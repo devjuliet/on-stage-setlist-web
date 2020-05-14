@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+
+.full-centered{
+    text-align: center;
+}
+
+.full-width{
+    width: -webkit-fill-available;
+}
+
+.text-left{
+    text-align: left;
+}
+
+.notificacion-flotante{
+    position: fixed;
+    top: 80px;
+    right: 19px;
+    height: 79px;
+    z-index: 999;
+}
+
+.navbar-custom {
+    position: fixed;
+    z-index: 1;
+    background-color: antiquewhite;
+    width: -webkit-fill-available;
+    margin: 0px;
+    top: 0px;
+    background-color: #282e38;
+    height: 70px;
+    max-height: 70px;
+}
+
+.fullpage-centered{
+    height: -webkit-fill-available;
+    align-content: center;
+    background-position: center;
+}
+
+.logo-flotante{
+    position: fixed;
+    bottom: 19px;
+    right: 19px;
+    height: 79px;
+}
