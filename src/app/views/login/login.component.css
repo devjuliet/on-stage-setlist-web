@@ -1,0 +1,13 @@
+.fullpage-centered{
+    height: -webkit-fill-available;
+    align-content: center;
+    background-position: center;
+}
+
+.logo-flotante{
+    position: fixed;
+    bottom: 19px;
+    right: 19px;
+    height: 79px;
+}
+
