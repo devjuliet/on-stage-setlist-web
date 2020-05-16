@@ -24,6 +24,7 @@ import { BandInfoComponent } from './views/dashboard/manager/band-info/band-info
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AddImageComponent } from './components/add-image/add-image.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { AddImageComponent } from './components/add-image/add-image.component';
     NavbarComponent,
     SidebarComponent,
     AddImageComponent,
+    FooterComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

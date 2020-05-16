@@ -1,0 +1,26 @@
+.footer{
+    background-color: #382983;
+}
+.left-footer{
+    display: flex;
+    width: 50%;
+    flex-wrap: wrap;
+}
+.lf-right-footer{
+    display: flex;
+    align-items: center;
+}
+.footer-line{
+    width: 1px;
+    height: 100px;
+    border: 1px solid rgba(0, 135, 209 , .8);
+}
+.right-footer{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+.main-footer{
+    display: flex;
+    align-items: center;
+}
