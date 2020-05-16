@@ -1,97 +1,116 @@
 <style>
     .sk-folding-cube {
-  margin: 20px auto;
-  width: 70px;
-  height: 70px;
-  position: relative;
-  -webkit-transform: rotateZ(45deg);
-          transform: rotateZ(45deg);
-}
-
-.sk-folding-cube .sk-cube {
-  float: left;
-  width: 50%;
-  height: 50%;
-  position: relative;
-  -webkit-transform: scale(1.1);
-      -ms-transform: scale(1.1);
-          transform: scale(1.1); 
-}
-.sk-folding-cube .sk-cube:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #333;
-  -webkit-animation: sk-foldCubeAngle 2.4s infinite linear both;
-          animation: sk-foldCubeAngle 2.4s infinite linear both;
-  -webkit-transform-origin: 100% 100%;
-      -ms-transform-origin: 100% 100%;
-          transform-origin: 100% 100%;
-}
-.sk-folding-cube .sk-cube2 {
-  -webkit-transform: scale(1.1) rotateZ(90deg);
-          transform: scale(1.1) rotateZ(90deg);
-}
-.sk-folding-cube .sk-cube3 {
-  -webkit-transform: scale(1.1) rotateZ(180deg);
-          transform: scale(1.1) rotateZ(180deg);
-}
-.sk-folding-cube .sk-cube4 {
-  -webkit-transform: scale(1.1) rotateZ(270deg);
-          transform: scale(1.1) rotateZ(270deg);
-}
-.sk-folding-cube .sk-cube2:before {
-  -webkit-animation-delay: 0.3s;
-          animation-delay: 0.3s;
-}
-.sk-folding-cube .sk-cube3:before {
-  -webkit-animation-delay: 0.6s;
-          animation-delay: 0.6s; 
-}
-.sk-folding-cube .sk-cube4:before {
-  -webkit-animation-delay: 0.9s;
-          animation-delay: 0.9s;
-}
-@-webkit-keyframes sk-foldCubeAngle {
-  0%, 10% {
-    -webkit-transform: perspective(140px) rotateX(-180deg);
+        margin: 20px auto;
+        width: 70px;
+        height: 70px;
+        position: relative;
+        -webkit-transform: rotateZ(45deg);
+        transform: rotateZ(45deg);
+    }
+    
+    .sk-folding-cube .sk-cube {
+        float: left;
+        width: 50%;
+        height: 50%;
+        position: relative;
+        -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+    
+    .sk-folding-cube .sk-cube:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #333;
+        -webkit-animation: sk-foldCubeAngle 2.4s infinite linear both;
+        animation: sk-foldCubeAngle 2.4s infinite linear both;
+        -webkit-transform-origin: 100% 100%;
+        -ms-transform-origin: 100% 100%;
+        transform-origin: 100% 100%;
+    }
+    
+    .sk-folding-cube .sk-cube2 {
+        -webkit-transform: scale(1.1) rotateZ(90deg);
+        transform: scale(1.1) rotateZ(90deg);
+    }
+    
+    .sk-folding-cube .sk-cube3 {
+        -webkit-transform: scale(1.1) rotateZ(180deg);
+        transform: scale(1.1) rotateZ(180deg);
+    }
+    
+    .sk-folding-cube .sk-cube4 {
+        -webkit-transform: scale(1.1) rotateZ(270deg);
+        transform: scale(1.1) rotateZ(270deg);
+    }
+    
+    .sk-folding-cube .sk-cube2:before {
+        -webkit-animation-delay: 0.3s;
+        animation-delay: 0.3s;
+    }
+    
+    .sk-folding-cube .sk-cube3:before {
+        -webkit-animation-delay: 0.6s;
+        animation-delay: 0.6s;
+    }
+    
+    .sk-folding-cube .sk-cube4:before {
+        -webkit-animation-delay: 0.9s;
+        animation-delay: 0.9s;
+    }
+    
+    @-webkit-keyframes sk-foldCubeAngle {
+        0%,
+        10% {
+            -webkit-transform: perspective(140px) rotateX(-180deg);
             transform: perspective(140px) rotateX(-180deg);
-    opacity: 0; 
-  } 25%, 75% {
-    -webkit-transform: perspective(140px) rotateX(0deg);
+            opacity: 0;
+        }
+        25%,
+        75% {
+            -webkit-transform: perspective(140px) rotateX(0deg);
             transform: perspective(140px) rotateX(0deg);
-    opacity: 1; 
-  } 90%, 100% {
-    -webkit-transform: perspective(140px) rotateY(180deg);
+            opacity: 1;
+        }
+        90%,
+        100% {
+            -webkit-transform: perspective(140px) rotateY(180deg);
             transform: perspective(140px) rotateY(180deg);
-    opacity: 0; 
-  } 
-}
-
-@keyframes sk-foldCubeAngle {
-  0%, 10% {
-    -webkit-transform: perspective(140px) rotateX(-180deg);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes sk-foldCubeAngle {
+        0%,
+        10% {
+            -webkit-transform: perspective(140px) rotateX(-180deg);
             transform: perspective(140px) rotateX(-180deg);
-    opacity: 0; 
-  } 25%, 75% {
-    -webkit-transform: perspective(140px) rotateX(0deg);
+            opacity: 0;
+        }
+        25%,
+        75% {
+            -webkit-transform: perspective(140px) rotateX(0deg);
             transform: perspective(140px) rotateX(0deg);
-    opacity: 1; 
-  } 90%, 100% {
-    -webkit-transform: perspective(140px) rotateY(180deg);
+            opacity: 1;
+        }
+        90%,
+        100% {
+            -webkit-transform: perspective(140px) rotateY(180deg);
             transform: perspective(140px) rotateY(180deg);
-    opacity: 0; 
-  }
-}
+            opacity: 0;
+        }
+    }
 </style>
 <main>
 
     <div id="preloader" *ngIf="!show">
         <div data-loader="circle-side"></div>
-    </div><!-- /Preload -->
+    </div>
+    <!-- /Preload -->
 
     <div id="loader_form" *ngIf="!show">
         <div data-loader="circle-side-2"></div>
@@ -99,52 +118,44 @@
     <div class="navbar-custom">
         <div class="row" style="height: -webkit-fill-available;align-items: center;">
             <div class="col">
-            
+
             </div>
             <div class="col-10" style="max-width: 1050px;">
-                <div class="row" >
+                <div class="row">
                     <div class="col-2" style="color: aliceblue;">
                         <img src="/assets/images/logo-trans.png" style="height: 40px;">
                     </div>
                     <div class="col-10">
                         <div class="row" style="text-align: right;">
-                                <div class="col">
-                                    <label style="color: white;padding: 0px 37px;font-size: x-large;">Bienvenido {{apiDataService.user.nombre}}</label>
-                                </div>
-                                <div class="col">
-                                    <button type="button" class="btn btn-light"(click)="apiDataService.logOut()">
+                            <div class="col">
+                                <label style="color: white;padding: 0px 37px;font-size: x-large;">Bienvenido {{apiDataService.user.nombre}}</label>
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-light" (click)="apiDataService.logOut()">
                                         Cerrar sesión
                                         <img style="height: 30px;" src="/assets/images/icon-logout.png">
                                     </button>
-                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col">
-            
+
             </div>
         </div>
     </div>
-    <div id="form_container" >
+    <div id="form_container">
         <div class="row" *ngIf="!showModal">
             <div class="col-lg-5">
                 <div id="left_form">
                     <figure><img src="/assets/cuestionary-files/img/logosds.png" width="300px" alt=""></figure>
                     <h2>Clasificacion programatica</h2>
-                    <p>En virtud de que los recursos destinados a programas y proyectos para el desarrollo social y
-                        humano son prioritarios y de interés público; y con el propósito de coadyuvar al pleno
-                        ejercicio de los derechos y el acceso al desarrollo social; es necesario determinar cuáles
-                        de los Programas Presupuestarios cuentan con enfoque social, partiendo de la atención a un
-                        derecho; y cuales tienen por fin el desarrollo social de las personas, atendiendo a la
-                        situación de vulnerabilidad que les coloca en desventaja. Esta clasificación y distinción
-                        servirá de herramienta de consulta y análisis de información para contribuir a la
-                        transparencia y a la rendición de cuentas, y a su vez dará a conocer sus reglas de
-                        operación, su padrón de beneficiarios y la normatividad aplicable.
-
-                        Para ello, la Secretaría de Hacienda en coordinación con la Secretaría de Desarrollo Social,
-                        realiza un inventario estatal de los Programas Presupuestarios a través del Clasificador de
-                        Programas Presupuestarios con enfoque social 2020.
+                    <p>En virtud de que los recursos destinados a programas y proyectos para el desarrollo social y humano son prioritarios y de interés público; y con el propósito de coadyuvar al pleno ejercicio de los derechos y el acceso al desarrollo
+                        social; es necesario determinar cuáles de los Programas Presupuestarios cuentan con enfoque social, partiendo de la atención a un derecho; y cuales tienen por fin el desarrollo social de las personas, atendiendo a la situación
+                        de vulnerabilidad que les coloca en desventaja. Esta clasificación y distinción servirá de herramienta de consulta y análisis de información para contribuir a la transparencia y a la rendición de cuentas, y a su vez dará a conocer
+                        sus reglas de operación, su padrón de beneficiarios y la normatividad aplicable. Para ello, la Secretaría de Hacienda en coordinación con la Secretaría de Desarrollo Social, realiza un inventario estatal de los Programas Presupuestarios
+                        a través del Clasificador de Programas Presupuestarios con enfoque social 2020.
                     </p>
                     <a href="#0" id="more_info" data-toggle="modal" data-target="#more-info"><i
                             class="pe-7s-info"></i></a>
@@ -176,8 +187,7 @@
                             </div>
                             <!-- /step -->
                             <div class="step" id="step1">
-                                <h3 class="main_question"><strong>2/13</strong>¿Cuál es el o los sujetos de derecho
-                                    que atiende el programa?</h3>
+                                <h3 class="main_question"><strong>2/13</strong>¿Cuál es el o los sujetos de derecho que atiende el programa?</h3>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group radio_input">
@@ -275,8 +285,7 @@
 
                             <!-- /step -->
                             <div class="step" id="step2">
-                                <h3 class="main_question"><strong>3/13</strong>¿El programa prespuestario está
-                                    alineado a algún derecho humano-social?</h3>
+                                <h3 class="main_question"><strong>3/13</strong>¿El programa prespuestario está alineado a algún derecho humano-social?</h3>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="col-md-12">
@@ -357,8 +366,7 @@
                             <!-- /step -->
 
                             <div class="step">
-                                <h3 class="main_question"><strong>4/13</strong>¿El programa atiende población en
-                                    alguna condición de vulnerabilidad?</h3>
+                                <h3 class="main_question"><strong>4/13</strong>¿El programa atiende población en alguna condición de vulnerabilidad?</h3>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="col-md-12">
@@ -386,19 +394,19 @@
                                         </div>
                                         <div class="form-group radio_input">
                                             <label><input (change)="pregunta3.complemento = 'zonaprioritariaestatal'" type="radio" value="zonaprioritariaestatal" name="cpobreza" id="cpobreza" class="icheck required">Personas habitantes de zonas de atención prioritaria estatales</label>
-                                        	</div>
+                                        </div>
                                         <div class="form-group radio_input">
                                             <label><input (change)="pregunta3.complemento = 'zonaprioritariafederal'" type="radio" value="zonaprioritariafederal" name="cpobreza" id="cpobreza" class="icheck required">Personas habitantes de zonas de atención prioritaria federales</label>
                                         </div>
                                     </div>
-                                <br><br><br>
+                                    <br><br><br>
                                 </div><br><br>
                                 <!-- /row -->
                             </div>
                             <!-- /step -->
                             <div class="step">
-                                <h3 class="main_question"><strong>5/13</strong>¿Cuál es la subcategoría del programa
-                                    presupuestario?</h3>
+                                <h3 class="main_question"><strong>5/13</strong>¿Cuál es la subcategoría del programa presupuestario?
+                                </h3>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group radio_input">
@@ -439,8 +447,7 @@
                             </div>
                             <!-- /step -->
                             <div class="step">
-                                <h3 class="main_question"><strong>6/13</strong> ¿El programa presupuestario entrega
-                                    algún tipo de apoyo social a la población?</h3>
+                                <h3 class="main_question"><strong>6/13</strong> ¿El programa presupuestario entrega algún tipo de apoyo social a la población?</h3>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group radio_input">
@@ -486,7 +493,7 @@
                                             <option value="27">Otro (especifique)</option>
                                         </select>
                                         <div id="tipoapoyo">
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -494,8 +501,7 @@
                             </div>
                             <!-- /step -->
                             <div class="step">
-                                <h3 class="main_question"><strong>7/13</strong>¿El apoyo social se entrega
-                                    directamente o indirectamente a la población?</h3>
+                                <h3 class="main_question"><strong>7/13</strong>¿El apoyo social se entrega directamente o indirectamente a la población?</h3>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group radio_input">
@@ -513,8 +519,7 @@
                             </div>
                             <!-- /step -->
                             <div class="step">
-                                <h3 class="main_question"><strong>8/13</strong>¿Con qué frecuencia el programa
-                                    entrega el apoyo social a la misma persona beneficiaria?
+                                <h3 class="main_question"><strong>8/13</strong>¿Con qué frecuencia el programa entrega el apoyo social a la misma persona beneficiaria?
                                 </h3>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -545,9 +550,7 @@
                             </div>
                             <!-- /step -->
                             <div class="step">
-                                <h3 class="main_question"><strong>9/13</strong>¿El programa presupuestario coadyuva
-                                    al cumplimiento de alguno de los objetivos de la política de desarrollo social y
-                                    humano estatal?</h3>
+                                <h3 class="main_question"><strong>9/13</strong>¿El programa presupuestario coadyuva al cumplimiento de alguno de los objetivos de la política de desarrollo social y humano estatal?</h3>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group radio_input">
@@ -574,8 +577,7 @@
                             </div>
                             <!-- /step -->
                             <div class="step">
-                                <h3 class="main_question"><strong>10/13</strong> ¿Cuál es la procedencia de los
-                                    recursos destinados al programa presupuestario?</h3>
+                                <h3 class="main_question"><strong>10/13</strong> ¿Cuál es la procedencia de los recursos destinados al programa presupuestario?</h3>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group radio_input">
@@ -611,8 +613,7 @@
                             </div>
                             <!-- /step -->
                             <div class="step">
-                                <h3 class="main_question"><strong>11/13</strong>Los recursos destinados al programa
-                                    presupuestario son prioritarios y de interés público porque están dirigidos a:
+                                <h3 class="main_question"><strong>11/13</strong>Los recursos destinados al programa presupuestario son prioritarios y de interés público porque están dirigidos a:
                                 </h3>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -684,8 +685,7 @@
                             </div>
                             <!-- /step -->
                             <div class="step">
-                                <h3 class="main_question"><strong>12/13</strong>¿El programa presupuestario cuenta
-                                    con padrón de beneficiarios?
+                                <h3 class="main_question"><strong>12/13</strong>¿El programa presupuestario cuenta con padrón de beneficiarios?
                                 </h3>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -706,8 +706,7 @@
                             </div>
                             <!-- /step -->
                             <div class="step">
-                                <h3 class="main_question"><strong>13/13</strong>¿El programa presupuestario cuenta
-                                    con reglas de operación vigentes y/o normatividad aplicable?
+                                <h3 class="main_question"><strong>13/13</strong>¿El programa presupuestario cuenta con reglas de operación vigentes y/o normatividad aplicable?
                                 </h3>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -775,8 +774,10 @@
             <!-- <button type="button" class="btn btn-primary submit" (click)="saveData()">
                 Enviar
             </button> -->
-        </div><!-- /Row -->
-    </div><!-- /Form_container -->
+        </div>
+        <!-- /Row -->
+    </div>
+    <!-- /Form_container -->
 </main>
 
 <footer id="home" class="clearfix">
@@ -798,38 +799,38 @@
 <!-- cd-overlay-content -->
 
 <div *ngIf="showModal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" style="height: -webkit-fill-available;margin: 0% 25%;position: absolute;top: 0px;width: -webkit-fill-available;">
-  <div  role="document" style="height: 300px;background-color: aliceblue;border-radius: 16p;">
-    <div  style="margin-top: 40%;height: 260px;">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel" style="font-size: xx-large;">Guardando Respuestas</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <div role="document" style="height: 300px;background-color: aliceblue;border-radius: 16p;">
+        <div style="margin-top: 40%;height: 260px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="font-size: xx-large;">Guardando Respuestas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="modal-body">
-        <div class="sk-folding-cube" *ngIf="!errorSave && !succeesSave">
-            <div class="sk-cube1 sk-cube"></div>
-            <div class="sk-cube2 sk-cube"></div>
-            <div class="sk-cube4 sk-cube"></div>
-            <div class="sk-cube3 sk-cube"></div>
-        </div>
-        <div class="" style="text-align: center; align-self: center;font-size: larger;" *ngIf="errorSave">
-            <img src="assets/images/error.png" style="height: 50px;"><br>
-            <label>Ups! A ocurrido un error.</label><br>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
-        </div>
-        <div class="" style="text-align: center; align-self: center;font-size: larger;" *ngIf="succeesSave">
-            <img src="assets/images/success.png" style="height: 50px;"><br>
-            Guardado Con Exito!
-        </div>
-      </div><!-- 
+            <div class="modal-body">
+                <div class="sk-folding-cube" *ngIf="!errorSave && !succeesSave">
+                    <div class="sk-cube1 sk-cube"></div>
+                    <div class="sk-cube2 sk-cube"></div>
+                    <div class="sk-cube4 sk-cube"></div>
+                    <div class="sk-cube3 sk-cube"></div>
+                </div>
+                <div class="" style="text-align: center; align-self: center;font-size: larger;" *ngIf="errorSave">
+                    <img src="assets/images/error.png" style="height: 50px;"><br>
+                    <label>Ups! A ocurrido un error.</label><br>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+                <div class="" style="text-align: center; align-self: center;font-size: larger;" *ngIf="succeesSave">
+                    <img src="assets/images/success.png" style="height: 50px;"><br> Guardado Con Exito!
+                </div>
+            </div>
+            <!--
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div> -->
+        </div>
     </div>
-  </div>
 </div>
 
 
@@ -845,17 +846,11 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <p>Lorem ipsum dolor sit amet, in porro albucius qui, in <strong>nec quod novum accumsan</strong>,
-                    mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus,
-                    pro ne quod dicunt sensibus.</p>
-                <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam
-                    dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt
-                    sensibus. Lorem ipsum dolor sit amet, <strong>in porro albucius qui</strong>, in nec quod novum
-                    accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum
-                    sanctus, pro ne quod dicunt sensibus.</p>
-                <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam
-                    dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt
-                    sensibus.</p>
+                <p>Lorem ipsum dolor sit amet, in porro albucius qui, in <strong>nec quod novum accumsan</strong>, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
+                <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus. Lorem ipsum dolor sit amet, <strong>in porro albucius qui</strong>,
+                    in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
+                <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.
+                </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn_1" data-dismiss="modal">Close</button>
@@ -876,8 +871,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <p>En caso de tener algún problema con el sistema de clasificador o necesitar mayor información
-                    comunicarse a: </p>
+                <p>En caso de tener algún problema con el sistema de clasificador o necesitar mayor información comunicarse a: </p>
                 <p><strong>Extensión: </strong> 12669 </p>
                 <p><strong>Correo electrónico: </strong> laura.teran@chihuahua.gob.mx</p>
             </div>

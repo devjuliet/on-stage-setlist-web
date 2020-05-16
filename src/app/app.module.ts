@@ -12,6 +12,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterProgramComponent } from './views/register-program/register-program.component';
 import { LoginComponent } from './views/login/login.component';
 import { HomeComponent } from './views/home/home.component';
+import { ManagerHomeComponent } from './views/dashboard/manager/manager-home/manager-home.component';
+import { LiveExperienceDesignerHomeComponent } from './views/dashboard/live-experience-designer/live-experience-designer-home/live-experience-designer-home.component';
+import { AdminBandsComponent } from './views/dashboard/manager/admin-bands/admin-bands.component';
+import { AddBandComponent } from './views/dashboard/manager/add-band/add-band.component';
+import { AdminEventsComponent } from './views/dashboard/manager/admin-events/admin-events.component';
+import { SettingsComponent } from './views/dashboard/manager/settings/settings.component';
+import { BandInfoComponent } from './views/dashboard/manager/band-info/band-info.component';
+
+//Components
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AddImageComponent } from './components/add-image/add-image.component';
 
 @NgModule({
   declarations: [
@@ -19,14 +31,19 @@ import { HomeComponent } from './views/home/home.component';
     RegisterProgramComponent,
     LoginComponent,
     HomeComponent,
+    ManagerHomeComponent,
+    LiveExperienceDesignerHomeComponent,
+    AdminBandsComponent,
+    AddBandComponent,
+    AdminEventsComponent,
+    SettingsComponent,
+    BandInfoComponent,
+    NavbarComponent,
+    SidebarComponent,
+    AddImageComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
