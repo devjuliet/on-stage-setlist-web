@@ -1,0 +1,50 @@
+.first-section{
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("/assets/images/background-landing.jpg");
+}
+.cover-background{
+    background: rgb(30,131,205);
+    background: linear-gradient(90deg, rgba(30,131,205,.5) 0%, rgba(51,58,145,.5) 28%, rgba(56,41,131,.5) 57%, rgba(30,131,205,.5) 100%);
+
+}
+.steps-card{
+    width: 100%;
+    max-width: 250px;
+    margin: auto;
+    max-height: 240px;
+    height: 100%;
+    padding: 20px;
+    border: 1px solid #246FBC;
+    border-radius: 20px;
+}
+.step-img{
+    max-width: 150px;
+    width: 100%;
+}
+.steps-flex{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.phone-flex{
+    display: flex;
+    justify-content: center;
+}
+.phone-img{
+    max-width: 200px;
+    width: 100%;
+    max-height: 380px;
+    height: 100%;
+}
+.phone-sec {
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("/assets/images/rectangles.svg");
+}
