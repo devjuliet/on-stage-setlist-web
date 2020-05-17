@@ -10,39 +10,23 @@ import { AdminBandsComponent } from './views/dashboard/manager/admin-bands/admin
 import { AdminEventsComponent } from './views/dashboard/manager/admin-events/admin-events.component';
 import { BandInfoComponent } from './views/dashboard/manager/band-info/band-info.component';
 import { SettingsComponent } from './views/dashboard/manager/settings/settings.component';
+import { RegisterComponent } from './views/register/register.component';
+import { UsComponent } from './views/us/us.component';
+
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard/manager', component: ManagerHomeComponent },
-  {
-    path: 'dashboard/live-experience-designer',
-    component: LiveExperienceDesignerHomeComponent,
-  },
-  {
-    path: 'dashboard/manager/add-band',
-    component: AddBandComponent,
-  },
-  {
-    path: 'dashboard/manager/admin-bands',
-    component: AdminBandsComponent,
-  },
-  {
-    path: 'dashboard/manager/admin-events',
-    component: AdminEventsComponent,
-  },
-  {
-    path: 'dashboard/manager/band-info',
-    component: AdminEventsComponent,
-  },
-  {
-    path: 'dashboard/manager/manager-home',
-    component: ManagerHomeComponent,
-  },
-  {
-    path: 'dashboard/manager/settings',
-    component: SettingsComponent,
-  },
+  { path: 'us', component: UsComponent },
+  { path: 'register', component: RegisterComponent },
 
+  { path: 'dashboard/manager', component: ManagerHomeComponent },
+  { path: 'dashboard/live-experience-designer', component: LiveExperienceDesignerHomeComponent },
+  { path: 'dashboard/manager/add-band', component: AddBandComponent },
+  { path: 'dashboard/manager/admin-bands', component: AdminBandsComponent },
+  { path: 'dashboard/manager/admin-events', component: AdminEventsComponent },
+  { path: 'dashboard/manager/band-info', component: AdminEventsComponent },
+  { path: 'dashboard/manager/manager-home', component: ManagerHomeComponent },
+  { path: 'dashboard/manager/settings', component: SettingsComponent },
   /* { path: 'register-program', component: RegisterProgramComponent },
   { path: 'validations', component: ValidationsComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent }, */
@@ -52,4 +36,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
