@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+
+html{
+    scroll-behavior: smooth;
+}
 body, p{
     margin: 0;
 }
@@ -100,6 +104,19 @@ body, p{
     text-decoration: none;
     opacity: 0.8;
 }
+.btn-lblu{
+    background-color: #0087D1;
+    color: white;
+    font-family: 'Questrial', sans-serif;
+    border-radius: 10px;
+    padding: 10px 20px;
+    transition: .3s ease-in-out;
+}
+.btn-lblu:hover{
+    text-decoration: none;
+    color: white;
+    opacity: .9;
+}
 /*LETRAS*/
 .fira-30-wht{
     font-family: 'Fira Sans', sans-serif;
@@ -117,11 +134,7 @@ body, p{
     font-size: 20px;
     transition: .3s ease-in-out;
 }
-.alink-20-wht:hover{
-    transform: scale(1.1);
-    text-decoration: none;
-    color: white;
-}
+
 .fira-16-wht{
     font-family: 'Fira Sans', sans-serif;
     color: white;
@@ -130,18 +143,43 @@ body, p{
 .fira-16-wht:hover{
     opacity: .8;
 }
-.fsize-20{
-    font-size: 20px;
-}
+
 .quesr-40-wht{
     font-family: 'Questrial', sans-serif;
     color: white;
     font-size: 40px;
 }
+.quest-30-blu{
+    font-family: 'Questrial', sans-serif;
+    color: #382983;
+    font-size: 30px;
+}
 .quest-18-grey{
     font-family: 'Questrial', sans-serif;
     font-size: 18px;
     color: #353535;
+}
+.quest-20-lblu{
+    font-family: 'Questrial', sans-serif;
+    font-size: 20px;
+    color: #0087D1;
+}
+.alink-20-wht:hover{
+    transform: scale(1.1);
+    text-decoration: none;
+    color: white;
+}
+.alink-20-lblu:hover{
+    color: #0087D1;
+    opacity: .8 ;
+    text-decoration: none;
+}
+/*FONT SIZE*/
+.fsize-30{
+    font-size: 30px;
+}
+.fsize-20{
+    font-size: 20px;
 }
 /*PADDINGS*/
 .p-b-180{
@@ -153,8 +191,14 @@ body, p{
 .p-t-80{
     padding-top: 80px;
 }
+.p-b-60{
+    padding-bottom: 60px;
+}
 .p-t-40{
     padding-top: 40px;
+}
+.p-b-40{
+    padding-bottom: 40px;
 }
 .p-r-35{
     padding-right: 35px;
@@ -214,5 +258,13 @@ body, p{
     }
     .right-footer{
         padding-top: 50px;
+    }
+}
+@media screen and (max-width:900px){
+    .login-image{
+        display: none;
+    }
+    .login-box{
+        width: 100% !important;
     }
 }
