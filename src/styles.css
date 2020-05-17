@@ -159,6 +159,11 @@ body, p{
     font-size: 18px;
     color: #353535;
 }
+.quest-15-grey{
+    font-family: 'Questrial', sans-serif;
+    font-size: 15px;
+    color: #353535;
+}
 .quest-20-lblu{
     font-family: 'Questrial', sans-serif;
     font-size: 20px;

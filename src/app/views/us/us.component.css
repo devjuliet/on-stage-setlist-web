@@ -1,0 +1,36 @@
+.us-background{
+    display: flex;
+    justify-content: space-around;
+    
+}
+.us-background img{
+    max-width: 300px;
+    width: 100%;
+}
+.squares{
+    width: 100%;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("/assets/images/squares.svg");
+    position: relative;
+}
+.card-us{
+    max-width: 250px;
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+    border-top: 2px solid rgba(0, 135, 209, .3);
+    border-left: 2px solid rgba(0, 135, 209, .3);
+    box-shadow: 4px 5px 9px -6px rgba(0,0,0,0.75);
+    transition: .3s ease-in-out;
+    padding: 10px;
+    background-color: white;
+}
+.card-us:hover{
+    transform: scale(1.08);
+}
+.us-flex{
+    display: flex;
+    justify-content: center;
+}
