@@ -1,1 +1,69 @@
-<p>sidebar works!</p>
+
+        <div class="row"  style="padding: 10px 20px;background-color: black">
+            <div class="col" style="text-align: left;">
+                <img class="" src="/assets/images/logo-trans-horizontal.png" style="height: 25px;">
+            </div>
+            <div class="col" style="text-align: right;align-self: center;">  
+               <!--  <button (click)="utilitiesService.closeSidemenu()" class="btn" style="padding: 6px 12px;"><i class="fa fa-bars"></i></button> -->
+            </div>
+        </div>
+        <div class="row full-centered " [style]="'background-color:'+ colorLinks[0]">
+            <label [class]="classesLinks[0]"></label>
+        </div>
+        <div class="row" [style]="'background-color:'+ colorLinks[1]">
+            <label [class]="classesLinks[1]"  routerLink="/dashboard" routerLinkActive="active">
+                <i class="fa fa-pie-chart fa-2x" style="margin-left: 15px;"></i>
+                <span style="margin-left: 20px;">Inicio</span>
+            </label>
+        </div>
+        <div class="row" [style]="'background-color:'+ colorLinks[2]">
+            <label [class]="classesLinks[2]" routerLink="/dashboard" routerLinkActive="active">
+                <i class="fa fa-institution fa-2x" style="margin-left: 15px;"></i>
+                <span style="margin-left: 20px;">Empresas</span>
+            </label>
+        </div>
+        <div class="row" [style]="'background-color:'+ colorLinks[3]" >
+            <label [class]="classesLinks[3]" routerLink="/dashboard" routerLinkActive="active">
+                <i class="fa fa-file-text fa-2x" style="margin-left: 15px;"></i>
+                <span style="margin-left: 20px;">Reportes</span>
+            </label>
+        </div>
+        <div class="row" [style]="'background-color:'+ colorLinks[4]">
+            <label [class]="classesLinks[4]" routerLink="/dashboard" routerLinkActive="active">
+                <i class="fa fa-fire-extinguisher fa-2x" style="margin-left: 15px;"></i>
+                <span style="margin-left: 20px;">Extintores</span>
+            </label>
+        </div>
+        <div class="row" [style]="'background-color:'+ colorLinks[5]">
+            <label [class]="classesLinks[5]" routerLink="/dashboard" routerLinkActive="active">
+                <i class="	fa fa-envelope fa-2x" style="margin-left: 15px;"></i>
+                <span style="margin-left: 20px;">Emails</span>
+            </label>
+        </div>
+        <div class="row" [style]="'background-color:'+ colorLinks[6]">
+            <label [class]="classesLinks[6]" routerLink="/dashboard" routerLinkActive="active">
+                <i class="fa far fa-map fa-2x" style="margin-left: 15px;"></i>
+                <span style="margin-left: 20px;">Mapa</span>
+            </label>
+        </div>
+        <div class="row" [style]="'background-color:'+ colorLinks[7]">
+            <label [class]="classesLinks[7]" routerLink="/dashboard" routerLinkActive="active"> 
+                <i class="fa fa-address-card-o fa-2x" style="margin-left: 15px;"></i>
+                <span style="margin-left: 20px;">Agentes</span>
+            </label>
+        </div>
+        <div class="row" [style]="'background-color:'+ colorLinks[8]">
+            <label [class]="classesLinks[8]" routerLink="/dashboard/roles" routerLinkActive="active">
+                <i class="fa fa-low-vision fa-2x" style="margin-left: 15px;"></i>
+                <span style="margin-left: 20px;">Roles</span>
+            </label>
+        </div>
+        <div class="row" [style]="'background-color:'+ colorLinks[9]">
+            <label [class]="classesLinks[9]"></label>
+        </div>
+        <div class="row full-centered" >
+            <div class="col" style="position: fixed;bottom: 19px;">
+                <button class="btn"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i></button>
+            </div>
+        </div>
+ 
