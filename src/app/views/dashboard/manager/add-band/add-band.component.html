@@ -1,1 +1,45 @@
-<p>add-band works!</p>
+<div class="main-manager">
+    <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass">
+        <app-sidebar class="sidebar" [activeLink]="2" [isManager]="true"></app-sidebar>
+    </div>
+    <div id="main" [class]="'side-content ' + utilitiesService.navbarClass">
+        <app-navbar-dashboard></app-navbar-dashboard>
+        <div class="p-t-20">
+            <div class="info-dashboard">
+                <div class="p-b-20">   
+                    <h1 class="fira-30-grey">Añadir banda</h1>
+                </div>
+                <div>
+                    <div class="row">
+                        <div class="col-xl-6 col-md-12">
+                            <input type="text" placeholder="Nombre de la banda">
+                        </div>
+                        <div class="col-xl-6 col-md-12">
+                            <input type="file" id="img" name="img" accept="image/*" style="display: none;">
+                            <label for="img">Click me</label>
+                        </div>
+                        <div class="col-xl-6 col-md-12">
+                            <textarea placeholder="Descripción de la banda..." cols="30" rows="5"></textarea>
+                        </div>
+                        <div class="col-xl-6 col-md-12">
+                            <div class="dropdown">
+                                <button class=" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Dropdown button
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                  <a class="dropdown-item" href="#">Action</a>
+                                  <a class="dropdown-item" href="#">Another action</a>
+                                  <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-xl-6 col-md-12">
+                            <input type="text" placeholder="Buscar integrante">
+                            <button>Añadir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
