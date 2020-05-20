@@ -66,29 +66,25 @@
     border-radius: 50%;
 }
   
-  /* On mouse-over, add a grey background color */
 .register-box-check:hover input ~ .checkmark {
     background-color: #ccc;
+    cursor: pointer;
 }
   
-  /* When the radio button is checked, add a blue background */
 .register-box-check input:checked ~ .checkmark {
     background-color: #382983;
 }
   
-  /* Create the indicator (the dot/circle - hidden when not checked) */
 .checkmark:after {
     content: "";
     position: absolute;
     display: none;
 }
   
-  /* Show the indicator (dot/circle) when checked */
 .register-box-check input:checked ~ .checkmark:after {
     display: block;
 }
   
-  /* Style the indicator (dot/circle) */
 .register-box-check .checkmark:after {
     top: 8px;
     left: 8px;

@@ -1,69 +1,79 @@
+<div *ngIf="isManager" class="sidebar">
+    <div class="text-center p-t-10 p-b-15">
+        <a href="#"><img src="/assets/images/logo-white.svg"></a>
+    </div>
+    <div class="wht-line"></div>
+    <div class="p-t-20">
+        <div class="text-center">
+            <img class="author" src="/assets/images/flor.svg"> 
+        </div>
+        <div class="text-center p-t-15">
+            <p class="fira-18-wht">Flor Legarda</p>
+        </div>
+    </div>
+    <div class="p-t-30">
+        <ul>
+            <li>
+                <a class="quest-16-wht" [class]="classesLinks[0]" routerLink="/dashboard/manager" routerLinkActive="active">
+                    <i class="fas fa-home p-r-20"></i>Inicio</a>
+            </li>
+            <li>
+                <a class="quest-16-wht" [class]="classesLinks[1]" routerLink="/dashboard/manager/admin-bands" routerLinkActive="active">
+                    <i class="fas fa-guitar p-r-20"></i>Bandas</a>
+            </li>
+            <li>
+                <a class="quest-16-wht" [class]="classesLinks[2]" routerLink="/dashboard/manager/add-band" routerLinkActive="active">
+                    <i class="fas fa-plus p-r-20"></i>Añadir Bandas</a>
+            </li>
+            <li>
+                <a class="quest-16-wht" [class]="classesLinks[3]" routerLink="/dashboard/manager/admin-events" routerLinkActive="active">
+                    <i class="fas fa-calendar-alt p-r-20"></i>Agregar Concierto</a>
+            </li>
+            <li>
+                <a class="quest-16-wht" [class]="classesLinks[4]" routerLink="/dashboard/manager/catalog" routerLinkActive="active">
+                    <i class="fas fa-book p-r-20"></i>Catálogo</a>
+            </li>
+            <li>
+                <a class="quest-16-wht" [class]="classesLinks[5]" routerLink="/dashboard/manager/settings" routerLinkActive="active">
+                    <i class="fas fa-cog p-r-20"></i>Ajustes</a>
+            </li>
+        </ul>
+    </div>
+</div>
 
-        <div class="row"  style="padding: 10px 20px;background-color: black">
-            <div class="col" style="text-align: left;">
-                <img class="" src="/assets/images/logo-trans-horizontal.png" style="height: 25px;">
-            </div>
-            <div class="col" style="text-align: right;align-self: center;">  
-               <!--  <button (click)="utilitiesService.closeSidemenu()" class="btn" style="padding: 6px 12px;"><i class="fa fa-bars"></i></button> -->
-            </div>
+<div *ngIf="!isManager">
+    <div class="text-center p-t-10 p-b-15">
+        <a href="#"><img src="/assets/images/logo-white.svg"></a>
+    </div>
+    <div class="wht-line"></div>
+    <div class="p-t-20">
+        <div class="text-center">
+            <img class="author" src="/assets/images/flor.svg"> 
         </div>
-        <div class="row full-centered " [style]="'background-color:'+ colorLinks[0]">
-            <label [class]="classesLinks[0]"></label>
+        <div class="text-center p-t-15">
+            <p class="fira-18-wht">Rolf Adragel</p>
         </div>
-        <div class="row" [style]="'background-color:'+ colorLinks[1]">
-            <label [class]="classesLinks[1]"  routerLink="/dashboard" routerLinkActive="active">
-                <i class="fa fa-pie-chart fa-2x" style="margin-left: 15px;"></i>
-                <span style="margin-left: 20px;">Inicio</span>
-            </label>
-        </div>
-        <div class="row" [style]="'background-color:'+ colorLinks[2]">
-            <label [class]="classesLinks[2]" routerLink="/dashboard" routerLinkActive="active">
-                <i class="fa fa-institution fa-2x" style="margin-left: 15px;"></i>
-                <span style="margin-left: 20px;">Empresas</span>
-            </label>
-        </div>
-        <div class="row" [style]="'background-color:'+ colorLinks[3]" >
-            <label [class]="classesLinks[3]" routerLink="/dashboard" routerLinkActive="active">
-                <i class="fa fa-file-text fa-2x" style="margin-left: 15px;"></i>
-                <span style="margin-left: 20px;">Reportes</span>
-            </label>
-        </div>
-        <div class="row" [style]="'background-color:'+ colorLinks[4]">
-            <label [class]="classesLinks[4]" routerLink="/dashboard" routerLinkActive="active">
-                <i class="fa fa-fire-extinguisher fa-2x" style="margin-left: 15px;"></i>
-                <span style="margin-left: 20px;">Extintores</span>
-            </label>
-        </div>
-        <div class="row" [style]="'background-color:'+ colorLinks[5]">
-            <label [class]="classesLinks[5]" routerLink="/dashboard" routerLinkActive="active">
-                <i class="	fa fa-envelope fa-2x" style="margin-left: 15px;"></i>
-                <span style="margin-left: 20px;">Emails</span>
-            </label>
-        </div>
-        <div class="row" [style]="'background-color:'+ colorLinks[6]">
-            <label [class]="classesLinks[6]" routerLink="/dashboard" routerLinkActive="active">
-                <i class="fa far fa-map fa-2x" style="margin-left: 15px;"></i>
-                <span style="margin-left: 20px;">Mapa</span>
-            </label>
-        </div>
-        <div class="row" [style]="'background-color:'+ colorLinks[7]">
-            <label [class]="classesLinks[7]" routerLink="/dashboard" routerLinkActive="active"> 
-                <i class="fa fa-address-card-o fa-2x" style="margin-left: 15px;"></i>
-                <span style="margin-left: 20px;">Agentes</span>
-            </label>
-        </div>
-        <div class="row" [style]="'background-color:'+ colorLinks[8]">
-            <label [class]="classesLinks[8]" routerLink="/dashboard/roles" routerLinkActive="active">
-                <i class="fa fa-low-vision fa-2x" style="margin-left: 15px;"></i>
-                <span style="margin-left: 20px;">Roles</span>
-            </label>
-        </div>
-        <div class="row" [style]="'background-color:'+ colorLinks[9]">
-            <label [class]="classesLinks[9]"></label>
-        </div>
-        <div class="row full-centered" >
-            <div class="col" style="position: fixed;bottom: 19px;">
-                <button class="btn"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i></button>
-            </div>
-        </div>
+    </div>
+    <div class="p-t-30">
+        <ul>
+            <li>
+                <a class="quest-16-wht" [class]="classesLinks[0]" routerLink="/dashboard/manager" routerLinkActive="active">
+                    <i class="fas fa-home p-r-20"></i>Mis listas</a>
+            </li>
+            <li>
+                <a class="quest-16-wht" [class]="classesLinks[2]" routerLink="/dashboard/manager/add-band" routerLinkActive="active">
+                    <i class="fas fa-plus p-r-20"></i>Añadir lista</a>
+            </li>
+            <li>
+                <a class="quest-16-wht" [class]="classesLinks[3]" routerLink="/dashboard/manager/admin-events" routerLinkActive="active">
+                    <i class="fas fa-calendar-alt p-r-20"></i>Eventos</a>
+            </li>
+            <li>
+                <a class="quest-16-wht" [class]="classesLinks[5]" routerLink="/dashboard/manager/settings" routerLinkActive="active">
+                    <i class="fas fa-cog p-r-20"></i>Ajustes</a>
+            </li>
+        </ul>
+    </div>
+</div>
+        
  

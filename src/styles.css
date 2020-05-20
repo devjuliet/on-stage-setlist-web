@@ -3,20 +3,13 @@
 html{
     scroll-behavior: smooth;
 }
-body, p{
+body, p, h1, h2, h3{
     margin: 0;
 }
-.full-centered{
-    text-align: center;
+button:focus{
+    outline: none;
 }
 
-.full-width{
-    width: -webkit-fill-available;
-}
-
-.text-left{
-    text-align: left;
-}
 
 .notificacion-flotante{
     position: fixed;
@@ -50,6 +43,27 @@ body, p{
     right: 19px;
     height: 79px;
 }
+.side-sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    transition: 0.3s;
+    z-index: 1;
+    width: 0;
+    height: 100%;
+}
+.myWidth{
+    margin-left: 300px;
+}
+.myMargin{
+    margin-left: 0;
+    width: 300px;
+}
+#main {
+    transition: margin-left .3s;
+    padding: 0 16px;
+}
 .max-width{
     max-width: 1440px;
     margin: auto;
@@ -59,6 +73,13 @@ body, p{
 }
 .fixed-shadow{
     box-shadow: 0px 8px 10px 0px rgba(0,0,0,0.3);
+}
+.sidebar{
+    background-color: #382983;
+    height: 100vh;
+}
+.flex-grow-10{
+    flex-grow: 10;
 }
 .input-gr-blu{
     border-top: 2px solid #382983;
@@ -132,6 +153,8 @@ body, p{
     border-radius: 10px;
     padding: 10px 20px;
     transition: .3s ease-in-out;
+    border: none;
+    cursor: pointer;
 }
 .btn-lblu:hover{
     text-decoration: none;
@@ -145,6 +168,8 @@ body, p{
     border-radius: 10px;
     padding: 10px 20px;
     transition: .3s ease-in-out;
+    border: none;
+    cursor: pointer;
 }
 .btn-gray:hover{
     background-color: #959EA3 ;
@@ -152,10 +177,25 @@ body, p{
     color: white;
     opacity: .9;
 }
+.btn-back-wht{
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    color: #382983;
+    transition: .3s ease-in-out;
+}
+.btn-back-wht:hover{
+    color: #0087D1;
+}
 /*LETRAS*/
 .fira-30-wht{
     font-family: 'Fira Sans', sans-serif;
     color: white;
+    font-size: 30px;
+}
+.fira-30-grey{
+    font-family: 'Fira Sans', sans-serif;
+    color: #353535;
     font-size: 30px;
 }
 .fira-30-blu{
@@ -169,10 +209,20 @@ body, p{
     font-size: 20px;
     transition: .3s ease-in-out;
 }
+.fira-18-wht{
+    font-family: 'Fira Sans', sans-serif;
+    color: white;
+    font-size: 18px;
+}
 
 .fira-16-wht{
     font-family: 'Fira Sans', sans-serif;
     color: white;
+    font-size: 16px;
+}
+.fira-16-grey{
+    font-family: 'Fira Sans', sans-serif;
+    color: #353535;
     font-size: 16px;
 }
 .fira-16-wht:hover{
@@ -189,15 +239,31 @@ body, p{
     color: #382983;
     font-size: 30px;
 }
+.quest-20-wht{
+    font-family: 'Questrial', sans-serif;
+    color: white;
+    font-size: 20px;
+    transition: .3s ease-in-out;
+}
 .quest-18-blu{
     font-family: 'Questrial', sans-serif;
     color: #382983;
     font-size: 18px;
 }
+.quest-20-grey{
+    font-family: 'Questrial', sans-serif;
+    font-size: 20px;
+    color: #353535;
+}
 .quest-18-grey{
     font-family: 'Questrial', sans-serif;
     font-size: 18px;
     color: #353535;
+}
+.quest-16-wht{
+    font-family: 'Questrial', sans-serif;
+    font-size: 16px;
+    color: white;
 }
 .quest-15-grey{
     font-family: 'Questrial', sans-serif;
@@ -222,6 +288,9 @@ body, p{
 /*FONT SIZE*/
 .fsize-30{
     font-size: 30px;
+}
+.fsize-25{
+    font-size: 25px;
 }
 .fsize-20{
     font-size: 20px;
@@ -248,6 +317,9 @@ body, p{
 .p-r-35{
     padding-right: 35px;
 }
+.p-t-30{
+    padding-top: 30px;
+}
 .p-t-20{
     padding-top: 20px;
 }
@@ -257,6 +329,15 @@ body, p{
 .p-l-20{
     padding-left: 20px;
 }
+.p-r-20{
+    padding-right: 20px;
+}
+.p-b-15{
+    padding-bottom: 15px;
+}
+.p-t-15{
+    padding-top: 15px;
+}
 .p-t-10{
     padding-top: 10px;
 }
@@ -265,6 +346,12 @@ body, p{
 }
 .p-r-10{
     padding-right: 10px;
+}
+.p-t-5{
+    padding-top: 5px;
+}
+.p-b-5{
+    padding-bottom: 5px;
 }
 .p-0-30{
     padding: 0 30px;

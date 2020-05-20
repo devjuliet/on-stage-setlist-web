@@ -27,6 +27,8 @@ import { AddImageComponent } from './components/add-image/add-image.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { UsComponent } from './views/us/us.component';
 import { RegisterComponent } from './views/register/register.component';
+import { NavbarDashboardComponent } from './components/navbar-dashboard/navbar-dashboard.component';
+import { CatalogComponent } from './views/dashboard/manager/catalog/catalog.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { RegisterComponent } from './views/register/register.component';
     FooterComponent,
     UsComponent,
     RegisterComponent,
+    NavbarDashboardComponent,
+    CatalogComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

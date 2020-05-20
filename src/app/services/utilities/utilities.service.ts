@@ -5,5 +5,25 @@ import { Injectable } from '@angular/core';
 })
 export class UtilitiesService {
 
-  constructor() { }
+  sidebarClass : String;
+  navbarClass : String;
+  
+  constructor() {
+    this.navbarClass = "myWidth";
+    this.sidebarClass = "myMargin";
+   }
+
+   showSidebar(){
+      if(this.sidebarClass == "myMargin"){
+        this.sidebarClass = "";
+      }
+      else{
+        this.sidebarClass = "myMargin";
+      }
+      if(this.navbarClass == "myWidth"){
+         this.navbarClass = "";
+      }else{
+        this.navbarClass = "myWidth";
+      }
+  }
 }
