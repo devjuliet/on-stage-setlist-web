@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'dashboard/manager/add-band', component: AddBandComponent },
   { path: 'dashboard/manager/admin-bands', component: AdminBandsComponent },
   { path: 'dashboard/manager/admin-events', component: AdminEventsComponent },
-  { path: 'dashboard/manager/band-info', component: AdminEventsComponent },
+  { path: 'dashboard/manager/band-info/:id', component: AdminEventsComponent },
   { path: 'dashboard/manager/catalog', component: CatalogComponent },
   { path: 'dashboard/manager/settings', component: SettingsComponent },
   /* { path: 'register-program', component: RegisterProgramComponent },

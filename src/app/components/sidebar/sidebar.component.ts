@@ -26,7 +26,14 @@ export class SidebarComponent implements OnInit {
     "normal-link",//5
   ];
 
-  constructor() { }
+  menuList : any[];
+
+  constructor() {
+    this.menuList = [
+      {name : "banda fdfs", active : false, id: 1},
+      {name : "banda fdfs", active : true, id: 45},
+      {name : "banda fdfs", active : false, id: 3}]
+   }
 
   ngOnInit(): void {
     console.log(this.activeLink);

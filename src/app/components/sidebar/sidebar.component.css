@@ -28,6 +28,7 @@ ul{
 ul li a{
     text-decoration: none;
     padding: 5px;
+    transition: .3s ease-in-out;
 }
 ul li a:hover{
     color: white;
@@ -40,3 +41,14 @@ ul li a:hover{
     margin: auto;
     text-align: center;
 }
+.second-link{
+    border-left: 30px solid #4B3E8F;
+    color: white;
+    font-family: 'Questrial', sans-serif;
+    font-size: 12px;
+    transition: .3s ease-in-out;
+}
+.second-link:hover{
+    border-left: 30px solid #0087D1;
+}
+

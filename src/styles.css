@@ -187,6 +187,20 @@ button:focus{
 .btn-back-wht:hover{
     color: #0087D1;
 }
+.btn-red{
+    color: white;
+    font-family: 'Questrial', sans-serif;
+    border-radius: 10px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    background-color: #A82020;
+    opacity: .7;
+    transition: .3s ease-in-out;
+}
+.btn-red:hover{
+    opacity: 1;
+}
 /*LETRAS*/
 .fira-30-wht{
     font-family: 'Fira Sans', sans-serif;
@@ -209,12 +223,21 @@ button:focus{
     font-size: 20px;
     transition: .3s ease-in-out;
 }
+.fira-20-blu{
+    font-family: 'Fira Sans', sans-serif;
+    color: #382983;
+    font-size: 20px;
+}
 .fira-18-wht{
     font-family: 'Fira Sans', sans-serif;
     color: white;
     font-size: 18px;
 }
-
+.fira-18-blu{
+    font-family: 'Fira Sans', sans-serif;
+    color: #382983;
+    font-size: 18px;
+}
 .fira-16-wht{
     font-family: 'Fira Sans', sans-serif;
     color: white;
@@ -294,6 +317,10 @@ button:focus{
 }
 .fsize-20{
     font-size: 20px;
+}
+/*MARGINS*/
+.m-10-0{
+    margin: 10px 0;
 }
 /*PADDINGS*/
 .p-b-180{
@@ -410,5 +437,11 @@ button:focus{
     }
     .width-50-100{
         width: 100%;
+    }
+}
+@media (min-width: 768px) {
+    .modal-xl {
+        width: 90%;
+        max-width:1200px;
     }
 }

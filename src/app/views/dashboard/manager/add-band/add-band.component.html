@@ -4,38 +4,209 @@
     </div>
     <div id="main" [class]="'side-content ' + utilitiesService.navbarClass">
         <app-navbar-dashboard></app-navbar-dashboard>
-        <div class="p-t-20">
+        <div class="p-t-20 p-b-40">
             <div class="info-dashboard">
                 <div class="p-b-20">   
                     <h1 class="fira-30-grey">Añadir banda</h1>
                 </div>
-                <div>
-                    <div class="row">
-                        <div class="col-xl-6 col-md-12">
+                <div class="row">
+                    <div class="col-xl-6 col-md-6 col-sm-12">
+                        <div class="">
                             <input type="text" placeholder="Nombre de la banda">
                         </div>
-                        <div class="col-xl-6 col-md-12">
-                            <input type="file" id="img" name="img" accept="image/*" style="display: none;">
-                            <label for="img">Click me</label>
-                        </div>
-                        <div class="col-xl-6 col-md-12">
+                        <div class="p-t-20">
                             <textarea placeholder="Descripción de la banda..." cols="30" rows="5"></textarea>
                         </div>
-                        <div class="col-xl-6 col-md-12">
-                            <div class="dropdown">
-                                <button class=" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Dropdown button
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                  <a class="dropdown-item" href="#">Action</a>
-                                  <a class="dropdown-item" href="#">Another action</a>
-                                  <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                              </div>
+                    </div>
+                    <div class="col-xl-6 col-md-6 col-sm-12">
+                        <div class="dis-fle-jcent">
+                            <!--Boton de verdad escondido-->
+                            <input type="file" id="img" name="img" accept="image/*" class="hidden">
+                            <!--Boton falso para subir una imagen-->
+                            <label class="img-btn" for="img"><img src="/assets/images/upload.svg"></label>
                         </div>
-                        <div class="col-xl-6 col-md-12">
-                            <input type="text" placeholder="Buscar integrante">
-                            <button>Añadir</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-6 col-md-6 col-sm-12">
+                        <div class="p-b-40 p-t-20">
+                            <select class="selectpicker" data-live-search="true" multiple title="Escoge un genero..." data-width="100%">
+                                <option >Rock</option>
+                                <option>Country</option>
+                                <option>Norteñas</option>
+                            </select>  
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-md-6 col-sm-12"></div>
+                </div>
+                <div class="div-line"></div>
+                <div class="dis-fle-alcent p-t-20 p-b-20">
+                    <input class="search-input" type="text" placeholder="Buscar integrante">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="p-l-20">
+                        <button class="btn-lblu" data-toggle="modal" data-target="#addMemModal"><i class="fas fa-plus p-r-10"></i>Añadir</button>
+                    </div>
+                </div>
+                <div class="member-box">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <div class="text-center">
+                                        <p class="fira-20-blu">Guitarrista</p>
+                                        <div class="profile-box">
+                                            <button class="delete-btn" data-toggle="modal" data-target="#deleteModal"><i class="far fa-times-circle"></i></button>
+                                            <img class="profile-pic" src="https://headsfortails15029229.files.wordpress.com/2018/03/baby-bunny.jpg">
+                                        </div>
+                                        <p class="fira-18-blu">Bunny Bun</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="text-center">
+                                        <p class="fira-20-blu">Bajista</p>
+                                        <div class="profile-box">
+                                            <button class="delete-btn" data-toggle="modal" data-target="#deleteModal"> <i class="far fa-times-circle"></i></button>
+                                            <img class="profile-pic" src="https://headsfortails15029229.files.wordpress.com/2018/03/baby-bunny.jpg">
+                                        </div>
+                                        <p class="fira-18-blu">Bunny Bun</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="text-center">
+                                        <p class="fira-20-blu">Teclado</p>
+                                        <div class="profile-box">
+                                            <button class="delete-btn" data-toggle="modal" data-target="#deleteModal"><i class="far fa-times-circle"></i></button>
+                                            <img class="profile-pic" src="https://headsfortails15029229.files.wordpress.com/2018/03/baby-bunny.jpg">
+                                        </div>
+                                        <p class="fira-18-blu">Bunny Bun</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="text-center">
+                                        <p class="fira-20-blu">Vocalista</p>
+                                        <div class="profile-box">
+                                            <button class="delete-btn" data-toggle="modal" data-target="#deleteModal"><i class="far fa-times-circle"></i></button>
+                                            <img class="profile-pic" src="https://headsfortails15029229.files.wordpress.com/2018/03/baby-bunny.jpg">
+                                        </div>
+                                        <p class="fira-18-blu">Bunny Bun</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                </div>
+                <div class="dis-fle-jcent p-t-40">
+                    <div class="p-0-10">
+                        <button class="btn-gray">Cancelar</button>
+                    </div>
+                    <div class="p-0-10">
+                        <button class="btn-lblu">Guardar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header dis-fle-jcent">
+                            <h5 class="modal-title fira-30-blu text-center" id="exampleModalLabel">¿Seguro que quieres elminar a este miembro?</h5>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img src="/assets/images/sadteam.svg">
+                        </div>
+                        <div class="modal-footer dis-fle-jcent">
+                            <button type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn-red">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="addMemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header dis-fle-jcent">
+                            <h5 class="modal-title fira-30-blu" id="exampleModalLabel">Añadir integrante</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="search-member">
+                                <input type="text" placeholder="Inserta el código del músico...">
+                            </div>
+                            <div class="row p-t-40">
+                                <div class="col-md-6 modal-box">
+                                    <div>
+                                        <div class="text-center">
+                                            <img class="profile-pic" src="https://headsfortails15029229.files.wordpress.com/2018/03/baby-bunny.jpg">
+                                        <p class="quest-18-grey p-t-20">Bunny Bun</p>
+                                        </div>
+                                        <p class="quest-15-grey text-center p-t-20">Soy un Bunny que le gusta ser un bunny, como zanahorias en las noches y en las mañanas también. Soy un Bunny multitasking que roquea shido.</p>
+                                        <p class="quest-15-grey text-center p-t-20">Vocalista</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 modal-box">
+                                    <p class="quest-20-grey">Historial</p>
+                                    <div class="modal-history" >
+                                        <div class="history-box m-10-0">
+                                            <p class="fira-18-blu">Banda de Gatos</p>
+                                            <p class="quest-15-grey">Vocalista</p>
+                                            <p class="quest-15-grey">4 meses</p>
+                                        </div>
+                                        <div class="history-box m-10-0">
+                                            <p class="fira-18-blu">Banda de Gatos</p>
+                                            <p class="quest-15-grey">Vocalista</p>
+                                            <p class="quest-15-grey">4 meses</p>
+                                        </div>
+                                        <div class="history-box m-10-0">
+                                            <p class="fira-18-blu">Banda de Gatos</p>
+                                            <p class="quest-15-grey">Vocalista</p>
+                                            <p class="quest-15-grey">4 meses</p>
+                                        </div>
+                                        <div class="history-box m-10-0">
+                                            <p class="fira-18-blu">Banda de Gatos</p>
+                                            <p class="quest-15-grey">Vocalista</p>
+                                            <p class="quest-15-grey">4 meses</p>
+                                        </div>
+                                        <div class="history-box m-10-0">
+                                            <p class="fira-18-blu">Banda de Gatos</p>
+                                            <p class="quest-15-grey">Vocalista</p>
+                                            <p class="quest-15-grey">4 meses</p>
+                                        </div>
+                                        <div class="history-box m-10-0">
+                                            <p class="fira-18-blu">Banda de Gatos</p>
+                                            <p class="quest-15-grey">Vocalista</p>
+                                            <p class="quest-15-grey">4 meses</p>
+                                        </div>
+                                        <div class="history-box m-10-0">
+                                            <p class="fira-18-blu">Banda de Gatos</p>
+                                            <p class="quest-15-grey">Vocalista</p>
+                                            <p class="quest-15-grey">4 meses</p>
+                                        </div>
+                                    </div>
+                                    <div class="p-t-40">
+                                        <p>¿Es diseñador de experiencia?</p>
+                                        <div class="row register-box-check p-t-20">
+                                            <div class="col-lg-6">
+                                                <label class="quest-18-blu"> <input class="" type="radio" checked="checked" name="radio">
+                                                    <span class="checkmark"></span> 
+                                                    <p class="p-l-20">No</p>
+                                                </label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label class="quest-18-blu"> 
+                                                    <input class="" type="radio" name="radio">
+                                                    <span class="checkmark"></span> 
+                                                    <p class="p-l-20">Si</p> 
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer dis-fle-jcent">
+                            <button type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn-lblu">Añadir</button>
                         </div>
                     </div>
                 </div>

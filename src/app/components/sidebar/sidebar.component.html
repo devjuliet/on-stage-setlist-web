@@ -20,6 +20,13 @@
             <li>
                 <a class="quest-16-wht" [class]="classesLinks[1]" routerLink="/dashboard/manager/admin-bands" routerLinkActive="active">
                     <i class="fas fa-guitar p-r-20"></i>Bandas</a>
+                <a *ngFor="let item of menuList; let i = index" class="second-link p-r-20" routerLink="/dashboard/manager/band-info/{{item.id}}" routerLinkActive="active">
+                    <span *ngIf="item.active">
+                    </span>
+                    test {{item.name}} {{i}}
+                    <br>
+                </a>
+                    
             </li>
             <li>
                 <a class="quest-16-wht" [class]="classesLinks[2]" routerLink="/dashboard/manager/add-band" routerLinkActive="active">
