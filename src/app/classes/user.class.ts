@@ -1,25 +1,17 @@
 export class User{
-    idusuarios : number;
-    usuario : string;
-    nombre : string;
-    apellidos : string;
-    password : string;
-    entidad : string;
-    extension : string;
-    rolusuario : number;
-    alreadyLoged : Boolean;
-    token : string;
+    idUser : Number;
+    name : String;
+    email : String;
+    password : String;
+    type : Number;
+    username : String;
 
     constructor(){
-        this.idusuarios = 0;
-        this.usuario = "";
-        this.nombre = "";
-        this.apellidos = "";
+        this.idUser = 0;
+        this.name = "";
+        this.email = "";
         this.password = "";
-        this.entidad = "";
-        this.extension = "";
-        this.rolusuario = 0;
-        this.alreadyLoged = false;
-        this.token = "";
+        this.password = "";
+        this.username = "";
     }
   }
