@@ -1,4 +1,5 @@
 import { Component,OnInit } from '@angular/core';
+import { UtilitiesService } from './services/utilities/utilities.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,5 @@ import { Component,OnInit } from '@angular/core';
 export class AppComponent  {
   title = 'client';
 
+  constructor(public utilitiesService : UtilitiesService,) { }
 }

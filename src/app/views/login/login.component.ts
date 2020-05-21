@@ -23,9 +23,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.apiDataService.checkLogin((success)=>{
+    /* this.apiDataService.checkLogin( (success)=>{
       //this.apiDataService.showNotification(0,success.message,6000);
-      /* console.log(success) */
+      //console.log(success)
       switch(this.apiDataService.user.rolusuario){
         case 0:
           this.route.navigateByUrl('/admin-dashboard')
@@ -41,15 +41,15 @@ export class LoginComponent implements OnInit {
           break;
       }
     },(error)=>{
-      /* console.log("error") */
-      /* console.log(error); */
+      console.log("error")
+      console.log(error);
       
       //this.apiDataService.showNotification(1,error.message,6000);
-    });
+    }); */
   }
 
   login(){
-    if(this.password == "" && this.username == ""){
+    /* if(this.password == "" && this.username == ""){
       this.apiDataService.showNotification(1,"Usuario y/ó contraseña invalidos",6000);
     }else if(this.username == ""){
       this.apiDataService.showNotification(1,"Usuario invalido",6000);
@@ -95,7 +95,7 @@ export class LoginComponent implements OnInit {
         console.log(error);
         this.apiDataService.showNotification(1,"Ups algo salio mal!",6000);
       });
-    }
+    } */
   }
 
 }
