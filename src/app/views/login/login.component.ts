@@ -48,6 +48,18 @@ export class LoginComponent implements OnInit {
     }); */
   }
 
+  validador(){
+    if(this.password == "" && this.username == "" || this.password.length < 8 && this.username.length < 8){
+      console.log("Usuario y/ó contraseña invalido")
+    }else if(this.username == "" || this.username.length < 8){
+      console.log("Usuario invalido");
+    }else if(this.password == "" || this.password.length < 8){
+      console.log("Contraseña invalida");
+    }else{
+      console.log("Validaciones completas");
+    }
+  }
+  
   login(){
     /* if(this.password == "" && this.username == ""){
       this.apiDataService.showNotification(1,"Usuario y/ó contraseña invalidos",6000);
