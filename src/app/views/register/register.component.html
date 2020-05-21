@@ -16,38 +16,39 @@
                         <div>
                             <p class="quest-18-blu p-b-20">Información de la cuenta</p>
                             <div class="p-b-20">
-                                <input class="input-gr-blu width-90p" type="text" placeholder="Nombre de usuario...">
+                                <input [(ngModel)]="username" class="input-gr-blu width-90p" type="text" placeholder="Nombre de usuario...">
                             </div>
                         </div>
                         <div class="p-b-20">
-                            <input class="input-gr-blu width-90p" type="password" placeholder="Contraseña...">
+                            <input [(ngModel)]="password" class="input-gr-blu width-90p" type="password" placeholder="Contraseña...">
                         </div>
                         <div class="p-b-20">
-                            <input class="input-gr-blu width-90p" type="password" placeholder="Confirmar contraseña...">
+                            <input [(ngModel)]="confirmPass" class="input-gr-blu width-90p" type="password" placeholder="Confirmar contraseña...">
                         </div>
                     </div>
                     <div class="width-50p width-50-100">
                         <div>
                             <p class="quest-18-blu p-b-20">Información personal</p>
                             <div class="p-b-20">
-                                <input class="input-gr-blu width-90p" type="text" placeholder="Nombre(s)">
+                                <input [(ngModel)]="name" class="input-gr-blu width-90p" type="text" placeholder="Nombre(s)">
                             </div>
                         </div>
                         <div class="p-b-20">
-                            <input class="input-gr-blu width-90p" type="email" placeholder="Correo">
+                            <input [(ngModel)]="email" class="input-gr-blu width-90p" type="email" placeholder="Correo">
                         </div>
                         <div class="p-b-20">
                             <p class="quest-18-blu p-b-10">Tipo de cuenta:</p>
                             <div class="row register-box-check">
                                 <div class="col-lg-6">
-                                    <label class="quest-18-blu"> <input class="" type="radio" checked="checked" name="radio">
+                                    <label class="quest-18-blu"> 
+                                        <input  [checked]="isManager" (change)="isManager = !isManager" class="" type="radio" name="radio">
                                         <span class="checkmark"></span> 
                                         <p class="p-l-20">Manager</p>
                                     </label>
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="quest-18-blu"> 
-                                        <input class="" type="radio" name="radio">
+                                        <input [checked]="!isManager" (change)="isManager = !isManager" class="" type="radio" name="radio">
                                         <span class="checkmark"></span> 
                                         <p class="p-l-20">Live Experience Designer</p> 
                                     </label>
@@ -64,7 +65,7 @@
                         <button class="btn-gray" >Cancelar</button>
                     </div>
                     <div class="p-0-10">
-                        <button class="btn-lblu" >Registrarme</button>
+                        <button (click)="registerUser()" class="btn-lblu" >Registrarme</button>
                     </div>
                 </div>
             </div>

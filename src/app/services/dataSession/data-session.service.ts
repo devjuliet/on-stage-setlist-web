@@ -14,17 +14,20 @@ export class DataSessionService {
 
   user: User;
 
-  constructor(private apiService: ApiDataService, private route: Router, ) {
+  constructor(private apiDataService: ApiDataService, private route: Router, ) {
     this.token = "";
     this.user = new User();
     let token = localStorage.getItem('token');
-    //localStorage.removeItem("user")
     if (!token) {
       console.log("Primer uso");
       localStorage.setItem('token', JSON.stringify(this.token));
     } else {
       this.token = JSON.parse(token);
     }
+  }
+  
+  navigateByUrl(url : String){
+    this.route.navigateByUrl(url.toString());
   }
 
   checkLogin(succesCallBack, errorCallBack) {
@@ -34,16 +37,51 @@ export class DataSessionService {
     } else {
       //TO DO - mandar traer la data de la api en caso de que el token este correcto pero no hacerlo si ya exite info de la sesion 
       //        en el servicio
-      succesCallBack(new LogedResponse(false, "Con token"))
+      this.apiDataService.getUserData(this.token).then((response: ServerMessage) => {
+        //console.log(response);
+        if (response.error == true) {
+          this.navigateByUrl("/login");
+          errorCallBack(new LogedResponse(false, response.message))
+        } else {
+            if(this.user.type==0){
+              //this.dataSessionService.navigateByUrl("/login");
+            }else if(this.user.type==1){
+              this.navigateByUrl("/dashboard/manager");
+            }else if(this.user.type==2){
+              this.navigateByUrl("/dashboard/live-experience-designer");
+            }
+            succesCallBack(new LogedResponse(false, "Con token"));
+        }
+      }, (error) => {
+        console.log(error);
+        this.navigateByUrl("/login");
+        errorCallBack(new LogedResponse(false, "A ocurrido un error"))
+      }); 
+      
     }
   }
 
+  loginUser(username : String, password : String) {
+    return new Promise((resolve,reject)=>{
+      this.apiDataService.doLogin(username,password).then((response: ServerMessage) => {
+        if(response.error){
+          reject(response)
+        }else{
+          //Logica con la que guardamos los datos del inicio de sesion
+          localStorage.setItem('token', JSON.stringify(response.data.token));
+          this.user = response.data.user;
+          resolve(response);
+        }
+      }, (error) => {
+        reject(error)
+      }); 
+    })
+      
+   }
 
   logOut() {
-    localStorage.setItem('user', JSON.stringify(new User()));
-    this.user = JSON.parse(localStorage.getItem('user'));
-    this.alreadyLoged = false;
-
+    localStorage.setItem('token', "");
+    this.token = localStorage.getItem('token');
     this.route.navigateByUrl('/')
   }
 }
