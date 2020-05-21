@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.apiDataService.checkLogin((success)=>{
+    this.apiDataService.checkLogin( (success)=>{
       //this.apiDataService.showNotification(0,success.message,6000);
       /* console.log(success) */
       switch(this.apiDataService.user.rolusuario){
