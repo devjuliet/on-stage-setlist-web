@@ -1,0 +1,78 @@
+<div class="main-manager">
+    <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass">
+        <app-sidebar class="sidebar" [activeLink]="4" [isManager]="true"></app-sidebar>
+    </div>
+    <div id="main" [class]="'side-content ' + utilitiesService.navbarClass">
+        <app-navbar-dashboard></app-navbar-dashboard>
+        <div class="p-t-20">
+            <div class="info-dashboard">
+                <h1 class="fira-30-grey p-b-20">Catálogo</h1>
+                <div class="row">
+                    <div class="col-xl-8 col-md-8 col-sm-12 p-b-20 p-t-20">
+                        <div class="catolog-card">
+                            <div class="row">
+                                <div class="col-xl-8 col-md-8 col-sm-8 disp-alcent">
+                                    <div>
+                                        <img src="/assets/images/band.jpg">
+                                    </div>
+                                    <div class="p-l-10">
+                                        <p class="fira-18-blu">Nombre de lista</p>
+                                        <p class="quest-15-grey">Número de canciones</p>
+                                        <p class="quest-15-grey">Banda</p>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-sm-4 text-end p-10">
+                                    <div class="p-r-10">
+                                        <button class="social-btn cloud"><i class="fas fa-cloud"></i></button>
+                                    </div>
+                                    <div class="p-r-10">
+                                        <button class="social-btn export"><i class="fas fa-file-export"></i></button>
+                                    </div>
+                                    <div class="p-r-10">
+                                        <button class="social-btn dropbox"><i class="fab fa-dropbox"></i></button>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-12">
+                        <div class="text-center">
+                            <button class="btn-lblu"><i class="fas fa-file-import"></i> Importar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-8 col-md-8 col-sm-12 p-b-20 p-t-20">
+                        <div class="catolog-card">
+                            <div class="row">
+                                <div class="col-xl-8 col-md-8 col-sm-8 disp-alcent">
+                                    <div>
+                                        <img src="/assets/images/band.jpg">
+                                    </div>
+                                    <div class="p-l-10">
+                                        <p class="fira-18-blu">Nombre de lista</p>
+                                        <p class="quest-15-grey">Número de canciones</p>
+                                        <p class="quest-15-grey">Banda</p>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-sm-4 text-end p-10">
+                                    <div class="p-r-10">
+                                        <button class="social-btn cloud"><i class="fas fa-cloud"></i></button>
+                                    </div>
+                                    <div class="p-r-10">
+                                        <button class="social-btn export"><i class="fas fa-file-export"></i></button>
+                                    </div>
+                                    <div class="p-r-10">
+                                        <button class="social-btn dropbox"><i class="fab fa-dropbox"></i></button>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

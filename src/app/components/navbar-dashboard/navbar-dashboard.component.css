@@ -1,0 +1,25 @@
+nav{
+    display: flex;
+    align-items: center;
+    height: 85px;
+    width: 100%;
+    border-bottom:1px solid #382983; ;
+}
+input{
+    width: 60%;
+    border-radius: 10px 0 0 10px;
+}
+
+.search button{
+    border-radius: 0 10px 10px 0;
+    border: none;
+    color: white;
+    background-color: #382983;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+.search button:hover{
+    background-color: #0087D1;
+}

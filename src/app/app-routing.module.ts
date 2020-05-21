@@ -12,6 +12,7 @@ import { BandInfoComponent } from './views/dashboard/manager/band-info/band-info
 import { SettingsComponent } from './views/dashboard/manager/settings/settings.component';
 import { RegisterComponent } from './views/register/register.component';
 import { UsComponent } from './views/us/us.component';
+import { CatalogComponent } from './views/dashboard/manager/catalog/catalog.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
@@ -24,8 +25,8 @@ const routes: Routes = [
   { path: 'dashboard/manager/add-band', component: AddBandComponent },
   { path: 'dashboard/manager/admin-bands', component: AdminBandsComponent },
   { path: 'dashboard/manager/admin-events', component: AdminEventsComponent },
-  { path: 'dashboard/manager/band-info', component: AdminEventsComponent },
-  { path: 'dashboard/manager/manager-home', component: ManagerHomeComponent },
+  { path: 'dashboard/manager/band-info/:id', component: BandInfoComponent },
+  { path: 'dashboard/manager/catalog', component: CatalogComponent },
   { path: 'dashboard/manager/settings', component: SettingsComponent },
   /* { path: 'register-program', component: RegisterProgramComponent },
   { path: 'validations', component: ValidationsComponent },

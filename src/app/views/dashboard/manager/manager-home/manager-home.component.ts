@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilitiesService } from '../../../../services/utilities/utilities.service';
 
 @Component({
   selector: 'app-manager-home',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManagerHomeComponent implements OnInit {
 
-  constructor() { }
+  constructor( public utilitiesService : UtilitiesService) { }
 
   ngOnInit(): void {
   }
