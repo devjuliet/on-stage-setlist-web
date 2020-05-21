@@ -380,6 +380,9 @@ button:focus{
 .p-b-5{
     padding-bottom: 5px;
 }
+.p-r-5{
+    padding-right: 5px;
+}
 .p-0-30{
     padding: 0 30px;
 }

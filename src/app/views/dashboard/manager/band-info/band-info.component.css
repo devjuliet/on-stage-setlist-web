@@ -1,0 +1,229 @@
+.info-dashboard{
+    box-shadow: 0px 0px 6px -3px rgba(56,41,131,1);
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 80vh;
+}
+input{
+    width: 100%;
+    border: 1px solid #382983;
+    border-radius: 10px;
+    padding-left: 15px;
+    height: 35px;
+    transition: .3s ease-in-out;
+}
+textarea{
+    width: 100%;
+    padding-top: 5px;
+    padding-left: 15px;
+    border: 1px solid #382983;
+    border-radius: 10px;
+
+}
+textarea:focus, input:focus{
+    outline: none;
+    border: 1px solid #0087D1;
+}
+img{
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+}
+.hidden{
+    display: none;
+}
+.img-btn{
+    transition: .3s ease-in-out;
+    cursor: pointer;
+    position: relative;
+}
+.img-btn:hover{
+    opacity: .8;
+}
+.overlay-img{
+    position: absolute;
+    top: 0;
+    max-width: 300px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(56, 41, 131,.5);
+}
+.new-photo{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 20px;
+    font-family: 'Questrial', sans-serif;
+}
+.dis-fle-alcent{
+    display: flex;
+    align-items: center;
+}
+.dis-fle-jcent{
+    display: flex;
+    justify-content: center;
+}
+.search-input{
+    border-radius: 10px 0 0 10px;
+    width: 50%;
+    height: 40px;
+    border-top: 1px solid #382983;
+    border-left: 1px solid #382983;
+    border-bottom: 1px solid #382983;
+    border-right: none;
+    padding-left: 15px;
+    outline: none;
+    transition: .3s ease-in-out;
+}
+.search-input:hover, .search-input:focus{
+    border-top: 1px solid #0087D1;
+    border-left: 1px solid #0087D1;
+    border-bottom: 1px solid #0087D1;
+    border-right: none;
+    outline: none;
+}
+.search-btn{
+    border-radius: 0 10px 10px 0;
+    background-color: white;
+    border-top: 1px solid #382983;
+    border-left:  none;
+    border-bottom: 1px solid #382983;
+    border-right: 1px solid #382983;
+    height: 40px;
+}
+.search-btn:hover{
+    border-top: 1px solid #382983;
+    border-bottom: 1px solid #382983;
+    border-right: 1px solid #382983;
+    color: #0087D1;
+    border-left: none;
+    cursor: pointer;
+
+}
+.search-btn:focus, .search-input:focus{
+    outline: none !important;
+}
+.img-btn{
+    transition: .3s ease-in-out;
+}
+.img-btn:hover{
+    cursor: pointer;
+    opacity: .8;
+}
+.div-line{
+    width: 100%;
+    height: 1px;
+    background-color: #0087D1;
+    opacity: .2;
+}
+.member-box{
+    border-radius: 10px;
+    width: 100%;
+    border: 1px solid #382983;
+}
+.profile-pic{
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    border: 4px solid #382983;
+}
+.album-pic{
+    width: 120px;
+    height: 120px;
+}
+.profile-box{
+    width: 120px;
+    margin: auto;
+    position: relative;
+}
+.delete-btn{
+    position: absolute;
+    right: -7px;
+    background-color: transparent;
+    font-size: 30px;
+    color: red;
+    border: none;
+    opacity: .65;
+    transition: .3s ease-in-out;
+    cursor: pointer;
+}
+.delete-btn:hover{
+    opacity: 1;
+}
+.modal-footer, .modal-header{
+    border: none;
+}
+.search-member{
+    max-width: 400px;
+    margin: auto;
+    width: 100%;
+}
+.modal-box{
+    max-width: 400px;
+    margin: 0 auto;
+    width: 100%;
+}
+.modal-history{
+    width: 100%;
+    height: 200px;
+    overflow-y: scroll;
+}
+.history-box{
+    padding: 5px;
+    border: 1px solid #382983;
+    border-radius: 10px;
+    width: 90%;
+    border-left: 5px solid #0087D1;
+
+}
+/* Esconder el checkbox*/
+.register-box-check input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}  
+/* Checkbox falso */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+  
+.register-box-check:hover input ~ .checkmark {
+    background-color: #ccc;
+    cursor: pointer;
+}
+  
+.register-box-check input:checked ~ .checkmark {
+    background-color: #382983;
+}
+  
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+.register-box-check input:checked ~ .checkmark:after {
+    display: block;
+}
+  
+.register-box-check .checkmark:after {
+    top: 8px;
+    left: 8px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+}
+.max-h250{
+    max-height: 250px;
+    height: 100%;
+    width: auto;
+}
