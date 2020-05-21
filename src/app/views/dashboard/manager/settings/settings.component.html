@@ -1,1 +1,48 @@
-<p>settings works!</p>
+<div class="main-manager">
+    <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass">
+        <app-sidebar class="sidebar" [activeLink]="5" [isManager]="true"></app-sidebar>
+    </div>
+    <div id="main" [class]="'side-content ' + utilitiesService.navbarClass">
+        <app-navbar-dashboard></app-navbar-dashboard>
+        <div class="p-t-20">
+            <div class="info-dashboard">
+                <h1 class="fira-30-grey p-b-20">Ajustes</h1>
+                <div class="row">
+                    <div class="col-xl-6 col-md-6 col-sm-12">
+                        <div class="p-b-20">
+                            <input type="text" placeholder="Nombre(s)...">
+                        </div>
+                        <div class="p-b-20">
+                            <input type="text" placeholder="Usuario...">
+                        </div>
+                        <div class="p-b-20"> 
+                            <input type="email" placeholder="Correo...">
+                        </div>
+                        <div class="p-b-20">
+                            <input type="password" placeholder="Contraseña...">
+                        </div>
+                        <div class="p-b-20">
+                            <input type="password" placeholder="Repetir contraseña...">
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-md-6 col-sm-12 ">
+                        <div class="img-box">
+                            <input type="file" id="img" name="img" accept="image/*" class="hidden">
+                            <label class="img-btn" for="img">
+                                <img src="/assets/images/flor.svg">
+                                <div class="color-img"></div>
+                                <p class="img-word quest-16-wht">Subir foto</p>
+                            </label>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="disp-fjce p-t-40">
+                    <div>
+                        <button class="btn-lblu">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
