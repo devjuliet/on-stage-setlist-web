@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilitiesService } from 'src/app/services/utilities/utilities.service';
 
 @Component({
   selector: 'app-admin-events',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminEventsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public utilitiesService : UtilitiesService) { }
 
   ngOnInit(): void {
   }

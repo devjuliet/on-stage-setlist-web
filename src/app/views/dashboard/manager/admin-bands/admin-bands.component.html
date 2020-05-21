@@ -1,1 +1,89 @@
-<p>admin-bands works!</p>
+<div class="main-manager">
+    <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass">
+        <app-sidebar class="sidebar" [activeLink]="1" [isManager]="true"></app-sidebar>
+    </div>
+    <div id="main" [class]="'side-content ' + utilitiesService.navbarClass">
+        <app-navbar-dashboard></app-navbar-dashboard>
+        <div class="p-t-20">
+            <div class="info-dashboard">
+                <div class="p-b-20">   
+                    <h1 class="fira-30-grey">Lista de bandas</h1>
+                    <div class="search-bar p-t-20">
+                        <input  type="text" placeholder="Buscar un evento...">
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr >
+                                <td scope="row">
+                                    <div class="">
+                                        <div class="band-card">
+                                            <div class="band-card-img">
+                                                <img src="/assets/images/band.jpg">
+                                            </div>
+                                            <p class="quest-20-grey text-center p-b-10 p-t-10">Bandita</p>
+                                            <p class="quest-15-grey text-center">Somos una bandita feliz que toca cosas de banditas.</p>
+                                            <div>
+                                                <p class="fira-16-grey text-center p-t-5 p-b-5">Generos</p>
+                                                <div class="genere-tags">
+                                                    <div class="tags"><p>Rock</p></div>
+                                                    <div class="tags"><p>Rock</p></div>
+                                                    <div class="tags"><p>Rock</p></div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </td>
+                                <td scope="row">
+                                    <div class="">
+                                        <div class="band-card">
+                                            <div class="band-card-img">
+                                                <img src="/assets/images/band.jpg">
+                                            </div>
+                                            <p class="quest-20-grey text-center p-b-10 p-t-10">Bandita</p>
+                                            <p class="quest-15-grey text-center">Somos una bandita feliz que toca cosas de banditas.</p>
+                                            <div>
+                                                <p class="fira-16-grey text-center p-t-5 p-b-5">Generos</p>
+                                                <div class="genere-tags">
+                                                    <div class="tags"><p>Rock</p></div>
+                                                    <div class="tags"><p>Rock</p></div>
+                                                    <div class="tags"><p>Rock</p></div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </td>
+                                <td scope="row">
+                                    <div class="">
+                                        <div class="band-card">
+                                            <div class="band-card-img">
+                                                <img src="/assets/images/band.jpg">
+                                            </div>
+                                            <p class="quest-20-grey text-center p-b-10 p-t-10">Bandita</p>
+                                            <p class="quest-15-grey text-center">Somos una bandita feliz que toca cosas de banditas.</p>
+                                            <div>
+                                                <p class="fira-16-grey text-center p-t-5 p-b-5">Generos</p>
+                                                <div class="genere-tags">
+                                                    <div class="tags"><p>Rock</p></div>
+                                                    <div class="tags"><p>Rock</p></div>
+                                                    <div class="tags"><p>Rock</p></div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

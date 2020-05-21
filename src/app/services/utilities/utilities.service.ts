@@ -13,6 +13,8 @@ import {
 })
 export class UtilitiesService {
 
+  sidebarClass : String;
+  navbarClass : String;
   //Utilidades interfaz
   public showOverlay = true;
   //Loading con mensaje 
@@ -29,10 +31,26 @@ export class UtilitiesService {
   showingMenu: boolean = true;
 
   constructor(private router: Router, ) {
+    this.navbarClass = "myWidth";
+    this.sidebarClass = "myMargin";
     router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event)
     })
   }
+  
+  showSidebar(){
+      if(this.sidebarClass == "myMargin"){
+        this.sidebarClass = "";
+      }
+      else{
+        this.sidebarClass = "myMargin";
+      }
+      if(this.navbarClass == "myWidth"){
+         this.navbarClass = "";
+      }else{
+        this.navbarClass = "myWidth";
+      }
+   }
 
   // Shows and hides the loading spinner during RouterEvent changes
   navigationInterceptor(event: RouterEvent): void {

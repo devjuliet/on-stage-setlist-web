@@ -1,1 +1,60 @@
-<p>manager-home works!</p>
+<div class="main-manager">
+    <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass">
+        <app-sidebar class="sidebar" [activeLink]="0" [isManager]="true"></app-sidebar>
+    </div>
+    <div id="main" [class]="'side-content ' + utilitiesService.navbarClass">
+        <app-navbar-dashboard></app-navbar-dashboard>
+        <div class="p-t-20">
+            <div class="info-dashboard">
+                <div class="p-b-20">   
+                    <h1 class="fira-30-grey">Proximos eventos</h1>
+                    <div class="search-bar p-t-20">
+                        <input  type="text" placeholder="Buscar un evento...">
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <table class="table">
+                        <tbody>
+                            <tr >
+                                <td scope="row">
+                                    <div class="event-card">
+                                        <div>
+                                            <p>Jueves 14 de Mayo del 2020</p>
+                                            <p>16:50 P.M.</p>
+                                            <p>Club Leones Chihuahua Chih.</p>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="p-t-10">
+                                <td scope="row">
+                                    <div class="event-card">
+                                        <div>
+                                            <p>Jueves 14 de Mayo del 2020</p>
+                                            <p>16:50 P.M.</p>
+                                            <p>Club Leones Chihuahua Chih.</p>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="p-t-10">
+                                <td scope="row">
+                                    <div class="event-card">
+                                        <div>
+                                            <p>Jueves 14 de Mayo del 2020</p>
+                                            <p>16:50 P.M.</p>
+                                            <p>Club Leones Chihuahua Chih.</p>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
