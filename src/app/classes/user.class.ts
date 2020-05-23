@@ -11,7 +11,7 @@ export class User{
         this.name = "";
         this.email = "";
         this.password = "";
-        this.password = "";
         this.username = "";
+        this.type = 1;//si es 1 es manager
     }
   }

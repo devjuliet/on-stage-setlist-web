@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilitiesService } from '../../services/utilities/utilities.service';
+import { DataSessionService } from 'src/app/services/dataSession/data-session.service';
 
 @Component({
   selector: 'app-navbar-dashboard',
@@ -8,9 +9,13 @@ import { UtilitiesService } from '../../services/utilities/utilities.service';
 })
 export class NavbarDashboardComponent implements OnInit {
 
-  constructor(public utilitiesService : UtilitiesService) { }
+  constructor(public utilitiesService : UtilitiesService,private dataSessionService : DataSessionService) { }
 
   ngOnInit(): void {
+  }
+
+  logOut() {
+    this.dataSessionService.logOut();
   }
 
 }
