@@ -1,8 +1,15 @@
 <div class="main-manager">
-    <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass">
-        <app-sidebar class="sidebar" [activeLink]="1" [isManager]="true"></app-sidebar>
+    <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass.toString()">
+        <app-sidebar class="sidebar" 
+            [activeLink]="1" 
+            [isManager]="dataSessionService.user.type.toString()=='1'"
+            [nameUser]="dataSessionService.user.name"
+            [imageurl]="dataSessionService.user.haveImage"
+            [idUser]="dataSessionService.user.idUser"
+            [imageSrc]="dataSessionService.user.imageBlob" 
+            ></app-sidebar>
     </div>
-    <div id="main" [class]="'side-content ' + utilitiesService.navbarClass">
+    <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
         <app-navbar-dashboard></app-navbar-dashboard>
         <div class="p-t-20">
             <div class="info-dashboard">
