@@ -17,15 +17,19 @@ export class LoginComponent implements OnInit {
   username : string;
   password : string;
 
-  constructor(public dataSessionService: DataSessionService, private apiDataService: ApiDataService, private utilitiesService: UtilitiesService) {}
+  constructor(public dataSessionService: DataSessionService, private utilitiesService: UtilitiesService) {}
   
   ngOnInit(): void {
     this.clearData();
     this.dataSessionService.checkLogin((logedResponse: LogedResponse) => {
-      console.log(logedResponse);
-      //TO DO - Falta añadir la logica que redirecciona a la ruta y con la data cargada internamente y 
-      //        mandar al dashboard correspondiente
-      
+      if(this.dataSessionService.user.type==0){
+        this.dataSessionService.logOut();
+        this.utilitiesService.showNotification(1, "El usuario solo es musico.", 4000, () => { });
+      }else if(this.dataSessionService.user.type==1){
+        this.dataSessionService.navigateByUrl("/dashboard/manager");
+      }else if(this.dataSessionService.user.type==2){
+        this.dataSessionService.navigateByUrl("/dashboard/live-experience-designer");
+      }
     }, (noLoginResponse: LogedResponse) => {
       console.log(noLoginResponse);
     });
@@ -57,12 +61,13 @@ export class LoginComponent implements OnInit {
           this.utilitiesService.showNotification(1, response.message, 4000, () => { });
         } else {
           this.clearData();
-          this.utilitiesService.showNotification(0, response.message, 2000, () => {
-            if(this.dataSessionService.user.type==0){
-              //this.dataSessionService.navigateByUrl("/login");
-            }else if(this.dataSessionService.user.type==1){
+          this.utilitiesService.showNotification(0, response.message, 0, () => {
+            if(response.data.user.type==0){
+              this.dataSessionService.logOut();
+              this.utilitiesService.showNotification(1, "El usuario solo es musico.", 4000, () => { });
+            }else if(response.data.user.type==1){
               this.dataSessionService.navigateByUrl("/dashboard/manager");
-            }else if(this.dataSessionService.user.type==2){
+            }else if(response.data.user.type==2){
               this.dataSessionService.navigateByUrl("/dashboard/live-experience-designer");
             }
           });

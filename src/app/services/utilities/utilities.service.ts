@@ -86,16 +86,18 @@ export class UtilitiesService {
     this.loadingMessageMsg = "";
   }
 
-  closeLoadingSuccess(titleSuccess = "",msgSucces = ""){
+  closeLoadingSuccess(titleSuccess = "",msgSucces = "",callback){
     this.loadingMsg = true;
     this.loadingOkMsg = true;
     this.loadingTitleMsg = titleSuccess;
-      this.loadingMessageMsg = msgSucces;
-    this.awaitTime(2000, () => {
+    this.loadingMessageMsg = msgSucces;
+    
+    this.awaitTime(1500, () => {
       this.loadingMsg = false;
       this.loadingOkMsg = false;
       this.loadingTitleMsg = "";
       this.loadingMessageMsg = "";
+      callback();
     });
   }
   //MENU LATERAL

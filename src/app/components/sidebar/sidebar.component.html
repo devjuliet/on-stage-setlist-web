@@ -5,10 +5,11 @@
     <div class="wht-line"></div>
     <div class="p-t-20">
         <div class="text-center">
-            <img class="author" src="/assets/images/flor.svg"> 
+            <img *ngIf="!imageurl" class="author" src="/assets/images/flor.svg">
+            <img *ngIf="imageurl" class="author" [src]="imageSrc">
         </div>
         <div class="text-center p-t-15">
-            <p class="fira-18-wht">Flor Legarda</p>
+            <p class="fira-18-wht">{{nameUser}}</p>
         </div>
     </div>
     <div class="p-t-30">
@@ -48,7 +49,7 @@
     </div>
 </div>
 
-<div *ngIf="!isManager">
+<div *ngIf="!isManager" class="sidebar">
     <div class="text-center p-t-10 p-b-15">
         <a href="#"><img src="/assets/images/logo-white.svg"></a>
     </div>
@@ -58,7 +59,7 @@
             <img class="author" src="/assets/images/flor.svg"> 
         </div>
         <div class="text-center p-t-15">
-            <p class="fira-18-wht">Rolf Adragel</p>
+            <p class="fira-18-wht">{{nameUser}}</p>
         </div>
     </div>
     <div class="p-t-30">
