@@ -19,7 +19,7 @@ export class DataSessionService {
 
   baseURL: String;
 
-  constructor(private apiDataService: ApiDataService, private route: Router,) {
+  constructor(private apiDataService: ApiDataService, private route: Router, ) {
     this.token = "";
     this.user = new User();
     this.elementsManager = new ElementsManager();
@@ -43,6 +43,7 @@ export class DataSessionService {
     if (this.token == "") {
       errorCallBack(new LogedResponse(true, "Sin token"))
     } else {
+      this.apiDataService.setToken(this.token);
       if (this.user.username == "") {
         this.apiDataService.getUserData(this.token).then((response: ServerMessage) => {
           //console.log(response);
@@ -61,7 +62,6 @@ export class DataSessionService {
               this.apiDataService.getImage(this.baseURL.toString() +
                 'uploads/user-image/' + this.user.idUser.toString()).then((image) => {
                   this.user.imageBlob = image;
-
                   succesCallBack(new LogedResponse(false, "Con token y usario actualizado"));
                 }, (error) => {
                   console.log(error);
@@ -82,14 +82,12 @@ export class DataSessionService {
           'uploads/user-image/' + this.user.idUser.toString()).then((image: string) => {
             this.user.imageBlob = image;
             //console.log(image);
-
             succesCallBack(new LogedResponse(false, "Sesion Con token e informacion de usuario"));
           }, (error) => {
             console.log(error);
             this.user.imageBlob = "";
             errorCallBack(new LogedResponse(true, "A ocurrido un error obteniendo la imagen del usuario"));
           });
-
       }
     }
   }

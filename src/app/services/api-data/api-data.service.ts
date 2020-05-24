@@ -11,6 +11,7 @@ import { of } from 'rxjs/internal/observable/of';
 })
 export class ApiDataService {
   baseURL: string = deployConf.apiUrl;
+  token: String;
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
   
@@ -32,9 +33,18 @@ export class ApiDataService {
     })
   }
 
+  setToken(newToken : String){
+    this.token = newToken;
+  }
+
   getImage(url : string) : Promise<any> {
     return new Promise((resolve,reject)=>{
-      this.http.get(url, { responseType: 'blob' })
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token,
+      });
+      
+      this.http.get(url, { headers: headers,responseType: 'blob' })
       .pipe(
         timeout(2000),
         catchError(e => {
@@ -46,7 +56,6 @@ export class ApiDataService {
         let objectURL = "";
         if(imageBlob!=null && imageBlob!=undefined){
           objectURL = URL.createObjectURL(imageBlob);
-          console.log("imagen obtenida");
         }
         resolve(this.sanitizer.bypassSecurityTrustUrl(objectURL) );
       },(error : ServerMessage)=>{
@@ -91,8 +100,31 @@ export class ApiDataService {
         haveImage : haveImage, 
         username : username
       };
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token,
+      });
 
-      this.http.post(this.baseURL + 'user/update-user',data,{}).subscribe((response : ServerMessage)=>{
+      this.http.post(this.baseURL + 'user/update-user',data,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
+  async changePasswordUser(idUser : Number,newPassword : String,){
+    return new Promise((resolve,reject)=>{
+      const data = {
+        idUser : idUser,
+        newPassword : newPassword,
+      };
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token,
+      });
+
+      this.http.post(this.baseURL + 'user/change-user-pass',data,{headers:headers}).subscribe((response : ServerMessage)=>{
         resolve(response);
       },(error)=>{
         reject(error)
@@ -102,16 +134,17 @@ export class ApiDataService {
 
   async uploadImageUser(formData: FormData) {
     return new Promise((resolve,reject)=>{
-      var url= this.baseURL + 'uploads/user-image/';
-      //this.appiEissa.presentAlert("","","Url para subir "+url);
-      this.http.post(url, formData, { })
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer '+this.token,
+      });
+
+      this.http.post(this.baseURL + 'uploads/user-image/', formData, {headers:headers })
         .subscribe((res: ServerMessage) => {
           if (res.error == false) {
             resolve(res);
           } else if( res.error == undefined){
             console.log("error no llego nada");
             reject(res);
-            //this.presentAlert("", "", 'File upload failed.Error desconocido')
           }else{
             resolve(res);
           }
@@ -123,7 +156,10 @@ export class ApiDataService {
 
   deleteImageUser(idUser){
     return new Promise((resolve,reject)=>{
-      this.http.get(this.baseURL + 'uploads/user-delete/'+idUser,{}).subscribe((response : ServerMessage)=>{
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer '+this.token,
+      });
+      this.http.get(this.baseURL + 'uploads/user-delete-image/'+idUser,{headers:headers}).subscribe((response : ServerMessage)=>{
         resolve(response);
       },(error)=>{
         reject(new ServerMessage(true,"A ocurrido un error inesperado",error));

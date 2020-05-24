@@ -5,6 +5,7 @@ import { LogedResponse } from '../../../../classes/logedResponse.class';
 import { User } from '../../../../classes/user.class';
 import { ApiDataService } from '../../../../services/api-data/api-data.service';
 import { ServerMessage } from '../../../../classes/serverMessages.dto';
+import { isRegExp } from 'util';
 
 @Component({
   selector: 'app-settings',
@@ -26,10 +27,11 @@ export class SettingsComponent implements OnInit {
   constructor(public dataSessionService: DataSessionService, public utilitiesService: UtilitiesService, private apiDataService: ApiDataService) {
     this.actualInfoUser = new User();
     this.source = '';
+    this.newPassword = "";
+    this.confirmPassword = "";
   }
 
   ngOnInit(): void {
-    //console.log("sssssssssssssssssss");
     this.dataSessionService.checkLogin((logedResponse: LogedResponse) => {
       //console.log(this.dataSessionService.user);
       //Manda al dashboard correspondiente o saca de la sesion
@@ -39,7 +41,6 @@ export class SettingsComponent implements OnInit {
         this.dataSessionService.logOut();
       } else {
         this.actualInfoUser = JSON.parse(JSON.stringify(this.dataSessionService.user));
-        console.log(this.actualInfoUser);
       }
     }, (noLoginResponse: LogedResponse) => {
       console.log(noLoginResponse);
@@ -84,17 +85,39 @@ export class SettingsComponent implements OnInit {
   }
 
   saveData() {
-    if (this.validateUserData()) {
+    if(this.newPassword.length>8 && this.confirmPassword.length>8 && this.newPassword == this.confirmPassword){
+      this.utilitiesService.showLoadingMsg("Cambiando contraseña", "Actualizando la contraseña del usuario.", () => {
+         
+        this.apiDataService.changePasswordUser(this.actualInfoUser.idUser,this.newPassword).then((response : ServerMessage) => {
+          console.log(response);
+          
+          this.utilitiesService.closeLoadingSuccess("Exito cambiando contraseña", "Su contraseña a sido cambiada con exito", () => {});
+          this.utilitiesService.showNotification(0, "Contraseña actualizada.", 5000, () => { 
+            this.newPassword = "";
+            this.confirmPassword = "";
+          });  
+        }).catch((error) => {
+          console.log(error);
+          this.utilitiesService.closeLoadingMsg();
+          this.utilitiesService.showNotification(1, "A ocurrido un error cambiando la contraseña.", 5000, () => { });    
+        });
+      });
+    }else if (this.validateUserData()) {
       console.log("valodciones ok");
       //Se elimino la imagen
       if (!this.actualInfoUser.haveImage && this.dataSessionService.user.haveImage && this.source.length == 0) {
         console.log("Elimino imagen");
-        this.apiDataService.deleteImageUser(this.actualInfoUser.idUser).then((response) => {
-          this.actualInfoUser.haveImage = false;
-          this.uploadDataUser(this.actualInfoUser);
-        }).catch((error) => {
-          console.log(error);
-          this.utilitiesService.showNotification(1, "Error subiendo imagen", 5000, () => { });
+        //Loading de carga
+        this.utilitiesService.showLoadingMsg("Eliminando imagen", "Eliminando imagen del usuario #" + this.actualInfoUser.idUser, () => {
+          this.apiDataService.deleteImageUser(this.actualInfoUser.idUser).then((response : ServerMessage) => {
+            this.actualInfoUser.haveImage = false;
+            this.utilitiesService.closeLoadingSuccess("Imagen eliminada", "Imagen del usuario #" + this.actualInfoUser.idUser + " eliminada correctamente", () => {});
+            this.uploadDataUser(this.actualInfoUser);
+          }).catch((error) => {
+            console.log(error);
+            this.utilitiesService.closeLoadingMsg();
+            this.utilitiesService.showNotification(0, "A ocurrido un error eliminando la imagen.", 5000, () => { });
+          });           
         });
       }
       //Si se selecciona una imagen
@@ -113,10 +136,8 @@ export class SettingsComponent implements OnInit {
       //Si la imagen no se va a eliminar
       else {
         console.log("Misma imagen");
-        /* this.uploadDataUser(permission); */
+        this.uploadDataUser(this.actualInfoUser);
       }
-    } else {
-
     }
   }
 
@@ -163,6 +184,7 @@ export class SettingsComponent implements OnInit {
   uploadDataUser(newData: User) {
     //Loading de carga
     //console.log(newData);
+    this.dataSessionService.user.haveImage = false;
     this.apiDataService.getImage(this.dataSessionService.baseURL.toString() +
       'uploads/user-image/' + this.actualInfoUser.idUser.toString()).then((image) => {
         this.dataSessionService.user.imageBlob = image;
