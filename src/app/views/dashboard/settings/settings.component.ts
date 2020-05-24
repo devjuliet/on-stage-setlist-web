@@ -1,11 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { UtilitiesService } from '../../../../services/utilities/utilities.service';
-import { DataSessionService } from '../../../../services/dataSession/data-session.service';
-import { LogedResponse } from '../../../../classes/logedResponse.class';
-import { User } from '../../../../classes/user.class';
-import { ApiDataService } from '../../../../services/api-data/api-data.service';
-import { ServerMessage } from '../../../../classes/serverMessages.dto';
-import { isRegExp } from 'util';
+import { UtilitiesService } from '../../../services/utilities/utilities.service';
+import { DataSessionService } from '../../../services/dataSession/data-session.service';
+import { LogedResponse } from '../../../classes/logedResponse.class';
+import { User } from '../../../classes/user.class';
+import { ApiDataService } from '../../../services/api-data/api-data.service';
+import { ServerMessage } from '../../../classes/serverMessages.dto';
 
 @Component({
   selector: 'app-settings',
@@ -35,9 +34,7 @@ export class SettingsComponent implements OnInit {
     this.dataSessionService.checkLogin((logedResponse: LogedResponse) => {
       //console.log(this.dataSessionService.user);
       //Manda al dashboard correspondiente o saca de la sesion
-      if (this.dataSessionService.user.type == 2) {
-        this.dataSessionService.navigateByUrl("/dashboard/live-experience-designer");
-      } else if (this.dataSessionService.user.type != 1) {
+      if (this.dataSessionService.user.type != 1 && this.dataSessionService.user.type != 2 ) {
         this.dataSessionService.logOut();
       } else {
         this.actualInfoUser = JSON.parse(JSON.stringify(this.dataSessionService.user));

@@ -17,8 +17,9 @@ import { LedHomeComponent } from './views/dashboard/live-experience-designer/led
 import { AdminBandsComponent } from './views/dashboard/manager/admin-bands/admin-bands.component';
 import { AddBandComponent } from './views/dashboard/manager/add-band/add-band.component';
 import { AdminEventsComponent } from './views/dashboard/manager/admin-events/admin-events.component';
-import { SettingsComponent } from './views/dashboard/manager/settings/settings.component';
 import { BandInfoComponent } from './views/dashboard/manager/band-info/band-info.component';
+
+import { SettingsComponent } from './views/dashboard/settings/settings.component';
 
 //Components
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -31,7 +32,7 @@ import { NavbarDashboardComponent } from './components/navbar-dashboard/navbar-d
 import { CatalogComponent } from './views/dashboard/manager/catalog/catalog.component';
 import { AddListComponent } from './views/dashboard/live-experience-designer/add-list/add-list.component';
 import { EditListComponent } from './views/dashboard/live-experience-designer/edit-list/edit-list.component';
-import { SettingsLedComponent } from './views/dashboard/live-experience-designer/settings-led/settings-led.component';
+import { NotFoundComponent } from './views/not-found/not-found.component';
 
 
 @NgModule({
@@ -58,7 +59,7 @@ import { SettingsLedComponent } from './views/dashboard/live-experience-designer
     LedHomeComponent,
     AddListComponent,
     EditListComponent,
-    SettingsLedComponent,
+    NotFoundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

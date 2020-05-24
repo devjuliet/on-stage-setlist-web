@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       } else if (this.dataSessionService.user.type == 1) {
         this.dataSessionService.navigateByUrl("/dashboard/manager");
       } else if (this.dataSessionService.user.type == 2) {
-        this.dataSessionService.navigateByUrl("/dashboard/live-experience-designer");
+        this.dataSessionService.navigateByUrl("/dashboard/led/home");
       }
     }, (noLoginResponse: LogedResponse) => {
       console.log(noLoginResponse);
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
           } else if (response.data.user.type == 1) {
             this.dataSessionService.navigateByUrl("/dashboard/manager");
           } else if (response.data.user.type == 2) {
-            this.dataSessionService.navigateByUrl("/dashboard/live-experience-designer");
+            this.dataSessionService.navigateByUrl("/dashboard/led/home");
           }
         });
       }, (error) => {
