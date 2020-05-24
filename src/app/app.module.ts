@@ -13,7 +13,7 @@ import { RegisterProgramComponent } from './views/register-program/register-prog
 import { LoginComponent } from './views/login/login.component';
 import { HomeComponent } from './views/home/home.component';
 import { ManagerHomeComponent } from './views/dashboard/manager/manager-home/manager-home.component';
-import { LiveExperienceDesignerHomeComponent } from './views/dashboard/live-experience-designer/live-experience-designer-home/live-experience-designer-home.component';
+import { LedHomeComponent } from './views/dashboard/live-experience-designer/led-home/led-home.component';
 import { AdminBandsComponent } from './views/dashboard/manager/admin-bands/admin-bands.component';
 import { AddBandComponent } from './views/dashboard/manager/add-band/add-band.component';
 import { AdminEventsComponent } from './views/dashboard/manager/admin-events/admin-events.component';
@@ -29,6 +29,10 @@ import { UsComponent } from './views/us/us.component';
 import { RegisterComponent } from './views/register/register.component';
 import { NavbarDashboardComponent } from './components/navbar-dashboard/navbar-dashboard.component';
 import { CatalogComponent } from './views/dashboard/manager/catalog/catalog.component';
+import { AddListComponent } from './views/dashboard/live-experience-designer/add-list/add-list.component';
+import { EditListComponent } from './views/dashboard/live-experience-designer/edit-list/edit-list.component';
+import { SettingsLedComponent } from './views/dashboard/live-experience-designer/settings-led/settings-led.component';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +41,7 @@ import { CatalogComponent } from './views/dashboard/manager/catalog/catalog.comp
     LoginComponent,
     HomeComponent,
     ManagerHomeComponent,
-    LiveExperienceDesignerHomeComponent,
+    LedHomeComponent,
     AdminBandsComponent,
     AddBandComponent,
     AdminEventsComponent,
@@ -51,6 +55,10 @@ import { CatalogComponent } from './views/dashboard/manager/catalog/catalog.comp
     RegisterComponent,
     NavbarDashboardComponent,
     CatalogComponent,
+    LedHomeComponent,
+    AddListComponent,
+    EditListComponent,
+    SettingsLedComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

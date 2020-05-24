@@ -45,10 +45,10 @@
 
 <!-- NOTIFICACIONES PARA TODA LA APP -->
 <div *ngIf="utilitiesService.successMessage" class="alert alert-success notificacion-flotante" role="alert">
-    {{utilitiesService.actualMessageServer}} <a href="#" (click)="utilitiesService.closeNotification()">X</a>
+    {{utilitiesService.actualMessageServer}} <button (click)="utilitiesService.closeNotification()">X</button>
 </div>
 <div *ngIf="utilitiesService.failMessage" class="alert alert-warning notificacion-flotante" role="alert">
-    {{utilitiesService.actualMessageServer}} <a href="#" (click)="utilitiesService.closeNotification()">X</a>
+    {{utilitiesService.actualMessageServer}} <button (click)="utilitiesService.closeNotification()">X</button>
 </div>
 
 <router-outlet></router-outlet>

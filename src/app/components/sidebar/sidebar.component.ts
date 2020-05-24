@@ -8,6 +8,10 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SidebarComponent implements OnInit {
   @Input() activeLink: number;
   @Input() isManager: Boolean;
+  @Input() nameUser: String;
+  @Input() imageurl: Boolean;
+  @Input() idUser: number;
+  @Input() imageSrc: string;
 
   colorLinks = [
     "whitesmoke",//0
@@ -36,7 +40,8 @@ export class SidebarComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log(this.activeLink);
+    //console.log(this.activeLink);
+    //console.log(this.imageSrc);
     for (let index = 0; index < this.colorLinks.length; index++) {
       this.colorLinks[index] = "whitesmoke";
       this.classesLinks[index] = "normal-link";

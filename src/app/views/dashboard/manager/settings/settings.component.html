@@ -1,8 +1,15 @@
 <div class="main-manager">
-    <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass">
-        <app-sidebar class="sidebar" [activeLink]="5" [isManager]="true"></app-sidebar>
+    <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass.toString()">
+        <app-sidebar class="sidebar" 
+            [activeLink]="5" 
+            [isManager]="dataSessionService.user.type.toString()=='1'"
+            [nameUser]="dataSessionService.user.name"
+            [imageurl]="dataSessionService.user.haveImage"
+            [idUser]="dataSessionService.user.idUser"
+            [imageSrc]="dataSessionService.user.imageBlob" 
+            ></app-sidebar>
     </div>
-    <div id="main" [class]="'side-content ' + utilitiesService.navbarClass">
+    <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
         <app-navbar-dashboard></app-navbar-dashboard>
         <div class="p-t-20">
             <div class="info-dashboard">
@@ -10,36 +17,63 @@
                 <div class="row">
                     <div class="col-xl-6 col-md-6 col-sm-12">
                         <div class="p-b-20">
-                            <input type="text" placeholder="Nombre(s)...">
+                            <input type="text" [(ngModel)]="actualInfoUser.name" placeholder="Nombre(s)...">
                         </div>
                         <div class="p-b-20">
-                            <input type="text" placeholder="Usuario...">
+                            <input type="text" [(ngModel)]="actualInfoUser.username" placeholder="Usuario...">
                         </div>
                         <div class="p-b-20"> 
-                            <input type="email" placeholder="Correo...">
+                            <input type="email" [(ngModel)]="actualInfoUser.email" placeholder="Correo...">
                         </div>
                         <div class="p-b-20">
-                            <input type="password" placeholder="Contraseña...">
+                            <input type="password" [(ngModel)]="newPassword" placeholder="Nueva Contraseña...">
                         </div>
                         <div class="p-b-20">
-                            <input type="password" placeholder="Repetir contraseña...">
+                            <input type="password" [(ngModel)]="confirmPassword" placeholder="Repetir contraseña...">
                         </div>
                     </div>
                     <div class="col-xl-6 col-md-6 col-sm-12 ">
+
                         <div class="img-box">
-                            <input type="file" id="img" name="img" accept="image/*" class="hidden">
-                            <label class="img-btn" for="img">
-                                <img src="/assets/images/flor.svg">
-                                <div class="color-img"></div>
-                                <p class="img-word quest-16-wht">Subir foto</p>
-                            </label>
+                            
+
+                            <div *ngIf="!actualInfoUser.haveImage"
+                                class="input-group mb-3"
+                                style="    justify-content: center;">
+                                <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
+
+                                <label *ngIf="source.length == 0">
+                                    <input (change)="updateSource($event)" type="file" id="img" name="img" accept="image/*" class="hidden">
+                                    <label class="img-btn" for="img">
+                                        <img  src="/assets/images/flor.svg">
+                                        <div class="color-img"></div>
+                                        <p class="img-word quest-16-wht">Subir foto</p>
+                                    </label>
+                                </label>
+                                <!-- img placeholder when a file has been picked. shows only when 'source' is not empty -->
+                                <img *ngIf="source.length > 0"
+                                    style="width: inherit;"
+                                    [src]="source">
+                                <button *ngIf="source.length > 0"
+                                    (click)="cancelImage()" class="btn2"
+                                    style="margin-top: 10px;">Borrar</button>
+                            </div>
+                            <div *ngIf="actualInfoUser.haveImage"
+                                class="input-group mb-3"
+                                style="    justify-content: center;">
+                                <img style="width: inherit;"
+                                    [src]="dataSessionService.user.imageBlob">
+                                <button (click)="cancelImage()"
+                                    class="btn2"
+                                    style="margin-top: 10px;">Borrar</button>
+                            </div>
                             
                         </div>
                     </div>
                 </div>
                 <div class="disp-fjce p-t-40">
                     <div>
-                        <button class="btn-lblu">Guardar</button>
+                        <button (click)="saveData()" class="btn-lblu">Guardar</button>
                     </div>
                 </div>
             </div>

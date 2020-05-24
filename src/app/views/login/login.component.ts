@@ -13,19 +13,23 @@ import { UtilitiesService } from 'src/app/services/utilities/utilities.service';
 })
 export class LoginComponent implements OnInit {
 
-  
-  username : string;
-  password : string;
 
-  constructor(public dataSessionService: DataSessionService, private apiDataService: ApiDataService, private utilitiesService: UtilitiesService) {}
-  
+  username: string;
+  password: string;
+
+  constructor(public dataSessionService: DataSessionService, private utilitiesService: UtilitiesService) { }
+
   ngOnInit(): void {
     this.clearData();
     this.dataSessionService.checkLogin((logedResponse: LogedResponse) => {
-      console.log(logedResponse);
-      //TO DO - Falta añadir la logica que redirecciona a la ruta y con la data cargada internamente y 
-      //        mandar al dashboard correspondiente
-      
+      if (this.dataSessionService.user.type == 0) {
+        this.dataSessionService.logOut();
+        this.utilitiesService.showNotification(1, "El usuario solo es musico.", 4000, () => { });
+      } else if (this.dataSessionService.user.type == 1) {
+        this.dataSessionService.navigateByUrl("/dashboard/manager");
+      } else if (this.dataSessionService.user.type == 2) {
+        this.dataSessionService.navigateByUrl("/dashboard/live-experience-designer");
+      }
     }, (noLoginResponse: LogedResponse) => {
       console.log(noLoginResponse);
     });
@@ -40,7 +44,7 @@ export class LoginComponent implements OnInit {
     if (this.username.length < 8) {
       this.utilitiesService.showNotification(1, "Usuario invalido.", 4000, () => { });
       return false;
-    }  else if (this.password.length < 8) {
+    } else if (this.password.length < 8) {
       this.utilitiesService.showNotification(1, "Contraseña invalida.", 4000, () => { });
       return false;
     } else {
@@ -50,26 +54,23 @@ export class LoginComponent implements OnInit {
 
   loginUser() {
     if (this.validateLoginData()) {
-      this.dataSessionService.loginUser(this.username,this.password).then((response: ServerMessage) => {
-        console.log(response);
-        
-        if (response.error) {
-          this.utilitiesService.showNotification(1, response.message, 4000, () => { });
-        } else {
-          this.clearData();
-          this.utilitiesService.showNotification(0, response.message, 2000, () => {
-            if(this.dataSessionService.user.type==0){
-              //this.dataSessionService.navigateByUrl("/login");
-            }else if(this.dataSessionService.user.type==1){
-              this.dataSessionService.navigateByUrl("/dashboard/manager");
-            }else if(this.dataSessionService.user.type==2){
-              this.dataSessionService.navigateByUrl("/dashboard/live-experience-designer");
-            }
-          });
-        }
+      this.dataSessionService.loginUser(this.username, this.password).then((response: ServerMessage) => {
+        //console.log(response);
+        this.clearData();
+        this.utilitiesService.showNotification(0, response.message, 2000, () => {
+          if (response.data.user.type == 0) {
+            this.dataSessionService.logOut();
+            this.utilitiesService.showNotification(1, "El usuario solo es musico.", 4000, () => { });
+          } else if (response.data.user.type == 1) {
+            this.dataSessionService.navigateByUrl("/dashboard/manager");
+          } else if (response.data.user.type == 2) {
+            this.dataSessionService.navigateByUrl("/dashboard/live-experience-designer");
+          }
+        });
       }, (error) => {
-        console.log(error);
-      }); 
+        //console.log(error);
+        this.utilitiesService.showNotification(1, error.message, 4000, () => { });
+      });
     }
   }
 

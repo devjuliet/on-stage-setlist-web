@@ -2,15 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ServerMessage } from '../../classes/serverMessages.dto';
 import { deployConf } from './../../utils/config';
-
+import { DomSanitizer } from '@angular/platform-browser';
+import { timeout, catchError } from 'rxjs/operators';
+import { of } from 'rxjs/internal/observable/of';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiDataService {
   baseURL: string = deployConf.apiUrl;
+  token: String;
 
-  constructor(private http: HttpClient,) {}
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
   
   async registerUser(name : String,email : String, password : String, type : Number, username : String){
     return new Promise((resolve,reject)=>{
@@ -29,6 +32,37 @@ export class ApiDataService {
       });
     })
   }
+
+  setToken(newToken : String){
+    this.token = newToken;
+  }
+
+  getImage(url : string) : Promise<any> {
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token,
+      });
+      
+      this.http.get(url, { headers: headers,responseType: 'blob' })
+      .pipe(
+        timeout(2000),
+        catchError(e => {
+          // do something on a timeout
+          //reject(e);
+          return of(null);
+        })
+      ).subscribe((imageBlob)=>{
+        let objectURL = "";
+        if(imageBlob!=null && imageBlob!=undefined){
+          objectURL = URL.createObjectURL(imageBlob);
+        }
+        resolve(this.sanitizer.bypassSecurityTrustUrl(objectURL) );
+      },(error : ServerMessage)=>{
+        reject(error)
+      });
+    })
+  }  
 
   doLogin(username : String, password : String) {
     return new Promise((resolve,reject)=>{
@@ -55,6 +89,82 @@ export class ApiDataService {
         reject(error)
       });
     })
+  }
+
+  async updateUser(idUser : Number,name : String,username : String, email : String, haveImage : Boolean){
+    return new Promise((resolve,reject)=>{
+      const data = {
+        idUser : idUser,
+        name : name,
+        email : email, 
+        haveImage : haveImage, 
+        username : username
+      };
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token,
+      });
+
+      this.http.post(this.baseURL + 'user/update-user',data,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
+  async changePasswordUser(idUser : Number,newPassword : String,){
+    return new Promise((resolve,reject)=>{
+      const data = {
+        idUser : idUser,
+        newPassword : newPassword,
+      };
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token,
+      });
+
+      this.http.post(this.baseURL + 'user/change-user-pass',data,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
+  async uploadImageUser(formData: FormData) {
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer '+this.token,
+      });
+
+      this.http.post(this.baseURL + 'uploads/user-image/', formData, {headers:headers })
+        .subscribe((res: ServerMessage) => {
+          if (res.error == false) {
+            resolve(res);
+          } else if( res.error == undefined){
+            console.log("error no llego nada");
+            reject(res);
+          }else{
+            resolve(res);
+          }
+        },(error)=>{
+          reject(error);
+        },);
+    });
+  }
+
+  deleteImageUser(idUser){
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer '+this.token,
+      });
+      this.http.get(this.baseURL + 'uploads/user-delete-image/'+idUser,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(new ServerMessage(true,"A ocurrido un error inesperado",error));
+      });
+    });
   }
 
   //EJEMPLO DE USO DEL METODO GET 
