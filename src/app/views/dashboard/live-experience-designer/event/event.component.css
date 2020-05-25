@@ -1,0 +1,28 @@
+.info-dashboard{
+    box-shadow: 0px 0px 6px -3px rgba(56,41,131,1);
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 80vh;
+}
+.event-card{
+    max-width: 500px;
+    width: 100%;
+    padding: 10px 20px;
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.5);
+    margin: 20px 0;
+}
+.event-card .flex-jus{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#addsetlist h5{
+    width: 100%;
+    text-align: center;
+}
+#addsetlist .modal-footer{
+    justify-content: center;
+}
+#addsetlist .modal-footer, #addsetlist .modal-header{
+    border: none;
+}

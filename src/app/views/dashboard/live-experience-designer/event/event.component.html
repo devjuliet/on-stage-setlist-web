@@ -1,0 +1,79 @@
+<div>
+    <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass.toString()">
+        <app-sidebar class="sidebar" 
+            [activeLink]="3" 
+            [isManager]="dataSessionService.user.type.toString()=='1'"
+            [nameUser]="dataSessionService.user.name"
+            [imageurl]="dataSessionService.user.haveImage"
+            [idUser]="dataSessionService.user.idUser"
+            [imageSrc]="dataSessionService.user.imageBlob" 
+            ></app-sidebar>
+    </div>
+    <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
+        <app-navbar-dashboard></app-navbar-dashboard>
+        <div class="p-t-20">
+            <div class="info-dashboard">
+                <p class="fira-30-grey">Lista de eventos</p>
+                <div class="p-t-20">
+                    <div class="event-card">
+                        <div class="flex-jus">
+                            <div>
+                                <p class="quest-18-grey"><strong>Nombre del evento</strong></p>
+                                <p class="quest-15-grey">Lugar del evento</p>
+                                <p class="quest-15-grey">Banda</p>
+                            </div>
+                            <div>
+                                <button class="btn-lblu" data-toggle="modal" data-target="#addsetlist">Añadir lista de canciones</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <div class="flex-jus">
+                            <div>
+                                <p class="quest-18-grey"><strong>Nombre del evento</strong></p>
+                                <p class="quest-15-grey">Lugar del evento</p>
+                                <p class="quest-15-grey">Banda</p>
+                            </div>
+                            <div>
+                                <button class="btn-lblu" data-toggle="modal" data-target="#addsetlist">Añadir lista de canciones</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <div class="flex-jus">
+                            <div>
+                                <p class="quest-18-grey"><strong>Nombre del evento</strong></p>
+                                <p class="quest-15-grey">Lugar del evento</p>
+                                <p class="quest-15-grey">Banda</p>
+                            </div>
+                            <div>
+                                <button class="btn-lblu" data-toggle="modal" data-target="#addsetlist">Añadir lista de canciones</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="addsetlist" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Añadir una lista de canciones</h5>
+                    </div>
+                    <div class="modal-body">
+                        <select class="selectpicker" data-live-search="true" multiple title="Escoge una lista..." data-width="100%">
+                            <option>Lista1</option>
+                            <option>Lista2</option>
+                            <option>Lista3</option>
+                        </select> 
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
+                      <button type="button" class="btn-lblu">Guardar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
