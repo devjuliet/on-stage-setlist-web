@@ -201,6 +201,28 @@ button:focus{
 .btn-red:hover{
     opacity: 1;
 }
+.trash-btn{
+    color: red;
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+.trash-btn:hover{
+    transform: scale(1.2);
+}
+.edit-btn{
+    background-color: transparent;
+    color: #0087D1;
+    border: none;
+    cursor: pointer;
+    font-size: 25px;
+    transition: .3s ease-in-out;
+}
+.edit-btn:hover{
+    opacity: .8;
+}
 /*LETRAS*/
 .fira-30-wht{
     font-family: 'Fira Sans', sans-serif;
@@ -251,6 +273,16 @@ button:focus{
 .fira-16-wht:hover{
     opacity: .8;
 }
+.fira-15-blu{
+    font-family: 'Fira Sans', sans-serif;
+    color: #0087D1;
+    font-size: 15px;
+    transition: .3s ease-in-out;
+}
+.alink-blu:hover{
+    text-decoration: none;
+    color: #382983;
+}
 
 .quesr-40-wht{
     font-family: 'Questrial', sans-serif;
@@ -291,6 +323,11 @@ button:focus{
 .quest-15-grey{
     font-family: 'Questrial', sans-serif;
     font-size: 15px;
+    color: #353535;
+}
+.quest-10-grey{
+    font-family: 'Questrial', sans-serif;
+    font-size: 10px;
     color: #353535;
 }
 .quest-20-lblu{
@@ -398,6 +435,9 @@ button:focus{
 .p-30-0{
     padding: 30px 0;
 }
+.p-20-0{
+    padding: 20px 0;
+}
 .p-10{
     padding: 10px;
 }
@@ -449,8 +489,4 @@ button:focus{
     }
 }
 @media (min-width: 768px) {
-    .modal-xl {
-        width: 90%;
-        max-width:1200px;
-    }
 }

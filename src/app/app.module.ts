@@ -33,6 +33,7 @@ import { CatalogComponent } from './views/dashboard/manager/catalog/catalog.comp
 import { AddListComponent } from './views/dashboard/live-experience-designer/add-list/add-list.component';
 import { EditListComponent } from './views/dashboard/live-experience-designer/edit-list/edit-list.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
+import { EventComponent } from './views/dashboard/live-experience-designer/event/event.component';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { NotFoundComponent } from './views/not-found/not-found.component';
     AddListComponent,
     EditListComponent,
     NotFoundComponent,
+    EventComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

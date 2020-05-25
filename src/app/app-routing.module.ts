@@ -16,6 +16,7 @@ import { AddListComponent } from './views/dashboard/live-experience-designer/add
 
 import { SettingsComponent } from './views/dashboard/settings/settings.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
+import { EventComponent } from './views/dashboard/live-experience-designer/event/event.component';
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -34,7 +35,8 @@ const routes: Routes = [
   { path: 'dashboard/led/home', component: LedHomeComponent },
   { path: 'dashboard/led/edit-list', component: EditListComponent },
   { path: 'dashboard/led/add-list', component: AddListComponent },
-  { path: 'dashboard/led/settings', component: SettingsComponent },//lista
+  { path: 'dashboard/led/settings', component: SettingsComponent },
+  { path: 'dashboard/led/event', component: EventComponent },//lista
 
   { path: 'missing-page', component: NotFoundComponent},
   { path: '**', redirectTo: 'missing-page' }
