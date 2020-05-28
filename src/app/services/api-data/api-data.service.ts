@@ -6,6 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { timeout, catchError } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 import { Band } from '../../classes/band.class';
+import { User } from '../../classes/user.class';
 
 @Injectable({
   providedIn: 'root'
@@ -109,21 +110,14 @@ export class ApiDataService {
     })
   }
 
-  async updateUser(idUser : Number,name : String,username : String, email : String, haveImage : Boolean){
+  async updateUser(updatedUser : User){
     return new Promise((resolve,reject)=>{
-      const data = {
-        idUser : idUser,
-        name : name,
-        email : email, 
-        haveImage : haveImage, 
-        username : username
-      };
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer '+this.token,
       });
 
-      this.http.post(this.baseURL + 'user/update-user',data,{headers:headers}).subscribe((response : ServerMessage)=>{
+      this.http.post(this.baseURL + 'user/update-user',updatedUser,{headers:headers}).subscribe((response : ServerMessage)=>{
         resolve(response);
       },(error)=>{
         reject(error)

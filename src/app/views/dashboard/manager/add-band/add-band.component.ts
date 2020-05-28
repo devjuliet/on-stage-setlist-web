@@ -259,14 +259,18 @@ export class AddBandComponent implements OnInit {
 
   getNewUserData() {
     this.apiDataService.getDataUserHistory(this.inputNewUser).then((response: ServerMessage) => {
-      this.newBandMember = response.data ? response.data : new BandMemberProfile();
-      if (response.data.haveImage) {
+      //console.log(response);
+      if(response.data == null){
+        this.newBandMember = new BandMemberProfile();
+        this.utilitiesService.showNotification(1, "Perfil no encontrado", 3000, () => { });
+      } else if (response.data.haveImage) {
+        this.newBandMember = response.data;
         this.apiDataService.getImage(this.dataSessionService.baseURL.toString() +
           'uploads/user-image/' + this.newBandMember.idUser.toString()).then((urlImage) => {
             this.newBandMember.imageBlob = urlImage;
           });
+        this.inputNewUser = "";
       }
-      this.inputNewUser = "";
     }).catch((error) => {
       console.log(error);
       this.utilitiesService.showNotification(1, "A ocurrido un error consultando el usuario", 5000, () => { });
