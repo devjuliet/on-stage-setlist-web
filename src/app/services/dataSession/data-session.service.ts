@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { User } from 'src/app/classes/user.class';
+import { User } from '../../classes/user.class';
 import { Router } from '@angular/router';
 import { ApiDataService } from '../api-data/api-data.service';
-import { ServerMessage } from 'src/app/classes/serverMessages.dto';
-import { LogedResponse } from 'src/app/classes/logedResponse.class';
-import { ElementsManager } from 'src/app/classes/elementsManager.class';
+import { ServerMessage } from '../../classes/serverMessages.dto';
+import { LogedResponse } from '../../classes/logedResponse.class';
+import { ElementsManager } from '../../classes/elementsManager.class';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
@@ -90,6 +90,20 @@ export class DataSessionService {
           });
       }
     }
+  }
+
+  getGenresCatalog(succesCallBack,errorCallBack){
+    this.apiDataService.getCatalogGenresData().then((response: ServerMessage) => {
+      if(response.error == true){
+        errorCallBack(response.message);
+      }else{
+        this.elementsManager.genresCatalog = response.data;
+        succesCallBack("Catalogo obtenido con exito.");
+      }
+    }, (error) => {
+      console.log(error);
+      errorCallBack("A ocurrido un error");
+    });
   }
 
   loginUser(username: String, password: String) {

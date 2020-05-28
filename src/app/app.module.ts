@@ -34,7 +34,8 @@ import { AddListComponent } from './views/dashboard/live-experience-designer/add
 import { EditListComponent } from './views/dashboard/live-experience-designer/edit-list/edit-list.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { EventComponent } from './views/dashboard/live-experience-designer/event/event.component';
-
+import { SearchResultComponent } from './views/dashboard/search-result/search-result.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -62,8 +63,15 @@ import { EventComponent } from './views/dashboard/live-experience-designer/event
     EditListComponent,
     NotFoundComponent,
     EventComponent,
+    SearchResultComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule, 
+    AppRoutingModule, 
+    FormsModule, 
+    HttpClientModule,
+    NgMultiSelectDropDownModule.forRoot(),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
