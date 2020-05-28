@@ -16,7 +16,7 @@ button:focus{
     top: 80px;
     right: 19px;
     height: 79px;
-    z-index: 999;
+    z-index: 99999;
 }
 
 .navbar-custom {

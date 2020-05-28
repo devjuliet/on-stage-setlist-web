@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Band } from '../../classes/band.class';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,6 +13,8 @@ export class SidebarComponent implements OnInit {
   @Input() imageurl: Boolean;
   @Input() idUser: number;
   @Input() imageSrc: string;
+  @Input() bandsList : Band[];
+  @Input() idActiveBand : Number;
 
   colorLinks = [
     "whitesmoke",//0
@@ -41,7 +44,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     //console.log(this.activeLink);
-    //console.log(this.imageSrc);
+    //console.log(this.idActiveBand);
     for (let index = 0; index < this.colorLinks.length; index++) {
       this.colorLinks[index] = "whitesmoke";
       this.classesLinks[index] = "normal-link";

@@ -31,6 +31,14 @@ export class DataSessionService {
       localStorage.setItem('token', JSON.stringify(this.token));
     } else {
       this.token = JSON.parse(token);
+      this.apiDataService.setToken(this.token);
+      //Acciones a realizar cuando el token estaba ya guardado pero la data para la interfaz no esta disponible
+      //Se sabe que no esta disponible porque apenas se mando llamar el contructor
+      this.getBandsManager((response) => {
+        //console.log(this.elementsManager.bands);
+      }, (err) => {
+        console.log(err);
+      });
     }
   }
 
@@ -106,6 +114,20 @@ export class DataSessionService {
     });
   }
 
+  getBandsManager(succesCallBack,errorCallBack){
+    this.apiDataService.getBandsManager().then((response: ServerMessage) => {
+      if(response.error == true){
+        errorCallBack(response.message);
+      }else{
+        this.elementsManager.bands = response.data;
+        succesCallBack("Bandas actualizadas con exito.");
+      }
+    }, (error) => {
+      console.log(error);
+      errorCallBack("A ocurrido un error");
+    });
+  }
+
   loginUser(username: String, password: String) {
     return new Promise((resolve, reject) => {
       this.apiDataService.doLogin(username, password).then((response: ServerMessage) => {
@@ -115,6 +137,7 @@ export class DataSessionService {
           //Logica con la que guardamos los datos del inicio de sesion
           localStorage.setItem('token', JSON.stringify(response.data.token));
           this.token = response.data.token;
+          this.apiDataService.setToken(this.token);
           resolve(response);
         }
       }, (error) => {

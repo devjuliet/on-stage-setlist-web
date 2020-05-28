@@ -7,6 +7,7 @@
             [imageurl]="dataSessionService.user.haveImage"
             [idUser]="dataSessionService.user.idUser"
             [imageSrc]="dataSessionService.user.imageBlob" 
+            [bandsList]="dataSessionService.elementsManager.bands" 
             ></app-sidebar>
     </div>
     <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
@@ -31,9 +32,43 @@
                     <div class="col-xl-6 col-md-6 col-sm-12">
                         <div class="dis-fle-jcent">
                             <!--Boton de verdad escondido-->
-                            <input type="file" id="img" name="img" accept="image/*" class="hidden">
+                            <!-- <input type="file" id="img" name="img" accept="image/*" class="hidden"> -->
                             <!--Boton falso para subir una imagen-->
-                            <label class="img-btn" for="img"><img src="/assets/images/upload.svg"></label>
+                            <!-- <label class="img-btn" for="img"><img src="/assets/images/upload.svg"></label> -->
+
+                            <div *ngIf="newBand.urlLogo.length == 0"
+                                class="input-group mb-3"
+                                style="    justify-content: center;">
+                                <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
+
+                                <label *ngIf="source.length == 0">
+                                    <input (change)="updateSource($event)" type="file" id="img" name="img" accept="image/*" class="hidden">
+                                    <label class="img-btn" for="img">
+                                        <img  src="/assets/images/upload.svg">
+                                        <div class="color-img"></div>
+                                        <p class="img-word quest-16-wht">Subir foto</p>
+                                    </label>
+                                </label>
+                                <!-- img placeholder when a file has been picked. shows only when 'source' is not empty -->
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                                        <img *ngIf="source.length > 0" [src]="source">
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                                        <button *ngIf="source.length > 0"
+                                            (click)="cancelImage()" class="trash-btn"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="newBand.urlLogo.length > 0" class="input-group mb-3 row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                                    <img [src]="newBand.imageBlob">
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                                    <button (click)="cancelImage()"
+                                    class="trash-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -58,7 +93,7 @@
                 </div>
                 <div class="div-line"></div>
                 <div class="dis-fle-alcent p-t-20 p-b-20">
-                    <input class="search-input" type="text" placeholder="Buscar integrante">
+                    <input [(ngModel)]="searchValue" (ngModelChange)="filterByName($event)" class="search-input" type="text" placeholder="Buscar integrante">
                     <button class="search-btn">
                         <i class="fas fa-search"></i>
                     </button>
@@ -70,44 +105,34 @@
                     <div class="table-responsive">
                         <table class="table">
                             <tr>
-                                <td>
-                                    <div class="text-center">
-                                        <p class="fira-20-blu">Guitarrista</p>
+                                <td *ngIf="newBand.bandMembers.length == 0">
+                                    <div class="text-center">  
                                         <div class="profile-box">
-                                            <button class="delete-btn" data-toggle="modal" data-target="#deleteModal"><i class="far fa-times-circle"></i></button>
                                             <img class="profile-pic" src="https://headsfortails15029229.files.wordpress.com/2018/03/baby-bunny.jpg">
                                         </div>
-                                        <p class="fira-18-blu">Bunny Bun</p>
+                                        <p class="fira-18-blu">Sin integrantes</p>
                                     </div>
                                 </td>
-                                <td>
-                                    <div class="text-center">
-                                        <p class="fira-20-blu">Bajista</p>
+                                <td *ngIf="bandMembersFiltered.length == 0 && newBand.bandMembers.length != 0">
+                                    <div class="text-center">  
                                         <div class="profile-box">
-                                            <button class="delete-btn" data-toggle="modal" data-target="#deleteModal"> <i class="far fa-times-circle"></i></button>
                                             <img class="profile-pic" src="https://headsfortails15029229.files.wordpress.com/2018/03/baby-bunny.jpg">
                                         </div>
-                                        <p class="fira-18-blu">Bunny Bun</p>
+                                        <p class="fira-18-blu">Sin resultados</p>
                                     </div>
                                 </td>
-                                <td>
+                                <td  *ngFor="let member of bandMembersFiltered; let i = index" >
                                     <div class="text-center">
-                                        <p class="fira-20-blu">Teclado</p>
+                                        <p class="fira-20-blu" *ngIf="member.role.toString()=='0'">Vocalista</p>
+                                        <p class="fira-20-blu" *ngIf="member.role.toString()=='1'">Teclado</p>
+                                        <p class="fira-20-blu" *ngIf="member.role.toString()=='2'">Bajista</p>
+                                        <p class="fira-20-blu" *ngIf="member.role.toString()=='3'">Guitarrista</p>    
                                         <div class="profile-box">
-                                            <button class="delete-btn" data-toggle="modal" data-target="#deleteModal"><i class="far fa-times-circle"></i></button>
-                                            <img class="profile-pic" src="https://headsfortails15029229.files.wordpress.com/2018/03/baby-bunny.jpg">
+                                            <button (click)="selectForDelete(member)" class="delete-btn" data-toggle="modal" data-target="#deleteModal"><i class="far fa-times-circle"></i></button>
+                                            <img *ngIf="!member.haveImage" class="profile-pic" src="https://headsfortails15029229.files.wordpress.com/2018/03/baby-bunny.jpg">
+                                            <img *ngIf="member.haveImage" class="profile-pic" [src]="member.imageBlob">
                                         </div>
-                                        <p class="fira-18-blu">Bunny Bun</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <p class="fira-20-blu">Vocalista</p>
-                                        <div class="profile-box">
-                                            <button class="delete-btn" data-toggle="modal" data-target="#deleteModal"><i class="far fa-times-circle"></i></button>
-                                            <img class="profile-pic" src="https://headsfortails15029229.files.wordpress.com/2018/03/baby-bunny.jpg">
-                                        </div>
-                                        <p class="fira-18-blu">Bunny Bun</p>
+                                        <p class="fira-18-blu">{{member.name}}</p>
                                     </div>
                                 </td>
                             </tr>
@@ -133,8 +158,8 @@
                             <img src="/assets/images/sadteam.svg">
                         </div>
                         <div class="modal-footer dis-fle-jcent">
-                            <button type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn-red">Eliminar</button>
+                            <button #btnCloseDelete type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
+                            <button (click)="deleteMember()" type="button" class="btn-red">Eliminar</button>
                         </div>
                     </div>
                 </div>
@@ -180,14 +205,15 @@
                                         <p>¿Es diseñador de experiencia?</p>
                                         <div class="row register-box-check p-t-20">
                                             <div class="col-lg-6">
-                                                <label class="quest-18-blu"> <input class="" type="radio" checked="checked" name="radio">
+                                                <label class="quest-18-blu"> 
+                                                    <input  class="" (change)="newMemberIsLiveDesigner = false" type="radio" [checked]="!newMemberIsLiveDesigner" name="radio">
                                                     <span class="checkmark"></span> 
                                                     <p class="p-l-20">No</p>
                                                 </label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <label class="quest-18-blu"> 
-                                                    <input class="" type="radio" name="radio">
+                                                    <input class="" (change)="newMemberIsLiveDesigner = true" type="radio" [checked]="newMemberIsLiveDesigner" name="radio">
                                                     <span class="checkmark"></span> 
                                                     <p class="p-l-20">Si</p> 
                                                 </label>
@@ -198,8 +224,8 @@
                             </div>
                         </div>
                         <div class="modal-footer dis-fle-jcent">
-                            <button (click)="cancelAddUser()" type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn-lblu">Añadir</button>
+                            <button #btnClose (click)="cancelAddUser()" type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
+                            <button  (click)="addNewBandMember()" type="button" class="btn-lblu">Añadir</button>
                         </div>
                     </div>
                 </div>

@@ -11,6 +11,7 @@ export class Band {
     idUserManager: Number;
     genres : Genre[];
     bandMembers: BandMember[];
+    bandLiveDesigners : Number[];
     sets : Set[];
     imageBlob: SafeUrl;
 
@@ -22,6 +23,7 @@ export class Band {
         this.idUserManager = 0;
         this.genres = [];
         this.bandMembers = [];
+        this.bandLiveDesigners = [];
         this.sets = [];
         this.imageBlob = "";
     }

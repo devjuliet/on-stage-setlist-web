@@ -26,7 +26,13 @@ export class LoginComponent implements OnInit {
         this.dataSessionService.logOut();
         this.utilitiesService.showNotification(1, "El usuario solo es musico.", 4000, () => { });
       } else if (this.dataSessionService.user.type == 1) {
-        this.dataSessionService.navigateByUrl("/dashboard/manager");
+        this.dataSessionService.getBandsManager((response) => {
+          //console.log(this.elementsManager.bands);
+          this.dataSessionService.navigateByUrl("/dashboard/manager");
+        }, (err) => {
+          console.log(err);
+          this.utilitiesService.showNotification(1, "A ocurrido un erro cargando las bandas.", 4000, () => { });
+        });
       } else if (this.dataSessionService.user.type == 2) {
         this.dataSessionService.navigateByUrl("/dashboard/led/home");
       }
@@ -62,7 +68,13 @@ export class LoginComponent implements OnInit {
             this.dataSessionService.logOut();
             this.utilitiesService.showNotification(1, "El usuario solo es musico.", 4000, () => { });
           } else if (response.data.user.type == 1) {
-            this.dataSessionService.navigateByUrl("/dashboard/manager");
+            this.dataSessionService.getBandsManager((response) => {
+              //console.log(this.elementsManager.bands);
+              this.dataSessionService.navigateByUrl("/dashboard/manager");
+            }, (err) => {
+              console.log(err);
+              this.utilitiesService.showNotification(1, "A ocurrido un erro cargando las bandas.", 4000, () => { });
+            });
           } else if (response.data.user.type == 2) {
             this.dataSessionService.navigateByUrl("/dashboard/led/home");
           }
