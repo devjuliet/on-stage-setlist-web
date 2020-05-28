@@ -5,6 +5,7 @@ import { deployConf } from './../../utils/config';
 import { DomSanitizer } from '@angular/platform-browser';
 import { timeout, catchError } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
+import { Band } from '../../classes/band.class';
 
 @Injectable({
   providedIn: 'root'
@@ -183,6 +184,62 @@ export class ApiDataService {
       });
     });
   }
+
+  //MANAGER
+  getBandsManager() {
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token
+      })
+       
+      this.http.get(this.baseURL + 'manager/bands',{ headers: headers }).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+  //FIN.MANAGER
+
+  //BANDAS
+  async createBand(newDataBand : Band) : Promise<any>{
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token,
+      });
+
+      this.http.post(this.baseURL + 'manager/create-band',newDataBand,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
+  async uploadImageBand(formData: FormData) {
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer '+this.token,
+      });
+
+      this.http.post(this.baseURL + 'uploads/band-image/', formData, {headers:headers })
+        .subscribe((res: ServerMessage) => {
+          if (res.error == false) {
+            resolve(res);
+          } else if( res.error == undefined){
+            console.log("error no llego nada");
+            reject(res);
+          }else{
+            resolve(res);
+          }
+        },(error)=>{
+          reject(error);
+        },);
+    });
+  }
+  //FIN.BANDAS
 
   //BUSCADOR
   getDataUserHistory(username){
