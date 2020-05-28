@@ -283,7 +283,11 @@ button:focus{
     text-decoration: none;
     color: #382983;
 }
-
+.quest-40-grey{
+    font-family: 'Questrial', sans-serif;
+    font-size: 40px;
+    color: #353535;
+}
 .quesr-40-wht{
     font-family: 'Questrial', sans-serif;
     color: white;
@@ -358,6 +362,9 @@ button:focus{
 /*MARGINS*/
 .m-10-0{
     margin: 10px 0;
+}
+.m-t-10{
+    margin-top: 10px;
 }
 /*PADDINGS*/
 .p-b-180{
