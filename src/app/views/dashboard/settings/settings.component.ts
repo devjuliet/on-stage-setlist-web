@@ -186,19 +186,29 @@ export class SettingsComponent implements OnInit {
       'uploads/user-image/' + this.actualInfoUser.idUser.toString()).then((image) => {
         this.dataSessionService.user.imageBlob = image;
         this.utilitiesService.showLoadingMsg("Actualizando Usuario", "Actualizando el usuario #" + newData.idUser, () => {
-          this.apiDataService.updateUser(newData.idUser, newData.name, newData.username, newData.email, newData.haveImage).then((response: ServerMessage) => {
+          this.apiDataService.updateUser(newData).then((response: ServerMessage) => {
             //console.log(response);
-            /* Se Recarga el usuario actual*/
-            this.dataSessionService.user.name = response.data.name;
-            this.dataSessionService.user.username = response.data.username;
-            this.dataSessionService.user.email = response.data.email;
-            this.dataSessionService.user.haveImage = response.data.haveImage;
-
-            this.utilitiesService.showNotification(0, response.message, 3000, () => { });
-            this.utilitiesService.closeLoadingSuccess("Usuario Actualizado", "Informacion del usuario #" + newData.idUser + " actualizada.", () => {
-              //ok
-            });
+            if(response.error == true){
+              this.utilitiesService.showNotification(1, response.message, 3000, () => {});
+              this.utilitiesService.closeLoadingMsg();
+              this.dataSessionService.user.haveImage = this.actualInfoUser.haveImage;
+              this.actualInfoUser.name=this.dataSessionService.user.name;
+              this.actualInfoUser.username=this.dataSessionService.user.username;
+              this.actualInfoUser.email=this.dataSessionService.user.email;
+            }else{
+              /* Se Recarga el usuario actual*/
+              this.dataSessionService.user.name = response.data.name;
+              this.dataSessionService.user.username = response.data.username;
+              this.dataSessionService.user.email = response.data.email;
+              this.dataSessionService.user.haveImage = response.data.haveImage;
+              this.utilitiesService.closeLoadingSuccess("Usuario Actualizado", "Informacion del usuario #" + newData.idUser + " actualizada.", () => {
+                //ok
+              });
+            }
+            
           }).catch((error) => {
+            this.dataSessionService.user.haveImage = this.actualInfoUser.haveImage;
+
             console.log(error);
             this.utilitiesService.showNotification(1, "Error actualizando informacion del usuario", 5000, () => { });
             this.utilitiesService.closeLoadingMsg();
