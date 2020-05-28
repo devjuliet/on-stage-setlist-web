@@ -8,6 +8,8 @@ export class User{
     type : Number;
     username : String;
     haveImage: Boolean;
+    role : Number;
+    description : String;
     imageBlob : SafeUrl;
 
     constructor(){
@@ -18,6 +20,8 @@ export class User{
         this.username = "";
         this.type = 0;//si es 1 es manager
         this.haveImage = false;
+        this.role = 0;
+        this.description = "";
         this.imageBlob = "";
     }
   }

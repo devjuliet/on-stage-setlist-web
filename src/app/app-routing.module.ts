@@ -17,11 +17,12 @@ import { AddListComponent } from './views/dashboard/live-experience-designer/add
 import { SettingsComponent } from './views/dashboard/settings/settings.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { EventComponent } from './views/dashboard/live-experience-designer/event/event.component';
+import { SearchResultComponent } from './views/dashboard/search-result/search-result.component';
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'us', component: UsComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: '', pathMatch: 'full', component: HomeComponent },//lista
+  { path: 'login', component: LoginComponent },//lista
+  { path: 'us', component: UsComponent },//lista
+  { path: 'register', component: RegisterComponent },//lista
 
   { path: 'dashboard/manager', component: ManagerHomeComponent },
   { path: 'dashboard/manager/admin-bands', component: AdminBandsComponent },
@@ -30,13 +31,14 @@ const routes: Routes = [
   { path: 'dashboard/manager/admin-events', component: AdminEventsComponent },
   { path: 'dashboard/manager/catalog', component: CatalogComponent },
   { path: 'dashboard/manager/settings', component: SettingsComponent },//lista
-
+  { path: 'dashboard/manager/search-result/:search', component: SearchResultComponent },
 
   { path: 'dashboard/led/home', component: LedHomeComponent },
   { path: 'dashboard/led/edit-list', component: EditListComponent },
   { path: 'dashboard/led/add-list', component: AddListComponent },
-  { path: 'dashboard/led/settings', component: SettingsComponent },
-  { path: 'dashboard/led/event', component: EventComponent },//lista
+  { path: 'dashboard/led/settings', component: SettingsComponent },//lista
+  { path: 'dashboard/led/event', component: EventComponent },
+  { path: 'dashboard/led/search-result/:search', component: SearchResultComponent },
 
   { path: 'missing-page', component: NotFoundComponent},
   { path: '**', redirectTo: 'missing-page' }

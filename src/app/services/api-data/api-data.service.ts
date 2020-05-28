@@ -64,6 +64,23 @@ export class ApiDataService {
     })
   }  
 
+  //CATALOGOS
+  getCatalogGenresData() {
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token
+      })
+       
+      this.http.get(this.baseURL + 'catalogs/genres',{ headers: headers }).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+  //FIN.CATALOGOS
+
   doLogin(username : String, password : String) {
     return new Promise((resolve,reject)=>{
       const data = {username : username , password : password};
@@ -166,6 +183,21 @@ export class ApiDataService {
       });
     });
   }
+
+  //BUSCADOR
+  getDataUserHistory(username){
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer '+this.token,
+      });
+      this.http.get(this.baseURL + 'search/username/?username='+username,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(new ServerMessage(true,"A ocurrido un error inesperado",error));
+      });
+    });
+  }
+  //FIN.BUSCADOR
 
   //EJEMPLO DE USO DEL METODO GET 
   /* async getRespuestas( entidad : string ) {

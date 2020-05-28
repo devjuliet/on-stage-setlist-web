@@ -19,10 +19,13 @@
                 <div class="row">
                     <div class="col-xl-6 col-md-6 col-sm-12">
                         <div class="">
-                            <input type="text" placeholder="Nombre de la banda">
+                            <input [(ngModel)]="newBand.name" type="text" placeholder="Nombre de la banda">
                         </div>
                         <div class="p-t-20">
-                            <textarea placeholder="Descripción de la banda..." cols="30" rows="5"></textarea>
+                            <textarea  [(ngModel)]="newBand.description" placeholder="Descripción de la banda..." cols="30" rows="5"></textarea>
+                            <div *ngIf="newBand.description.length < 50">
+                                <label>Descripcion muy corta {{newBand.description.length}} < 50</label>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xl-6 col-md-6 col-sm-12">
@@ -36,12 +39,19 @@
                 </div>
                 <div class="row">
                     <div class="col-xl-6 col-md-6 col-sm-12">
-                        <div class="p-b-40 p-t-20">
-                            <select class="selectpicker" data-live-search="true" multiple title="Escoge un genero..." data-width="100%">
+                        <div class="p-b-40 p-t-20" *ngIf="loaded">
+                            <!-- <select class="selectpicker" data-live-search="true" multiple title="Escoge un genero..." data-width="100%">
                                 <option >Rock</option>
                                 <option>Country</option>
                                 <option>Norteñas</option>
-                            </select>  
+                            </select>   -->
+                            <ng-multiselect-dropdown
+                                [placeholder]="'Seleccione los generos'"
+                                [settings]="dropdownGenresSettings"
+                                [data]="dataSessionService.elementsManager.genresCatalog"
+                                [(ngModel)]="this.newBand.genres"
+                                >
+                            </ng-multiselect-dropdown>
                         </div>
                     </div>
                     <div class="col-xl-6 col-md-6 col-sm-12"></div>
@@ -53,7 +63,7 @@
                         <i class="fas fa-search"></i>
                     </button>
                     <div class="p-l-20">
-                        <button class="btn-lblu" data-toggle="modal" data-target="#addMemModal"><i class="fas fa-plus p-r-10"></i>Añadir</button>
+                        <button (click)="cancelAddUser()" class="btn-lblu" data-toggle="modal" data-target="#addMemModal"><i class="fas fa-plus p-r-10"></i>Añadir</button>
                     </div>
                 </div>
                 <div class="member-box">
@@ -109,7 +119,7 @@
                         <button class="btn-gray">Cancelar</button>
                     </div>
                     <div class="p-0-10">
-                        <button class="btn-lblu">Guardar</button>
+                        <button (click)="saveData()" class="btn-lblu">Guardar</button>
                     </div>
                 </div>
             </div>
@@ -137,56 +147,33 @@
                         </div>
                         <div class="modal-body">
                             <div class="search-member">
-                                <input type="text" placeholder="Inserta el código del músico...">
+                                <input [(ngModel)]="inputNewUser" (keyup.enter)="getNewUserData()" type="text" placeholder="Inserta el código del músico...">
                             </div>
-                            <div class="row p-t-40">
+                            <div *ngIf="newBandMember.name.length == 0"  class="row p-t-40">
+                                No se encontro el perfil
+                            </div>
+                            <div *ngIf="newBandMember.name.length > 5" class="row p-t-40">
                                 <div class="col-md-6 modal-box">
                                     <div>
                                         <div class="text-center">
-                                            <img class="profile-pic" src="https://headsfortails15029229.files.wordpress.com/2018/03/baby-bunny.jpg">
-                                        <p class="quest-18-grey p-t-20">Bunny Bun</p>
+                                            <img *ngIf="!newBandMember.haveImage" class="profile-pic" src="https://headsfortails15029229.files.wordpress.com/2018/03/baby-bunny.jpg">
+                                            <img *ngIf="newBandMember.haveImage" class="profile-pic" [src]="newBandMember.imageBlob">
+                                            <p class="quest-18-grey p-t-20">{{newBandMember.name}}</p>
                                         </div>
-                                        <p class="quest-15-grey text-center p-t-20">Soy un Bunny que le gusta ser un bunny, como zanahorias en las noches y en las mañanas también. Soy un Bunny multitasking que roquea shido.</p>
-                                        <p class="quest-15-grey text-center p-t-20">Vocalista</p>
+                                        <p class="quest-15-grey text-center p-t-20">{{newBandMember.description}}</p>
+                                        <p class="quest-15-grey text-center p-t-20" *ngIf="newBandMember.role.toString()=='0'">Vocalista</p>
+                                        <p class="quest-15-grey text-center p-t-20" *ngIf="newBandMember.role.toString()=='1'">Teclado</p>
+                                        <p class="quest-15-grey text-center p-t-20" *ngIf="newBandMember.role.toString()=='2'">Bajista</p>
+                                        <p class="quest-15-grey text-center p-t-20" *ngIf="newBandMember.role.toString()=='3'">Guitarrista</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6 modal-box">
                                     <p class="quest-20-grey">Historial</p>
                                     <div class="modal-history" >
-                                        <div class="history-box m-10-0">
-                                            <p class="fira-18-blu">Banda de Gatos</p>
-                                            <p class="quest-15-grey">Vocalista</p>
-                                            <p class="quest-15-grey">4 meses</p>
-                                        </div>
-                                        <div class="history-box m-10-0">
-                                            <p class="fira-18-blu">Banda de Gatos</p>
-                                            <p class="quest-15-grey">Vocalista</p>
-                                            <p class="quest-15-grey">4 meses</p>
-                                        </div>
-                                        <div class="history-box m-10-0">
-                                            <p class="fira-18-blu">Banda de Gatos</p>
-                                            <p class="quest-15-grey">Vocalista</p>
-                                            <p class="quest-15-grey">4 meses</p>
-                                        </div>
-                                        <div class="history-box m-10-0">
-                                            <p class="fira-18-blu">Banda de Gatos</p>
-                                            <p class="quest-15-grey">Vocalista</p>
-                                            <p class="quest-15-grey">4 meses</p>
-                                        </div>
-                                        <div class="history-box m-10-0">
-                                            <p class="fira-18-blu">Banda de Gatos</p>
-                                            <p class="quest-15-grey">Vocalista</p>
-                                            <p class="quest-15-grey">4 meses</p>
-                                        </div>
-                                        <div class="history-box m-10-0">
-                                            <p class="fira-18-blu">Banda de Gatos</p>
-                                            <p class="quest-15-grey">Vocalista</p>
-                                            <p class="quest-15-grey">4 meses</p>
-                                        </div>
-                                        <div class="history-box m-10-0">
-                                            <p class="fira-18-blu">Banda de Gatos</p>
-                                            <p class="quest-15-grey">Vocalista</p>
-                                            <p class="quest-15-grey">4 meses</p>
+                                        <div *ngFor="let register of newBandMember.userHistories; let i = index" class="history-box m-10-0">
+                                            <p class="fira-18-blu">{{register.bandName}}</p>
+                                            <p class="quest-15-grey">{{register.description}}</p>
+                                            <p class="quest-15-grey">{{register.date}}</p>
                                         </div>
                                     </div>
                                     <div class="p-t-40">
@@ -211,7 +198,7 @@
                             </div>
                         </div>
                         <div class="modal-footer dis-fle-jcent">
-                            <button type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
+                            <button (click)="cancelAddUser()" type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
                             <button type="button" class="btn-lblu">Añadir</button>
                         </div>
                     </div>
