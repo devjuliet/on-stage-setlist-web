@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilitiesService } from 'src/app/services/utilities/utilities.service';
+import { DataSessionService } from 'src/app/services/dataSession/data-session.service';
 
 @Component({
   selector: 'app-search-result',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchResultComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dataSessionService : DataSessionService, public utilitiesService : UtilitiesService) { }
 
   ngOnInit(): void {
   }
