@@ -6,6 +6,7 @@ export class BandMember {
     name: String;
     haveImage: Boolean;
     imageBlob: SafeUrl;
+    idUser : Number;
 
     constructor() {
         this.idMember = 0;
@@ -13,5 +14,6 @@ export class BandMember {
         this.name = "";
         this.haveImage = false;
         this.imageBlob = "";
+        this.idUser = 0;
     }
 }
