@@ -75,7 +75,7 @@ export class BandInfoComponent implements OnInit {
         //console.log(logedResponse);
         //Manda al dashboard correspondiente o saca de la sesion
         if (this.dataSessionService.user.type == 2) {
-          this.dataSessionService.navigateByUrl("/dashboard/led/home");
+          this.dataSessionService.navigateByUrl("/dashboard/led");
         } else if (this.dataSessionService.user.type != 1) {
           this.dataSessionService.logOut();
         } else {

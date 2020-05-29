@@ -25,13 +25,13 @@ export class AdminBandsComponent implements OnInit {
       //console.log(logedResponse);
       //Manda al dashboard correspondiente o saca de la sesion
       if(this.dataSessionService.user.type==2){
-        this.dataSessionService.navigateByUrl("/dashboard/led/home");
+        this.dataSessionService.navigateByUrl("/dashboard/led");
       }else if(this.dataSessionService.user.type!=1){
         this.dataSessionService.logOut();
       }else{
        console.log("usuario simonki");
        this.dataSessionService.getBandsManager(async (response) => {
-          //console.log(this.dataSessionService.elementsManager.bands);
+          console.log(this.dataSessionService.elementsManager.bands);
           this.bandsFiltered = Array.from(this.dataSessionService.elementsManager.bands);
           //Se cargan todas las imagenes de las bandas
           for (let index = 0; index < this.dataSessionService.elementsManager.bands.length; index++) {
@@ -57,8 +57,8 @@ export class AdminBandsComponent implements OnInit {
       this.bandsFiltered = Array.from(this.dataSessionService.elementsManager.bands);
     } else {
       this.bandsFiltered = this.dataSessionService.elementsManager.bands.filter(function (band) {
-        let fixed = band.name.charAt(0).toUpperCase() + event.slice(1);
-        return band.name.toLowerCase().includes(ssearchValue);
+        let fixed = band.name.charAt(0).toUpperCase() + band.name.slice(1);
+        return fixed.toLowerCase().includes(ssearchValue);
       });
     }
   }

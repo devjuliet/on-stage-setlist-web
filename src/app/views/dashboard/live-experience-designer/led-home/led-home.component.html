@@ -1,7 +1,7 @@
 <div>
     <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass.toString()">
         <app-sidebar class="sidebar" 
-            [activeLink]="0" 
+            [activeLink]="1" 
             [isManager]="dataSessionService.user.type.toString()=='1'"
             [nameUser]="dataSessionService.user.name"
             [imageurl]="dataSessionService.user.haveImage"

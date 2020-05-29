@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
           this.utilitiesService.showNotification(1, "A ocurrido un erro cargando las bandas.", 4000, () => { });
         });
       } else if (this.dataSessionService.user.type == 2) {
-        this.dataSessionService.navigateByUrl("/dashboard/led/home");
+        this.dataSessionService.navigateByUrl("/dashboard/led");
       }
     }, (noLoginResponse: LogedResponse) => {
       console.log(noLoginResponse);
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
               this.utilitiesService.showNotification(1, "A ocurrido un erro cargando las bandas.", 4000, () => { });
             });
           } else if (response.data.user.type == 2) {
-            this.dataSessionService.navigateByUrl("/dashboard/led/home");
+            this.dataSessionService.navigateByUrl("/dashboard/led");
           }
         });
       }, (error) => {

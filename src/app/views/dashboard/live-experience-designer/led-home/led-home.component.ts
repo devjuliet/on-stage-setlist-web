@@ -16,14 +16,15 @@ export class LedHomeComponent implements OnInit {
     this.dataSessionService.checkLogin((logedResponse: LogedResponse) => {
       //console.log(logedResponse);
       //Manda al dashboard correspondiente o saca de la sesion
-      if(this.dataSessionService.user.type==2){
-        this.dataSessionService.navigateByUrl("/dashboard/led/home");
-      }else if(this.dataSessionService.user.type!=1){
+      if (this.dataSessionService.user.type == 1) {
+        this.dataSessionService.navigateByUrl("/dashboard/manager");
+      } else if (this.dataSessionService.user.type != 2) {
         this.dataSessionService.logOut();
-        console.log("usuario simonki............");
-      }else{
-       console.log("usuario simonki");
-       
+      } else {
+        //Cosas para hacer en caso de que el usario este logeado
+        console.log("simonkiii");
+        
+        
       }
     }, (noLoginResponse: LogedResponse) => {
       console.log(noLoginResponse);

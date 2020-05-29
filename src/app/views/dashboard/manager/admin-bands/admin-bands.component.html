@@ -27,63 +27,63 @@
                     <table class="table">
                         <tbody>
                             <tr *ngFor="let band of bandsFiltered; let idx = index">
-                                <td *ngIf="idx % 3 === 0" scope="row">
+                                <td *ngIf="idx % 3 === 0" scope="row" routerLink="/dashboard/manager/band-info/{{bandsFiltered[idx].idBand}}" routerLinkActive="active">
                                     <div class="">
                                         <div class="band-card">
                                             <div class="band-card-img">
-                                                <img *ngIf="dataSessionService.elementsManager.bands[idx].urlLogo.length == 0" src="/assets/images/no-band.svg">
-                                                <img *ngIf="dataSessionService.elementsManager.bands[idx].urlLogo.length > 0" [src]="dataSessionService.elementsManager.bands[idx].imageBlob">
+                                                <img *ngIf="bandsFiltered[idx].urlLogo.length == 0" src="/assets/images/no-band.svg">
+                                                <img *ngIf="bandsFiltered[idx].urlLogo.length > 0" [src]="bandsFiltered[idx].imageBlob">
                                             </div>
-                                            <p class="quest-20-grey text-center p-b-10 p-t-10">{{dataSessionService.elementsManager.bands[idx].name}}</p>
-                                            <p class="quest-15-grey text-center">{{dataSessionService.elementsManager.bands[idx].description}}</p>
+                                            <p class="quest-20-grey text-center p-b-10 p-t-10">{{bandsFiltered[idx].name}}</p>
+                                            <p class="quest-15-grey text-center">{{bandsFiltered[idx].description}}</p>
                                             <div>
                                                 <p class="fira-16-grey text-center p-t-5 p-b-5">Generos</p>
                                                 <div class="genere-tags">
-                                                    <div *ngIf="dataSessionService.elementsManager.bands[idx].genres[0] != undefined" class="tags"><p>{{dataSessionService.elementsManager.bands[idx].genres[0].name}}</p></div>
-                                                    <div *ngIf="dataSessionService.elementsManager.bands[idx].genres[1] != undefined" class="tags"><p>{{dataSessionService.elementsManager.bands[idx].genres[1].name}}</p></div>
-                                                    <div *ngIf="dataSessionService.elementsManager.bands[idx].genres[2] != undefined" class="tags"><p>{{dataSessionService.elementsManager.bands[idx].genres[2].name}}</p></div>
+                                                    <div *ngIf="bandsFiltered[idx].genres[0] != undefined" class="tags"><p>{{bandsFiltered[idx].genres[0].name}}</p></div>
+                                                    <div *ngIf="bandsFiltered[idx].genres[1] != undefined" class="tags"><p>{{bandsFiltered[idx].genres[1].name}}</p></div>
+                                                    <div *ngIf="bandsFiltered[idx].genres[2] != undefined" class="tags"><p>{{bandsFiltered[idx].genres[2].name}}</p></div>
                                                 </div>
                                             </div>
                                             
                                         </div>
                                     </div>
                                 </td>
-                                <td *ngIf="idx % 3 === 0 && (idx+1)<dataSessionService.elementsManager.bands.length" scope="row">
+                                <td *ngIf="idx % 3 === 0 && (idx+1)<bandsFiltered.length" scope="row" routerLink="/dashboard/manager/band-info/{{bandsFiltered[idx+1].idBand}}" routerLinkActive="active">
                                     <div class="">
                                         <div class="band-card">
                                             <div class="band-card-img">
-                                                <img *ngIf="dataSessionService.elementsManager.bands[idx+1].urlLogo.length == 0" src="/assets/images/no-band.svg">
-                                                <img *ngIf="dataSessionService.elementsManager.bands[idx+1].urlLogo.length > 0" [src]="dataSessionService.elementsManager.bands[idx+1].imageBlob">
+                                                <img *ngIf="bandsFiltered[idx+1].urlLogo.length == 0" src="/assets/images/no-band.svg">
+                                                <img *ngIf="bandsFiltered[idx+1].urlLogo.length > 0" [src]="bandsFiltered[idx+1].imageBlob">
                                             </div>
-                                            <p class="quest-20-grey text-center p-b-10 p-t-10">{{dataSessionService.elementsManager.bands[idx+1].name}}</p>
-                                            <p class="quest-15-grey text-center">{{dataSessionService.elementsManager.bands[idx+1].description}}</p>
+                                            <p class="quest-20-grey text-center p-b-10 p-t-10">{{bandsFiltered[idx+1].name}}</p>
+                                            <p class="quest-15-grey text-center">{{bandsFiltered[idx+1].description}}</p>
                                             <div>
                                                 <p class="fira-16-grey text-center p-t-5 p-b-5">Generos</p>
                                                 <div class="genere-tags">
-                                                    <div *ngIf="dataSessionService.elementsManager.bands[idx+1].genres[0] != undefined" class="tags"><p>{{dataSessionService.elementsManager.bands[idx+1].genres[0].name}}</p></div>
-                                                    <div *ngIf="dataSessionService.elementsManager.bands[idx+1].genres[1] != undefined" class="tags"><p>{{dataSessionService.elementsManager.bands[idx+1].genres[1].name}}</p></div>
-                                                    <div *ngIf="dataSessionService.elementsManager.bands[idx+1].genres[2] != undefined" class="tags"><p>{{dataSessionService.elementsManager.bands[idx+1].genres[2].name}}</p></div>
+                                                    <div *ngIf="bandsFiltered[idx+1].genres[0] != undefined" class="tags"><p>{{bandsFiltered[idx+1].genres[0].name}}</p></div>
+                                                    <div *ngIf="bandsFiltered[idx+1].genres[1] != undefined" class="tags"><p>{{bandsFiltered[idx+1].genres[1].name}}</p></div>
+                                                    <div *ngIf="bandsFiltered[idx+1].genres[2] != undefined" class="tags"><p>{{bandsFiltered[idx+1].genres[2].name}}</p></div>
                                                 </div>
                                             </div>
                                             
                                         </div>
                                     </div>
                                 </td>
-                                <td *ngIf="idx % 3 === 0 && (idx+2)<dataSessionService.elementsManager.bands.length" scope="row">
+                                <td *ngIf="idx % 3 === 0 && (idx+2)<bandsFiltered.length" scope="row" routerLink="/dashboard/manager/band-info/{{bandsFiltered[idx+2].idBand}}" routerLinkActive="active">
                                     <div class="">
                                         <div class="band-card">
                                             <div class="band-card-img">
-                                                <img *ngIf="dataSessionService.elementsManager.bands[idx+2].urlLogo.length == 0" src="/assets/images/no-band.svg">
-                                                <img *ngIf="dataSessionService.elementsManager.bands[idx+2].urlLogo.length > 0" [src]="dataSessionService.elementsManager.bands[idx+2].imageBlob">
+                                                <img *ngIf="bandsFiltered[idx+2].urlLogo.length == 0" src="/assets/images/no-band.svg">
+                                                <img *ngIf="bandsFiltered[idx+2].urlLogo.length > 0" [src]="bandsFiltered[idx+2].imageBlob">
                                             </div>
-                                            <p class="quest-20-grey text-center p-b-10 p-t-10">{{dataSessionService.elementsManager.bands[idx+2].name}}</p>
-                                            <p class="quest-15-grey text-center">{{dataSessionService.elementsManager.bands[idx+2].description}}</p>
+                                            <p class="quest-20-grey text-center p-b-10 p-t-10">{{bandsFiltered[idx+2].name}}</p>
+                                            <p class="quest-15-grey text-center">{{bandsFiltered[idx+2].description}}</p>
                                             <div>
                                                 <p class="fira-16-grey text-center p-t-5 p-b-5">Generos</p>
                                                 <div class="genere-tags">
-                                                    <div *ngIf="dataSessionService.elementsManager.bands[idx+2].genres[0] != undefined" class="tags"><p>{{dataSessionService.elementsManager.bands[idx+2].genres[0].name}}</p></div>
-                                                    <div *ngIf="dataSessionService.elementsManager.bands[idx+2].genres[1] != undefined" class="tags"><p>{{dataSessionService.elementsManager.bands[idx+2].genres[1].name}}</p></div>
-                                                    <div *ngIf="dataSessionService.elementsManager.bands[idx+2].genres[2] != undefined" class="tags"><p>{{dataSessionService.elementsManager.bands[idx+2].genres[2].name}}</p></div>
+                                                    <div *ngIf="bandsFiltered[idx+2].genres[0] != undefined" class="tags"><p>{{bandsFiltered[idx+2].genres[0].name}}</p></div>
+                                                    <div *ngIf="bandsFiltered[idx+2].genres[1] != undefined" class="tags"><p>{{bandsFiltered[idx+2].genres[1].name}}</p></div>
+                                                    <div *ngIf="bandsFiltered[idx+2].genres[2] != undefined" class="tags"><p>{{bandsFiltered[idx+2].genres[2].name}}</p></div>
                                                 </div>
                                             </div>
                                             

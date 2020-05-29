@@ -18,6 +18,7 @@ import { SettingsComponent } from './views/dashboard/settings/settings.component
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { EventComponent } from './views/dashboard/live-experience-designer/event/event.component';
 import { SearchResultComponent } from './views/dashboard/search-result/search-result.component';
+import { RepertoriesComponent } from './views/dashboard/live-experience-designer/repertories/repertories.component';
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },//lista
   { path: 'login', component: LoginComponent },//lista
@@ -25,19 +26,20 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },//lista
 
   { path: 'dashboard/manager', component: ManagerHomeComponent },
-  { path: 'dashboard/manager/admin-bands', component: AdminBandsComponent },
+  { path: 'dashboard/manager/admin-bands', component: AdminBandsComponent },//lista
   { path: 'dashboard/manager/band-info/:id', component: BandInfoComponent },
-  { path: 'dashboard/manager/add-band', component: AddBandComponent },
+  { path: 'dashboard/manager/add-band', component: AddBandComponent },//lista
   { path: 'dashboard/manager/admin-events', component: AdminEventsComponent },
   { path: 'dashboard/manager/catalog', component: CatalogComponent },
   { path: 'dashboard/manager/settings', component: SettingsComponent },//lista
   { path: 'dashboard/manager/search-result/:search', component: SearchResultComponent },
 
-  { path: 'dashboard/led/home', component: LedHomeComponent },
-  { path: 'dashboard/led/edit-list', component: EditListComponent },
+  { path: 'dashboard/led', component: RepertoriesComponent },
+  { path: 'dashboard/led/my-lists', component: LedHomeComponent },
   { path: 'dashboard/led/add-list', component: AddListComponent },
-  { path: 'dashboard/led/settings', component: SettingsComponent },//lista
+  { path: 'dashboard/led/edit-list/:id', component: EditListComponent },
   { path: 'dashboard/led/event', component: EventComponent },
+  { path: 'dashboard/led/settings', component: SettingsComponent },//lista
   { path: 'dashboard/led/search-result/:search', component: SearchResultComponent },
 
   { path: 'missing-page', component: NotFoundComponent},
