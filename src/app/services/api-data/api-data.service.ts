@@ -212,6 +212,36 @@ export class ApiDataService {
     })
   }
 
+  async updateBand(updatesDataBand : Band){
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token,
+      });
+
+      this.http.post(this.baseURL + 'manager/band-update',updatesDataBand,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
+  async deleteBand(idBandForDelete : Number){
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token,
+      });
+
+      this.http.get(this.baseURL + 'manager/band-delete/'+idBandForDelete,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
   async uploadImageBand(formData: FormData) {
     return new Promise((resolve,reject)=>{
       const headers = new HttpHeaders({
@@ -233,6 +263,19 @@ export class ApiDataService {
         },);
     });
   }
+
+  deleteImageBand(idBand){
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer '+this.token,
+      });
+      this.http.get(this.baseURL + 'uploads/band-delete-image/'+idBand,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(new ServerMessage(true,"A ocurrido un error inesperado",error));
+      });
+    });
+  }
   //FIN.BANDAS
 
   //BUSCADOR
@@ -242,6 +285,19 @@ export class ApiDataService {
         'Authorization': 'Bearer '+this.token,
       });
       this.http.get(this.baseURL + 'search/username/?username='+username,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(new ServerMessage(true,"A ocurrido un error inesperado",error));
+      });
+    });
+  }
+
+  findBandByIdAndByManagerId(idBand){
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer '+this.token,
+      });
+      this.http.get(this.baseURL + 'manager/band/'+idBand,{headers:headers}).subscribe((response : ServerMessage)=>{
         resolve(response);
       },(error)=>{
         reject(new ServerMessage(true,"A ocurrido un error inesperado",error));
