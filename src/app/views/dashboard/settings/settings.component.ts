@@ -32,12 +32,17 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSessionService.checkLogin((logedResponse: LogedResponse) => {
-      //console.log(this.dataSessionService.user);
+      //console.log(logedResponse);
       //Manda al dashboard correspondiente o saca de la sesion
-      if (this.dataSessionService.user.type != 1 && this.dataSessionService.user.type != 2 ) {
+      if (this.dataSessionService.user.type == 1) {
+        this.dataSessionService.navigateByUrl("/dashboard/manager");
+      } else if (this.dataSessionService.user.type != 2) {
         this.dataSessionService.logOut();
       } else {
-        this.actualInfoUser = JSON.parse(JSON.stringify(this.dataSessionService.user));
+        //Cosas para hacer en caso de que el usario este logeado
+        console.log("simonkiii");
+        
+        
       }
     }, (noLoginResponse: LogedResponse) => {
       console.log(noLoginResponse);

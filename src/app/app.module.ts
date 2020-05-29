@@ -36,6 +36,7 @@ import { NotFoundComponent } from './views/not-found/not-found.component';
 import { EventComponent } from './views/dashboard/live-experience-designer/event/event.component';
 import { SearchResultComponent } from './views/dashboard/search-result/search-result.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { RepertoriesComponent } from './views/dashboard/live-experience-designer/repertories/repertories.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     NotFoundComponent,
     EventComponent,
     SearchResultComponent,
+    RepertoriesComponent,
   ],
   imports: [
     BrowserModule, 

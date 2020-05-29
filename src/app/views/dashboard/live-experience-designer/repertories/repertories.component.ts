@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { UtilitiesService } from '../../../../services/utilities/utilities.service';
 import { DataSessionService } from '../../../../services/dataSession/data-session.service';
+import { UtilitiesService } from '../../../../services/utilities/utilities.service';
 import { LogedResponse } from '../../../../classes/logedResponse.class';
 
 @Component({
-  selector: 'app-add-list',
-  templateUrl: './add-list.component.html',
-  styleUrls: ['./add-list.component.css']
+  selector: 'app-repertories',
+  templateUrl: './repertories.component.html',
+  styleUrls: ['./repertories.component.css']
 })
-export class AddListComponent implements OnInit {
+export class RepertoriesComponent implements OnInit {
 
   constructor(public dataSessionService : DataSessionService, public utilitiesService : UtilitiesService) { }
 
