@@ -199,16 +199,17 @@ export class BandInfoComponent implements OnInit {
         this.utilitiesService.showNotification(1, "Perfil no encontrado", 3000, () => { });
       } else {
         this.newBandMember = response.data;
+        if (this.newBandMember.haveImage == true) {
+          //console.log(this.newBandMember);
+          
+          this.apiDataService.getImage(this.dataSessionService.baseURL.toString() +
+            'uploads/user-image/' + this.newBandMember.idUser.toString()).then((urlImage) => {
+              this.newBandMember.imageBlob = urlImage;
+            });
+          this.inputNewUser = "";
+        }
       }
-      if (response.data.haveImage == true) {
-        //console.log(this.newBandMember);
-        
-        this.apiDataService.getImage(this.dataSessionService.baseURL.toString() +
-          'uploads/user-image/' + this.newBandMember.idUser.toString()).then((urlImage) => {
-            this.newBandMember.imageBlob = urlImage;
-          });
-        this.inputNewUser = "";
-      }
+      
     }).catch((error) => {
       console.log(error);
       this.utilitiesService.showNotification(1, "A ocurrido un error consultando el usuario", 5000, () => { });

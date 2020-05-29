@@ -5,7 +5,7 @@ export class ElementsManager{
     upcomingEvents : [];
 
     genresCatalog : Genre[];
-    bands : [];
+    bands : Band[];
 
     constructor(){
         this.upcomingEvents = [];

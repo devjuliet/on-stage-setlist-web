@@ -207,8 +207,15 @@
                                 <div class="search-member">
                                     <input [(ngModel)]="inputNewUser" (keyup.enter)="getNewUserData()" type="text" placeholder="Inserta el código del músico...">
                                 </div>
-                                <div *ngIf="newBandMember.name.length == 0"  class="row p-t-40">
-                                    No se encontro el perfil
+                                <div *ngIf="newBandMember.name.length == 0"  class="p-t-40">
+                                    <div class="row text-center">
+                                        <div class="col-12">
+                                            <img src="/assets/images/astromusician.svg">
+                                        </div>
+                                        <div class="col-12">
+                                            <p class="quest-18-grey p-t-15">No se encontro el perfil...</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div *ngIf="newBandMember.name.length > 5" class="row p-t-40">
                                     <div class="col-md-6 modal-box">

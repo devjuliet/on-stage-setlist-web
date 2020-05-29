@@ -17,7 +17,7 @@
                 <div class="p-b-20">   
                     <h1 class="fira-30-grey">Lista de bandas</h1>
                     <div class="search-bar p-t-20">
-                        <input  type="text" placeholder="Buscar un evento...">
+                        <input [(ngModel)]="searchValue" (ngModelChange)="filterByName($event)"  type="text" placeholder="Buscar una banda...">
                         <button class="search-btn">
                             <i class="fas fa-search"></i>
                         </button>
@@ -26,61 +26,64 @@
                 <div class="table-responsive">
                     <table class="table">
                         <tbody>
-                            <tr >
-                                <td scope="row">
+                            <tr *ngFor="let band of bandsFiltered; let idx = index">
+                                <td *ngIf="idx % 3 === 0" scope="row">
                                     <div class="">
                                         <div class="band-card">
                                             <div class="band-card-img">
-                                                <img src="/assets/images/no-band.svg">
+                                                <img *ngIf="dataSessionService.elementsManager.bands[idx].urlLogo.length == 0" src="/assets/images/no-band.svg">
+                                                <img *ngIf="dataSessionService.elementsManager.bands[idx].urlLogo.length > 0" [src]="dataSessionService.elementsManager.bands[idx].imageBlob">
                                             </div>
-                                            <p class="quest-20-grey text-center p-b-10 p-t-10">Bandita</p>
-                                            <p class="quest-15-grey text-center">Somos una bandita feliz que toca cosas de banditas.</p>
+                                            <p class="quest-20-grey text-center p-b-10 p-t-10">{{dataSessionService.elementsManager.bands[idx].name}}</p>
+                                            <p class="quest-15-grey text-center">{{dataSessionService.elementsManager.bands[idx].description}}</p>
                                             <div>
                                                 <p class="fira-16-grey text-center p-t-5 p-b-5">Generos</p>
                                                 <div class="genere-tags">
-                                                    <div class="tags"><p>Rock</p></div>
-                                                    <div class="tags"><p>Rock</p></div>
-                                                    <div class="tags"><p>Rock</p></div>
+                                                    <div *ngIf="dataSessionService.elementsManager.bands[idx].genres[0] != undefined" class="tags"><p>{{dataSessionService.elementsManager.bands[idx].genres[0].name}}</p></div>
+                                                    <div *ngIf="dataSessionService.elementsManager.bands[idx].genres[1] != undefined" class="tags"><p>{{dataSessionService.elementsManager.bands[idx].genres[1].name}}</p></div>
+                                                    <div *ngIf="dataSessionService.elementsManager.bands[idx].genres[2] != undefined" class="tags"><p>{{dataSessionService.elementsManager.bands[idx].genres[2].name}}</p></div>
                                                 </div>
                                             </div>
                                             
                                         </div>
                                     </div>
                                 </td>
-                                <td scope="row">
+                                <td *ngIf="idx % 3 === 0 && (idx+1)<dataSessionService.elementsManager.bands.length" scope="row">
                                     <div class="">
                                         <div class="band-card">
                                             <div class="band-card-img">
-                                                <img src="/assets/images/no-band.svg">
+                                                <img *ngIf="dataSessionService.elementsManager.bands[idx+1].urlLogo.length == 0" src="/assets/images/no-band.svg">
+                                                <img *ngIf="dataSessionService.elementsManager.bands[idx+1].urlLogo.length > 0" [src]="dataSessionService.elementsManager.bands[idx+1].imageBlob">
                                             </div>
-                                            <p class="quest-20-grey text-center p-b-10 p-t-10">Bandita</p>
-                                            <p class="quest-15-grey text-center">Somos una bandita feliz que toca cosas de banditas.</p>
+                                            <p class="quest-20-grey text-center p-b-10 p-t-10">{{dataSessionService.elementsManager.bands[idx+1].name}}</p>
+                                            <p class="quest-15-grey text-center">{{dataSessionService.elementsManager.bands[idx+1].description}}</p>
                                             <div>
                                                 <p class="fira-16-grey text-center p-t-5 p-b-5">Generos</p>
                                                 <div class="genere-tags">
-                                                    <div class="tags"><p>Rock</p></div>
-                                                    <div class="tags"><p>Rock</p></div>
-                                                    <div class="tags"><p>Rock</p></div>
+                                                    <div *ngIf="dataSessionService.elementsManager.bands[idx+1].genres[0] != undefined" class="tags"><p>{{dataSessionService.elementsManager.bands[idx+1].genres[0].name}}</p></div>
+                                                    <div *ngIf="dataSessionService.elementsManager.bands[idx+1].genres[1] != undefined" class="tags"><p>{{dataSessionService.elementsManager.bands[idx+1].genres[1].name}}</p></div>
+                                                    <div *ngIf="dataSessionService.elementsManager.bands[idx+1].genres[2] != undefined" class="tags"><p>{{dataSessionService.elementsManager.bands[idx+1].genres[2].name}}</p></div>
                                                 </div>
                                             </div>
                                             
                                         </div>
                                     </div>
                                 </td>
-                                <td scope="row">
+                                <td *ngIf="idx % 3 === 0 && (idx+2)<dataSessionService.elementsManager.bands.length" scope="row">
                                     <div class="">
                                         <div class="band-card">
                                             <div class="band-card-img">
-                                                <img src="/assets/images/no-band.svg">
+                                                <img *ngIf="dataSessionService.elementsManager.bands[idx+2].urlLogo.length == 0" src="/assets/images/no-band.svg">
+                                                <img *ngIf="dataSessionService.elementsManager.bands[idx+2].urlLogo.length > 0" [src]="dataSessionService.elementsManager.bands[idx+2].imageBlob">
                                             </div>
-                                            <p class="quest-20-grey text-center p-b-10 p-t-10">Bandita</p>
-                                            <p class="quest-15-grey text-center">Somos una bandita feliz que toca cosas de banditas.</p>
+                                            <p class="quest-20-grey text-center p-b-10 p-t-10">{{dataSessionService.elementsManager.bands[idx+2].name}}</p>
+                                            <p class="quest-15-grey text-center">{{dataSessionService.elementsManager.bands[idx+2].description}}</p>
                                             <div>
                                                 <p class="fira-16-grey text-center p-t-5 p-b-5">Generos</p>
                                                 <div class="genere-tags">
-                                                    <div class="tags"><p>Rock</p></div>
-                                                    <div class="tags"><p>Rock</p></div>
-                                                    <div class="tags"><p>Rock</p></div>
+                                                    <div *ngIf="dataSessionService.elementsManager.bands[idx+2].genres[0] != undefined" class="tags"><p>{{dataSessionService.elementsManager.bands[idx+2].genres[0].name}}</p></div>
+                                                    <div *ngIf="dataSessionService.elementsManager.bands[idx+2].genres[1] != undefined" class="tags"><p>{{dataSessionService.elementsManager.bands[idx+2].genres[1].name}}</p></div>
+                                                    <div *ngIf="dataSessionService.elementsManager.bands[idx+2].genres[2] != undefined" class="tags"><p>{{dataSessionService.elementsManager.bands[idx+2].genres[2].name}}</p></div>
                                                 </div>
                                             </div>
                                             
