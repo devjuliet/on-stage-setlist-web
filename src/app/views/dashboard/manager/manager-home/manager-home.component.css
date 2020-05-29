@@ -51,3 +51,8 @@ td{
     border-left: 15px solid #382983;
     padding-left: 15px;
 }
+.no-event{
+    max-width: 700px;
+    width: 100%;
+    opacity: .4;
+}
