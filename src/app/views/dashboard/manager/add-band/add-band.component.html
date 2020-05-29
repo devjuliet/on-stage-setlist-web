@@ -25,30 +25,32 @@
                         <div class="p-t-20">
                             <textarea  [(ngModel)]="newBand.description" placeholder="Descripción de la banda..." cols="30" rows="5"></textarea>
                             <div *ngIf="newBand.description.length < 50">
-                                <label>Descripcion muy corta {{newBand.description.length}} < 50</label>
+                                <label class="quest-15-grey">Descripcion muy corta {{newBand.description.length}} < 50</label>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-6 col-md-6 col-sm-12">
+                        <p class="quest-18-grey text-center p-b-20">Añade una imagen a tu banda</p>
                         <div class="dis-fle-jcent">
                             <!--Boton de verdad escondido-->
                             <!-- <input type="file" id="img" name="img" accept="image/*" class="hidden"> -->
                             <!--Boton falso para subir una imagen-->
                             <!-- <label class="img-btn" for="img"><img src="/assets/images/upload.svg"></label> -->
-
+                            
                             <div *ngIf="newBand.urlLogo.length == 0"
                                 class="input-group mb-3"
                                 style="    justify-content: center;">
                                 <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
-
-                                <label *ngIf="source.length == 0">
-                                    <input (change)="updateSource($event)" type="file" id="img" name="img" accept="image/*" class="hidden">
-                                    <label class="img-btn" for="img">
-                                        <img  src="/assets/images/upload.svg">
-                                        <div class="color-img"></div>
-                                        <p class="img-word quest-16-wht">Subir foto</p>
+                              
+                                    <label *ngIf="source.length == 0">
+                                        <input (change)="updateSource($event)" type="file" id="img" name="img" accept="image/*" class="hidden">
+                                        <label class="img-btn" for="img">
+                                            <img  src="/assets/images/upload.svg">
+                                            <div class="color-img"></div>
+                                            <p class="img-word quest-16-wht">Subir foto</p>
+                                        </label>
                                     </label>
-                                </label>
+                                
                                 <!-- img placeholder when a file has been picked. shows only when 'source' is not empty -->
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 text-center">
@@ -107,10 +109,10 @@
                             <tr>
                                 <td *ngIf="newBand.bandMembers.length == 0">
                                     <div class="text-center">  
-                                        <div class="profile-box">
-                                            <img class="profile-pic" src="https://headsfortails15029229.files.wordpress.com/2018/03/baby-bunny.jpg">
+                                        <div class="">
+                                            <img class="no-result-img" src="/assets/images/no-result.svg">
                                         </div>
-                                        <p class="fira-18-blu">Sin integrantes</p>
+                                        <p class="quest-18-grey">Sin integrantes</p>
                                     </div>
                                 </td>
                                 <td *ngIf="bandMembersFiltered.length == 0 && newBand.bandMembers.length != 0">
@@ -174,8 +176,15 @@
                             <div class="search-member">
                                 <input [(ngModel)]="inputNewUser" (keyup.enter)="getNewUserData()" type="text" placeholder="Inserta el código del músico...">
                             </div>
-                            <div *ngIf="newBandMember.name.length == 0"  class="row p-t-40">
-                                No se encontro el perfil
+                            <div *ngIf="newBandMember.name.length == 0"  class="p-t-40">
+                                <div class="row text-center">
+                                    <div class="col-12">
+                                        <img src="/assets/images/astromusician.svg">
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="quest-18-grey p-t-15">No se encontro el perfil...</p>
+                                    </div>
+                                </div>
                             </div>
                             <div *ngIf="newBandMember.name.length > 5" class="row p-t-40">
                                 <div class="col-md-6 modal-box">
