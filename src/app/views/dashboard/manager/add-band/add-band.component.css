@@ -193,3 +193,9 @@ img{
     border-radius: 50%;
     background: white;
 }
+.no-result-img{
+    max-width: 500px;
+    width: 100%;
+    height: auto;
+    opacity: .5;
+}
