@@ -44,9 +44,10 @@
                                 <label *ngIf="source.length == 0">
                                     <input (change)="updateSource($event)" type="file" id="img" name="img" accept="image/*" class="hidden">
                                     <label class="img-btn" for="img">
-                                        <img  src="/assets/images/flor.svg">
-                                        <div class="color-img"></div>
-                                        <p class="img-word quest-16-wht">Subir foto</p>
+                                        <img  src="/assets/images/avatar.svg">
+                                        <div class="color-img">
+                                            <p class="img-word quest-16-wht">Subir foto</p>
+                                        </div>
                                     </label>
                                 </label>
                                 <!-- img placeholder when a file has been picked. shows only when 'source' is not empty -->

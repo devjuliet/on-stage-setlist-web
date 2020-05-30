@@ -71,6 +71,12 @@ button:focus{
 .text-center{
     text-align: center;
 }
+.text-end{
+    text-align: end;
+}
+.text-start{
+    text-align: start;
+}
 .fixed-shadow{
     box-shadow: 0px 8px 10px 0px rgba(0,0,0,0.3);
 }
@@ -102,7 +108,46 @@ button:focus{
 .width-90p{
     width: 90%;
 }
+.search-bar{
+    display: flex;
+    align-items: center;
+}
+
+.p-input{
+    border-radius: 10px 0 0 10px;
+    width: 60%;
+    height: 40px;
+    border-top: 1px solid #382983;
+    border-left: 1px solid #382983;
+    border-bottom: 1px solid #382983;
+    border-right: none;
+    padding-left: 15px;
+    outline: none;
+    transition: .3s ease-in-out;
+}
+.p-input:focus{
+    border-top: 1px solid #0087D1;
+    border-left: 1px solid #0087D1;
+    border-bottom: 1px solid #0087D1;
+    border-right: none;
+}
 /*BOTONES*/
+.search-btn{
+    height: 40px;
+    width: 40px;
+    background-color: white;
+    border-radius: 0 10px 10px 0;
+    border-top: 1px solid #382983;
+    border-left: none;
+    border-bottom: 1px solid #382983;
+    border-right: 1px solid #382983;
+    cursor: pointer;
+    color: #382983;
+    transition: .3s ease-in-out;
+}
+.search-btn:hover{
+    color: #0087D1;
+}
 .btn-wht{
     background-color: #382983;
     border: 1px solid white;
@@ -195,11 +240,12 @@ button:focus{
     border: none;
     cursor: pointer;
     background-color: #A82020;
-    opacity: .7;
+    opacity: 1;
     transition: .3s ease-in-out;
 }
 .btn-red:hover{
-    opacity: 1;
+    box-shadow: 0px 0px 6px 0px rgba(136,21,21,1);
+    font-weight: 600;
 }
 .trash-btn{
     color: red;
@@ -329,6 +375,11 @@ button:focus{
     font-size: 15px;
     color: #353535;
 }
+.quest-12-grey{
+    font-family: 'Questrial', sans-serif;
+    font-size: 12px;
+    color: #353535;
+}
 .quest-10-grey{
     font-family: 'Questrial', sans-serif;
     font-size: 10px;
@@ -429,6 +480,9 @@ button:focus{
 }
 .p-r-5{
     padding-right: 5px;
+}
+.p-l-5{
+    padding-left: 5px;
 }
 .p-0-30{
     padding: 0 30px;

@@ -1,18 +1,366 @@
 <div>
     <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass.toString()">
-        <app-sidebar class="sidebar" 
-            [activeLink]="0" 
-            [isManager]="dataSessionService.user.type.toString()=='1'"
-            [nameUser]="dataSessionService.user.name"
-            [imageurl]="dataSessionService.user.haveImage"
-            [idUser]="dataSessionService.user.idUser"
-            [imageSrc]="dataSessionService.user.imageBlob" 
-            ></app-sidebar>
+        <app-sidebar class="sidebar" [activeLink]="0" [isManager]="dataSessionService.user.type.toString()=='1'"
+            [nameUser]="dataSessionService.user.name" [imageurl]="dataSessionService.user.haveImage"
+            [idUser]="dataSessionService.user.idUser" [imageSrc]="dataSessionService.user.imageBlob"></app-sidebar>
     </div>
     <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
         <app-navbar-dashboard></app-navbar-dashboard>
         <div class="p-t-20">
-            
+            <div class="info-dashboard">
+                <h1 class="fira-30-grey">Mis Repertorios</h1>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="search-bar p-t-20">
+                            <input class="p-input" type="text" placeholder="Buscar una lista...">
+                            <button class="search-btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 disf-fend">
+                        <button class="btn-lblu" data-toggle="modal" data-target="#editNewModal"><i
+                                class="fas fa-plus"></i> Añadir repertorio</button>
+                    </div>
+                </div>
+
+                <div class="row p-t-40">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="rep-card">
+                            <p class="fira-16-grey text-center p-b-10"><strong>Bunny Repertorio</strong></p>
+                            <div class="rep-line"></div>
+                            <p class="quest-15-grey p-t-20">Bunny Banda</p>
+                            <p class="quest-15-grey p-t-10">No se le ha asignado ningun evento</p>
+                            <div class="rep-tag p-t-30">
+                                <div class="tagsini">
+                                    <p class="quest-10-grey">Tranqui</p>
+                                </div>
+                                <div class="tagsini">
+                                    <p class="quest-10-grey">Calmadas</p>
+                                </div>
+                                <div class="tagsini">
+                                    <p class="quest-10-grey">Kpop</p>
+                                </div>
+                            </div>
+                            <div class="p-t-30">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <button class="list-btn" type="button" data-toggle="collapse"
+                                            data-target="#collapseExample" aria-expanded="false"
+                                            aria-controls="collapseExample">
+                                            Ver listas <i class="fas fa-angle-down p-l-5"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-4 text-end">
+                                        <button class="rep-trash" data-toggle="modal" data-target="#trashModal"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                                <div class="collapse" id="collapseExample">
+                                    <div class="card card-body">
+                                        <p class="quest-12-grey list-resu">Lista 1</p>
+                                        <p class="quest-12-grey list-resu">Lista 2</p>
+                                        <p class="quest-12-grey list-resu">Lista 3</p>
+                                        <p class="quest-12-grey list-resu">Lista 4</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="rep-edit">
+                                <button data-toggle="tooltip" data-placement="top" title="Editar repertorio"
+                                    data-toggle="modal" data-target="#editNewModal">
+                                    <i class="fas fa-pen-square"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="rep-card">
+                            <p class="fira-16-grey text-center p-b-10"><strong>Bunny Repertorio</strong></p>
+                            <div class="rep-line"></div>
+                            <p class="quest-15-grey p-t-20">Bunny Banda</p>
+                            <p class="quest-15-grey p-t-10">No se le ha asignado ningun evento</p>
+                            <div class="rep-tag p-t-30">
+                                <div class="tagsini">
+                                    <p class="quest-10-grey">Tranqui</p>
+                                </div>
+                                <div class="tagsini">
+                                    <p class="quest-10-grey">Calmadas</p>
+                                </div>
+                                <div class="tagsini">
+                                    <p class="quest-10-grey">Kpop</p>
+                                </div>
+                            </div>
+                            <div class="p-t-30">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <button class="list-btn" type="button" data-toggle="collapse"
+                                            data-target="#collapseExample2" aria-expanded="false"
+                                            aria-controls="collapseExample">
+                                            Ver listas <i class="fas fa-angle-down p-l-5"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-4 text-end">
+                                        <button class="rep-trash" data-toggle="modal" data-target="#trashModal"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                                <div class="collapse" id="collapseExample2">
+                                    <div class="card card-body">
+                                        <p class="quest-12-grey list-resu">Lista 1</p>
+                                        <p class="quest-12-grey list-resu">Lista 2</p>
+                                        <p class="quest-12-grey list-resu">Lista 3</p>
+                                        <p class="quest-12-grey list-resu">Lista 4</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="rep-edit">
+                                <button data-toggle="tooltip" data-placement="top" title="Editar repertorio"
+                                    data-toggle="modal" data-target="#editNewModal">
+                                    <i class="fas fa-pen-square"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="rep-card">
+                            <p class="fira-16-grey text-center p-b-10"><strong>Bunny Repertorio</strong></p>
+                            <div class="rep-line"></div>
+                            <p class="quest-15-grey p-t-20">Bunny Banda</p>
+                            <p class="quest-15-grey p-t-10">No se le ha asignado ningun evento</p>
+                            <div class="rep-tag p-t-30">
+                                <div class="tagsini">
+                                    <p class="quest-10-grey">Tranqui</p>
+                                </div>
+                                <div class="tagsini">
+                                    <p class="quest-10-grey">Calmadas</p>
+                                </div>
+                                <div class="tagsini">
+                                    <p class="quest-10-grey">Kpop</p>
+                                </div>
+                            </div>
+                            <div class="p-t-30">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <button class="list-btn" type="button" data-toggle="collapse"
+                                            data-target="#collapseExample3" aria-expanded="false"
+                                            aria-controls="collapseExample">
+                                            Ver listas <i class="fas fa-angle-down p-l-5"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-4 text-end">
+                                        <button class="rep-trash" data-toggle="modal" data-target="#trashModal"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                                <div class="collapse" id="collapseExample3">
+                                    <div class="card card-body">
+                                        <p class="quest-12-grey list-resu">Lista 1</p>
+                                        <p class="quest-12-grey list-resu">Lista 2</p>
+                                        <p class="quest-12-grey list-resu">Lista 3</p>
+                                        <p class="quest-12-grey list-resu">Lista 4</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="rep-edit">
+                                <button data-toggle="tooltip" data-placement="top" title="Editar repertorio"
+                                    data-toggle="modal" data-target="#editNewModal">
+                                    <i class="fas fa-pen-square"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="rep-card">
+                            <p class="fira-16-grey text-center p-b-10"><strong>Bunny Repertorio</strong></p>
+                            <div class="rep-line"></div>
+                            <p class="quest-15-grey p-t-20">Bunny Banda</p>
+                            <p class="quest-15-grey p-t-10">No se le ha asignado ningun evento</p>
+                            <div class="rep-tag p-t-30">
+                                <div class="tagsini">
+                                    <p class="quest-10-grey">Tranqui</p>
+                                </div>
+                                <div class="tagsini">
+                                    <p class="quest-10-grey">Calmadas</p>
+                                </div>
+                                <div class="tagsini">
+                                    <p class="quest-10-grey">Kpop</p>
+                                </div>
+                            </div>
+                            <div class="p-t-30">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <button class="list-btn" type="button" data-toggle="collapse"
+                                            data-target="#collapseExample4" aria-expanded="false"
+                                            aria-controls="collapseExample">
+                                            Ver listas <i class="fas fa-angle-down p-l-5"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-4 text-end">
+                                        <button class="rep-trash" data-toggle="modal" data-target="#trashModal">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="collapse" id="collapseExample4">
+                                    <div class="card card-body">
+                                        <p class="quest-12-grey list-resu">Lista 1</p>
+                                        <p class="quest-12-grey list-resu">Lista 2</p>
+                                        <p class="quest-12-grey list-resu">Lista 3</p>
+                                        <p class="quest-12-grey list-resu">Lista 4</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="rep-edit">
+                                <button data-toggle="tooltip" data-placement="top" title="Editar repertorio"
+                                    data-toggle="modal" data-target="#editNewModal">
+                                    <i class="fas fa-pen-square"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--MODAL NUEVO/EDITAR REPERTORIO -->
+            <div class="modal fade" id="editNewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="fira-30-blu" id="exampleModalLabel">Repertorio</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12">
+                                    <div>
+                                        <input class="input-text" type="text" placeholder="Nombre del repertorio...">
+                                    </div>
+                                    <div class="p-t-20">
+                                        <p class="quest-15-grey">Selecciona una banda</p>
+                                        <select class="selectpicker" data-width="100%">
+                                            <option>Mustard</option>
+                                            <option>Ketchup</option>
+                                            <option>Relish</option>
+                                          </select>
+                                    </div>
+                                    <div class="p-t-20">
+                                        <p class="quest-15-grey">Asignale un evento</p>
+                                    </div>
+                                    <div class="p-t-20"> 
+                                        <p class="quest-15-grey">Ponle etiquetas</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12">
+                                    <div>
+                                        <p class="quest-20-grey">Selecciona las listas de canciones</p>
+                                    </div>
+                                    <div class="list-box">
+                                        <div class="list-card">
+                                            <div class="row">
+                                                <div class="col-2 search-bar">
+                                                    <input type="checkbox" id="lista1">
+                                                </div>
+                                                <div class="col-10 search-bar">
+                                                    <label for="lista1"> 
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <img class="sm-img" src="/assets/images/gbaby.jpg">
+                                                            </div>
+                                                            <div class="col-8">
+                                                                <p>Bunny Lista</p>
+                                                                <p>10 Canciones</p>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        <div class="list-card">
+                                            <div class="row">
+                                                <div class="col-2 search-bar">
+                                                    <input type="checkbox" id="lista2">
+                                                </div>
+                                                <div class="col-10 search-bar">
+                                                    <label for="lista2"> 
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <img class="sm-img" src="/assets/images/gbaby.jpg">
+                                                            </div>
+                                                            <div class="col-8">
+                                                                <p>Bunny Lista</p>
+                                                                <p>10 Canciones</p>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        <div class="list-card">
+                                            <div class="row">
+                                                <div class="col-2 search-bar">
+                                                    <input type="checkbox" id="lista3">
+                                                </div>
+                                                <div class="col-10 search-bar">
+                                                    <label for="lista3"> 
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <img class="sm-img" src="/assets/images/gbaby.jpg">
+                                                            </div>
+                                                            <div class="col-8">
+                                                                <p>Bunny Lista</p>
+                                                                <p>10 Canciones</p>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        <div class="list-card">
+                                            <div class="row">
+                                                <div class="col-2 search-bar">
+                                                    <input type="checkbox" id="lista4">
+                                                </div>
+                                                <div class="col-10 search-bar">
+                                                    <label for="lista4"> 
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <img class="sm-img" src="/assets/images/gbaby.jpg">
+                                                            </div>
+                                                            <div class="col-8">
+                                                                <p>Bunny Lista</p>
+                                                                <p>10 Canciones</p>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn-lblu">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--MODAL PARA ELIMINAR-->
+            <div class="modal fade" id="trashModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h5 class="modal-title fira-30-grey" id="exampleModalLabel">¿Estas seguro que quieres eliminar este repertorio?</h5>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img src="/assets/images/no-song.svg">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn-red">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
