@@ -129,3 +129,10 @@
 .my-overlay i.fa.fa-spinner.fa-spin, .spinner-big {
     font-size: 100px !important;
 }
+
+#modalLoadingComponen{
+    padding-right: 15px; 
+    display: block;
+    background-color: rgba(0, 0, 0, 0.54);
+    z-index: 5000;
+}

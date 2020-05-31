@@ -27,12 +27,12 @@ const routes: Routes = [
 
   { path: 'dashboard/manager', component: ManagerHomeComponent },
   { path: 'dashboard/manager/admin-bands', component: AdminBandsComponent },//lista
-  { path: 'dashboard/manager/band-info/:id', component: BandInfoComponent },
+  { path: 'dashboard/manager/band-info/:id', component: BandInfoComponent },//lista
   { path: 'dashboard/manager/add-band', component: AddBandComponent },//lista
-  { path: 'dashboard/manager/admin-events', component: AdminEventsComponent },
+  { path: 'dashboard/manager/admin-events', component: AdminEventsComponent },//lista
   { path: 'dashboard/manager/catalog', component: CatalogComponent },
   { path: 'dashboard/manager/settings', component: SettingsComponent },//lista
-  { path: 'dashboard/manager/search-result/:search', component: SearchResultComponent },
+
 
   { path: 'dashboard/led', component: RepertoriesComponent },
   { path: 'dashboard/led/my-lists', component: LedHomeComponent },
@@ -40,7 +40,8 @@ const routes: Routes = [
   { path: 'dashboard/led/edit-list/:id', component: EditListComponent },
   { path: 'dashboard/led/event', component: EventComponent },
   { path: 'dashboard/led/settings', component: SettingsComponent },//lista
-  { path: 'dashboard/led/search-result/:search', component: SearchResultComponent },
+
+  { path: 'dashboard/search-result/:search', component: SearchResultComponent },//lista
 
   { path: 'missing-page', component: NotFoundComponent},
   { path: '**', redirectTo: 'missing-page' }

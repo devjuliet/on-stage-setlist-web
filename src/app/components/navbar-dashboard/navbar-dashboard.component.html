@@ -6,8 +6,8 @@
             </button>
         </div>
         <div class="search flex-grow-10 text-center">
-            <input class="input-gr-blu" type="text" placeholder="Buscar grupos o músicos">
-            <button><i class="fas fa-search"></i></button>
+            <input [(ngModel)]="searchInput" (keyup.enter)="search()" class="input-gr-blu" type="text" placeholder="Buscar grupos o músicos">
+            <button (click)="search()"><i class="fas fa-search"></i></button>
         </div>
         <div>
             <button (click)="logOut()" class="btn-back-wht" >

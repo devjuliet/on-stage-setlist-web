@@ -137,4 +137,9 @@ export class UtilitiesService {
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
+  getDateForInputs(){
+    let fixMont = new Date().getUTCMonth().toString().length == 1 ? "0"+new Date().getUTCMonth() : new Date().getUTCMonth();
+    return "" + new Date().getFullYear() + "-" + fixMont + "-" + new Date().getDate();
+  }
 }

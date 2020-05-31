@@ -259,7 +259,7 @@ export class AddBandComponent implements OnInit {
 
   getNewUserData() {
     this.apiDataService.getDataUserHistory(this.inputNewUser).then((response: ServerMessage) => {
-      //console.log(response);
+      console.log(response);
       if(response.data == null){
         this.newBandMember = new BandMemberProfile();
         this.utilitiesService.showNotification(1, "Perfil no encontrado", 3000, () => { });
