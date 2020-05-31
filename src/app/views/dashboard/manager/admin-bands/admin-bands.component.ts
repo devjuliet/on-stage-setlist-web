@@ -31,7 +31,7 @@ export class AdminBandsComponent implements OnInit {
       }else{
        console.log("usuario simonki");
        this.dataSessionService.getBandsManager(async (response) => {
-          console.log(this.dataSessionService.elementsManager.bands);
+          //console.log(this.dataSessionService.elementsManager.bands);
           this.bandsFiltered = Array.from(this.dataSessionService.elementsManager.bands);
           //Se cargan todas las imagenes de las bandas
           for (let index = 0; index < this.dataSessionService.elementsManager.bands.length; index++) {

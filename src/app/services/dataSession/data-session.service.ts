@@ -6,6 +6,7 @@ import { ServerMessage } from '../../classes/serverMessages.dto';
 import { LogedResponse } from '../../classes/logedResponse.class';
 import { ElementsManager } from '../../classes/elementsManager.class';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Tag } from '../../classes/tag.class';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +17,14 @@ export class DataSessionService {
 
   user: User;
   elementsManager: ElementsManager;
-
+  tagsCatalog : Tag[];
   baseURL: String;
 
   constructor(private apiDataService: ApiDataService, private route: Router, ) {
     this.token = "";
     this.user = new User();
     this.elementsManager = new ElementsManager();
+    this.tagsCatalog = [];
     this.baseURL = apiDataService.baseURL;
     //localStorage.setItem('token', JSON.stringify(this.token));
     let token = localStorage.getItem('token');
@@ -126,6 +128,37 @@ export class DataSessionService {
       console.log(error);
       errorCallBack("A ocurrido un error");
     });
+  };
+
+  getEventsManager(succesCallBack,errorCallBack){
+    this.apiDataService.getEventsManager().then((response: ServerMessage) => {
+      if(response.error == true){
+        errorCallBack(response.message);
+      }else{
+        this.elementsManager.upcomingEvents = response.data;
+        for (let index = 0; index < this.elementsManager.upcomingEvents.length; index++) {
+          this.elementsManager.upcomingEvents[index].date = new Date(this.elementsManager.upcomingEvents[index].date);
+        }
+        succesCallBack("Eventos actualizadas con exito.");
+      }
+    }, (error) => {
+      console.log(error);
+      errorCallBack("A ocurrido un error");
+    });
+  };
+
+  getTagsCatalog(succesCallBack,errorCallBack){
+    this.apiDataService.getCatalogTagsData().then((response: ServerMessage) => {
+      if(response.error == true){
+        errorCallBack(response.message);
+      }else{
+        this.tagsCatalog = response.data;
+        succesCallBack("Catalogo de tags obtenido con exito.");
+      }
+    }, (error) => {
+      console.log(error);
+      errorCallBack("A ocurrido un error");
+    });
   }
 
   loginUser(username: String, password: String) {
@@ -150,5 +183,47 @@ export class DataSessionService {
     localStorage.setItem('token', "");
     this.token = localStorage.getItem('token');
     this.route.navigateByUrl('/')
+  }
+
+  searchBandsUsersByName(name : String){
+    return new Promise((resolve, reject) => {
+      this.apiDataService.searchBandsUsersByName(name).then((response: ServerMessage) => {
+        if (response.error) {
+          reject(response)
+        } else {
+          resolve(response);
+        }
+      }, (error) => {
+        reject(error)
+      });
+    });
+  }
+
+  getBandById(bandId : Number){
+    return new Promise((resolve, reject) => {
+      this.apiDataService.findBandById(bandId).then((response: ServerMessage) => {
+        if (response.error) {
+          reject(response)
+        } else {
+          resolve(response);
+        }
+      }, (error) => {
+        reject(error)
+      });
+    });
+  }
+
+  getUserById(bandId : Number){
+    return new Promise((resolve, reject) => {
+      this.apiDataService.findUserById(bandId).then((response: ServerMessage) => {
+        if (response.error) {
+          reject(response)
+        } else {
+          resolve(response);
+        }
+      }, (error) => {
+        reject(error)
+      });
+    });
   }
 }

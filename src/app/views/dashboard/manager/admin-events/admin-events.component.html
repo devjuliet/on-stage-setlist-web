@@ -18,48 +18,54 @@
                     <h1 class="fira-30-grey">Proximos eventos</h1>
                     <div class="dis-fle-alcent p-t-20">
                         <div class="search-bar wid-70p">
-                            <input  type="text" placeholder="Buscar un evento...">
+                            <input [(ngModel)]="searchValue" (ngModelChange)="filterByName($event)"  type="text" placeholder="Buscar un evento...">
                             <button class="search-btn">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
+                        <div class="p-t-20">
+                            <ng-multiselect-dropdown
+                                [placeholder]="'Buscar por tag'"
+                                [settings]="dropdownSearchTagSettings"
+                                [data]="dataSessionService.tagsCatalog"
+                                (onSelect)="onTagSearchSelect($event)"
+                                (onDeSelect)="onTagSearchSelect($event)"
+                                [(ngModel)]="selectedSearchTag"
+                                >
+                            </ng-multiselect-dropdown>
+                        </div>
                         <div class="p-l-20">
-                            <button class="btn-lblu" data-toggle="modal" data-target="#concertModal"><i class="fas fa-plus p-r-5"></i>Crear un evento</button>
+                            <button #btnCOpenModal (click)="modalEvent(true)" class="btn-lblu" data-toggle="modal" data-target="#concertModal"><i class="fas fa-plus p-r-5"></i>Crear un evento</button>
+                            <button style="display: none;" #concertModasl class="btn-lblu" data-toggle="modal" data-target="#concertModal"><i class="fas fa-plus p-r-5"></i>editar un evento</button>
                         </div>
                     </div>  
                 </div>
                 <div>
                     <table class="table">
                         <tbody>
-                            <tr >
-                                <td scope="row">
+                            <div *ngIf="eventsFiltered.length == 0 && dataSessionService.elementsManager.upcomingEvents.length > 0" class="row text-center">
+                                <div class="col-12">
+                                    <img class="no-event" src="/assets/images/concert.svg">
+                                </div>
+                                <div class="col-12">
+                                    <p class="quest-20-grey">No se ha encontrado ningún resultado...</p>
+                                </div>  
+                            </div>
+                            <div *ngIf="dataSessionService.elementsManager.upcomingEvents.length == 0" class="row text-center">
+                                <div class="col-12">
+                                    <img class="no-event" src="/assets/images/concert.svg">
+                                </div>
+                                <div class="col-12">
+                                    <p class="quest-20-grey">No se ha encontrado ningún evento...</p>
+                                </div>  
+                            </div>
+                            <tr *ngFor="let event of eventsFiltered; let i = index" style="margin: 10px 10px;">
+                                <td scope="row" class="btn-gray" (click)="modalEvent(false,event)" >
                                     <div class="event-card">
                                         <div>
-                                            <p>Jueves 14 de Mayo del 2020</p>
-                                            <p>16:50 P.M.</p>
-                                            <p>Club Leones Chihuahua Chih.</p>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="p-t-10">
-                                <td scope="row">
-                                    <div class="event-card">
-                                        <div>
-                                            <p>Jueves 14 de Mayo del 2020</p>
-                                            <p>16:50 P.M.</p>
-                                            <p>Club Leones Chihuahua Chih.</p>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="p-t-10">
-                                <td scope="row">
-                                    <div class="event-card">
-                                        <div>
-                                            <p>Jueves 14 de Mayo del 2020</p>
-                                            <p>16:50 P.M.</p>
-                                            <p>Club Leones Chihuahua Chih.</p>
+                                            <p>{{event.date}}</p>
+                                            <p>{{event.name}}</p>
+                                            <p>{{event.place}} , {{event.location}}</p>
                                         </div>
                                     </div>
                                 </td>
@@ -72,32 +78,46 @@
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header dis-fle-jcent">
-                      <h5 class="modal-title fira-30-blu text-center" id="exampleModalLabel">Crea tu evento!</h5>
+                        <h5 *ngIf="isNew" class="modal-title fira-30-blu text-center" id="exampleModalLabel">Crea tu evento!</h5>
+                        <h5 *ngIf="!isNew" class="modal-title fira-30-blu text-center" id="exampleModalLabel">Editando tu evento!</h5>
                     </div>
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="text" placeholder="Titulo del evento...">
+                                <input [(ngModel)]="actualEvent.name" type="text" placeholder="Titulo del evento...">
+                                <div class="p-t-20">
+                                    <p>Ubicacion</p>
+                                    <input [(ngModel)]="actualEvent.location" type="text" placeholder="Ubicacion del evento...">
+                                </div>
+                                <div class="p-t-20">
+                                    <input [(ngModel)]="actualEvent.tour" type="text" placeholder="Tour del evento...">
+                                </div>
                                 <div class="p-t-20">
                                     <p>Fecha</p>
-                                    <input type="date">
+                                    <input [(ngModel)]="date" type="date">
                                 </div>
                                 <div class="p-t-20">
-                                    <input type="time">
+                                    <textarea [(ngModel)]="actualEvent.place" placeholder="Lugar del evento..." cols="30" rows="5"></textarea>
                                 </div>
-                                <div class="p-t-20 p-b-20">
-                                    <textarea placeholder="Lugar del evento..." cols="30" rows="5"></textarea>
+                                <div class="p-t-20">
+                                    <ng-multiselect-dropdown
+                                        [placeholder]="'Seleccione un Tag'"
+                                        [settings]="dropdownTagSettings"
+                                        [data]="dataSessionService.tagsCatalog"
+                                        [(ngModel)]="selectedTag"
+                                        >
+                                    </ng-multiselect-dropdown>
                                 </div>
-                                <div class="dropdown">
-                                    <button class="dropdown-blu dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      Banda
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <a class="dropdown-item" href="#">Bandita1</a>
-                                      <a class="dropdown-item" href="#">Bandita2</a>
-                                      <a class="dropdown-item" href="#">Bandita3</a>
-                                    </div>
-                                  </div>
+                                <div class="p-t-20">
+                                    <ng-multiselect-dropdown
+                                        [placeholder]="'Seleccione la banda'"
+                                        [settings]="dropdownBandSettings"
+                                        [data]="dataSessionService.elementsManager.bands"
+                                        [(ngModel)]="selectedBand"
+                                        >
+                                    </ng-multiselect-dropdown>
+                                </div>
+                                
                             </div>
                             <div class="col-md-6 dis-fle-alcent">
                                 <img class="max-w300" src="/assets/images/calendar.svg">
@@ -105,8 +125,8 @@
                         </div>
                     </div>
                     <div class="modal-footer dis-fle-jcent">
-                        <button type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn-lblu">Guardar</button>
+                        <button #btnCloseModal type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
+                        <button (click)="saveEvent()" type="button" class="btn-lblu">Guardar</button>
                     </div>
                   </div>
                 </div>

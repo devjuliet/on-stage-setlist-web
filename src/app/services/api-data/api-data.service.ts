@@ -7,6 +7,7 @@ import { timeout, catchError } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 import { Band } from '../../classes/band.class';
 import { User } from '../../classes/user.class';
+import { ActualEvent } from '../../classes/actualEvent.class';
 
 @Injectable({
   providedIn: 'root'
@@ -75,6 +76,21 @@ export class ApiDataService {
       })
        
       this.http.get(this.baseURL + 'catalogs/genres',{ headers: headers }).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
+  getCatalogTagsData() {
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token
+      })
+       
+      this.http.get(this.baseURL + 'catalogs/tags',{ headers: headers }).subscribe((response : ServerMessage)=>{
         resolve(response);
       },(error)=>{
         reject(error)
@@ -194,6 +210,64 @@ export class ApiDataService {
       });
     })
   }
+
+  findBandByIdAndByManagerId(idBand){
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer '+this.token,
+      });
+      this.http.get(this.baseURL + 'manager/band/'+idBand,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(new ServerMessage(true,"A ocurrido un error inesperado",error));
+      });
+    });
+  }
+
+  async createEvent(newDataEvent : ActualEvent) : Promise<any>{
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token,
+      });
+
+      this.http.post(this.baseURL + 'manager/create-event',newDataEvent,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
+  async updateEvent(updatedDataEvent : ActualEvent) : Promise<any>{
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token,
+      });
+
+      this.http.post(this.baseURL + 'manager/update-event',updatedDataEvent,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
+  getEventsManager() {
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token
+      })
+       
+      this.http.get(this.baseURL + 'manager/events',{ headers: headers }).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
   //FIN.MANAGER
 
   //BANDAS
@@ -279,6 +353,16 @@ export class ApiDataService {
   //FIN.BANDAS
 
   //BUSCADOR
+  searchBandsUsersByName(name : String) {
+    return new Promise((resolve,reject)=>{
+      this.http.get(this.baseURL + 'search?name='+name,{}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
   getDataUserHistory(username){
     return new Promise((resolve,reject)=>{
       const headers = new HttpHeaders({
@@ -292,12 +376,25 @@ export class ApiDataService {
     });
   }
 
-  findBandByIdAndByManagerId(idBand){
+  findBandById(idBand){
     return new Promise((resolve,reject)=>{
       const headers = new HttpHeaders({
         'Authorization': 'Bearer '+this.token,
       });
-      this.http.get(this.baseURL + 'manager/band/'+idBand,{headers:headers}).subscribe((response : ServerMessage)=>{
+      this.http.get(this.baseURL + 'search/get-band?bandId='+idBand,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(new ServerMessage(true,"A ocurrido un error inesperado",error));
+      });
+    });
+  }
+
+  findUserById(idUser){
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer '+this.token,
+      });
+      this.http.get(this.baseURL + 'search/get-artist-profile?idUser='+idUser,{headers:headers}).subscribe((response : ServerMessage)=>{
         resolve(response);
       },(error)=>{
         reject(new ServerMessage(true,"A ocurrido un error inesperado",error));
