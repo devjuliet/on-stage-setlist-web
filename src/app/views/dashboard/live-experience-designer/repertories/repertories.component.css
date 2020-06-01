@@ -50,7 +50,7 @@
 .rep-edit{
     position: absolute;
     top: 5px;
-    right: 5px;   
+    right: 5px;
 }
 .rep-edit button{
     font-size: 30px;
@@ -104,9 +104,14 @@
 .list-card{
     box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.5);
     padding: 10px;
-    border-left: 10px solid #0087D1;
+    border-left: 10px solid #382983;
     margin: 10px auto;
     width: 90%;
+    cursor: pointer;
+}
+.list-card-selected{
+  box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.5);
+  border-left: 10px solid #0087D1;
 }
 .list-box{
     height: 300px;
@@ -115,4 +120,24 @@
 .sm-img{
     width: 60px;
     height: 60px;
+}
+button#dropdownMenuButton{
+  border: 1px solid #382983;
+  background: white;
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Questrial', sans-serif;
+  height: 40px;
+  color: rgb(117, 117, 117);
+  cursor: pointer;
+  transition: .3s ease-in-out;
+}
+button#dropdownMenuButton:hover{
+  border: 1px solid #0087D1;
+}
+.dropdown-menu.show{
+  width: 100%;
 }
