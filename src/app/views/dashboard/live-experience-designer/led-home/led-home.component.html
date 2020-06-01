@@ -1,19 +1,19 @@
 <div>
     <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass.toString()">
-        <app-sidebar class="sidebar" 
-            [activeLink]="1" 
+        <app-sidebar class="sidebar"
+            [activeLink]="1"
             [isManager]="dataSessionService.user.type.toString()=='1'"
             [nameUser]="dataSessionService.user.name"
             [imageurl]="dataSessionService.user.haveImage"
             [idUser]="dataSessionService.user.idUser"
-            [imageSrc]="dataSessionService.user.imageBlob" 
+            [imageSrc]="dataSessionService.user.imageBlob"
             ></app-sidebar>
     </div>
     <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
         <app-navbar-dashboard></app-navbar-dashboard>
         <div class="p-t-20">
             <div class="info-dashboard">
-                <div class="p-b-20">   
+                <div class="p-b-20">
                     <h1 class="fira-30-grey">Mis Listas</h1>
                     <div class="search-bar p-t-20">
                         <input class="p-input"  type="text" placeholder="Buscar una lista...">
@@ -24,11 +24,11 @@
                 </div>
                 <div class="row">
                     <div class="col-xl-4 col-lg-6 col-sm-12 p-20-0">
-                        <div class="album-card text-center">
+                        <div class="album-card text-center album-card-selected">
                             <div>
                                 <img src="/assets/images/gbaby.jpg">
                             </div>
-                            <div>
+                            <div class="p-t-20">
                                 <p class="fira-20-blu">Nombresito del album</p>
                                 <p class="quest-15-grey">10 canciones</p>
                             </div>
@@ -39,7 +39,7 @@
                             <div>
                                 <img src="/assets/images/gbaby.jpg">
                             </div>
-                            <div>
+                            <div class="p-t-20">
                                 <p class="fira-20-blu">Nombresito del album</p>
                                 <p class="quest-15-grey">10 canciones</p>
                             </div>
@@ -50,7 +50,7 @@
                             <div>
                                 <img src="/assets/images/gbaby.jpg">
                             </div>
-                            <div>
+                            <div class="p-t-20">
                                 <p class="fira-20-blu">Nombresito del album</p>
                                 <p class="quest-15-grey">10 canciones</p>
                             </div>
@@ -61,7 +61,7 @@
                             <div>
                                 <img src="/assets/images/gbaby.jpg">
                             </div>
-                            <div>
+                            <div class="p-t-20">
                                 <p class="fira-20-blu">Nombresito del album</p>
                                 <p class="quest-15-grey">10 canciones</p>
                             </div>

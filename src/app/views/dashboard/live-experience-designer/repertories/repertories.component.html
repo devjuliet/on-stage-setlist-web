@@ -30,7 +30,11 @@
                             <p class="fira-16-grey text-center p-b-10"><strong>Bunny Repertorio</strong></p>
                             <div class="rep-line"></div>
                             <p class="quest-15-grey p-t-20">Bunny Banda</p>
-                            <p class="quest-15-grey p-t-10">No se le ha asignado ningun evento</p>
+                            <p class="quest-15-grey p-t-10">Evento 1</p>
+                            <p class="quest-12-grey p-t-10">Fecha: 14/08/2050</p>
+                            <p class="quest-12-grey p-t-10">Salón Bunys saltarines</p>
+                            <p class="quest-12-grey p-t-10">Chihuahua, chihuahua</p>
+                            <p class="quest-12-grey p-t-10">Gira 2050</p>
                             <div class="rep-tag p-t-30">
                                 <div class="tagsini">
                                     <p class="quest-10-grey">Tranqui</p>
@@ -234,16 +238,29 @@
                                     </div>
                                     <div class="p-t-20">
                                         <p class="quest-15-grey">Selecciona una banda</p>
-                                        <select class="selectpicker" data-width="100%">
-                                            <option>Mustard</option>
-                                            <option>Ketchup</option>
-                                            <option>Relish</option>
-                                          </select>
+                                        <div class="dropdown">
+                                          <button class=" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Lista de bandas
+                                          </button>
+                                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Banda 1</a>
+                                            <a class="dropdown-item" href="#">Banda 2</a>
+                                            <a class="dropdown-item" href="#">Banda 3</a>
+                                          </div>
+                                        </div>
                                     </div>
                                     <div class="p-t-20">
                                         <p class="quest-15-grey">Asignale un evento</p>
+                                        <button class=" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          Lista de eventos
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                          <a class="dropdown-item" href="#">Evento 1</a>
+                                          <a class="dropdown-item" href="#">Evento 2</a>
+                                          <a class="dropdown-item" href="#">Evento 3</a>
+                                        </div>
                                     </div>
-                                    <div class="p-t-20"> 
+                                    <div class="p-t-20">
                                         <p class="quest-15-grey">Ponle etiquetas</p>
                                     </div>
                                 </div>
@@ -252,86 +269,50 @@
                                         <p class="quest-20-grey">Selecciona las listas de canciones</p>
                                     </div>
                                     <div class="list-box">
+                                        <div class="list-card list-card-selected">
+                                          <div class="row">
+                                              <div class="col-4">
+                                                  <img class="sm-img" src="/assets/images/gbaby.jpg">
+                                              </div>
+                                              <div class="col-8">
+                                                  <p>Bunny Lista</p>
+                                                  <p>10 Canciones</p>
+                                              </div>
+                                          </div>
+                                        </div>
                                         <div class="list-card">
-                                            <div class="row">
-                                                <div class="col-2 search-bar">
-                                                    <input type="checkbox" id="lista1">
-                                                </div>
-                                                <div class="col-10 search-bar">
-                                                    <label for="lista1"> 
-                                                        <div class="row">
-                                                            <div class="col-4">
-                                                                <img class="sm-img" src="/assets/images/gbaby.jpg">
-                                                            </div>
-                                                            <div class="col-8">
-                                                                <p>Bunny Lista</p>
-                                                                <p>10 Canciones</p>
-                                                            </div>
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>  
+                                          <div class="row">
+                                              <div class="col-4">
+                                                  <img class="sm-img" src="/assets/images/gbaby.jpg">
+                                              </div>
+                                              <div class="col-8">
+                                                  <p>Bunny Lista</p>
+                                                  <p>10 Canciones</p>
+                                              </div>
+                                          </div>
+                                        </div>
                                         <div class="list-card">
-                                            <div class="row">
-                                                <div class="col-2 search-bar">
-                                                    <input type="checkbox" id="lista2">
-                                                </div>
-                                                <div class="col-10 search-bar">
-                                                    <label for="lista2"> 
-                                                        <div class="row">
-                                                            <div class="col-4">
-                                                                <img class="sm-img" src="/assets/images/gbaby.jpg">
-                                                            </div>
-                                                            <div class="col-8">
-                                                                <p>Bunny Lista</p>
-                                                                <p>10 Canciones</p>
-                                                            </div>
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>  
+                                          <div class="row">
+                                              <div class="col-4">
+                                                  <img class="sm-img" src="/assets/images/gbaby.jpg">
+                                              </div>
+                                              <div class="col-8">
+                                                  <p>Bunny Lista</p>
+                                                  <p>10 Canciones</p>
+                                              </div>
+                                          </div>
+                                        </div>
                                         <div class="list-card">
-                                            <div class="row">
-                                                <div class="col-2 search-bar">
-                                                    <input type="checkbox" id="lista3">
-                                                </div>
-                                                <div class="col-10 search-bar">
-                                                    <label for="lista3"> 
-                                                        <div class="row">
-                                                            <div class="col-4">
-                                                                <img class="sm-img" src="/assets/images/gbaby.jpg">
-                                                            </div>
-                                                            <div class="col-8">
-                                                                <p>Bunny Lista</p>
-                                                                <p>10 Canciones</p>
-                                                            </div>
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>  
-                                        <div class="list-card">
-                                            <div class="row">
-                                                <div class="col-2 search-bar">
-                                                    <input type="checkbox" id="lista4">
-                                                </div>
-                                                <div class="col-10 search-bar">
-                                                    <label for="lista4"> 
-                                                        <div class="row">
-                                                            <div class="col-4">
-                                                                <img class="sm-img" src="/assets/images/gbaby.jpg">
-                                                            </div>
-                                                            <div class="col-8">
-                                                                <p>Bunny Lista</p>
-                                                                <p>10 Canciones</p>
-                                                            </div>
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>  
+                                          <div class="row">
+                                              <div class="col-4">
+                                                  <img class="sm-img" src="/assets/images/gbaby.jpg">
+                                              </div>
+                                              <div class="col-8">
+                                                  <p>Bunny Lista</p>
+                                                  <p>10 Canciones</p>
+                                              </div>
+                                          </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

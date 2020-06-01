@@ -1,300 +1,444 @@
 <div>
-    <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass.toString()">
-        <app-sidebar class="sidebar" 
-            [activeLink]="2" 
-            [isManager]="dataSessionService.user.type.toString()=='1'"
-            [nameUser]="dataSessionService.user.name"
-            [imageurl]="dataSessionService.user.haveImage"
-            [idUser]="dataSessionService.user.idUser"
-            [imageSrc]="dataSessionService.user.imageBlob" 
-            ></app-sidebar>
-    </div>
-    <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
-        <app-navbar-dashboard></app-navbar-dashboard>
-        <div class="p-t-20">
-            <div class="info-dashboard">
-                <h1 class="fira-30-grey">Añadir Lista</h1>
-                <div class="row">
-                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                        <div class="p-t-20">
-                            <input type="text" placeholder="Nombre de la lista...">
-                        </div>
-                        <div class="p-t-20 text-center upload-img">
-                            <input type="file" id="img"  class="hidden">
-                            <label class="img-btn" for="img">
-                            <img  src="/assets/images/no-song.svg">
-                            <div class="color-img"></div>
-                            <p class="img-word quest-16-wht">Subir foto</p>
-                            </label>
-                        </div>
-                        <div class="p-t-20">
-                            <textarea placeholder="Descripción..."></textarea>
-                        </div>
-                        <div class="p-t-20">
-                            <select class="selectpicker" data-live-search="true" multiple title="Escoge un genero..." data-width="100%">
-                                <option>Rock</option>
-                                <option>Country</option>
-                                <option>Norteñas</option>
-                            </select>  
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                        <p class="quest-20-grey"><strong>Canciones</strong></p>
-                        <div class="song-list">
-                            <div class="song-box">
-                                <div class="num">
-                                    <p>1</p>
-                                </div>
-                                <div class="song-name">
-                                    <div>
-                                        <p>Mi osito berrinchudo-Giby</p>
-                                    </div>
-                                    <div>
-                                        <button class="edit-btn" data-toggle="modal" data-target="#editSongModal"><i class="fas fa-pen-square"></i></button>
-                                        <button class="trash-btn fsize-25" data-toggle="modal" data-target="#deleteSongModal"><i class="fas fa-trash"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="song-box">
-                                <div class="num">
-                                    <p>1</p>
-                                </div>
-                                <div class="song-name">
-                                    <div>
-                                        <p>Mi osito berrinchudo-Giby</p>
-                                    </div>
-                                    <div>
-                                        <button class="edit-btn" data-toggle="modal" data-target="#editSongModal"><i class="fas fa-pen-square"></i></button>
-                                        <button class="trash-btn fsize-25" data-toggle="modal" data-target="#deleteSongModal"><i class="fas fa-trash"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="song-box">
-                                <div class="num">
-                                    <p>1</p>
-                                </div>
-                                <div class="song-name">
-                                    <div>
-                                        <p>Mi osito berrinchudo-Giby</p>
-                                    </div>
-                                    <div>
-                                        <button class="edit-btn" data-toggle="modal" data-target="#editSongModal"><i class="fas fa-pen-square"></i></button>
-                                        <button class="trash-btn fsize-25" data-toggle="modal" data-target="#deleteSongModal"><i class="fas fa-trash"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="song-box">
-                                <div class="num">
-                                    <p>1</p>
-                                </div>
-                                <div class="song-name">
-                                    <div>
-                                        <p>Mi osito berrinchudo-Giby</p>
-                                    </div>
-                                    <div>
-                                        <button class="edit-btn" data-toggle="modal" data-target="#editSongModal"><i class="fas fa-pen-square"></i></button>
-                                        <button class="trash-btn fsize-25" data-toggle="modal" data-target="#deleteSongModal"><i class="fas fa-trash"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center p-t-20">
-                            <button class="btn-lblu" data-toggle="modal" data-target="#newSongModal"><i class="fas fa-plus p-r-10"></i>Añadir Canción</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="button-footer p-t-40">
-                    <div class="p-r-20 p-l-20">
-                        <button class="btn-gray">Cancelar</button>
-                    </div>
-                    <div class="p-r-20 p-l-20">
-                        <button class="btn-lblu">Guardar</button>
-                    </div>
-                </div>
+  <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass.toString()">
+    <app-sidebar class="sidebar" [activeLink]="2" [isManager]="dataSessionService.user.type.toString()=='1'"
+      [nameUser]="dataSessionService.user.name" [imageurl]="dataSessionService.user.haveImage"
+      [idUser]="dataSessionService.user.idUser" [imageSrc]="dataSessionService.user.imageBlob"></app-sidebar>
+  </div>
+  <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
+    <app-navbar-dashboard></app-navbar-dashboard>
+    <div class="p-t-20">
+      <div class="info-dashboard">
+        <h1 class="fira-30-grey">Añadir Lista</h1>
+        <div class="row">
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+            <div class="p-t-20">
+              <input type="text" placeholder="Nombre de la lista...">
             </div>
-
-            <div class="modal fade" id="deleteSongModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-center" id="exampleModalLabel">¿Seguro que quieres eliminar esta canción de tu lista?</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body text-center">
-                            <img  src="/assets/images/song-play.svg">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn-red">Eliminar</button>
-                        </div>
-                    </div>
-                </div>
+            <div class="p-t-20 text-center upload-img">
+              <input type="file" id="img" class="hidden">
+              <label class="img-btn" for="img">
+                <img src="/assets/images/no-song.svg">
+                <div class="color-img"></div>
+                <p class="img-word quest-16-wht">Subir foto</p>
+              </label>
             </div>
-
-            <div class="modal fade" id="editSongModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-center" id="exampleModalLabel">Canción Num</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-12 border-right-blu">
-                                    <div>
-                                        <input type="text" placeholder="Nombre de la canción...">
-                                    </div>
-                                    <div>
-                                        <p class="quest-18-grey p-t-10">Busca tú canción, modificala y guardala!</p>
-                                        <ul>
-                                            <li>
-                                                <a class="fira-15-blu alink-blu" href="https://www.musica.com/">musica.com</a>
-                                            </li>
-                                            <li>
-                                                <a class="fira-15-blu alink-blu" href="https://www.buscaletras.com/">buscaletras.com</a>
-                                            </li>
-                                            <li>
-                                                <a class="fira-15-blu alink-blu" href="https://www.letras.com/">letras.com</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <p>Aquí va el editor!!!!</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-12">
-                                    <p class="fira-20-blu">Acordes</p>
-                                    <p class="quest-15-grey">Añade una imagen de los acordes de acuerdo al instrumento.</p>
-                                    <div class="row instruments">
-                                        <div class="col-lg-4">
-                                            <div>
-                                                <input type="file" id="img-g"  class="hidden">
-                                                <label class="img-btn-ins" for="img-g">
-                                                    <img src="/assets/images/guitarra.svg">   
-                                                    <p class="quest-10-grey text-center">Guitarra</p> 
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div>
-                                                <input type="file" id="img-b"  class="hidden">
-                                                <label class="img-btn-ins" for="img-b">
-                                                    <img src="/assets/images/bajo.svg">   
-                                                    <p class="quest-10-grey text-center">Bajo</p>  
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div>
-                                                <input type="file" id="img-t"  class="hidden">
-                                                <label class="img-btn-ins" for="img-t">
-                                                    <img src="/assets/images/piano.svg"> 
-                                                    <p class="quest-10-grey text-center">Teclado</p>    
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p class="fira-20-blu">Etiquetas de búsqueda</p>
-                                    <p class="quest-15-grey">Añade etiquetas de búsqueda de tus canciones para que tu equipo siempre pueda encontrarlas!</p>
-                                    <div>
-                                        <select class="selectpicker" data-live-search="true" multiple title="Escoge una etiqueta..." data-width="100%">
-                                            <option>tranqui</option>
-                                            <option>lenta</option>
-                                            <option>Rápida</option>
-                                        </select> 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn-lblu">Guardar</button>
-                        </div>
-                    </div>
-                </div>
+            <div class="p-t-20">
+              <textarea placeholder="Descripción..."></textarea>
             </div>
-            <div class="modal fade" id="newSongModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-center" id="exampleModalLabel">Nueva Canción</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-12 border-right-blu">
-                                    <div>
-                                        <input type="text" placeholder="Nombre de la canción...">
-                                    </div>
-                                    <div>
-                                        <p class="quest-18-grey p-t-10">Busca tú canción, modificala y guardala!</p>
-                                        <ul>
-                                            <li>
-                                                <a class="fira-15-blu alink-blu" href="https://www.musica.com/">musica.com</a>
-                                            </li>
-                                            <li>
-                                                <a class="fira-15-blu alink-blu" href="https://www.buscaletras.com/">buscaletras.com</a>
-                                            </li>
-                                            <li>
-                                                <a class="fira-15-blu alink-blu" href="https://www.letras.com/">letras.com</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <p>Aquí va el editor!!!!</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-12">
-                                    <p class="fira-20-blu">Acordes</p>
-                                    <p class="quest-15-grey">Añade una imagen de los acordes de acuerdo al instrumento.</p>
-                                    <div class="row instruments">
-                                        <div class="col-lg-4">
-                                            <div>
-                                                <input type="file" id="img-g"  class="hidden">
-                                                <label class="img-btn-ins" for="img-g">
-                                                    <img src="/assets/images/guitarra.svg">   
-                                                    <p class="quest-10-grey text-center">Guitarra</p> 
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div>
-                                                <input type="file" id="img-b"  class="hidden">
-                                                <label class="img-btn-ins" for="img-b">
-                                                    <img src="/assets/images/bajo.svg">   
-                                                    <p class="quest-10-grey text-center">Bajo</p>  
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div>
-                                                <input type="file" id="img-t"  class="hidden">
-                                                <label class="img-btn-ins" for="img-t">
-                                                    <img src="/assets/images/piano.svg"> 
-                                                    <p class="quest-10-grey text-center">Teclado</p>    
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p class="fira-20-blu">Etiquetas de búsqueda</p>
-                                    <p class="quest-15-grey">Añade etiquetas de búsqueda de tus canciones para que tu equipo siempre pueda encontrarlas!</p>
-                                    <div>
-                                        <select class="selectpicker" data-live-search="true" multiple title="Escoge una etiqueta..." data-width="100%">
-                                            <option>tranqui</option>
-                                            <option>lenta</option>
-                                            <option>Rápida</option>
-                                        </select> 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn-lblu">Guardar</button>
-                        </div>
-                    </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+            <p class="quest-20-grey"><strong>Canciones en tu lista</strong></p>
+            <div class="song-list">
+              <div class="song-box">
+                <div class="num">
+                  <p>1</p>
                 </div>
+                <div class="song-name">
+                  <div>
+                    <p>Mi osito berrinchudo-Giby</p>
+                  </div>
+                  <div>
+                    <button class="edit-btn" data-toggle="modal" data-target="#editSongModal"><i
+                        class="fas fa-pen-square"></i></button>
+                    <button class="trash-btn fsize-25" data-toggle="modal" data-target="#deleteSongModal"><i
+                        class="fas fa-trash"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="song-box">
+                <div class="num">
+                  <p>1</p>
+                </div>
+                <div class="song-name">
+                  <div>
+                    <p>Mi osito berrinchudo-Giby</p>
+                  </div>
+                  <div>
+                    <button class="edit-btn" data-toggle="modal" data-target="#editSongModal"><i
+                        class="fas fa-pen-square"></i></button>
+                    <button class="trash-btn fsize-25" data-toggle="modal" data-target="#deleteSongModal"><i
+                        class="fas fa-trash"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="song-box">
+                <div class="num">
+                  <p>1</p>
+                </div>
+                <div class="song-name">
+                  <div>
+                    <p>Mi osito berrinchudo-Giby</p>
+                  </div>
+                  <div>
+                    <button class="edit-btn" data-toggle="modal" data-target="#editSongModal"><i
+                        class="fas fa-pen-square"></i></button>
+                    <button class="trash-btn fsize-25" data-toggle="modal" data-target="#deleteSongModal"><i
+                        class="fas fa-trash"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="song-box">
+                <div class="num">
+                  <p>1</p>
+                </div>
+                <div class="song-name">
+                  <div>
+                    <p>Mi osito berrinchudo-Giby</p>
+                  </div>
+                  <div>
+                    <button class="edit-btn" data-toggle="modal" data-target="#editSongModal"><i
+                        class="fas fa-pen-square"></i></button>
+                    <button class="trash-btn fsize-25" data-toggle="modal" data-target="#deleteSongModal"><i
+                        class="fas fa-trash"></i></button>
+                  </div>
+                </div>
+              </div>
             </div>
+            <div class="text-center p-t-20">
+              <div>
+                <button class="btn-lblu" data-toggle="modal" data-target="#newSongModal"><i
+                    class="fas fa-plus p-r-10"></i>Añadir una canción nueva</button>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="button-footer p-t-40">
+          <div class="p-r-20 p-l-20">
+            <button class="btn-gray">Cancelar</button>
+          </div>
+          <div class="p-r-20 p-l-20">
+            <button class="btn-lblu">Guardar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="deleteSongModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center" id="exampleModalLabel">¿Seguro que quieres eliminar esta canción de tu
+                lista?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+              <img src="/assets/images/song-play.svg">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn-red">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="editSongModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center" id="exampleModalLabel">Canción Num</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-lg-6 col-md-12 border-right-blu">
+                  <div>
+                    <div>
+                      <input type="text" placeholder="Nombre de la canción...">
+                    </div>
+                    <div class="p-t-10">
+                      <input type="text" placeholder="Artista de la canción...">
+                    </div>
+                    <div class="p-t-10">
+                      <input type="number" placeholder="BPM...">
+                    </div>
+                    <ul>
+                      <li>
+                        <a class="fira-15-blu alink-blu" href="https://www.musica.com/">musica.com</a>
+                      </li>
+                      <li>
+                        <a class="fira-15-blu alink-blu" href="https://www.buscaletras.com/">buscaletras.com</a>
+                      </li>
+                      <li>
+                        <a class="fira-15-blu alink-blu" href="https://www.letras.com/">letras.com</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p>Aquí va el editor!!!!</p>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                  <p class="fira-20-blu">Acordes</p>
+                  <p class="quest-15-grey">Añade una imagen de los acordes de acuerdo al instrumento.</p>
+                  <div class="row instruments">
+                    <div class="col-lg-4">
+                      <div>
+                        <input type="file" id="img-g" class="hidden">
+                        <label class="img-btn-ins" for="img-g">
+                          <img src="/assets/images/guitarra.svg">
+                          <p class="quest-10-grey text-center">Guitarra</p>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div>
+                        <input type="file" id="img-b" class="hidden">
+                        <label class="img-btn-ins" for="img-b">
+                          <img src="/assets/images/bajo.svg">
+                          <p class="quest-10-grey text-center">Bajo</p>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div>
+                        <input type="file" id="img-t" class="hidden">
+                        <label class="img-btn-ins" for="img-t">
+                          <img src="/assets/images/piano.svg">
+                          <p class="quest-10-grey text-center">Teclado</p>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="fira-20-blu">Partituras</p>
+                  <p class="quest-15-grey">Añade una imagen de la partitura de acuerdo al instrumento.</p>
+                  <div class="row instruments">
+                    <div class="col-lg-4">
+                      <div>
+                        <input type="file" id="img-g" class="hidden">
+                        <label class="img-btn-ins" for="img-g">
+                          <img src="/assets/images/guitarra.svg">
+                          <p class="quest-10-grey text-center">Guitarra</p>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div>
+                        <input type="file" id="img-b" class="hidden">
+                        <label class="img-btn-ins" for="img-b">
+                          <img src="/assets/images/bajo.svg">
+                          <p class="quest-10-grey text-center">Bajo</p>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div>
+                        <input type="file" id="img-t" class="hidden">
+                        <label class="img-btn-ins" for="img-t">
+                          <img src="/assets/images/piano.svg">
+                          <p class="quest-10-grey text-center">Teclado</p>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="fira-20-blu">Etiquetas de búsqueda</p>
+                  <p class="quest-15-grey">Añade etiquetas de búsqueda de tus canciones para que tu equipo siempre
+                    pueda encontrarlas!</p>
+                  <div>
+                    <select class="selectpicker" data-live-search="true" multiple title="Escoge una etiqueta..."
+                      data-width="100%">
+                      <option>tranqui</option>
+                      <option>lenta</option>
+                      <option>Rápida</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn-lblu">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="newSongModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center" id="exampleModalLabel">Añadir una canción</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#newsong" role="tab"
+                    aria-controls="home" aria-selected="true">Nueva canción</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#oldsong" role="tab"
+                    aria-controls="profile" aria-selected="false">Canción ya existente</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="newsong" role="tabpanel" aria-labelledby="home-tab">
+                  <div class="row p-t-30">
+                    <div class="col-lg-6 col-md-12 border-right-blu">
+                      <div>
+                        <input type="text" placeholder="Nombre de la canción...">
+                      </div>
+                      <div class="p-t-10">
+                        <input type="text" placeholder="Artista de la canción...">
+                      </div>
+                      <div class="p-t-10">
+                        <input type="number" placeholder="BPM...">
+                      </div>
+                      <div>
+                        <p class="quest-18-grey p-t-10">Busca tú canción, modificala y guardala!</p>
+                        <ul>
+                          <li>
+                            <a class="fira-15-blu alink-blu" href="https://www.musica.com/" target="_blank">musica.com</a>
+                          </li>
+                          <li>
+                            <a class="fira-15-blu alink-blu" href="https://www.buscaletras.com/" target="_blank">buscaletras.com</a>
+                          </li>
+                          <li>
+                            <a class="fira-15-blu alink-blu" href="https://www.letras.com/" target="_blank">letras.com</a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p>Aquí va el editor!!!!</p>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                      <p class="fira-20-blu">Acordes</p>
+                      <p class="quest-15-grey">Añade una imagen de los acordes de acuerdo al instrumento.</p>
+                      <div class="row instruments">
+                        <div class="col-lg-4">
+                          <div>
+                            <input type="file" id="img-g" class="hidden">
+                            <label class="img-btn-ins" for="img-g">
+                              <img src="/assets/images/guitarra.svg">
+                              <p class="quest-10-grey text-center">Guitarra</p>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div>
+                            <input type="file" id="img-b" class="hidden">
+                            <label class="img-btn-ins" for="img-b">
+                              <img src="/assets/images/bajo.svg">
+                              <p class="quest-10-grey text-center">Bajo</p>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div>
+                            <input type="file" id="img-t" class="hidden">
+                            <label class="img-btn-ins" for="img-t">
+                              <img src="/assets/images/piano.svg">
+                              <p class="quest-10-grey text-center">Teclado</p>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <p class="fira-20-blu">Partituras</p>
+                      <p class="quest-15-grey">Añade una imagen de la partitura de acuerdo al instrumento.</p>
+                      <div class="row instruments">
+                        <div class="col-lg-4">
+                          <div>
+                            <input type="file" id="img-g" class="hidden">
+                            <label class="img-btn-ins" for="img-g">
+                              <img src="/assets/images/guitarra.svg">
+                              <p class="quest-10-grey text-center">Guitarra</p>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div>
+                            <input type="file" id="img-b" class="hidden">
+                            <label class="img-btn-ins" for="img-b">
+                              <img src="/assets/images/bajo.svg">
+                              <p class="quest-10-grey text-center">Bajo</p>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div>
+                            <input type="file" id="img-t" class="hidden">
+                            <label class="img-btn-ins" for="img-t">
+                              <img src="/assets/images/piano.svg">
+                              <p class="quest-10-grey text-center">Teclado</p>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <p class="fira-20-blu">Etiquetas de búsqueda</p>
+                      <p class="quest-15-grey">Añade etiquetas de búsqueda de tus canciones para que tu equipo siempre
+                        pueda
+                        encontrarlas!</p>
+                      <div>
+                        <select class="selectpicker" data-live-search="true" multiple title="Escoge una etiqueta..."
+                          data-width="100%">
+                          <option>tranqui</option>
+                          <option>lenta</option>
+                          <option>Rápida</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="oldsong" role="tabpanel" aria-labelledby="profile-tab">
+                  <p class="quest-15-grey p-t-30 p-l-15">Añade una canción que ya está registrada.</p>
+                  <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                      <div class="ex-song ex-song-choosen">
+                        <p class="fira-18-blu"><strong>Bunny song</strong></p>
+                        <p class="quest-18-grey">Cover</p>
+                        <p class="quest-15-grey">Artista Bunny</p>
+                        <p class="quest-12-grey">BPM: 135</p>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                      <div class="ex-song">
+                        <p class="fira-18-blu"><strong>Bunny song</strong></p>
+                        <p class="quest-18-grey">Cover</p>
+                        <p class="quest-15-grey">Artista Bunny</p>
+                        <p class="quest-12-grey">BPM: 135</p>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                      <div class="ex-song">
+                        <p class="fira-18-blu"><strong>Bunny song</strong></p>
+                        <p class="quest-18-grey">Cover</p>
+                        <p class="quest-15-grey">Artista Bunny</p>
+                        <p class="quest-12-grey">BPM: 135</p>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                      <div class="ex-song">
+                        <p class="fira-18-blu"><strong>Bunny song</strong></p>
+                        <p class="quest-18-grey">Cover</p>
+                        <p class="quest-15-grey">Artista Bunny</p>
+                        <p class="quest-12-grey">BPM: 135</p>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                      <div class="ex-song">
+                        <p class="fira-18-blu"><strong>Bunny song</strong></p>
+                        <p class="quest-18-grey">Cover</p>
+                        <p class="quest-15-grey">Artista Bunny</p>
+                        <p class="quest-12-grey">BPM: 135</p>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn-lblu">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

@@ -109,3 +109,12 @@ input[type="date" i]::-webkit-inner-spin-button{
 .event-card:hover{
   border-left: 15px solid #0087D1 !important;
 }
+.tagsito{
+  border: 1px solid #382983;
+  color: #0087D1;
+  font-family: 'Questrial', sans-serif;
+  font-size: 10px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  width: fit-content;
+}

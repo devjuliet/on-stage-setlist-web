@@ -137,21 +137,21 @@ button:focus{
 }
 
 .p-input{
-    border-radius: 10px 0 0 10px;
+    border-radius: 10px 0 0 10px !important;
     width: 60%;
-    height: 40px;
-    border-top: 1px solid #382983;
-    border-left: 1px solid #382983;
-    border-bottom: 1px solid #382983;
-    border-right: none;
-    padding-left: 15px;
+    height: 40px !important;
+    border-top: 1px solid #382983 !important;
+    border-left: 1px solid #382983 !important;
+    border-bottom: 1px solid #382983 !important;
+    border-right: none !important;
+    padding-left: 15px !important;
     outline: none;
     transition: .3s ease-in-out;
 }
 .p-input:focus{
-    border-top: 1px solid #0087D1;
-    border-left: 1px solid #0087D1;
-    border-bottom: 1px solid #0087D1;
+    border-top: 1px solid #0087D1 !important;
+    border-left: 1px solid #0087D1 !important;
+    border-bottom: 1px solid #0087D1 !important;
     border-right: none;
 }
 
@@ -161,6 +161,31 @@ button:focus{
   font-family: 'Questrial', sans-serif;
 }
 
+.nav-link.active{
+  color: #0087D1 !important;
+}
+.nav-link{
+  color: #353535 !important;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #2c2068;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #4b3e8f;
+}
 /*BOTONES*/
 .search-btn{
     height: 40px;
@@ -545,6 +570,9 @@ button:focus{
 }
 .p-20-0{
     padding: 20px 0;
+}
+.p-20{
+  padding: 20px;
 }
 .p-10{
     padding: 10px;
