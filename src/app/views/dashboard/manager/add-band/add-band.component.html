@@ -1,20 +1,20 @@
 <div class="main-manager">
     <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass.toString()">
-        <app-sidebar class="sidebar" 
-            [activeLink]="2" 
+        <app-sidebar class="sidebar"
+            [activeLink]="2"
             [isManager]="dataSessionService.user.type.toString()=='1'"
             [nameUser]="dataSessionService.user.name"
             [imageurl]="dataSessionService.user.haveImage"
             [idUser]="dataSessionService.user.idUser"
-            [imageSrc]="dataSessionService.user.imageBlob" 
-            [bandsList]="dataSessionService.elementsManager.bands" 
+            [imageSrc]="dataSessionService.user.imageBlob"
+            [bandsList]="dataSessionService.elementsManager.bands"
             ></app-sidebar>
     </div>
     <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
         <app-navbar-dashboard></app-navbar-dashboard>
         <div class="p-t-20 p-b-40">
             <div class="info-dashboard">
-                <div class="p-b-20">   
+                <div class="p-b-20">
                     <h1 class="fira-30-grey">Añadir banda</h1>
                 </div>
                 <div class="row">
@@ -28,29 +28,43 @@
                                 <label class="quest-15-grey">Descripcion muy corta {{newBand.description.length}} < 50</label>
                             </div>
                         </div>
+                        <div class="p-b-40 p-t-20" *ngIf="loaded">
+                          <!-- <select class="selectpicker" data-live-search="true" multiple title="Escoge un genero..." data-width="100%">
+                              <option >Rock</option>
+                              <option>Country</option>
+                              <option>Norteñas</option>
+                          </select>   -->
+                          <ng-multiselect-dropdown
+                              [placeholder]="'Seleccione los generos'"
+                              [settings]="dropdownGenresSettings"
+                              [data]="dataSessionService.elementsManager.genresCatalog"
+                              [(ngModel)]="this.newBand.genres"
+                              >
+                          </ng-multiselect-dropdown>
+                      </div>
                     </div>
                     <div class="col-xl-6 col-md-6 col-sm-12">
-                        <p class="quest-18-grey text-center p-b-20">Añade una imagen a tu banda</p>
-                        <div class="dis-fle-jcent">
+                        <p class="quest-18-grey p-l-15 p-b-20"><strong>Añade una imagen a tu banda</strong></p>
+                        <div>
                             <!--Boton de verdad escondido-->
                             <!-- <input type="file" id="img" name="img" accept="image/*" class="hidden"> -->
                             <!--Boton falso para subir una imagen-->
                             <!-- <label class="img-btn" for="img"><img src="/assets/images/upload.svg"></label> -->
-                            
+
                             <div *ngIf="newBand.urlLogo.length == 0"
                                 class="input-group mb-3"
                                 style="    justify-content: center;">
                                 <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
-                              
-                                    <label *ngIf="source.length == 0">
-                                        <input (change)="updateSource($event)" type="file" id="img" name="img" accept="image/*" class="hidden">
-                                        <label class="img-btn" for="img">
-                                            <img  src="/assets/images/upload.svg">
-                                            <div class="color-img"></div>
-                                            <p class="img-word quest-16-wht">Subir foto</p>
-                                        </label>
+
+                                <label *ngIf="source.length == 0">
+                                    <input (change)="updateSource($event)" type="file" id="img" name="img" accept="image/*" class="hidden">
+                                    <label class="img-btn" for="img">
+                                        <img class="edit-img" src="/assets/images/no-band.svg">
+                                        <div class="color-img"></div>
+                                        <i class="fas fa-upload middle-img"></i>
                                     </label>
-                                
+                                </label>
+
                                 <!-- img placeholder when a file has been picked. shows only when 'source' is not empty -->
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 text-center">
@@ -74,25 +88,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xl-6 col-md-6 col-sm-12">
-                        <div class="p-b-40 p-t-20" *ngIf="loaded">
-                            <!-- <select class="selectpicker" data-live-search="true" multiple title="Escoge un genero..." data-width="100%">
-                                <option >Rock</option>
-                                <option>Country</option>
-                                <option>Norteñas</option>
-                            </select>   -->
-                            <ng-multiselect-dropdown
-                                [placeholder]="'Seleccione los generos'"
-                                [settings]="dropdownGenresSettings"
-                                [data]="dataSessionService.elementsManager.genresCatalog"
-                                [(ngModel)]="this.newBand.genres"
-                                >
-                            </ng-multiselect-dropdown>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-md-6 col-sm-12"></div>
-                </div>
                 <div class="div-line"></div>
                 <div class="dis-fle-alcent p-t-20 p-b-20">
                     <input [(ngModel)]="searchValue" (ngModelChange)="filterByName($event)" class="search-input" type="text" placeholder="Buscar integrante">
@@ -108,7 +103,7 @@
                         <table class="table">
                             <tr>
                                 <td *ngIf="newBand.bandMembers.length == 0">
-                                    <div class="text-center">  
+                                    <div class="text-center">
                                         <div class="">
                                             <img class="no-result-img" src="/assets/images/no-result.svg">
                                         </div>
@@ -116,9 +111,9 @@
                                     </div>
                                 </td>
                                 <td *ngIf="bandMembersFiltered.length == 0 && newBand.bandMembers.length != 0">
-                                    <div class="text-center">  
+                                    <div class="text-center">
                                         <div class="profile-box">
-                                            <img class="profile-pic" src="https://headsfortails15029229.files.wordpress.com/2018/03/baby-bunny.jpg">
+                                            <img class="profile-pic" src="/assets/images/no-band.svg">
                                         </div>
                                         <p class="fira-18-blu">Sin resultados</p>
                                     </div>
@@ -128,7 +123,7 @@
                                         <p class="fira-20-blu" *ngIf="member.role.toString()=='0'">Vocalista</p>
                                         <p class="fira-20-blu" *ngIf="member.role.toString()=='1'">Teclado</p>
                                         <p class="fira-20-blu" *ngIf="member.role.toString()=='2'">Bajista</p>
-                                        <p class="fira-20-blu" *ngIf="member.role.toString()=='3'">Guitarrista</p>    
+                                        <p class="fira-20-blu" *ngIf="member.role.toString()=='3'">Guitarrista</p>
                                         <div class="profile-box">
                                             <button (click)="selectForDelete(member)" class="delete-btn" data-toggle="modal" data-target="#deleteModal"><i class="far fa-times-circle"></i></button>
                                             <img *ngIf="!member.haveImage" class="profile-pic" src="https://headsfortails15029229.files.wordpress.com/2018/03/baby-bunny.jpg">
@@ -214,17 +209,17 @@
                                         <p>¿Es diseñador de experiencia?</p>
                                         <div class="row register-box-check p-t-20">
                                             <div class="col-lg-6">
-                                                <label class="quest-18-blu"> 
+                                                <label class="quest-18-blu">
                                                     <input  class="" (change)="newMemberIsLiveDesigner = false" type="radio" [checked]="!newMemberIsLiveDesigner" name="radio">
-                                                    <span class="checkmark"></span> 
+                                                    <span class="checkmark"></span>
                                                     <p class="p-l-20">No</p>
                                                 </label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <label class="quest-18-blu"> 
+                                                <label class="quest-18-blu">
                                                     <input class="" (change)="newMemberIsLiveDesigner = true" type="radio" [checked]="newMemberIsLiveDesigner" name="radio">
-                                                    <span class="checkmark"></span> 
-                                                    <p class="p-l-20">Si</p> 
+                                                    <span class="checkmark"></span>
+                                                    <p class="p-l-20">Si</p>
                                                 </label>
                                             </div>
                                         </div>

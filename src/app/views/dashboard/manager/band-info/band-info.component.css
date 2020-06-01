@@ -183,7 +183,7 @@ img{
     position: absolute;
     opacity: 0;
     cursor: pointer;
-}  
+}
 /* Checkbox falso */
 .checkmark {
     position: absolute;
@@ -194,26 +194,26 @@ img{
     background-color: #eee;
     border-radius: 50%;
 }
-  
+
 .register-box-check:hover input ~ .checkmark {
     background-color: #ccc;
     cursor: pointer;
 }
-  
+
 .register-box-check input:checked ~ .checkmark {
     background-color: #382983;
 }
-  
+
 .checkmark:after {
     content: "";
     position: absolute;
     display: none;
 }
-  
+
 .register-box-check input:checked ~ .checkmark:after {
     display: block;
 }
-  
+
 .register-box-check .checkmark:after {
     top: 8px;
     left: 8px;
@@ -229,4 +229,11 @@ img{
 }
 .wht-100{
     width: 100%;
+}
+
+
+
+.disp-flex-jus{
+  display: flex;
+  justify-content: center;
 }

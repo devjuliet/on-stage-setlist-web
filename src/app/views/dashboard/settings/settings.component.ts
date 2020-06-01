@@ -34,15 +34,17 @@ export class SettingsComponent implements OnInit {
     this.dataSessionService.checkLogin((logedResponse: LogedResponse) => {
       //console.log(logedResponse);
       //Manda al dashboard correspondiente o saca de la sesion
-      if (this.dataSessionService.user.type == 1) {
-        this.dataSessionService.navigateByUrl("/dashboard/manager");
-      } else if (this.dataSessionService.user.type != 2) {
+      if (this.dataSessionService.user.type != 1 && this.dataSessionService.user.type != 2) {
         this.dataSessionService.logOut();
       } else {
         //Cosas para hacer en caso de que el usario este logeado
         console.log("simonkiii");
-        
-        
+
+        /* Se Recarga el usuario actual*/
+        this.actualInfoUser.name = new String(this.dataSessionService.user.name);
+        this.actualInfoUser.username = new String( this.dataSessionService.user.username);
+        this.actualInfoUser.email = new String( this.dataSessionService.user.email );
+        this.actualInfoUser.haveImage = new Boolean(this.dataSessionService.user.haveImage);
       }
     }, (noLoginResponse: LogedResponse) => {
       console.log(noLoginResponse);
@@ -89,19 +91,19 @@ export class SettingsComponent implements OnInit {
   saveData() {
     if(this.newPassword.length>8 && this.confirmPassword.length>8 && this.newPassword == this.confirmPassword){
       this.utilitiesService.showLoadingMsg("Cambiando contraseña", "Actualizando la contraseña del usuario.", () => {
-         
+
         this.apiDataService.changePasswordUser(this.actualInfoUser.idUser,this.newPassword).then((response : ServerMessage) => {
           console.log(response);
-          
+
           this.utilitiesService.closeLoadingSuccess("Exito cambiando contraseña", "Su contraseña a sido cambiada con exito", () => {});
-          this.utilitiesService.showNotification(0, "Contraseña actualizada.", 5000, () => { 
+          this.utilitiesService.showNotification(0, "Contraseña actualizada.", 5000, () => {
             this.newPassword = "";
             this.confirmPassword = "";
-          });  
+          });
         }).catch((error) => {
           console.log(error);
           this.utilitiesService.closeLoadingMsg();
-          this.utilitiesService.showNotification(1, "A ocurrido un error cambiando la contraseña.", 5000, () => { });    
+          this.utilitiesService.showNotification(1, "A ocurrido un error cambiando la contraseña.", 5000, () => { });
         });
       });
     }else if (this.validateUserData()) {
@@ -119,7 +121,7 @@ export class SettingsComponent implements OnInit {
             console.log(error);
             this.utilitiesService.closeLoadingMsg();
             this.utilitiesService.showNotification(0, "A ocurrido un error eliminando la imagen.", 5000, () => { });
-          });           
+          });
         });
       }
       //Si se selecciona una imagen
@@ -210,7 +212,7 @@ export class SettingsComponent implements OnInit {
                 //ok
               });
             }
-            
+
           }).catch((error) => {
             this.dataSessionService.user.haveImage = this.actualInfoUser.haveImage;
 
