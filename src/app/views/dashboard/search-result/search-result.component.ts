@@ -32,7 +32,7 @@ export class SearchResultComponent implements OnInit {
       this.dataSessionService.checkLogin((logedResponse: LogedResponse) => {
         //console.log(logedResponse);
         //Manda al dashboard correspondiente o saca de la sesion
-        if (this.dataSessionService.user.type != 1 && this.dataSessionService.user.type != 2) {
+        if (this.dataSessionService.user.type != 1 && this.dataSessionService.user.type != 2 && this.dataSessionService.user.type != 0) {
           this.dataSessionService.logOut();
         } else {
           //Cosas para hacer en caso de que el usario este logeado

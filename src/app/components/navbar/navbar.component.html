@@ -11,8 +11,9 @@
         </div>
         <div>
             <ul>
-                <li><a class="fira-16-wht p-r-10" href="login">Iniciar sesión</a></li>
-                <li><a class="btn-wht" href="register">Registrate</a></li>
+                <li *ngIf="username.length != 0"><a class="fira-16-wht p-r-10" href="login">{{username}}<i class='fas fa-user-cog user-icon'></i></a></li>
+                <li *ngIf="username.length == 0"><a class="fira-16-wht p-r-10" href="login">Iniciar sesión</a></li>
+                <li *ngIf="username.length == 0"><a class="btn-wht" href="register">Registrate</a></li>
             </ul>
         </div>
     </nav>

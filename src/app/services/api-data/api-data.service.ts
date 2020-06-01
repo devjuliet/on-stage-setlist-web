@@ -23,9 +23,12 @@ export class ApiDataService {
       const data = {
         name : name,
         email : email, 
+        haveImage : false,//valor default
+        username : username,
+        role : -1,
         password : password, 
         type : type, 
-        username : username
+        description : "",
       };
 
       this.http.post(this.baseURL + 'user/register',data,{}).subscribe((response : ServerMessage)=>{

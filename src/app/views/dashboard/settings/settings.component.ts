@@ -31,18 +31,28 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataSessionService.checkLogin((logedResponse: LogedResponse) => {
+    this.dataSessionService.checkLogin(async (logedResponse: LogedResponse) => {
       //console.log(logedResponse);
       //Manda al dashboard correspondiente o saca de la sesion
-      if (this.dataSessionService.user.type == 1) {
-        this.dataSessionService.navigateByUrl("/dashboard/manager");
-      } else if (this.dataSessionService.user.type != 2) {
+      if (this.dataSessionService.user.type != 1 && this.dataSessionService.user.type != 2 && this.dataSessionService.user.type != 0) {
         this.dataSessionService.logOut();
       } else {
         //Cosas para hacer en caso de que el usario este logeado
         console.log("simonkiii");
+        //console.log(this.dataSessionService.user);
         
-        
+        /* Se Recarga el usuario actual en la vista*/
+        this.actualInfoUser.idUser = new Number(this.dataSessionService.user.idUser);
+        this.actualInfoUser.name = new String(this.dataSessionService.user.name);
+        this.actualInfoUser.username = new String( this.dataSessionService.user.username);
+        this.actualInfoUser.email = new String( this.dataSessionService.user.email );
+        this.actualInfoUser.haveImage = this.dataSessionService.user.haveImage;
+
+        if(this.actualInfoUser.haveImage == true){
+          this.actualInfoUser.imageBlob = await this.apiDataService.getImage(this.dataSessionService.baseURL.toString() +
+          'uploads/user-image/' + this.actualInfoUser.idUser.toString());
+        }
+        //
       }
     }, (noLoginResponse: LogedResponse) => {
       console.log(noLoginResponse);
@@ -91,7 +101,7 @@ export class SettingsComponent implements OnInit {
       this.utilitiesService.showLoadingMsg("Cambiando contraseña", "Actualizando la contraseña del usuario.", () => {
          
         this.apiDataService.changePasswordUser(this.actualInfoUser.idUser,this.newPassword).then((response : ServerMessage) => {
-          console.log(response);
+          //console.log(response);
           
           this.utilitiesService.closeLoadingSuccess("Exito cambiando contraseña", "Su contraseña a sido cambiada con exito", () => {});
           this.utilitiesService.showNotification(0, "Contraseña actualizada.", 5000, () => { 
@@ -105,10 +115,10 @@ export class SettingsComponent implements OnInit {
         });
       });
     }else if (this.validateUserData()) {
-      console.log("valodciones ok");
+      //console.log("valodciones ok");
       //Se elimino la imagen
       if (!this.actualInfoUser.haveImage && this.dataSessionService.user.haveImage && this.source.length == 0) {
-        console.log("Elimino imagen");
+        //console.log("Elimino imagen");
         //Loading de carga
         this.utilitiesService.showLoadingMsg("Eliminando imagen", "Eliminando imagen del usuario #" + this.actualInfoUser.idUser, () => {
           this.apiDataService.deleteImageUser(this.actualInfoUser.idUser).then((response : ServerMessage) => {
@@ -124,7 +134,7 @@ export class SettingsComponent implements OnInit {
       }
       //Si se selecciona una imagen
       else if ( this.source.length > 0) {
-        console.log("imgagen diferente");
+        //console.log("imgagen diferente");
 
         this.uploadImage(this.selectedFile, "" + this.actualInfoUser.idUser).then((response: any) => {
           //Se guarda el estado actual de la imagen
@@ -137,8 +147,39 @@ export class SettingsComponent implements OnInit {
       }
       //Si la imagen no se va a eliminar
       else {
-        console.log("Misma imagen");
-        this.uploadDataUser(this.actualInfoUser);
+        //console.log("Misma imagen");
+        this.utilitiesService.showLoadingMsg("Actualizando Usuario", "Actualizando el usuario #" + this.actualInfoUser.idUser, () => {
+          this.apiDataService.updateUser(this.actualInfoUser).then((response: ServerMessage) => {
+            //console.log(response);
+            if(response.error == true){
+              this.utilitiesService.showNotification(1, response.message, 3000, () => {});
+              this.utilitiesService.closeLoadingMsg();
+              this.actualInfoUser.idUser = new Number(this.dataSessionService.user.idUser);
+              this.dataSessionService.user.haveImage = this.actualInfoUser.haveImage;
+              this.actualInfoUser.name=this.dataSessionService.user.name;
+              this.actualInfoUser.username=this.dataSessionService.user.username;
+              this.actualInfoUser.email=this.dataSessionService.user.email;
+              
+            }else{
+              /* Se Recarga el usuario actual*/
+              this.actualInfoUser.idUser = new Number(this.dataSessionService.user.idUser);
+              this.dataSessionService.user.name = response.data.name;
+              this.dataSessionService.user.username = response.data.username;
+              this.dataSessionService.user.email = response.data.email;
+              this.dataSessionService.user.haveImage = response.data.haveImage;
+              this.utilitiesService.closeLoadingSuccess("Usuario Actualizado", "Informacion del usuario #" + this.actualInfoUser.idUser + " actualizada.", () => {
+                //ok
+              });
+            }
+            
+          }).catch((error) => {
+            this.dataSessionService.user.haveImage = this.actualInfoUser.haveImage;
+
+            console.log(error);
+            this.utilitiesService.showNotification(1, "Error actualizando informacion del usuario", 5000, () => { });
+            this.utilitiesService.closeLoadingMsg();
+          });
+        });
       }
     }
   }
@@ -190,18 +231,22 @@ export class SettingsComponent implements OnInit {
     this.apiDataService.getImage(this.dataSessionService.baseURL.toString() +
       'uploads/user-image/' + this.actualInfoUser.idUser.toString()).then((image) => {
         this.dataSessionService.user.imageBlob = image;
+        this.source = '';
         this.utilitiesService.showLoadingMsg("Actualizando Usuario", "Actualizando el usuario #" + newData.idUser, () => {
           this.apiDataService.updateUser(newData).then((response: ServerMessage) => {
             //console.log(response);
             if(response.error == true){
               this.utilitiesService.showNotification(1, response.message, 3000, () => {});
               this.utilitiesService.closeLoadingMsg();
+              this.actualInfoUser.idUser = new Number(this.dataSessionService.user.idUser);
               this.dataSessionService.user.haveImage = this.actualInfoUser.haveImage;
               this.actualInfoUser.name=this.dataSessionService.user.name;
               this.actualInfoUser.username=this.dataSessionService.user.username;
               this.actualInfoUser.email=this.dataSessionService.user.email;
+              
             }else{
               /* Se Recarga el usuario actual*/
+              this.actualInfoUser.idUser = new Number(this.dataSessionService.user.idUser);
               this.dataSessionService.user.name = response.data.name;
               this.dataSessionService.user.username = response.data.username;
               this.dataSessionService.user.email = response.data.email;

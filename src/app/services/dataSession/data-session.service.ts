@@ -36,11 +36,13 @@ export class DataSessionService {
       this.apiDataService.setToken(this.token);
       //Acciones a realizar cuando el token estaba ya guardado pero la data para la interfaz no esta disponible
       //Se sabe que no esta disponible porque apenas se mando llamar el contructor
-      this.getBandsManager((response) => {
-        //console.log(this.elementsManager.bands);
-      }, (err) => {
-        console.log(err);
-      });
+      if(this.token.length > 0){
+        this.getBandsManager((response) => {
+          //console.log(this.elementsManager.bands);
+        }, (err) => {
+          console.log(err);
+        })
+      };
     }
   }
 
@@ -54,6 +56,8 @@ export class DataSessionService {
       errorCallBack(new LogedResponse(true, "Sin token"))
     } else {
       this.apiDataService.setToken(this.token);
+      //console.log(this.user);
+      
       if (this.user.username == "") {
         this.apiDataService.getUserData(this.token).then((response: ServerMessage) => {
           //console.log(response);
@@ -88,7 +92,8 @@ export class DataSessionService {
           errorCallBack(new LogedResponse(true, "A ocurrido un error"));
         });
       } else {
-        this.apiDataService.getImage(this.baseURL.toString() +
+        if(this.user.haveImage == true){
+          this.apiDataService.getImage(this.baseURL.toString() +
           'uploads/user-image/' + this.user.idUser.toString()).then((image: string) => {
             this.user.imageBlob = image;
             //console.log(image);
@@ -98,6 +103,10 @@ export class DataSessionService {
             this.user.imageBlob = "";
             errorCallBack(new LogedResponse(true, "A ocurrido un error obteniendo la imagen del usuario"));
           });
+        }else{
+          succesCallBack(new LogedResponse(false, "Sesion Con token e informacion de usuario"));
+        }
+        
       }
     }
   }

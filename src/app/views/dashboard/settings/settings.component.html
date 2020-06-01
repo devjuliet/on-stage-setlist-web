@@ -1,7 +1,7 @@
 <div class="main-manager">
     <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass.toString()">
         <app-sidebar class="sidebar" 
-            [activeLink]="4" 
+            [activeLink]="dataSessionService.user.type.toString()=='1' ? 5 : 4" 
             [isManager]="dataSessionService.user.type.toString()=='1'"
             [nameUser]="dataSessionService.user.name"
             [imageurl]="dataSessionService.user.haveImage"
@@ -36,7 +36,7 @@
                     <div class="col-xl-6 col-md-6 col-sm-12 ">
 
                         <div class="img-box">
-                            <div *ngIf="!actualInfoUser.haveImage"
+                            <div *ngIf="actualInfoUser.haveImage == false"
                                 class="input-group mb-3"
                                 style="    justify-content: center;">
                                 <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div *ngIf="actualInfoUser.haveImage" class="input-group mb-3 row">
+                            <div *ngIf="actualInfoUser.haveImage == true" class="input-group mb-3 row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 text-center">
                                     <img [src]="dataSessionService.user.imageBlob">
                                 </div>

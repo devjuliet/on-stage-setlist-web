@@ -9,7 +9,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 //Importacion de las vistas/componentes
-import { RegisterProgramComponent } from './views/register-program/register-program.component';
 import { LoginComponent } from './views/login/login.component';
 import { HomeComponent } from './views/home/home.component';
 import { ManagerHomeComponent } from './views/dashboard/manager/manager-home/manager-home.component';
@@ -41,7 +40,6 @@ import { RepertoriesComponent } from './views/dashboard/live-experience-designer
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterProgramComponent,
     LoginComponent,
     HomeComponent,
     ManagerHomeComponent,

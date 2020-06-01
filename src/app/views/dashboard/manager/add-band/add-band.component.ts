@@ -72,7 +72,7 @@ export class AddBandComponent implements OnInit {
     this.dataSessionService.checkLogin((logedResponse: LogedResponse) => {
       //console.log(logedResponse);
       //Manda al dashboard correspondiente o saca de la sesion
-      if (this.dataSessionService.user.type == 2) {
+      if (this.dataSessionService.user.type == 2 || this.dataSessionService.user.type == 0) {
         this.dataSessionService.navigateByUrl("/dashboard/led");
       } else if (this.dataSessionService.user.type != 1) {
         this.dataSessionService.logOut();

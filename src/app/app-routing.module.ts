@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'us', component: UsComponent },//lista
   { path: 'register', component: RegisterComponent },//lista
 
-  { path: 'dashboard/manager', component: ManagerHomeComponent },
+  { path: 'dashboard/manager', component: ManagerHomeComponent },//lista
   { path: 'dashboard/manager/admin-bands', component: AdminBandsComponent },//lista
   { path: 'dashboard/manager/band-info/:id', component: BandInfoComponent },//lista
   { path: 'dashboard/manager/add-band', component: AddBandComponent },//lista

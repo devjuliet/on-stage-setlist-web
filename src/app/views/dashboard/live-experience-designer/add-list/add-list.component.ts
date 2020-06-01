@@ -18,7 +18,7 @@ export class AddListComponent implements OnInit {
       //Manda al dashboard correspondiente o saca de la sesion
       if (this.dataSessionService.user.type == 1) {
         this.dataSessionService.navigateByUrl("/dashboard/manager");
-      } else if (this.dataSessionService.user.type != 2) {
+      } else if (this.dataSessionService.user.type != 2 && this.dataSessionService.user.type != 0) {
         this.dataSessionService.logOut();
       } else {
         //Cosas para hacer en caso de que el usario este logeado

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilitiesService } from '../../../../services/utilities/utilities.service';
-import { ApiDataService } from 'src/app/services/api-data/api-data.service';
-import { DataSessionService } from 'src/app/services/dataSession/data-session.service';
-import { LogedResponse } from 'src/app/classes/logedResponse.class';
+import { ApiDataService } from '../../../../services/api-data/api-data.service';
+import { DataSessionService } from '../../../../services/dataSession/data-session.service';
+import { LogedResponse } from '../../../../classes/logedResponse.class';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ActualEvent } from '../../../../classes/actualEvent.class';
 
@@ -31,14 +31,14 @@ export class ManagerHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.eventsFiltered = Array.from(this.dataSessionService.elementsManager.upcomingEvents);
     this.dataSessionService.checkLogin((logedResponse: LogedResponse) => {
       //console.log(logedResponse);
       //Manda al dashboard correspondiente o saca de la sesion
-      if(this.dataSessionService.user.type==2){
+      if(this.dataSessionService.user.type==2 || this.dataSessionService.user.type == 0){
         this.dataSessionService.navigateByUrl("/dashboard/led");
       }else if(this.dataSessionService.user.type!=1){
         this.dataSessionService.logOut();
-        
       }else{
        console.log("usuario simonki");
        this.dataSessionService.getTagsCatalog((response) => {
@@ -53,7 +53,7 @@ export class ManagerHomeComponent implements OnInit {
       });
       }
     }, (noLoginResponse: LogedResponse) => {
-      console.log(noLoginResponse);
+      //console.log(noLoginResponse);
       this.dataSessionService.navigateByUrl("/");
     });
   }
