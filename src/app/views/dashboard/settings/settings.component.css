@@ -11,6 +11,8 @@ input{
     height: 40px;
     padding-left: 15px;
     transition: .3s ease-in-out;
+    font-family: 'Questrial', sans-serif;
+    color: #353535;
 }
 input:focus{
     outline: none;
@@ -57,4 +59,18 @@ input:focus{
     transform: translate(-40%, 50%);
     font-size: 20px;
     font-weight: 600;
+}
+textarea {
+  border: 1px solid #382983;
+  border-radius: 10px;
+  width: 90%;
+  padding-left: 15px;
+  height: 100px;
+  font-family: 'Questrial', sans-serif;
+  transition: .3s ease-in-out;
+  color: #353535;
+}
+textarea:focus{
+  outline: none;
+  border: 1px solid #0087D1;
 }

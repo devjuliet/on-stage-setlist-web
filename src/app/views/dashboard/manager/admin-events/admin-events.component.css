@@ -106,3 +106,6 @@ input[type="date" i]::-webkit-inner-spin-button{
     border: 1px solid #0087D1;
     outline: none;
 }
+.event-card:hover{
+  border-left: 15px solid #0087D1 !important;
+}

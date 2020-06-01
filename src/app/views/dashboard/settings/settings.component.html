@@ -6,8 +6,8 @@
             [nameUser]="dataSessionService.user.name"
             [imageurl]="dataSessionService.user.haveImage"
             [idUser]="dataSessionService.user.idUser"
-            [imageSrc]="dataSessionService.user.imageBlob" 
-            [bandsList]="dataSessionService.elementsManager.bands" 
+            [imageSrc]="dataSessionService.user.imageBlob"
+            [bandsList]="dataSessionService.elementsManager.bands"
             ></app-sidebar>
     </div>
     <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
@@ -23,7 +23,7 @@
                         <div class="p-b-20">
                             <input type="text" [(ngModel)]="actualInfoUser.username" placeholder="Usuario...">
                         </div>
-                        <div class="p-b-20"> 
+                        <div class="p-b-20">
                             <input type="email" [(ngModel)]="actualInfoUser.email" placeholder="Correo...">
                         </div>
                         <div class="p-b-20">
@@ -32,6 +32,7 @@
                         <div class="p-b-20">
                             <input type="password" [(ngModel)]="confirmPassword" placeholder="Repetir contraseña...">
                         </div>
+                        <textarea placeholder="Descripción..."></textarea>
                     </div>
                     <div class="col-xl-6 col-md-6 col-sm-12 ">
 
@@ -67,10 +68,10 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                                     <button (click)="cancelImage()"
-                                    class="trash-btn"><i class="fas fa-trash"></i></button>
+                                    class="trash-btn" data-toggle="tooltip" data-placement="right" title="Eliminar foto"><i class="fas fa-trash"></i></button>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>

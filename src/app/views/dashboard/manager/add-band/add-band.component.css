@@ -25,7 +25,7 @@ textarea:focus, input:focus{
     border: 1px solid #0087D1;
 }
 img{
-    max-width: 200px;
+    max-width: 300px;
     width: 100%;
     height: auto;
 }
@@ -36,10 +36,7 @@ img{
     display: flex;
     align-items: center;
 }
-.dis-fle-jcent{
-    display: flex;
-    justify-content: center;
-}
+
 .search-input{
     border-radius: 10px 0 0 10px;
     width: 50%;
@@ -154,7 +151,7 @@ img{
     position: absolute;
     opacity: 0;
     cursor: pointer;
-}  
+}
 /* Checkbox falso */
 .checkmark {
     position: absolute;
@@ -165,26 +162,26 @@ img{
     background-color: #eee;
     border-radius: 50%;
 }
-  
+
 .register-box-check:hover input ~ .checkmark {
     background-color: #ccc;
     cursor: pointer;
 }
-  
+
 .register-box-check input:checked ~ .checkmark {
     background-color: #382983;
 }
-  
+
 .checkmark:after {
     content: "";
     position: absolute;
     display: none;
 }
-  
+
 .register-box-check input:checked ~ .checkmark:after {
     display: block;
 }
-  
+
 .register-box-check .checkmark:after {
     top: 8px;
     left: 8px;
@@ -192,10 +189,4 @@ img{
     height: 10px;
     border-radius: 50%;
     background: white;
-}
-.no-result-img{
-    max-width: 500px;
-    width: 100%;
-    height: auto;
-    opacity: .5;
 }
