@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DataSessionService } from 'src/app/services/dataSession/data-session.service';
-import { LogedResponse } from 'src/app/classes/logedResponse.class';
-import { UtilitiesService } from 'src/app/services/utilities/utilities.service';
-import { ApiDataService } from 'src/app/services/api-data/api-data.service';
-import { ServerMessage } from 'src/app/classes/serverMessages.dto';
+import { DataSessionService } from '../../services/dataSession/data-session.service';
+import { LogedResponse } from '../../classes/logedResponse.class';
+import { UtilitiesService } from '../../services/utilities/utilities.service';
+import { ApiDataService } from '../../services/api-data/api-data.service';
+import { ServerMessage } from '../../classes/serverMessages.dto';
 
 @Component({
   selector: 'app-register',
@@ -25,23 +25,38 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.clearData();
     this.dataSessionService.checkLogin((logedResponse: LogedResponse) => {
-      console.log(logedResponse);
-      //TO DO - Falta añadir la logica que redirecciona a la ruta y con la data cargada internamente y 
-      //        mandar al dashboard correspondiente
-      
+      //console.log(logedResponse);
+      if (this.dataSessionService.user.type != 0 && this.dataSessionService.user.type != 1 && this.dataSessionService.user.type != 2) {
+        this.dataSessionService.logOut();
+        this.utilitiesService.showNotification(1, "Usuario desconocido.", 4000, () => { });
+      } else if (this.dataSessionService.user.type == 1 ) {
+        this.dataSessionService.navigateByUrl("/dashboard/manager");
+        this.dataSessionService.getBandsManager((response) => {
+          //console.log(this.elementsManager.bands);
+        }, (err) => {
+          console.log(err);
+          this.utilitiesService.showNotification(1, "A ocurrido un erro cargando las bandas.", 4000, () => { });
+        });
+      } else if (this.dataSessionService.user.type == 2 || this.dataSessionService.user.type == 0) {
+        this.dataSessionService.navigateByUrl("/dashboard/led");
+      }else{
+        //Cosas para hacer en la vista
+
+      }
     }, (noLoginResponse: LogedResponse) => {
-      console.log(noLoginResponse);
+      //console.log(noLoginResponse);
+
     });
   }
 
   clearData() {
-    this.name = "";
-    this.email = "";
-    this.password = "";
-    this.confirmPass = "";
+    this.name = "Lupillo Rivera";
+    this.email = "lupillos.music@hotmail.com";
+    this.password = "lupillos.music";
+    this.confirmPass = "lupillos.music";
     this.type = 1;
-    this.username = "";
-    this.isManager = true;
+    this.username = "lupillos.music";
+    this.isManager = false;
   }
 
   validateRegisterData(): Boolean {
@@ -72,6 +87,8 @@ export class RegisterComponent implements OnInit {
       this.apiDataService.registerUser(this.name, this.email, this.password, this.type, this.username).then((response: ServerMessage) => {
         if (response.error) {
           this.utilitiesService.showNotification(1, response.message, 4000, () => { });
+          //console.log(response);
+          
         } else {
           this.clearData();
           this.utilitiesService.showNotification(0, response.message, 3000, () => {

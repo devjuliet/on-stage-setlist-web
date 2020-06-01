@@ -7,7 +7,7 @@ export class User{
     password : String;
     type : Number;
     username : String;
-    haveImage: Boolean;
+    haveImage: boolean;
     role : Number;
     description : String;
     imageBlob : SafeUrl;
