@@ -1,20 +1,20 @@
 <div class="main-manager">
     <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass.toString()">
-        <app-sidebar class="sidebar" 
-            [activeLink]="1" 
+        <app-sidebar class="sidebar"
+            [activeLink]="1"
             [isManager]="dataSessionService.user.type.toString()=='1'"
             [nameUser]="dataSessionService.user.name"
             [imageurl]="dataSessionService.user.haveImage"
             [idUser]="dataSessionService.user.idUser"
-            [imageSrc]="dataSessionService.user.imageBlob" 
-            [bandsList]="dataSessionService.elementsManager.bands" 
+            [imageSrc]="dataSessionService.user.imageBlob"
+            [bandsList]="dataSessionService.elementsManager.bands"
             ></app-sidebar>
     </div>
     <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
         <app-navbar-dashboard></app-navbar-dashboard>
         <div class="p-t-20">
             <div class="info-dashboard">
-                <div class="p-b-20">   
+                <div class="p-b-20">
                     <h1 class="fira-30-grey">Lista de bandas</h1>
                     <div class="search-bar p-t-20">
                         <input [(ngModel)]="searchValue" (ngModelChange)="filterByName($event)"  type="text" placeholder="Buscar una banda...">
@@ -23,76 +23,29 @@
                         </button>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table">
-                        <tbody>
-                            <tr *ngFor="let band of bandsFiltered; let idx = index">
-                                <td *ngIf="idx % 3 === 0" scope="row" routerLink="/dashboard/manager/band-info/{{bandsFiltered[idx].idBand}}" routerLinkActive="active">
-                                    <div class="">
-                                        <div class="band-card">
-                                            <div class="band-card-img">
-                                                <img *ngIf="bandsFiltered[idx].urlLogo.length == 0" src="/assets/images/no-band.svg">
-                                                <img *ngIf="bandsFiltered[idx].urlLogo.length > 0" [src]="bandsFiltered[idx].imageBlob">
-                                            </div>
-                                            <p class="quest-20-grey text-center p-b-10 p-t-10">{{bandsFiltered[idx].name}}</p>
-                                            <p class="quest-15-grey text-center">{{bandsFiltered[idx].description}}</p>
-                                            <div>
-                                                <p class="fira-16-grey text-center p-t-5 p-b-5">Generos</p>
-                                                <div class="genere-tags">
-                                                    <div *ngIf="bandsFiltered[idx].genres[0] != undefined" class="tags"><p>{{bandsFiltered[idx].genres[0].name}}</p></div>
-                                                    <div *ngIf="bandsFiltered[idx].genres[1] != undefined" class="tags"><p>{{bandsFiltered[idx].genres[1].name}}</p></div>
-                                                    <div *ngIf="bandsFiltered[idx].genres[2] != undefined" class="tags"><p>{{bandsFiltered[idx].genres[2].name}}</p></div>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 col-sm-12 p-b-10 p-t-10"  *ngFor="let band of bandsFiltered; let idx = index">
+                    <div class="routerLink-nofoc" scope="row" routerLink="/dashboard/manager/band-info/{{band.idBand}}" routerLinkActive="active">
+                        <div class="">
+                            <div class="band-card">
+                                <div class="band-card-img">
+                                    <img *ngIf="band.urlLogo.length == 0" src="/assets/images/no-band.svg">
+                                    <img *ngIf="band.urlLogo.length > 0" [src]="band.imageBlob">
+                                </div>
+                                <p class="quest-20-grey text-center p-b-10 p-t-10">{{band.name}}</p>
+                                <p class="quest-15-grey text-center max-lines">{{band.description}}</p>
+                                <div>
+                                    <p class="fira-16-grey text-center p-t-5 p-b-5">Generos</p>
+                                    <div class="genere-tags">
+                                        <div *ngIf="band.genres[0] != undefined" class="tags"><p>{{band.genres[0].name}}</p></div>
+                                        <div *ngIf="band.genres[1] != undefined" class="tags"><p>{{band.genres[1].name}}</p></div>
+                                        <div *ngIf="band.genres[2] != undefined" class="tags"><p>{{band.genres[2].name}}</p></div>
                                     </div>
-                                </td>
-                                <td *ngIf="idx % 3 === 0 && (idx+1)<bandsFiltered.length" scope="row" routerLink="/dashboard/manager/band-info/{{bandsFiltered[idx+1].idBand}}" routerLinkActive="active">
-                                    <div class="">
-                                        <div class="band-card">
-                                            <div class="band-card-img">
-                                                <img *ngIf="bandsFiltered[idx+1].urlLogo.length == 0" src="/assets/images/no-band.svg">
-                                                <img *ngIf="bandsFiltered[idx+1].urlLogo.length > 0" [src]="bandsFiltered[idx+1].imageBlob">
-                                            </div>
-                                            <p class="quest-20-grey text-center p-b-10 p-t-10">{{bandsFiltered[idx+1].name}}</p>
-                                            <p class="quest-15-grey text-center">{{bandsFiltered[idx+1].description}}</p>
-                                            <div>
-                                                <p class="fira-16-grey text-center p-t-5 p-b-5">Generos</p>
-                                                <div class="genere-tags">
-                                                    <div *ngIf="bandsFiltered[idx+1].genres[0] != undefined" class="tags"><p>{{bandsFiltered[idx+1].genres[0].name}}</p></div>
-                                                    <div *ngIf="bandsFiltered[idx+1].genres[1] != undefined" class="tags"><p>{{bandsFiltered[idx+1].genres[1].name}}</p></div>
-                                                    <div *ngIf="bandsFiltered[idx+1].genres[2] != undefined" class="tags"><p>{{bandsFiltered[idx+1].genres[2].name}}</p></div>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                </td>
-                                <td *ngIf="idx % 3 === 0 && (idx+2)<bandsFiltered.length" scope="row" routerLink="/dashboard/manager/band-info/{{bandsFiltered[idx+2].idBand}}" routerLinkActive="active">
-                                    <div class="">
-                                        <div class="band-card">
-                                            <div class="band-card-img">
-                                                <img *ngIf="bandsFiltered[idx+2].urlLogo.length == 0" src="/assets/images/no-band.svg">
-                                                <img *ngIf="bandsFiltered[idx+2].urlLogo.length > 0" [src]="bandsFiltered[idx+2].imageBlob">
-                                            </div>
-                                            <p class="quest-20-grey text-center p-b-10 p-t-10">{{bandsFiltered[idx+2].name}}</p>
-                                            <p class="quest-15-grey text-center">{{bandsFiltered[idx+2].description}}</p>
-                                            <div>
-                                                <p class="fira-16-grey text-center p-t-5 p-b-5">Generos</p>
-                                                <div class="genere-tags">
-                                                    <div *ngIf="bandsFiltered[idx+2].genres[0] != undefined" class="tags"><p>{{bandsFiltered[idx+2].genres[0].name}}</p></div>
-                                                    <div *ngIf="bandsFiltered[idx+2].genres[1] != undefined" class="tags"><p>{{bandsFiltered[idx+2].genres[1].name}}</p></div>
-                                                    <div *ngIf="bandsFiltered[idx+2].genres[2] != undefined" class="tags"><p>{{bandsFiltered[idx+2].genres[2].name}}</p></div>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                </td>
-                                
-                        </tbody>
-                    </table>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
                 </div>
             </div>
         </div>

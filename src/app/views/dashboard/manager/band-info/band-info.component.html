@@ -1,13 +1,13 @@
 <div class="main-manager">
     <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass.toString()">
-        <app-sidebar class="sidebar" 
-            [activeLink]="1" 
+        <app-sidebar class="sidebar"
+            [activeLink]="1"
             [isManager]="dataSessionService.user.type.toString()=='1'"
             [nameUser]="dataSessionService.user.name"
             [imageurl]="dataSessionService.user.haveImage"
             [idUser]="dataSessionService.user.idUser"
-            [imageSrc]="dataSessionService.user.imageBlob" 
-            [bandsList]="dataSessionService.elementsManager.bands" 
+            [imageSrc]="dataSessionService.user.imageBlob"
+            [bandsList]="dataSessionService.elementsManager.bands"
             [idActiveBand]="idBandOpened"
             ></app-sidebar>
     </div>
@@ -15,7 +15,7 @@
         <app-navbar-dashboard></app-navbar-dashboard>
         <div class="p-t-20 p-b-40">
             <div class="info-dashboard">
-                <div class="p-b-20">   
+                <div class="p-b-20">
                     <h1 class="fira-30-grey">Editar Banda</h1>
                 </div>
                 <div class="row">
@@ -29,9 +29,23 @@
                                 <label>Descripcion muy corta {{newBand.description.length}} < 50</label>
                             </div>
                         </div>
+                        <div class="p-b-40 p-t-20" *ngIf="loaded">
+                          <!-- <select class="selectpicker" data-live-search="true" multiple title="Escoge un genero..." data-width="100%">
+                              <option >Rock</option>
+                              <option>Country</option>
+                              <option>Norteñas</option>
+                          </select>   -->
+                          <ng-multiselect-dropdown
+                              [placeholder]="'Seleccione los generos'"
+                              [settings]="dropdownGenresSettings"
+                              [data]="dataSessionService.elementsManager.genresCatalog"
+                              [(ngModel)]="this.newBand.genres"
+                              >
+                          </ng-multiselect-dropdown>
+                      </div>
                     </div>
                     <div class="col-xl-6 col-md-6 col-sm-12">
-                        <p class="quest-15-grey"><strong>Sube una foto de la banda</strong></p>
+                        <p class="quest-15-grey p-l-15 p-b-10"><strong>Sube una foto de la banda</strong></p>
                         <div>
                             <!-- <input type="file" id="img" name="img" accept="image/*" class="hidden">
                             <label class="img-btn" for="img">
@@ -40,7 +54,6 @@
                                 <p class="new-photo">Subir foto nueva</p>
                             </label> -->
 
-
                             <div *ngIf="newBand.urlLogo.length == 0"
                                 class="input-group mb-3"
                                 style="    justify-content: center;">
@@ -48,10 +61,10 @@
 
                                 <label *ngIf="source.length == 0">
                                     <input (change)="updateSource($event)" type="file" id="img" name="img" accept="image/*" class="hidden">
-                                    <label class="img-btn" for="img">
-                                        <img  src="/assets/images/no-band.svg">
+                                    <label class="img-btn" for="img" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                                        <img class="edit-img" src="/assets/images/no-band.svg">
                                         <div class="color-img"></div>
-                                        <p class="img-word quest-16-wht">Subir foto</p>
+                                        <i class="fas fa-upload middle-img"></i>
                                     </label>
                                 </label>
                                 <!-- img placeholder when a file has been picked. shows only when 'source' is not empty -->
@@ -67,34 +80,15 @@
                             </div>
                             <div *ngIf="newBand.urlLogo.length > 0" class="input-group mb-3 row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                                    <img [src]="newBand.imageBlob">
+                                    <img class="edit-img" [src]="newBand.imageBlob">
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                                     <button (click)="cancelImage()"
-                                    class="trash-btn"><i class="fas fa-trash"></i></button>
+                                    class="trash-btn" data-toggle="tooltip" data-placement="right" title="Eliminar foto"><i class="fas fa-trash"></i></button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-6 col-md-6 col-sm-12">
-                        <div class="p-b-40 p-t-20" *ngIf="loaded">
-                            <!-- <select class="selectpicker" data-live-search="true" multiple title="Escoge un genero..." data-width="100%">
-                                <option >Rock</option>
-                                <option>Country</option>
-                                <option>Norteñas</option>
-                            </select>   -->
-                            <ng-multiselect-dropdown
-                                [placeholder]="'Seleccione los generos'"
-                                [settings]="dropdownGenresSettings"
-                                [data]="dataSessionService.elementsManager.genresCatalog"
-                                [(ngModel)]="this.newBand.genres"
-                                >
-                            </ng-multiselect-dropdown>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-md-6 col-sm-12"></div>
                 </div>
                 <div>
                     <p class="fira-20-blu">Integrantes de la banda</p>
@@ -113,17 +107,17 @@
                         <table class="table">
                             <tr>
                                 <td *ngIf="newBand.bandMembers.length == 0">
-                                    <div class="text-center">  
-                                        <div class="profile-box">
-                                            <img class="profile-pic" src="https://headsfortails15029229.files.wordpress.com/2018/03/baby-bunny.jpg">
+                                    <div class="text-center">
+                                        <div class="">
+                                            <img class="no-result-img" src="/assets/images/no-result.svg">
                                         </div>
                                         <p class="fira-18-blu">Sin integrantes</p>
                                     </div>
                                 </td>
                                 <td *ngIf="bandMembersFiltered.length == 0 && newBand.bandMembers.length != 0">
-                                    <div class="text-center">  
-                                        <div class="profile-box">
-                                            <img class="profile-pic" src="https://headsfortails15029229.files.wordpress.com/2018/03/baby-bunny.jpg">
+                                    <div class="text-center">
+                                        <div class="">
+                                            <img class="no-result-img" src="/assets/images/no-result.svg">
                                         </div>
                                         <p class="fira-18-blu">Sin resultados</p>
                                     </div>
@@ -133,10 +127,10 @@
                                         <p class="fira-20-blu" *ngIf="member.role.toString()=='0'">Vocalista</p>
                                         <p class="fira-20-blu" *ngIf="member.role.toString()=='1'">Teclado</p>
                                         <p class="fira-20-blu" *ngIf="member.role.toString()=='2'">Bajista</p>
-                                        <p class="fira-20-blu" *ngIf="member.role.toString()=='3'">Guitarrista</p>    
+                                        <p class="fira-20-blu" *ngIf="member.role.toString()=='3'">Guitarrista</p>
                                         <div class="profile-box">
                                             <button (click)="selectForDelete(member)" class="delete-btn" data-toggle="modal" data-target="#deleteModal"><i class="far fa-times-circle"></i></button>
-                                            <img *ngIf="!member.haveImage" class="profile-pic" src="https://headsfortails15029229.files.wordpress.com/2018/03/baby-bunny.jpg">
+                                            <img *ngIf="!member.haveImage" class="profile-pic" src="/assets/images/avatar.svg">
                                             <img *ngIf="member.haveImage" class="profile-pic" [src]="member.imageBlob">
                                         </div>
                                         <p class="fira-18-blu">{{member.name}}</p>
@@ -154,7 +148,7 @@
                         <table class="table">
                             <tr>
                                 <td *ngIf="newBand.sets.length == 0">
-                                    <div class="text-center">  
+                                    <div class="text-center">
                                         <div class="profile-box">
                                             <img class="album-pic" src="/assets/images/no-song.svg">
                                         </div>
@@ -175,10 +169,12 @@
                     </div>
                 </div>
                 <div class="dis-fle-jcent p-t-40">
-                    <div class="p-0-10">
+                      <div class="p-0-10">
                         <button class="btn-red" data-toggle="modal" data-target="#deleteBandModal">Eliminar</button>
+                      </div>
+                      <div class="p-0-10">
                         <button (click)="saveData()" class="btn-lblu">Guardar</button>
-                    </div>
+                      </div>
                 </div>
                 <!-- FALTA implementar -->
                 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -245,17 +241,17 @@
                                             <p>¿Es diseñador de experiencia?</p>
                                             <div class="row register-box-check p-t-20">
                                                 <div class="col-lg-6">
-                                                    <label class="quest-18-blu"> 
+                                                    <label class="quest-18-blu">
                                                         <input  class="" (change)="newMemberIsLiveDesigner = false" type="radio" [checked]="!newMemberIsLiveDesigner" name="radio">
-                                                        <span class="checkmark"></span> 
+                                                        <span class="checkmark"></span>
                                                         <p class="p-l-20">No</p>
                                                     </label>
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <label class="quest-18-blu"> 
+                                                    <label class="quest-18-blu">
                                                         <input class="" (change)="newMemberIsLiveDesigner = true" type="radio" [checked]="newMemberIsLiveDesigner" name="radio">
-                                                        <span class="checkmark"></span> 
-                                                        <p class="p-l-20">Si</p> 
+                                                        <span class="checkmark"></span>
+                                                        <p class="p-l-20">Si</p>
                                                     </label>
                                                 </div>
                                             </div>
