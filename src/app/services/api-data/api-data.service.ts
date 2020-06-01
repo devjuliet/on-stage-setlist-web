@@ -25,7 +25,7 @@ export class ApiDataService {
         email : email, 
         haveImage : false,//valor default
         username : username,
-        role : -1,
+        role : 0,
         password : password, 
         type : type, 
         description : "",

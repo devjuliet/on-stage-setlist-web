@@ -248,10 +248,18 @@ export class BandInfoComponent implements OnInit {
   }
 
   deleteMember() {
-    let indexItem = this.newBand.bandMembers.findIndex((element) => {
+    //Se elimina de la lista de miembros
+    let indexItemMember = this.newBand.bandMembers.findIndex((element) => {
       return element.idMember == this.memberSelectedForDelete.idMember;
     })
-    this.newBand.bandMembers.splice(indexItem, 1);
+    this.newBand.bandMembers.splice(indexItemMember, 1);
+
+    //Se elimina de la lista de miembros
+    let indexItemDesigner = this.newBand.bandLiveDesigners.findIndex((element) => {
+      return element == this.memberSelectedForDelete.idMember;
+    })
+    this.newBand.bandLiveDesigners.splice(indexItemDesigner, 1);
+
     this.utilitiesService.showNotification(1, "A eliminado a " + this.memberSelectedForDelete.name + " de la banda", 3000, () => {
       this.memberSelectedForDelete = new BandMember();
     });

@@ -24,6 +24,22 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div *ngIf="dataSessionService.elementsManager.bands.length == 0"  class="col">
+                        <div class="text-center">
+                            <div class="">
+                                <img class="no-result-img" src="/assets/images/no-result.svg">
+                            </div>
+                            <p class="quest-18-grey">Sin Bandas</p>
+                        </div>
+                    </div>
+                    <div *ngIf="bandsFiltered.length == 0 && dataSessionService.elementsManager.bands.length != 0"  class="col">
+                        <div class="text-center">
+                            <div class="profile-box">
+                                <img class="profile-pic" src="/assets/images/no-band.svg">
+                            </div>
+                            <p class="fira-18-blu">Sin resultados</p>
+                        </div>
+                    </div>
                   <div class="col-lg-4 col-md-6 col-sm-12 p-b-10 p-t-10"  *ngFor="let band of bandsFiltered; let idx = index">
                     <div class="routerLink-nofoc" scope="row" routerLink="/dashboard/manager/band-info/{{band.idBand}}" routerLinkActive="active">
                         <div class="">

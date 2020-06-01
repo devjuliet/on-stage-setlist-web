@@ -180,10 +180,10 @@ export class AdminEventsComponent implements OnInit {
     this.actualEvent = new ActualEvent();
     this.selectedBand = [];
     this.selectedTag = [];
-    this.actualEvent.name = "Concierto chidote";
-    this.actualEvent.location = "Ubicacion chidota";
-    this.actualEvent.place = "Concierto chidote";
-    this.actualEvent.tour = "El tour de las bunyys";
+    this.actualEvent.name = "";
+    this.actualEvent.location = "";
+    this.actualEvent.place = "";
+    this.actualEvent.tour = "";
   }
 
   saveEvent(){
