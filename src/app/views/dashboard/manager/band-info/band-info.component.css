@@ -48,15 +48,7 @@ img{
     height: 100%;
     background-color: rgba(56, 41, 131,.5);
 }
-.new-photo{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 20px;
-    font-family: 'Questrial', sans-serif;
-}
+
 .dis-fle-alcent{
     display: flex;
     align-items: center;
