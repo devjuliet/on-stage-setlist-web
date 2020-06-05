@@ -1,11 +1,11 @@
 <div>
   <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass.toString()">
-    <app-sidebar class="sidebar" 
-      [activeLink]="idListOpened == undefined ? 2 : 1" 
+    <app-sidebar class="sidebar"
+      [activeLink]="idListOpened == undefined ? 2 : 1"
       [isManager]="dataSessionService.user.type.toString()=='1'"
-      [nameUser]="dataSessionService.user.name" 
+      [nameUser]="dataSessionService.user.name"
       [imageurl]="dataSessionService.user.haveImage"
-      [idUser]="dataSessionService.user.idUser" 
+      [idUser]="dataSessionService.user.idUser"
       [imageSrc]="dataSessionService.user.imageBlob"
       [setList]="dataSessionService.elementsLed.setsList"
       [idActive]="idListOpened"></app-sidebar>
@@ -18,23 +18,23 @@
         <div class="row">
           <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
             <div class="p-t-20">
-              <ng-multiselect-dropdown 
-                *ngIf=" newList.name.length == 0 && 
-                        newList.description.length == 0 && 
+              <ng-multiselect-dropdown
+                *ngIf=" newList.name.length == 0 &&
+                        newList.description.length == 0 &&
                         newList.songs.length == 0"
 
-                [placeholder]="'Selecciona una banda'" 
+                [placeholder]="'Selecciona una banda'"
                 [settings]="dropdownSearchBandSettings"
-                [data]="dataSessionService.elementsLed.bands" 
+                [data]="dataSessionService.elementsLed.bands"
                 (onSelect)="onBandSearchSelect($event)"
-                (onDeSelect)="onBandSearchSelect($event)" 
+                (onDeSelect)="onBandSearchSelect($event)"
                 [(ngModel)]="selectedBand"
                 [disabled]="false">
               </ng-multiselect-dropdown>
-              <label *ngIf="newList.name.length != 0 || 
-                            newList.description.length != 0 || 
+              <label class="quest-15-grey" *ngIf="newList.name.length != 0 ||
+                            newList.description.length != 0 ||
                             newList.songs.length != 0">
-                Nueva lista para la banda: {{dataSessionService.elementsLed.bands[0].name}}<br>
+                Lista para la banda: {{dataSessionService.elementsLed.bands[0].name}}<br>
                 Manager: {{dataSessionService.elementsLed.bands[0].managerName}}<br>
               </label>
             </div>
@@ -56,7 +56,6 @@
                     class="hidden">
                   <label class="img-btn" for="img" data-toggle="tooltip" data-placement="right" title="Subir una foto">
                     <img src="/assets/images/no-song.svg">
-                    <div class="color-img"></div>
                     <i class="fas fa-upload middle-img"></i>
                   </label>
                 </label>
@@ -74,7 +73,7 @@
 
               <div *ngIf="newList.haveImage == true" class="input-group mb-3 row">
                 <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                  <img class="edit-img" [src]="newList.imageBlob">
+                  <img  [src]="newList.imageBlob">
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                   <button (click)="cancelImage()" class="trash-btn" data-toggle="tooltip" data-placement="right"
@@ -88,8 +87,9 @@
           </div>
           <div *ngIf="selectedBand.length != 0" class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
             <p class="quest-20-grey"><strong>Canciones en tu lista</strong></p>
-            <div *ngIf="newList.songs.length == 0">
-              Sin canciones
+            <div *ngIf="newList.songs.length == 0" class="text-center p-t-30">
+              <img class="img-icon" src="/assets/images/no-song-list.svg">
+              <p class="quest-18-grey">Sin canciones</p>
             </div>
             <div class="song-list" >
                 <div *ngFor="let song of newList.songs; let i = index"  class="song-box">
@@ -116,7 +116,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="selectedBand.length != 0" class="button-footer p-t-40">
+        <div *ngIf="selectedBand.length != 0" class="button-footer p-t-180 width-100p">
           <div class="p-r-20 p-l-20">
             <button routerLink="/dashboard/led/my-lists" routerLinkActive="active" class="btn-gray">Cancelar</button>
           </div>
@@ -125,15 +125,14 @@
           </div>
         </div>
 
-        <div *ngIf="selectedBand.length == 0" class="row text-center">
-          <div class="col-12">
+        <div *ngIf="selectedBand.length == 0" class="text-center col-12">
+          <div class="p-t-150">
             <img class="no-event" src="/assets/images/concert.svg">
           </div>
-          <div class="col-12">
+          <div class="p-t-20">
             <p class="quest-20-grey">Selecciona una banda para añadir tu lista...</p>
           </div>
         </div>
-      </div>
 
       <div class="modal fade" id="deleteSongModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -192,10 +191,11 @@
                       </li>
                     </ul>
                   </div>
-                  <div>
-                    <p><!-- Aquí va el editor!!!! -->
+                  <div class="p-t-20 ">
+                    <!-- Aquí va el editor!!!! -->
+                    <p class="quest-18-grey p-b-10">Escribe la letra de tu canción aqui abajo.</p>
                       <textarea [(ngModel)]="newSong.lyric" placeholder="Letra de la cancion..."></textarea>
-                    </p>
+
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-12">
@@ -222,10 +222,10 @@
                               <p class="quest-10-grey text-center">Guitarra</p>
                             </label> -->
 
-                            <input 
+                            <input
                               (change)="updateInstrumentSource($event,0)" type="file" id="img-chords-guitar" name="img-chords-guitar" accept="image/*"
                               class="hidden">
-                            <label class="img-btn" for="img-chords-guitar" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                            <label class="img-btn-ins" for="img-chords-guitar" data-toggle="tooltip" data-placement="right" title="Subir una foto">
                               <img src="/assets/images/guitarra.svg">
                               <p class="quest-10-grey text-center">Guitarra</p>
                             </label>
@@ -233,7 +233,10 @@
                           <!-- img placeholder when a file has been picked. shows only when 'sourceTabGuitar' is not empty -->
                           <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                              <img *ngIf="sourceChordsGuitar.length > 0" [src]="sourceChordsGuitar">
+                              <img *ngIf="sourceChordsGuitar.length > 0" [src]="sourceChordsGuitar" class="p-b-10 sm-img">
+                              <button *ngIf="sourceChordsGuitar.length > 0" class="modal-btn" data-toggle="modal" data-target="#imgModalg">
+                                Ver imagen
+                              </button>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                               <button *ngIf="sourceChordsGuitar.length > 0" (click)="cancelImageInstrument(0)" class="trash-btn"><i
@@ -244,7 +247,10 @@
 
                         <div *ngIf="newSong.chordsGuitar == true" class="input-group mb-3 row">
                           <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                            <img class="edit-img" [src]="newSong.chordsGuitarBlob">
+                            <img class="sm-img p-b-10" [src]="newSong.chordsGuitarBlob">
+                            <button class="modal-btn" data-toggle="modal" data-target="#imgModalg">
+                              Ver imagen
+                            </button>
                           </div>
                           <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                             <button (click)="cancelImageInstrument(0)" class="trash-btn" data-toggle="tooltip" data-placement="right"
@@ -265,10 +271,10 @@
                               <p class="quest-10-grey text-center">Bajo</p>
                             </label>
                           </div> -->
-                          <input  
+                          <input
                             (change)="updateInstrumentSource($event,1)" type="file" id="img-chords-bass" name="img-chords-bass" accept="image/*"
                             class="hidden">
-                          <label class="img-btn" for="img-chords-bass" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                          <label class="img-btn-ins" for="img-chords-bass" data-toggle="tooltip" data-placement="right" title="Subir una foto">
                             <img src="/assets/images/bajo.svg">
                             <p class="quest-10-grey text-center">Bajo</p>
                           </label>
@@ -276,7 +282,10 @@
                         <!-- img placeholder when a file has been picked. shows only when 'sourceTabGuitar' is not empty -->
                         <div class="row">
                           <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                            <img *ngIf="sourceChordsBass.length > 0" [src]="sourceChordsBass">
+                            <img class="p-b-10 sm-img" *ngIf="sourceChordsBass.length > 0" [src]="sourceChordsBass">
+                            <button *ngIf="sourceChordsBass.length > 0" class="modal-btn" data-toggle="modal" data-target="#imgModalb">
+                              Ver imagen
+                            </button>
                           </div>
                           <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                             <button *ngIf="sourceChordsBass.length > 0" (click)="cancelImageInstrument(1)" class="trash-btn"><i
@@ -287,8 +296,12 @@
 
                       <div *ngIf="newSong.chordsBass == true" class="input-group mb-3 row">
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                          <img class="edit-img" [src]="newSong.chordsBassBlob">
+                          <img class="sm-img p-b-10" [src]="newSong.chordsBassBlob">
+                            <button class="modal-btn" data-toggle="modal" data-target="#imgModalb">
+                              Ver imagen
+                            </button>
                         </div>
+
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                           <button (click)="cancelImageInstrument(1)" class="trash-btn" data-toggle="tooltip" data-placement="right"
                             title="Eliminar foto"><i class="fas fa-trash"></i></button>
@@ -306,10 +319,10 @@
                                   <p class="quest-10-grey text-center">Teclado</p>
                                 </label>
                               </div> -->
-                          <input  
+                          <input
                             (change)="updateInstrumentSource($event,2)" type="file" id="img-chords-piano" name="img-chords-piano" accept="image/*"
                             class="hidden">
-                          <label class="img-btn" for="img-chords-piano" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                          <label class="img-btn-ins" for="img-chords-piano" data-toggle="tooltip" data-placement="right" title="Subir una foto">
                             <img src="/assets/images/piano.svg">
                             <p class="quest-10-grey text-center">Teclado</p>
                           </label>
@@ -317,7 +330,10 @@
                         <!-- img placeholder when a file has been picked. shows only when 'sourceTabGuitar' is not empty -->
                         <div class="row">
                           <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                            <img *ngIf="sourceChordsPiano.length > 0" [src]="sourceChordsPiano">
+                            <img class="p-b-10 sm-img" *ngIf="sourceChordsPiano.length > 0" [src]="sourceChordsPiano">
+                            <button *ngIf="sourceChordsPiano.length > 0" class="modal-btn" data-toggle="modal" data-target="#imgModalp">
+                              Ver imagen
+                            </button>
                           </div>
                           <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                             <button *ngIf="sourceChordsPiano.length > 0" (click)="cancelImageInstrument(2)" class="trash-btn"><i
@@ -328,7 +344,10 @@
 
                       <div *ngIf="newSong.chordsPiano == true" class="input-group mb-3 row">
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                          <img class="edit-img" [src]="newSong.chordsPianoBlob">
+                          <img class="sm-img p-b-10" [src]="newSong.chordsPianoBlob">
+                          <button class="modal-btn" data-toggle="modal" data-target="#imgModalp">
+                            Ver imagen
+                          </button>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                           <button (click)="cancelImageInstrument(2)" class="trash-btn" data-toggle="tooltip" data-placement="right"
@@ -351,10 +370,10 @@
                                     <p class="quest-10-grey text-center">Guitarra</p>
                                   </label>
                                 </div> -->
-                          <input  
+                          <input
                             (change)="updateInstrumentSource($event,3)" type="file" id="img-tabs-guitar" name="img-tabs-guitar" accept="image/*"
                             class="hidden">
-                          <label class="img-btn" for="img-tabs-guitar" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                          <label class="img-btn-ins" for="img-tabs-guitar" data-toggle="tooltip" data-placement="right" title="Subir una foto">
                             <img src="/assets/images/guitarra.svg">
                             <p class="quest-10-grey text-center">Guitarra</p>
                           </label>
@@ -362,7 +381,10 @@
                         <!-- img placeholder when a file has been picked. shows only when 'sourceTabGuitar' is not empty -->
                         <div class="row">
                           <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                            <img *ngIf="sourceTabGuitar.length > 0" [src]="sourceTabGuitar">
+                            <img class="p-b-10 sm-img" *ngIf="sourceTabGuitar.length > 0" [src]="sourceTabGuitar">
+                            <button *ngIf="sourceTabGuitar.length > 0" class="modal-btn" data-toggle="modal" data-target="#imgModalgp">
+                              Ver imagen
+                            </button>
                           </div>
                           <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                             <button *ngIf="sourceTabGuitar.length > 0" (click)="cancelImageInstrument(3)" class="trash-btn"><i
@@ -373,7 +395,10 @@
 
                       <div *ngIf="newSong.tabGuitar == true" class="input-group mb-3 row">
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                          <img class="edit-img" [src]="newSong.tabGuitarBlob">
+                          <img class="sm-img p-b-10" [src]="newSong.tabGuitarBlob">
+                          <button class="modal-btn" data-toggle="modal" data-target="#imgModalgp">
+                            Ver imagen
+                          </button>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                           <button (click)="cancelImageInstrument(3)" class="trash-btn" data-toggle="tooltip" data-placement="right"
@@ -392,10 +417,10 @@
                                     <p class="quest-10-grey text-center">Bajo</p>
                                   </label>
                                 </div> -->
-                          <input  
+                          <input
                             (change)="updateInstrumentSource($event,4)" type="file" id="img-tabs-bass" name="img-tabs-bass" accept="image/*"
                             class="hidden">
-                          <label class="img-btn" for="img-tabs-bass" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                          <label class="img-btn-ins" for="img-tabs-bass" data-toggle="tooltip" data-placement="right" title="Subir una foto">
                             <img src="/assets/images/bajo.svg">
                             <p class="quest-10-grey text-center">Bajo</p>
                           </label>
@@ -403,7 +428,10 @@
                         <!-- img placeholder when a file has been picked. shows only when 'sourceTabBass' is not empty -->
                         <div class="row">
                           <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                            <img *ngIf="sourceTabBass.length > 0" [src]="sourceTabBass">
+                            <img *ngIf="sourceTabBass.length > 0" [src]="sourceTabBass" class="sm-img p-b-10">
+                            <button *ngIf="sourceTabBass.length > 0" class="modal-btn" data-toggle="modal" data-target="#imgModalbp">
+                              Ver imagen
+                            </button>
                           </div>
                           <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                             <button *ngIf="sourceTabBass.length > 0" (click)="cancelImageInstrument(4)" class="trash-btn"><i
@@ -414,7 +442,10 @@
 
                       <div *ngIf="newSong.tabBass == true" class="input-group mb-3 row">
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                          <img class="edit-img" [src]="newSong.tabBassBlob">
+                          <img class="sm-img p-b-10" [src]="newSong.tabBassBlob">
+                          <button class="modal-btn" data-toggle="modal" data-target="#imgModalbp">
+                            Ver imagen
+                          </button>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                           <button (click)="cancelImageInstrument(4)" class="trash-btn" data-toggle="tooltip" data-placement="right"
@@ -433,10 +464,10 @@
                                     <p class="quest-10-grey text-center">Teclado</p>
                                   </label>
                                 </div> -->
-                          <input  
+                          <input
                             (change)="updateInstrumentSource($event,5)" type="file" id="img-tabs-piano" name="img-tabs-piano" accept="image/*"
                             class="hidden">
-                          <label class="img-btn" for="img-tabs-piano" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                          <label class="img-btn-ins" for="img-tabs-piano" data-toggle="tooltip" data-placement="right" title="Subir una foto">
                             <img src="/assets/images/piano.svg">
                             <p class="quest-10-grey text-center">Teclado</p>
                           </label>
@@ -444,7 +475,10 @@
                         <!-- img placeholder when a file has been picked. shows only when 'sourceTabPiano' is not empty -->
                         <div class="row">
                           <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                            <img *ngIf="sourceTabPiano.length > 0" [src]="sourceTabPiano">
+                            <img class="p-b-10 sm-img" *ngIf="sourceTabPiano.length > 0" [src]="sourceTabPiano">
+                            <button  *ngIf="sourceTabPiano.length > 0"  class="modal-btn" data-toggle="modal" data-target="#imgModalpp">
+                              Ver imagen
+                            </button>
                           </div>
                           <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                             <button *ngIf="sourceTabPiano.length > 0" (click)="cancelImageInstrument(5)" class="trash-btn"><i
@@ -455,7 +489,10 @@
 
                       <div *ngIf="newSong.tabPiano == true" class="input-group mb-3 row">
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                          <img class="edit-img" [src]="newSong.tabPianoBlob">
+                          <img class="sm-img p-b-10" [src]="newSong.tabPianoBlob">
+                          <button class="modal-btn" data-toggle="modal" data-target="#imgModalpp">
+                            Ver imagen
+                          </button>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                           <button (click)="cancelImageInstrument(5)" class="trash-btn" data-toggle="tooltip" data-placement="right"
@@ -464,7 +501,7 @@
                       </div>
                     </div>
                   </div>
-                  
+
                   <p class="fira-20-blu">Etiquetas de búsqueda</p>
                   <p class="quest-15-grey">Añade etiquetas de búsqueda de tus canciones para que tu equipo siempre
                     pueda
@@ -548,10 +585,9 @@
                           </li>
                         </ul>
                       </div>
-                      <div>
-                        <p><!-- Aquí va el editor!!!! -->
+                      <div class="p-t-20"><!-- Aquí va el editor!!!! -->
+                          <p class="quest-18-grey p-b-10">Escribe la letra de tu canción aqui abajo.</p>
                           <textarea [(ngModel)]="newSong.lyric" placeholder="Letra de la cancion..."></textarea>
-                        </p>
                       </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
@@ -578,10 +614,10 @@
                                   <p class="quest-10-grey text-center">Guitarra</p>
                                 </label> -->
 
-                                <input 
+                                <input
                                   (change)="updateInstrumentSource($event,0)" type="file" id="img-chords-guitar" name="img-chords-guitar" accept="image/*"
                                   class="hidden">
-                                <label class="img-btn" for="img-chords-guitar" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                                <label class="img-btn-ins" for="img-chords-guitar" data-toggle="tooltip" data-placement="right" title="Subir una foto">
                                   <img src="/assets/images/guitarra.svg">
                                   <p class="quest-10-grey text-center">Guitarra</p>
                                 </label>
@@ -589,7 +625,10 @@
                               <!-- img placeholder when a file has been picked. shows only when 'sourceTabGuitar' is not empty -->
                               <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                                  <img *ngIf="sourceChordsGuitar.length > 0" [src]="sourceChordsGuitar">
+                                  <img class="sm-img p-b-10" *ngIf="sourceChordsGuitar.length > 0" [src]="sourceChordsGuitar">
+                                  <button *ngIf="sourceChordsGuitar.length > 0"  class="modal-btn" data-toggle="modal" data-target="#imgModalg">
+                                    Ver imagen
+                                  </button>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                                   <button *ngIf="sourceChordsGuitar.length > 0" (click)="cancelImageInstrument(0)" class="trash-btn"><i
@@ -600,7 +639,10 @@
 
                             <div *ngIf="newSong.chordsGuitar == true" class="input-group mb-3 row">
                               <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                                <img class="edit-img" [src]="newSong.chordsGuitarBlob">
+                                <img class="sm-img p-b-10" [src]="newSong.chordsGuitarBlob">
+                                <button class="modal-btn" data-toggle="modal" data-target="#imgModalg">
+                                  Ver imagen
+                                </button>
                               </div>
                               <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                                 <button (click)="cancelImageInstrument(0)" class="trash-btn" data-toggle="tooltip" data-placement="right"
@@ -621,10 +663,10 @@
                                   <p class="quest-10-grey text-center">Bajo</p>
                                 </label>
                               </div> -->
-                              <input  
+                              <input
                                 (change)="updateInstrumentSource($event,1)" type="file" id="img-chords-bass" name="img-chords-bass" accept="image/*"
                                 class="hidden">
-                              <label class="img-btn" for="img-chords-bass" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                              <label class="img-btn-ins" for="img-chords-bass" data-toggle="tooltip" data-placement="right" title="Subir una foto">
                                 <img src="/assets/images/bajo.svg">
                                 <p class="quest-10-grey text-center">Bajo</p>
                               </label>
@@ -632,7 +674,10 @@
                             <!-- img placeholder when a file has been picked. shows only when 'sourceTabGuitar' is not empty -->
                             <div class="row">
                               <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                                <img *ngIf="sourceChordsBass.length > 0" [src]="sourceChordsBass">
+                                <img class="sm-img p-b-10" *ngIf="sourceChordsBass.length > 0" [src]="sourceChordsBass">
+                                <button *ngIf="sourceChordsBass.length > 0" class="modal-btn" data-toggle="modal" data-target="#imgModalb">
+                                  Ver imagen
+                                </button>
                               </div>
                               <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                                 <button *ngIf="sourceChordsBass.length > 0" (click)="cancelImageInstrument(1)" class="trash-btn"><i
@@ -643,7 +688,10 @@
 
                           <div *ngIf="newSong.chordsBass == true" class="input-group mb-3 row">
                             <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                              <img class="edit-img" [src]="newSong.chordsBassBlob">
+                              <img class="sm-img" [src]="newSong.chordsBassBlob">
+                              <button class="modal-btn" data-toggle="modal" data-target="#imgModalb">
+                                Ver imagen
+                              </button>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                               <button (click)="cancelImageInstrument(1)" class="trash-btn" data-toggle="tooltip" data-placement="right"
@@ -662,10 +710,10 @@
                                       <p class="quest-10-grey text-center">Teclado</p>
                                     </label>
                                   </div> -->
-                              <input  
+                              <input
                                 (change)="updateInstrumentSource($event,2)" type="file" id="img-chords-piano" name="img-chords-piano" accept="image/*"
                                 class="hidden">
-                              <label class="img-btn" for="img-chords-piano" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                              <label class="img-btn-ins" for="img-chords-piano" data-toggle="tooltip" data-placement="right" title="Subir una foto">
                                 <img src="/assets/images/piano.svg">
                                 <p class="quest-10-grey text-center">Teclado</p>
                               </label>
@@ -673,7 +721,10 @@
                             <!-- img placeholder when a file has been picked. shows only when 'sourceTabGuitar' is not empty -->
                             <div class="row">
                               <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                                <img *ngIf="sourceChordsPiano.length > 0" [src]="sourceChordsPiano">
+                                <img class="sm-img p-b-10" *ngIf="sourceChordsPiano.length > 0" [src]="sourceChordsPiano">
+                                <button *ngIf="sourceChordsPiano.length > 0" class="modal-btn" data-toggle="modal" data-target="#imgModalp">
+                                  Ver imagen
+                                </button>
                               </div>
                               <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                                 <button *ngIf="sourceChordsPiano.length > 0" (click)="cancelImageInstrument(2)" class="trash-btn"><i
@@ -684,7 +735,10 @@
 
                           <div *ngIf="newSong.chordsPiano == true" class="input-group mb-3 row">
                             <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                              <img class="edit-img" [src]="newSong.chordsPianoBlob">
+                              <img class="sm-img" [src]="newSong.chordsPianoBlob">
+                              <button class="modal-btn" data-toggle="modal" data-target="#imgModalp">
+                                Ver imagen
+                              </button>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                               <button (click)="cancelImageInstrument(2)" class="trash-btn" data-toggle="tooltip" data-placement="right"
@@ -707,10 +761,10 @@
                                         <p class="quest-10-grey text-center">Guitarra</p>
                                       </label>
                                     </div> -->
-                              <input  
+                              <input
                                 (change)="updateInstrumentSource($event,3)" type="file" id="img-tabs-guitar" name="img-tabs-guitar" accept="image/*"
                                 class="hidden">
-                              <label class="img-btn" for="img-tabs-guitar" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                              <label class="img-btn-ins" for="img-tabs-guitar" data-toggle="tooltip" data-placement="right" title="Subir una foto">
                                 <img src="/assets/images/guitarra.svg">
                                 <p class="quest-10-grey text-center">Guitarra</p>
                               </label>
@@ -718,7 +772,10 @@
                             <!-- img placeholder when a file has been picked. shows only when 'sourceTabGuitar' is not empty -->
                             <div class="row">
                               <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                                <img *ngIf="sourceTabGuitar.length > 0" [src]="sourceTabGuitar">
+                                <img class="sm-img" *ngIf="sourceTabGuitar.length > 0" [src]="sourceTabGuitar">
+                                <button *ngIf="sourceTabGuitar.length > 0" class="modal-btn" data-toggle="modal" data-target="#imgModalgp">
+                                  Ver imagen
+                                </button>
                               </div>
                               <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                                 <button *ngIf="sourceTabGuitar.length > 0" (click)="cancelImageInstrument(3)" class="trash-btn"><i
@@ -729,7 +786,10 @@
 
                           <div *ngIf="newSong.tabGuitar == true" class="input-group mb-3 row">
                             <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                              <img class="edit-img" [src]="newSong.tabGuitarBlob">
+                              <img class="sm-img p-b-10" [src]="newSong.tabGuitarBlob">
+                              <button class="modal-btn" data-toggle="modal" data-target="#imgModalgp">
+                                Ver imagen
+                              </button>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                               <button (click)="cancelImageInstrument(3)" class="trash-btn" data-toggle="tooltip" data-placement="right"
@@ -748,10 +808,10 @@
                                         <p class="quest-10-grey text-center">Bajo</p>
                                       </label>
                                     </div> -->
-                              <input  
+                              <input
                                 (change)="updateInstrumentSource($event,4)" type="file" id="img-tabs-bass" name="img-tabs-bass" accept="image/*"
                                 class="hidden">
-                              <label class="img-btn" for="img-tabs-bass" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                              <label class="img-btn-ins" for="img-tabs-bass" data-toggle="tooltip" data-placement="right" title="Subir una foto">
                                 <img src="/assets/images/bajo.svg">
                                 <p class="quest-10-grey text-center">Bajo</p>
                               </label>
@@ -759,7 +819,10 @@
                             <!-- img placeholder when a file has been picked. shows only when 'sourceTabBass' is not empty -->
                             <div class="row">
                               <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                                <img *ngIf="sourceTabBass.length > 0" [src]="sourceTabBass">
+                                <img class="sm-img p-b-10" *ngIf="sourceTabBass.length > 0" [src]="sourceTabBass">
+                                <button *ngIf="sourceTabBass.length > 0"  class="modal-btn" data-toggle="modal" data-target="#imgModalbp">
+                                  Ver imagen
+                                </button>
                               </div>
                               <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                                 <button *ngIf="sourceTabBass.length > 0" (click)="cancelImageInstrument(4)" class="trash-btn"><i
@@ -770,7 +833,10 @@
 
                           <div *ngIf="newSong.tabBass == true" class="input-group mb-3 row">
                             <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                              <img class="edit-img" [src]="newSong.tabBassBlob">
+                              <img class="sm-img p-b-10" [src]="newSong.tabBassBlob">
+                              <button class="modal-btn" data-toggle="modal" data-target="#imgModalbp">
+                                Ver imagen
+                              </button>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                               <button (click)="cancelImageInstrument(4)" class="trash-btn" data-toggle="tooltip" data-placement="right"
@@ -789,10 +855,10 @@
                                         <p class="quest-10-grey text-center">Teclado</p>
                                       </label>
                                     </div> -->
-                              <input  
+                              <input
                                 (change)="updateInstrumentSource($event,5)" type="file" id="img-tabs-piano" name="img-tabs-piano" accept="image/*"
                                 class="hidden">
-                              <label class="img-btn" for="img-tabs-piano" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                              <label class="img-btn-ins" for="img-tabs-piano" data-toggle="tooltip" data-placement="right" title="Subir una foto">
                                 <img src="/assets/images/piano.svg">
                                 <p class="quest-10-grey text-center">Teclado</p>
                               </label>
@@ -800,7 +866,10 @@
                             <!-- img placeholder when a file has been picked. shows only when 'sourceTabPiano' is not empty -->
                             <div class="row">
                               <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                                <img *ngIf="sourceTabPiano.length > 0" [src]="sourceTabPiano">
+                                <img class="sm-img p-b-10" *ngIf="sourceTabPiano.length > 0" [src]="sourceTabPiano">
+                                <button *ngIf="sourceTabPiano.length > 0" class="modal-btn" data-toggle="modal" data-target="#imgModalpp">
+                                  Ver imagen
+                                </button>
                               </div>
                               <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                                 <button *ngIf="sourceTabPiano.length > 0" (click)="cancelImageInstrument(5)" class="trash-btn"><i
@@ -811,7 +880,10 @@
 
                           <div *ngIf="newSong.tabPiano == true" class="input-group mb-3 row">
                             <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                              <img class="edit-img" [src]="newSong.tabPianoBlob">
+                              <img class="sm-img p-b-10" [src]="newSong.tabPianoBlob">
+                              <button class="modal-btn" data-toggle="modal" data-target="#imgModalpp">
+                                Ver imagen
+                              </button>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
                               <button (click)="cancelImageInstrument(5)" class="trash-btn" data-toggle="tooltip" data-placement="right"
@@ -820,7 +892,7 @@
                           </div>
                         </div>
                       </div>
-                      
+
                       <p class="fira-20-blu">Etiquetas de búsqueda</p>
                       <p class="quest-15-grey">Añade etiquetas de búsqueda de tus canciones para que tu equipo siempre
                         pueda
@@ -853,12 +925,12 @@
                 </div>
                 <div class="tab-pane fade" id="oldsong" role="tabpanel" aria-labelledby="profile-tab">
                   <div class="p-b-20">
-                    <h1 class="fira-30-grey">Lista de canciones disponibles para el set</h1>
+                    <h1 class="fira-30-grey p-t-20">Lista de canciones disponibles para el set</h1>
                     <div class="search-bar p-t-20">
                         <input [(ngModel)]="searchValue" (ngModelChange)="filterSongByName($event)"  type="text" placeholder="Buscar una cancion...">
                     </div>
                   </div>
-                  <p class="quest-15-grey p-t-30 p-l-15">Añade una canción que ya está registrada.</p>
+                  <p class="quest-15-grey p-l-15">Añade una canción que ya está registrada.</p>
                   <div class="row">
                     <!-- <div class="col-lg-6 col-md-12">
                       <div class="ex-song ex-song-choosen">
@@ -881,6 +953,80 @@
                 </div>
               </div>
 
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="modal fade" id="imgModalg" tabindex="-1" role="dialog" aria-labelledby="imgModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <img class="img-modal" [src]="newSong.chordsGuitarBlob">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="imgModalb" tabindex="-1" role="dialog" aria-labelledby="imgModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <img class="img-modal" [src]="newSong.chordsBassBlob">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="imgModalp" tabindex="-1" role="dialog" aria-labelledby="imgModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <img class="img-modal" [src]="newSong.chordsPianoBlob">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="imgModalgp" tabindex="-1" role="dialog" aria-labelledby="imgModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <img class="img-modal" [src]="newSong.tabGuitarBlob">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="imgModalbp" tabindex="-1" role="dialog" aria-labelledby="imgModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <img class="img-modal" [src]="newSong.tabBassBlob">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="imgModalpp" tabindex="-1" role="dialog" aria-labelledby="imgModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <img class="img-modal" [src]="newSong.tabPianoBlob">
+              </div>
             </div>
           </div>
         </div>

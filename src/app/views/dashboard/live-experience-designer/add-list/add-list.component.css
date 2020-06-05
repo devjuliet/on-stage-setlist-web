@@ -119,6 +119,8 @@ textarea:focus, input:focus{
 }
 .img-btn{
   transition: .3s ease-in-out;
+  position: relative;
+  cursor: pointer;
 }
 .img-btn:hover{
   opacity: .7;
@@ -133,6 +135,44 @@ textarea:focus, input:focus{
   cursor: pointer;
   transition: .3s ease-in-out;
 }
-.ex-song-choosen{
+.ex-song:hover{
+  border: 1px solid #0087D1;
   border-right: 20px solid #0087D1;
+}
+.img-icon{
+  max-width: 400px;
+  opacity: .5;
+}
+.sm-img{
+  max-width: 70px !important;
+  height: 70px;
+  width: 100%;
+}
+.no-event{
+  max-width: 600px;
+  width: 100%;
+  opacity: .5;
+}
+.modal-btn{
+  border: none;
+  padding: 5px 10px;
+  border-radius: 10px;
+  width: 80px;
+  background: #382983;
+  cursor: pointer;
+  color: white;
+  transition: .3s ease-in-out;
+  font-size: 12px;
+}
+.modal-btn:hover{
+  background: #0087D1;
+}
+#imgModalg .modal-backdrop {
+  background-color: red;
+}
+#imgModalg , #imgModalb, #imgModalp, #imgModalgp, #imgModalbp, #imgModalpp{
+  background-color: rgba(56, 41, 131, .3);
+}
+.img-modal{
+  max-width: 450px;
 }

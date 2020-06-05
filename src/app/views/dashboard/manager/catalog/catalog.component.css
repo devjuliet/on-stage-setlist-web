@@ -1,40 +1,46 @@
-.info-dashboard{
-    box-shadow: 0px 0px 6px -3px rgba(56,41,131,1);
-    padding: 20px;
-    border-radius: 10px;
-    min-height: 80vh;
+.info-dashboard {
+  box-shadow: 0px 0px 6px -3px rgba(56, 41, 131, 1);
+  padding: 20px;
+  border-radius: 10px;
+  min-height: 80vh;
 }
-img{
-    width: 150px;
+img {
+  width: 150px;
 }
-.social-btn{
-    background-color: white;
-    border: none;
-    cursor: pointer;
-    color: #382983;
-    transition: .3s ease-in-out;
-    font-size: 20px;
+.social-btn {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  color: #382983;
+  transition: 0.3s ease-in-out;
+  font-size: 20px;
 }
-.cloud:hover{
-    color: #0088cc;
+.cloud:hover {
+  color: #0088cc;
 }
-.dropbox:hover{
-    color: #3d9ae8;
+.dropbox:hover {
+  color: #3d9ae8;
 }
-.export:hover{
-    color: #CD4410;
+.export:hover {
+  color: #cd4410;
 }
-.disp-alcent{
-    display: flex;
-    align-items: center;
+.disp-alcent {
+  display: flex;
+  align-items: center;
 }
-.text-end{
-    text-align: end;
+.text-end {
+  text-align: end;
 }
-.text-center{
-    text-align: center;
+.text-center {
+  text-align: center;
 }
-.catolog-card{
-    border-radius: 10px;
-    box-shadow: 0px 0px 5px -3px rgba(56,41,131,1);
+.catolog-card {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px -3px rgba(56, 41, 131, 1);
+  text-align: center;
+}
+.catolog-card img{
+  width: 200px;
+  height: 150px;
 }
