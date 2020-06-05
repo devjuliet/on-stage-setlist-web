@@ -1,39 +1,72 @@
 <div>
-  <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass.toString()">
-    <app-sidebar class="sidebar" [activeLink]="" [isManager]="dataSessionService.user.type.toString()=='1'"
-      [nameUser]="dataSessionService.user.name" [imageurl]="dataSessionService.user.haveImage"
-      [idUser]="dataSessionService.user.idUser" [imageSrc]="dataSessionService.user.imageBlob"
-      [bandsList]="dataSessionService.elementsManager.bands"></app-sidebar>
-  </div>
-  <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
-    <app-navbar-dashboard></app-navbar-dashboard>
-    <div class="p-t-20">
-      <div class="info-dashboard">
-        <p class="fira-30-grey">Resultados de la busqueda : '{{searchQuery}}'</p>
-        <div *ngIf="results.length != 0" class="row">
-          <div *ngFor="let result of results; let i = index" class="col-lg-4 col-md-5">
-            <!--Tarjeta de banda-->
-            <div *ngIf="result.isBand" class="band-card">
-              <div class="text-center">
-                <img *ngIf="!result.haveImage" class="profile-pic" src="/assets/images/no-band.svg">
-                <img *ngIf="result.haveImage" class="profile-pic" [src]="result.imageBlob">
-              </div>
-              <div>
-                <p class="quest-20-grey text-center p-b-10 p-t-10">{{result.name}}</p>
-                <p class="quest-15-grey text-center box-text">{{result.description}}</p>
-                <div>
-                  <p class="fira-16-grey text-center p-t-5 p-b-5">Generos</p>
-                  <div class="genere-tags">
-                    <div *ngIf="results[i].genres[0] != undefined" class="tags">
-                      <p>{{results[i].genres[0].name}}</p>
-                    </div>
-                    <div *ngIf="results[i].genres[1] != undefined" class="tags">
-                      <p>{{results[i].genres[1].name}}</p>
-                    </div>
-                    <div *ngIf="results[i].genres[2] != undefined" class="tags">
-                      <p>{{results[i].genres[2].name}}</p>
-                    </div>
-                  </div>
+      <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass.toString()">
+        <app-sidebar class="sidebar" 
+            [activeLink]="" 
+            [isManager]="dataSessionService.user.type.toString()=='1'"
+            [nameUser]="dataSessionService.user.name" 
+            [imageurl]="dataSessionService.user.haveImage"
+            [idUser]="dataSessionService.user.idUser" 
+            [imageSrc]="dataSessionService.user.imageBlob"
+            [bandsList]="dataSessionService.elementsManager.bands" 
+            [setList]="dataSessionService.elementsLed.setsList"></app-sidebar>
+    </div>
+      <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
+        <app-navbar-dashboard></app-navbar-dashboard>
+        <div class="p-t-20">
+            <div class="info-dashboard">
+                <p class="fira-30-grey">Resultados de la busqueda : '{{searchQuery}}'</p>
+                              <div *ngIf="results.length != 0" class="row">
+                        <div *ngFor="let result of results; let i = index" class="col-lg-4 col-md-5">
+                            <!--Tarjeta de banda-->
+                            <div *ngIf="result.isBand" class="band-card">
+                                <div class="text-center">
+                                    <img *ngIf="!result.haveImage" class="profile-pic" src="/assets/images/no-band.svg">
+                                    <img *ngIf="result.haveImage" class="profile-pic" [src]="result.imageBlob">
+                                </div>
+                                <div>
+                                    <p class="quest-20-grey text-center p-b-10 p-t-10">{{result.name}}</p>
+                                    <p class="quest-15-grey text-center">{{result.description}}</p>
+                                    <div>
+                                        <p class="fira-16-grey text-center p-t-5 p-b-5">Generos</p>
+                                        <div class="genere-tags">
+                                            <div *ngIf="results[i].genres[0] != undefined" class="tags"><p>{{results[i].genres[0].name}}</p></div>
+                                            <div *ngIf="results[i].genres[1] != undefined" class="tags"><p>{{results[i].genres[1].name}}</p></div>
+                                            <div *ngIf="results[i].genres[2] != undefined" class="tags"><p>{{results[i].genres[2].name}}</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center p-t-20">
+                                        <button (click)="selectBand(result.id)" class="btn-lblu" data-toggle="modal" data-target="#bandModal">Ver
+                                            más</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Tarjeta de Músico-->
+                            <div *ngIf="!result.isBand" class="music-card">
+                                <div class="text-center">
+                                    <img *ngIf="!result.haveImage" class="profile-pic" src="/assets/images/flor.svg">
+                                    <img *ngIf="result.haveImage" class="profile-pic" [src]="result.imageBlob">
+                                </div>
+                                <div>
+                                    <p class="quest-20-grey text-center p-b-10 p-t-10">{{result.name}}</p>
+                                    <div>
+                                        <p class="fira-16-grey text-center p-t-5 p-b-5">Instrumento</p>
+                                        <div class="genere-tags">
+                                            <div class="tags">
+                                                <p *ngIf="result.role.toString()=='0'">Vocalista</p>
+                                                <p *ngIf="result.role.toString()=='1'">Teclado</p>
+                                                <p *ngIf="result.role.toString()=='2'">Bajista</p>
+                                                <p *ngIf="result.role.toString()=='3'">Guitarrista</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center p-t-20">
+                                    <button (click)="selectArtist(result.id)" class="btn-lblu" data-toggle="modal" data-target="#musicModal">Ver
+                                        más</button>
+                                </div>
+                            </div>
+                        </div>
                 </div>
                 <div class="text-center p-t-20">
                   <button (click)="selectBand(result.id)" class="btn-lblu" data-toggle="modal"
