@@ -57,7 +57,6 @@
                                     <input (change)="updateSource($event)" type="file" id="img" name="img" accept="image/*" class="hidden">
                                     <label class="img-btn" for="img" data-toggle="tooltip" data-placement="right" title="Subir una foto">
                                         <img class="edit-img" src="/assets/images/no-band.svg">
-                                        <div class="color-img"></div>
                                         <i class="fas fa-upload middle-img"></i>
                                     </label>
                                 </label>
@@ -123,6 +122,7 @@
                                         <p class="fira-20-blu" *ngIf="member.role.toString()=='2'">Bajista</p>
                                         <p class="fira-20-blu" *ngIf="member.role.toString()=='3'">Guitarrista</p>
                                         <div class="profile-box">
+                                            <span class="led" data-toggle="tooltip" data-placement="top" title="Diseñador de experiencia"><i class="fas fa-pen-fancy"></i></span>
                                             <button (click)="selectForDelete(member)" class="delete-btn" data-toggle="modal" data-target="#deleteModal"><i class="far fa-times-circle"></i></button>
                                             <img *ngIf="!member.haveImage" class="profile-pic" src="/assets/images/avatar.svg">
                                             <img *ngIf="member.haveImage" class="profile-pic" [src]="member.imageBlob">
@@ -135,7 +135,7 @@
                     </div>
                 </div>
                 <div class="p-t-20 p-b-20">
-                    <p class="fira-20-blu">Lista de canciones</p>
+                    <p class="fira-20-blu">Listas de canciones</p>
                 </div>
                 <div class="member-box">
                     <div class="table-responsive">

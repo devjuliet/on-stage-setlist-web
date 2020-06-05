@@ -1,5 +1,5 @@
 <div>
-    <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass.toString()">
+      <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass.toString()">
         <app-sidebar class="sidebar" 
             [activeLink]="" 
             [isManager]="dataSessionService.user.type.toString()=='1'"
@@ -10,17 +10,17 @@
             [bandsList]="dataSessionService.elementsManager.bands" 
             [setList]="dataSessionService.elementsLed.setsList"></app-sidebar>
     </div>
-    <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
+      <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
         <app-navbar-dashboard></app-navbar-dashboard>
         <div class="p-t-20">
             <div class="info-dashboard">
                 <p class="fira-30-grey">Resultados de la busqueda : '{{searchQuery}}'</p>
-                <div *ngIf="results.length != 0" class="row">
+                              <div *ngIf="results.length != 0" class="row">
                         <div *ngFor="let result of results; let i = index" class="col-lg-4 col-md-5">
                             <!--Tarjeta de banda-->
                             <div *ngIf="result.isBand" class="band-card">
                                 <div class="text-center">
-                                    <img *ngIf="!result.haveImage" class="profile-pic" src="/assets/images/band.jpg">
+                                    <img *ngIf="!result.haveImage" class="profile-pic" src="/assets/images/no-band.svg">
                                     <img *ngIf="result.haveImage" class="profile-pic" [src]="result.imageBlob">
                                 </div>
                                 <div>
@@ -68,103 +68,145 @@
                             </div>
                         </div>
                 </div>
-            </div>
-            <div *ngIf="results.length == 0" class="no-result p-t-80">
-                <img src="/assets/images/no-result.svg">
-                <p class="quest-40-grey">No se han encontrado resultados...</p>
-            </div>
-        </div>
-        <!--Modal-Bandas-->
-        <div class="modal fade" id="bandModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 info-box">
-                                <div class="text-center">
-                                    <img *ngIf="bandSelected.urlLogo.length == 0" class="profile-pic" src="/assets/images/band.jpg">
-                                    <img *ngIf="bandSelected.urlLogo.length != 0" class="profile-pic" [src]="bandSelected.imageBlob">
-                                    <p class="quest-20-grey p-t-20 p-b-10"><strong>{{bandSelected.name}}</strong></p>
-                                    <p class="quest-15-grey">{{bandSelected.description}}</p>
-                                    <p class="fira-18-blu p-t-20 p-b-10">Generos</p>
-                                    <div class="genere-tags">
-                                        <div *ngIf="bandSelected.genres[0] != undefined" class="tags"><p>{{bandSelected.genres[0].name}}</p></div>
-                                        <div *ngIf="bandSelected.genres[1] != undefined" class="tags"><p>{{bandSelected.genres[1].name}}</p></div>
-                                        <div *ngIf="bandSelected.genres[2] != undefined" class="tags"><p>{{bandSelected.genres[2].name}}</p></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="text-center">
-                                    <p class="fira-18-blu p-t-20 p-b-10"><strong>Integrantes</strong></p>
-                                    <div class="member-box">
-                                        <div class="row">
-                                            <div *ngFor="let member of bandSelected.bandMembers; let i = index" class="col-lg-6">
-                                                <div class="band-member">
-                                                    <img *ngIf="!member.haveImage" class="profile-pic" src="/assets/images/luismi.svg">
-                                                    <img *ngIf="member.haveImage" class="profile-pic" [src]="member.imageBlob">
-                                                    <p class="quest-15-grey"><strong>{{member.name}}</strong></p>
-                                                    <p class="quest-15-grey" *ngIf="member.role.toString()=='0'">Vocalista</p>
-                                                    <p class="quest-15-grey" *ngIf="member.role.toString()=='1'">Teclado</p>
-                                                    <p class="quest-15-grey" *ngIf="member.role.toString()=='2'">Bajista</p>
-                                                    <p class="quest-15-grey" *ngIf="member.role.toString()=='3'">Guitarrista</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn-gray" data-dismiss="modal">Cerrar</button>
-                    </div>
+                <div class="text-center p-t-20">
+                  <button (click)="selectBand(result.id)" class="btn-lblu" data-toggle="modal"
+                    data-target="#bandModal">Ver
+                    más</button>
                 </div>
+              </div>
             </div>
-        </div>
-        <!--Modal Musicos-->
-        <div class="modal fade" id="musicModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
+
+            <!--Tarjeta de Músico-->
+            <div *ngIf="!result.isBand" class="music-card">
+              <div class="text-center">
+                <img *ngIf="!result.haveImage" class="profile-pic" src="/assets/images/avatar.svg">
+                <img *ngIf="result.haveImage" class="profile-pic" [src]="result.imageBlob">
+              </div>
+              <div>
+                <p class="quest-20-grey text-center p-b-10 p-t-10">{{result.name}}</p>
+                <div>
+                  <p class="fira-16-grey text-center p-t-5 p-b-5">Instrumento</p>
+                  <div class="genere-tags">
+                    <div class="tags">
+                      <p *ngIf="result.role.toString()=='0'">Vocalista</p>
+                      <p *ngIf="result.role.toString()=='1'">Teclado</p>
+                      <p *ngIf="result.role.toString()=='2'">Bajista</p>
+                      <p *ngIf="result.role.toString()=='3'">Guitarrista</p>
                     </div>
-                    <div class="modal-body p-b-40">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 text-center right-side p-b-20">
-                                <div>
-                                    <div class="profile-img">
-                                        <img *ngIf="!artistSelected.haveImage" class="profile-pic" src="/assets/images/gbaby.jpg">
-                                        <img *ngIf="artistSelected.haveImage" class="profile-pic" [src]="artistSelected.imageBlob">
-                                        <p class="quest-20-grey p-b-10"><strong>{{artistSelected.name}}</strong></p>
-                                    </div>
-                                    <p class="quest-15-grey">{{artistSelected.description}}</p>
-                                    <p class="fira-18-blu" *ngIf="artistSelected.role.toString()=='0'">Vocalista</p>
-                                    <p class="fira-18-blu" *ngIf="artistSelected.role.toString()=='1'">Teclado</p>
-                                    <p class="fira-18-blu" *ngIf="artistSelected.role.toString()=='2'">Bajista</p>
-                                    <p class="fira-18-blu" *ngIf="artistSelected.role.toString()=='3'">Guitarrista</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <p class="quest-20-grey text-center p-b-20">Historial</p>
-                                <div class="modal-history">
-                                    <div *ngFor="let register of artistSelected.userHistories; let i = index" class="history-box m-10-0">
-                                        <p class="fira-18-blu">{{register.bandName}}</p>
-                                        <p class="quest-15-grey">{{register.description}}</p>
-                                        <p class="quest-15-grey">{{register.date}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn-gray" data-dismiss="modal">Close</button>
-                    </div>
+                  </div>
                 </div>
+              </div>
+              <div class="text-center p-t-20">
+                <button (click)="selectArtist(result.id)" class="btn-lblu" data-toggle="modal"
+                  data-target="#musicModal">Ver
+                  más</button>
+              </div>
             </div>
+          </div>
         </div>
+        <div *ngIf="results.length == 0" class="no-result p-t-80">
+          <img src="/assets/images/no-result.svg">
+          <p class="quest-40-grey">No se han encontrado resultados...</p>
+        </div>
+      </div>
     </div>
+    <!--Modal-Bandas-->
+    <div class="modal fade" id="bandModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 info-box">
+                <div class="text-center">
+                  <img *ngIf="bandSelected.urlLogo.length == 0" class="profile-pic" src="/assets/images/no-band.svg">
+                  <img *ngIf="bandSelected.urlLogo.length != 0" class="profile-pic" [src]="bandSelected.imageBlob">
+                  <p class="quest-20-grey p-t-20 p-b-10"><strong>{{bandSelected.name}}</strong></p>
+                  <p class="quest-15-grey">{{bandSelected.description}}</p>
+                  <p class="fira-18-blu p-t-20 p-b-10">Generos</p>
+                  <div class="genere-tags">
+                    <div *ngIf="bandSelected.genres[0] != undefined" class="tags">
+                      <p>{{bandSelected.genres[0].name}}</p>
+                    </div>
+                    <div *ngIf="bandSelected.genres[1] != undefined" class="tags">
+                      <p>{{bandSelected.genres[1].name}}</p>
+                    </div>
+                    <div *ngIf="bandSelected.genres[2] != undefined" class="tags">
+                      <p>{{bandSelected.genres[2].name}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <div class="text-center">
+                  <p class="fira-18-blu p-t-20 p-b-10"><strong>Integrantes</strong></p>
+                  <div class="member-box">
+                    <div class="row">
+                      <div *ngFor="let member of bandSelected.bandMembers; let i = index" class="col-lg-6">
+                        <div class="band-member">
+                          <img *ngIf="!member.haveImage" class="profile-pic" src="/assets/images/avatar.svg">
+                          <img *ngIf="member.haveImage" class="profile-pic" [src]="member.imageBlob">
+                          <p class="quest-15-grey"><strong>{{member.name}}</strong></p>
+                          <p class="quest-15-grey" *ngIf="member.role.toString()=='0'">Vocalista</p>
+                          <p class="quest-15-grey" *ngIf="member.role.toString()=='1'">Teclado</p>
+                          <p class="quest-15-grey" *ngIf="member.role.toString()=='2'">Bajista</p>
+                          <p class="quest-15-grey" *ngIf="member.role.toString()=='3'">Guitarrista</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-gray" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Modal Musicos-->
+    <div class="modal fade" id="musicModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+          </div>
+          <div class="modal-body p-b-40">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 text-center right-side p-b-20">
+                <div>
+                  <div class="profile-img">
+                    <img *ngIf="!artistSelected.haveImage" class="profile-pic" src="/assets/images/avatar.svg">
+                    <img *ngIf="artistSelected.haveImage" class="profile-pic" [src]="artistSelected.imageBlob">
+                    <p class="quest-20-grey p-b-10"><strong>{{artistSelected.name}}</strong></p>
+                  </div>
+                  <p class="quest-15-grey">{{artistSelected.description}}</p>
+                  <p class="fira-18-blu" *ngIf="artistSelected.role.toString()=='0'">Vocalista</p>
+                  <p class="fira-18-blu" *ngIf="artistSelected.role.toString()=='1'">Teclado</p>
+                  <p class="fira-18-blu" *ngIf="artistSelected.role.toString()=='2'">Bajista</p>
+                  <p class="fira-18-blu" *ngIf="artistSelected.role.toString()=='3'">Guitarrista</p>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <p class="quest-20-grey text-center p-b-20">Historial</p>
+                <div class="modal-history">
+                  <div *ngFor="let register of artistSelected.userHistories; let i = index" class="history-box m-10-0">
+                    <p class="fira-18-blu">{{register.bandName}}</p>
+                    <p class="quest-15-grey">{{register.description}}</p>
+                    <p class="quest-15-grey">{{register.date}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-gray" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

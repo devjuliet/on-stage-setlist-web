@@ -80,6 +80,9 @@ button:focus{
 .fixed-shadow{
     box-shadow: 0px 8px 10px 0px rgba(0,0,0,0.3);
 }
+.position-r{
+  position: relative;
+}
 .sidebar{
     background-color: #382983;
     height: 100vh;
@@ -107,6 +110,9 @@ button:focus{
 }
 .width-90p{
     width: 90%;
+}
+.width-100p{
+  width: 100%;
 }
 .search-bar{
     display: flex;
@@ -490,6 +496,12 @@ button:focus{
 .p-b-180{
     padding-bottom: 180px;
 }
+.p-t-180{
+  padding-top: 180px;
+}
+.p-t-150{
+  padding-top: 150px;
+}
 .p-b-100{
     padding-bottom: 100px;
 }
@@ -576,6 +588,9 @@ button:focus{
 }
 .p-10{
     padding: 10px;
+}
+.p-0{
+  padding: 0 !important;
 }
 @media screen and (max-width: 1440px){
     .max-width{

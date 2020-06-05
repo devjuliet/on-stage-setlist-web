@@ -229,3 +229,11 @@ img{
   display: flex;
   justify-content: center;
 }
+.led{
+  font-size: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #382983;
+}

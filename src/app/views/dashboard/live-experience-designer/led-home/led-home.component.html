@@ -33,11 +33,11 @@
                     <div *ngFor="let list of setsListFiltered; let i = index"  class="col-xl-4 col-lg-6 col-sm-12 p-20-0">
                         <div [routerLink]="'/dashboard/led/edit-list/'+list.idSet.toString()" routerLinkActive="active" class="album-card text-center album-card-selected">
                             <div>
-                                <img *ngIf="list.haveImage == false" src="/assets/images/gbaby.jpg">
-                                <img *ngIf="list.haveImage == true" [src]="list.imageBlob">
+                                <img class="list-img" *ngIf="list.haveImage == false" src="/assets/images/no-list.svg">
+                                <img class="list-img" *ngIf="list.haveImage == true" [src]="list.imageBlob">
                             </div>
                             <div class="p-t-20">
-                                <p class="fira-20-blu">{{list.name}}</p>
+                                <p class="fira-20-blu title-long">{{list.name}}</p>
                                 <p class="quest-15-grey">{{list.songs.length}} canciones</p>
                             </div>
                         </div>
