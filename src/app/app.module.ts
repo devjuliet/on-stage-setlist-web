@@ -30,7 +30,6 @@ import { RegisterComponent } from './views/register/register.component';
 import { NavbarDashboardComponent } from './components/navbar-dashboard/navbar-dashboard.component';
 import { CatalogComponent } from './views/dashboard/manager/catalog/catalog.component';
 import { AddListComponent } from './views/dashboard/live-experience-designer/add-list/add-list.component';
-import { EditListComponent } from './views/dashboard/live-experience-designer/edit-list/edit-list.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { EventComponent } from './views/dashboard/live-experience-designer/event/event.component';
 import { SearchResultComponent } from './views/dashboard/search-result/search-result.component';
@@ -59,7 +58,6 @@ import { RepertoriesComponent } from './views/dashboard/live-experience-designer
     CatalogComponent,
     LedHomeComponent,
     AddListComponent,
-    EditListComponent,
     NotFoundComponent,
     EventComponent,
     SearchResultComponent,

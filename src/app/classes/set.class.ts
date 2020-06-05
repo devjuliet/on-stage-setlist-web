@@ -3,14 +3,14 @@ import { SafeUrl } from "@angular/platform-browser";
 export class Set {
     idSet: Number;
     name: String;
-    urlImage : string;
+    haveImage: boolean;
     description : string;
     imageBlob: SafeUrl;
 
     constructor() {
         this.idSet = 0;
         this.name = "";
-        this.urlImage = "";
+        this.haveImage = false;
         this.description = "";
         this.imageBlob = "";
     }

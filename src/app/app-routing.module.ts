@@ -11,7 +11,6 @@ import { RegisterComponent } from './views/register/register.component';
 import { UsComponent } from './views/us/us.component';
 import { CatalogComponent } from './views/dashboard/manager/catalog/catalog.component';
 import { LedHomeComponent } from './views/dashboard/live-experience-designer/led-home/led-home.component';
-import { EditListComponent } from './views/dashboard/live-experience-designer/edit-list/edit-list.component';
 import { AddListComponent } from './views/dashboard/live-experience-designer/add-list/add-list.component';
 
 import { SettingsComponent } from './views/dashboard/settings/settings.component';
@@ -35,15 +34,14 @@ const routes: Routes = [
 
 
   { path: 'dashboard/led', component: RepertoriesComponent },
-  { path: 'dashboard/led/my-lists', component: LedHomeComponent },
-  { path: 'dashboard/led/add-list', component: AddListComponent },
-  { path: 'dashboard/led/edit-list/:id', component: EditListComponent },
-  { path: 'dashboard/led/event', component: EventComponent },
+  { path: 'dashboard/led/my-lists', component: LedHomeComponent },//lista
+  { path: 'dashboard/led/add-list', component: AddListComponent },//lista
+  { path: 'dashboard/led/edit-list/:id', component: AddListComponent },//lista
   { path: 'dashboard/led/settings', component: SettingsComponent },//lista
 
   { path: 'dashboard/search-result/:search', component: SearchResultComponent },//lista
 
-  { path: 'missing-page', component: NotFoundComponent},
+  { path: 'missing-page', component: NotFoundComponent},//lista
   { path: '**', redirectTo: 'missing-page' }
 ];
 

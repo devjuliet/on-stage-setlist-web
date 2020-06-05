@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Band } from '../../classes/band.class';
+import { SetLed } from '../../classes/led/setLed.class';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,7 +15,8 @@ export class SidebarComponent implements OnInit {
   @Input() idUser: number;
   @Input() imageSrc: string;
   @Input() bandsList : Band[];
-  @Input() idActiveBand : Number;
+  @Input() setList : SetLed[];
+  @Input() idActive : Number;
 
   colorLinks = [
     "whitesmoke",//0
