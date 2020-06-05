@@ -7,6 +7,7 @@
             [imageurl]="dataSessionService.user.haveImage"
             [idUser]="dataSessionService.user.idUser"
             [imageSrc]="dataSessionService.user.imageBlob"
+            [setList]="dataSessionService.elementsLed.setsList"
             ></app-sidebar>
     </div>
     <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
@@ -16,54 +17,28 @@
                 <div class="p-b-20">
                     <h1 class="fira-30-grey">Mis Listas</h1>
                     <div class="search-bar p-t-20">
-                        <input class="p-input"  type="text" placeholder="Buscar una lista...">
+                        <input [(ngModel)]="searchValue" (ngModelChange)="filterByName($event)" class="p-input"  type="text" placeholder="Buscar una lista...">
                         <button class="search-btn">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xl-4 col-lg-6 col-sm-12 p-20-0">
-                        <div class="album-card text-center album-card-selected">
-                            <div>
-                                <img src="/assets/images/gbaby.jpg">
-                            </div>
-                            <div class="p-t-20">
-                                <p class="fira-20-blu">Nombresito del album</p>
-                                <p class="quest-15-grey">10 canciones</p>
-                            </div>
-                        </div>
+                    <div *ngIf="dataSessionService.elementsLed.setsList.length == 0">
+                        Sin listas
                     </div>
-                    <div class="col-xl-4 col-lg-6 col-sm-12  p-20-0">
-                        <div class="album-card text-center">
-                            <div>
-                                <img src="/assets/images/gbaby.jpg">
-                            </div>
-                            <div class="p-t-20">
-                                <p class="fira-20-blu">Nombresito del album</p>
-                                <p class="quest-15-grey">10 canciones</p>
-                            </div>
-                        </div>
+                    <div *ngIf="setsListFiltered.length == 0 && dataSessionService.elementsLed.setsList.length > 0">
+                        Sin resultados
                     </div>
-                    <div class="col-xl-4 col-lg-6 col-sm-12  p-20-0">
-                        <div class="album-card text-center">
+                    <div *ngFor="let list of setsListFiltered; let i = index"  class="col-xl-4 col-lg-6 col-sm-12 p-20-0">
+                        <div [routerLink]="'/dashboard/led/edit-list/'+list.idSet.toString()" routerLinkActive="active" class="album-card text-center album-card-selected">
                             <div>
-                                <img src="/assets/images/gbaby.jpg">
+                                <img *ngIf="list.haveImage == false" src="/assets/images/gbaby.jpg">
+                                <img *ngIf="list.haveImage == true" [src]="list.imageBlob">
                             </div>
                             <div class="p-t-20">
-                                <p class="fira-20-blu">Nombresito del album</p>
-                                <p class="quest-15-grey">10 canciones</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-sm-12  p-20-0">
-                        <div class="album-card text-center">
-                            <div>
-                                <img src="/assets/images/gbaby.jpg">
-                            </div>
-                            <div class="p-t-20">
-                                <p class="fira-20-blu">Nombresito del album</p>
-                                <p class="quest-15-grey">10 canciones</p>
+                                <p class="fira-20-blu">{{list.name}}</p>
+                                <p class="quest-15-grey">{{list.songs.length}} canciones</p>
                             </div>
                         </div>
                     </div>

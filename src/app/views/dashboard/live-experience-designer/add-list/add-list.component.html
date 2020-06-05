@@ -1,8 +1,14 @@
 <div>
   <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass.toString()">
-    <app-sidebar class="sidebar" [activeLink]="2" [isManager]="dataSessionService.user.type.toString()=='1'"
-      [nameUser]="dataSessionService.user.name" [imageurl]="dataSessionService.user.haveImage"
-      [idUser]="dataSessionService.user.idUser" [imageSrc]="dataSessionService.user.imageBlob"></app-sidebar>
+    <app-sidebar class="sidebar" 
+      [activeLink]="idListOpened == undefined ? 2 : 1" 
+      [isManager]="dataSessionService.user.type.toString()=='1'"
+      [nameUser]="dataSessionService.user.name" 
+      [imageurl]="dataSessionService.user.haveImage"
+      [idUser]="dataSessionService.user.idUser" 
+      [imageSrc]="dataSessionService.user.imageBlob"
+      [setList]="dataSessionService.elementsLed.setsList"
+      [idActive]="idListOpened"></app-sidebar>
   </div>
   <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
     <app-navbar-dashboard></app-navbar-dashboard>
@@ -12,102 +18,119 @@
         <div class="row">
           <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
             <div class="p-t-20">
-              <input type="text" placeholder="Nombre de la lista...">
+              <ng-multiselect-dropdown 
+                *ngIf=" newList.name.length == 0 && 
+                        newList.description.length == 0 && 
+                        newList.songs.length == 0"
+
+                [placeholder]="'Selecciona una banda'" 
+                [settings]="dropdownSearchBandSettings"
+                [data]="dataSessionService.elementsLed.bands" 
+                (onSelect)="onBandSearchSelect($event)"
+                (onDeSelect)="onBandSearchSelect($event)" 
+                [(ngModel)]="selectedBand"
+                [disabled]="false">
+              </ng-multiselect-dropdown>
+              <label *ngIf="newList.name.length != 0 || 
+                            newList.description.length != 0 || 
+                            newList.songs.length != 0">
+                Nueva lista para la banda: {{dataSessionService.elementsLed.bands[0].name}}<br>
+                Manager: {{dataSessionService.elementsLed.bands[0].managerName}}<br>
+              </label>
             </div>
-            <div class="p-t-20 text-center upload-img">
-              <input type="file" id="img" class="hidden">
+            <div *ngIf="selectedBand.length != 0" class="p-t-20">
+              <input [(ngModel)]="newList.name" type="text" placeholder="Nombre de la lista...">
+            </div>
+            <div *ngIf="selectedBand.length != 0" class="p-t-20 text-center upload-img">
+              <!-- <input type="file" id="img" class="hidden">
               <label class="img-btn" for="img">
                 <img src="/assets/images/no-song.svg">
                 <div class="color-img"></div>
                 <p class="img-word quest-16-wht">Subir foto</p>
-              </label>
+              </label> -->
+              <div *ngIf="newList.haveImage == false" class="input-group mb-3" style="    justify-content: center;">
+                <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
+
+                <label *ngIf="source.length == 0">
+                  <input #onChange (change)="updateSource($event)" type="file" id="img" name="img" accept="image/*"
+                    class="hidden">
+                  <label class="img-btn" for="img" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                    <img src="/assets/images/no-song.svg">
+                    <div class="color-img"></div>
+                    <i class="fas fa-upload middle-img"></i>
+                  </label>
+                </label>
+                <!-- img placeholder when a file has been picked. shows only when 'source' is not empty -->
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                    <img *ngIf="source.length > 0" [src]="source">
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                    <button *ngIf="source.length > 0" (click)="cancelImage()" class="trash-btn"><i
+                        class="fas fa-trash"></i></button>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="newList.haveImage == true" class="input-group mb-3 row">
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                  <img class="edit-img" [src]="newList.imageBlob">
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                  <button (click)="cancelImage()" class="trash-btn" data-toggle="tooltip" data-placement="right"
+                    title="Eliminar foto"><i class="fas fa-trash"></i></button>
+                </div>
+              </div>
             </div>
-            <div class="p-t-20">
-              <textarea placeholder="Descripción..."></textarea>
+            <div *ngIf="selectedBand.length != 0" class="p-t-20">
+              <textarea [(ngModel)]="newList.description" placeholder="Descripción..."></textarea>
             </div>
           </div>
-          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+          <div *ngIf="selectedBand.length != 0" class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
             <p class="quest-20-grey"><strong>Canciones en tu lista</strong></p>
-            <div class="song-list">
-              <div class="song-box">
-                <div class="num">
-                  <p>1</p>
-                </div>
-                <div class="song-name">
-                  <div>
-                    <p>Mi osito berrinchudo-Giby</p>
-                  </div>
-                  <div>
-                    <button class="edit-btn" data-toggle="modal" data-target="#editSongModal"><i
-                        class="fas fa-pen-square"></i></button>
-                    <button class="trash-btn fsize-25" data-toggle="modal" data-target="#deleteSongModal"><i
-                        class="fas fa-trash"></i></button>
-                  </div>
-                </div>
-              </div>
-              <div class="song-box">
-                <div class="num">
-                  <p>1</p>
-                </div>
-                <div class="song-name">
-                  <div>
-                    <p>Mi osito berrinchudo-Giby</p>
-                  </div>
-                  <div>
-                    <button class="edit-btn" data-toggle="modal" data-target="#editSongModal"><i
-                        class="fas fa-pen-square"></i></button>
-                    <button class="trash-btn fsize-25" data-toggle="modal" data-target="#deleteSongModal"><i
-                        class="fas fa-trash"></i></button>
-                  </div>
-                </div>
-              </div>
-              <div class="song-box">
-                <div class="num">
-                  <p>1</p>
-                </div>
-                <div class="song-name">
-                  <div>
-                    <p>Mi osito berrinchudo-Giby</p>
-                  </div>
-                  <div>
-                    <button class="edit-btn" data-toggle="modal" data-target="#editSongModal"><i
-                        class="fas fa-pen-square"></i></button>
-                    <button class="trash-btn fsize-25" data-toggle="modal" data-target="#deleteSongModal"><i
-                        class="fas fa-trash"></i></button>
-                  </div>
-                </div>
-              </div>
-              <div class="song-box">
-                <div class="num">
-                  <p>1</p>
-                </div>
-                <div class="song-name">
-                  <div>
-                    <p>Mi osito berrinchudo-Giby</p>
-                  </div>
-                  <div>
-                    <button class="edit-btn" data-toggle="modal" data-target="#editSongModal"><i
-                        class="fas fa-pen-square"></i></button>
-                    <button class="trash-btn fsize-25" data-toggle="modal" data-target="#deleteSongModal"><i
-                        class="fas fa-trash"></i></button>
-                  </div>
-                </div>
-              </div>
+            <div *ngIf="newList.songs.length == 0">
+              Sin canciones
             </div>
+            <div class="song-list" >
+                <div *ngFor="let song of newList.songs; let i = index"  class="song-box">
+                  <div class="num">
+                    <p>{{newList.songs[i].idSong}}</p>
+                  </div>
+                  <div class="song-name">
+                    <div>
+                      <p>{{song.name}}</p>
+                    </div>
+                    <div>
+                      <button (click)="initEditingSong(song.idSong)" class="edit-btn" data-toggle="modal" data-target="#editSongModal"><i
+                          class="fas fa-pen-square"></i></button>
+                      <button (click)="selectSongForDeleteInSet(song.idSong)" class="trash-btn fsize-25" data-toggle="modal" data-target="#deleteSongModal"><i
+                          class="fas fa-trash"></i></button>
+                    </div>
+                  </div>
+                </div>
             <div class="text-center p-t-20">
               <div>
-                <button class="btn-lblu" data-toggle="modal" data-target="#newSongModal"><i
+                <button #newSongModal (click)="initNewSong()" class="btn-lblu" data-toggle="modal" data-target="#newSongModal"><i
                     class="fas fa-plus p-r-10"></i>Añadir una canción nueva</button>
               </div>
             </div>
           </div>
         </div>
-        <div class="button-footer p-t-40">
+        <div *ngIf="selectedBand.length != 0" class="button-footer p-t-40">
           <div class="p-r-20 p-l-20">
-            <button class="btn-gray">Cancelar</button>
+            <button routerLink="/dashboard/led/my-lists" routerLinkActive="active" class="btn-gray">Cancelar</button>
           </div>
           <div class="p-r-20 p-l-20">
-            <button class="btn-lblu">Guardar</button>
+            <button (click)="saveNewList()" class="btn-lblu">Guardar</button>
+          </div>
+        </div>
+
+        <div *ngIf="selectedBand.length == 0" class="row text-center">
+          <div class="col-12">
+            <img class="no-event" src="/assets/images/concert.svg">
+          </div>
+          <div class="col-12">
+            <p class="quest-20-grey">Selecciona una banda para añadir tu lista...</p>
           </div>
         </div>
       </div>
@@ -125,8 +148,8 @@
               <img src="/assets/images/song-play.svg">
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn-red">Eliminar</button>
+              <button #CloseDeleteModal type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
+              <button (click)="deleteSongFromSet()" type="button" class="btn-red">Eliminar</button>
             </div>
           </div>
         </div>
@@ -137,67 +160,180 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title text-center" id="exampleModalLabel">Canción Num</h5>
+              <h5 class="modal-title text-center" id="exampleModalLabel">Canción {{newSong.idSong}}</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <div class="row">
+              <div class="row p-t-30">
                 <div class="col-lg-6 col-md-12 border-right-blu">
                   <div>
-                    <div>
-                      <input type="text" placeholder="Nombre de la canción...">
-                    </div>
-                    <div class="p-t-10">
-                      <input type="text" placeholder="Artista de la canción...">
-                    </div>
-                    <div class="p-t-10">
-                      <input type="number" placeholder="BPM...">
-                    </div>
+                    <input [(ngModel)]="newSong.name" type="text" placeholder="Nombre de la canción...">
+                  </div>
+                  <div class="p-t-10">
+                    <input [(ngModel)]="newSong.artist" type="text" placeholder="Artista de la canción...">
+                  </div>
+                  <div class="p-t-10">
+                    <input  [(ngModel)]="newSong.tempo" type="number" placeholder="BPM...">
+                  </div>
+                  <div>
+                    <p class="quest-18-grey p-t-10">Busca tú canción, modificala y guardala!</p>
                     <ul>
                       <li>
-                        <a class="fira-15-blu alink-blu" href="https://www.musica.com/">musica.com</a>
+                        <a class="fira-15-blu alink-blu" href="https://www.musica.com/"
+                          target="_blank">musica.com</a>
                       </li>
                       <li>
-                        <a class="fira-15-blu alink-blu" href="https://www.buscaletras.com/">buscaletras.com</a>
+                        <a class="fira-15-blu alink-blu" href="https://www.buscaletras.com/"
+                          target="_blank">buscaletras.com</a>
                       </li>
                       <li>
-                        <a class="fira-15-blu alink-blu" href="https://www.letras.com/">letras.com</a>
+                        <a class="fira-15-blu alink-blu" href="https://www.letras.com/"
+                          target="_blank">letras.com</a>
                       </li>
                     </ul>
                   </div>
                   <div>
-                    <p>Aquí va el editor!!!!</p>
+                    <p><!-- Aquí va el editor!!!! -->
+                      <textarea [(ngModel)]="newSong.lyric" placeholder="Letra de la cancion..."></textarea>
+                    </p>
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-12">
                   <p class="fira-20-blu">Acordes</p>
                   <p class="quest-15-grey">Añade una imagen de los acordes de acuerdo al instrumento.</p>
                   <div class="row instruments">
+                    <!-- Imagen GUITARA TABS -->
                     <div class="col-lg-4">
                       <div>
-                        <input type="file" id="img-g" class="hidden">
+                        <!-- <input type="file" id="img-g" class="hidden">
                         <label class="img-btn-ins" for="img-g">
                           <img src="/assets/images/guitarra.svg">
                           <p class="quest-10-grey text-center">Guitarra</p>
+                        </label> -->
+
+                        <div *ngIf="newSong.chordsGuitar == false" class="input-group mb-3" style="justify-content: center;">
+                          <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
+
+                          <label *ngIf="sourceChordsGuitar.length == 0">
+                           <!--  <input (change)="updateInstrumentSource($event)" type="file" id="img" name="img" accept="image/*"
+                              class="hidden">
+                            <label class="img-btn-ins" for="img-g" data-toggle="tooltip" data-placement="right">
+                              <img src="/assets/images/guitarra.svg">
+                              <p class="quest-10-grey text-center">Guitarra</p>
+                            </label> -->
+
+                            <input 
+                              (change)="updateInstrumentSource($event,0)" type="file" id="img-chords-guitar" name="img-chords-guitar" accept="image/*"
+                              class="hidden">
+                            <label class="img-btn" for="img-chords-guitar" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                              <img src="/assets/images/guitarra.svg">
+                              <p class="quest-10-grey text-center">Guitarra</p>
+                            </label>
+                          </label>
+                          <!-- img placeholder when a file has been picked. shows only when 'sourceTabGuitar' is not empty -->
+                          <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                              <img *ngIf="sourceChordsGuitar.length > 0" [src]="sourceChordsGuitar">
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                              <button *ngIf="sourceChordsGuitar.length > 0" (click)="cancelImageInstrument(0)" class="trash-btn"><i
+                                  class="fas fa-trash"></i></button>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div *ngIf="newSong.chordsGuitar == true" class="input-group mb-3 row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                            <img class="edit-img" [src]="newSong.chordsGuitarBlob">
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                            <button (click)="cancelImageInstrument(0)" class="trash-btn" data-toggle="tooltip" data-placement="right"
+                              title="Eliminar foto"><i class="fas fa-trash"></i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Imagen BAJO TABS -->
+                    <div class="col-lg-4">
+                      <div *ngIf="newSong.chordsBass == false" class="input-group mb-3" style="justify-content: center;">
+                        <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
+                        <label *ngIf="sourceChordsBass.length == 0">
+                          <!-- <div>
+                            <input type="file" id="img-b" class="hidden">
+                            <label class="img-btn-ins" for="img-b">
+                              <img src="/assets/images/bajo.svg">
+                              <p class="quest-10-grey text-center">Bajo</p>
+                            </label>
+                          </div> -->
+                          <input  
+                            (change)="updateInstrumentSource($event,1)" type="file" id="img-chords-bass" name="img-chords-bass" accept="image/*"
+                            class="hidden">
+                          <label class="img-btn" for="img-chords-bass" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                            <img src="/assets/images/bajo.svg">
+                            <p class="quest-10-grey text-center">Bajo</p>
+                          </label>
                         </label>
+                        <!-- img placeholder when a file has been picked. shows only when 'sourceTabGuitar' is not empty -->
+                        <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                            <img *ngIf="sourceChordsBass.length > 0" [src]="sourceChordsBass">
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                            <button *ngIf="sourceChordsBass.length > 0" (click)="cancelImageInstrument(1)" class="trash-btn"><i
+                                class="fas fa-trash"></i></button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div *ngIf="newSong.chordsBass == true" class="input-group mb-3 row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                          <img class="edit-img" [src]="newSong.chordsBassBlob">
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                          <button (click)="cancelImageInstrument(1)" class="trash-btn" data-toggle="tooltip" data-placement="right"
+                            title="Eliminar foto"><i class="fas fa-trash"></i></button>
+                        </div>
                       </div>
                     </div>
                     <div class="col-lg-4">
-                      <div>
-                        <input type="file" id="img-b" class="hidden">
-                        <label class="img-btn-ins" for="img-b">
-                          <img src="/assets/images/bajo.svg">
-                          <p class="quest-10-grey text-center">Bajo</p>
+                      <div *ngIf="newSong.chordsPiano == false" class="input-group mb-3" style="justify-content: center;">
+                        <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
+                        <label *ngIf="sourceChordsPiano.length == 0">
+                          <!-- <div>
+                                <input type="file" id="img-t" class="hidden">
+                                <label class="img-btn-ins" for="img-t">
+                                  <img src="/assets/images/piano.svg">
+                                  <p class="quest-10-grey text-center">Teclado</p>
+                                </label>
+                              </div> -->
+                          <input  
+                            (change)="updateInstrumentSource($event,2)" type="file" id="img-chords-piano" name="img-chords-piano" accept="image/*"
+                            class="hidden">
+                          <label class="img-btn" for="img-chords-piano" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                            <img src="/assets/images/piano.svg">
+                            <p class="quest-10-grey text-center">Teclado</p>
+                          </label>
                         </label>
+                        <!-- img placeholder when a file has been picked. shows only when 'sourceTabGuitar' is not empty -->
+                        <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                            <img *ngIf="sourceChordsPiano.length > 0" [src]="sourceChordsPiano">
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                            <button *ngIf="sourceChordsPiano.length > 0" (click)="cancelImageInstrument(2)" class="trash-btn"><i
+                                class="fas fa-trash"></i></button>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div>
-                        <input type="file" id="img-t" class="hidden">
-                        <label class="img-btn-ins" for="img-t">
-                          <img src="/assets/images/piano.svg">
-                          <p class="quest-10-grey text-center">Teclado</p>
-                        </label>
+
+                      <div *ngIf="newSong.chordsPiano == true" class="input-group mb-3 row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                          <img class="edit-img" [src]="newSong.chordsPianoBlob">
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                          <button (click)="cancelImageInstrument(2)" class="trash-btn" data-toggle="tooltip" data-placement="right"
+                            title="Eliminar foto"><i class="fas fa-trash"></i></button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -205,50 +341,159 @@
                   <p class="quest-15-grey">Añade una imagen de la partitura de acuerdo al instrumento.</p>
                   <div class="row instruments">
                     <div class="col-lg-4">
-                      <div>
-                        <input type="file" id="img-g" class="hidden">
-                        <label class="img-btn-ins" for="img-g">
-                          <img src="/assets/images/guitarra.svg">
-                          <p class="quest-10-grey text-center">Guitarra</p>
+                      <div *ngIf="newSong.tabGuitar == false" class="input-group mb-3" style="justify-content: center;">
+                        <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
+                        <label *ngIf="sourceTabGuitar.length == 0">
+                          <!-- <div>
+                                  <input type="file" id="img-g" class="hidden">
+                                  <label class="img-btn-ins" for="img-g">
+                                    <img src="/assets/images/guitarra.svg">
+                                    <p class="quest-10-grey text-center">Guitarra</p>
+                                  </label>
+                                </div> -->
+                          <input  
+                            (change)="updateInstrumentSource($event,3)" type="file" id="img-tabs-guitar" name="img-tabs-guitar" accept="image/*"
+                            class="hidden">
+                          <label class="img-btn" for="img-tabs-guitar" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                            <img src="/assets/images/guitarra.svg">
+                            <p class="quest-10-grey text-center">Guitarra</p>
+                          </label>
                         </label>
+                        <!-- img placeholder when a file has been picked. shows only when 'sourceTabGuitar' is not empty -->
+                        <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                            <img *ngIf="sourceTabGuitar.length > 0" [src]="sourceTabGuitar">
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                            <button *ngIf="sourceTabGuitar.length > 0" (click)="cancelImageInstrument(3)" class="trash-btn"><i
+                                class="fas fa-trash"></i></button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div *ngIf="newSong.tabGuitar == true" class="input-group mb-3 row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                          <img class="edit-img" [src]="newSong.tabGuitarBlob">
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                          <button (click)="cancelImageInstrument(3)" class="trash-btn" data-toggle="tooltip" data-placement="right"
+                            title="Eliminar foto"><i class="fas fa-trash"></i></button>
+                        </div>
                       </div>
                     </div>
                     <div class="col-lg-4">
-                      <div>
-                        <input type="file" id="img-b" class="hidden">
-                        <label class="img-btn-ins" for="img-b">
-                          <img src="/assets/images/bajo.svg">
-                          <p class="quest-10-grey text-center">Bajo</p>
+                      <div *ngIf="newSong.tabBass == false" class="input-group mb-3" style="justify-content: center;">
+                        <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
+                        <label *ngIf="sourceTabBass.length == 0">
+                          <!-- <div>
+                                  <input type="file" id="img-b" class="hidden">
+                                  <label class="img-btn-ins" for="img-b">
+                                    <img src="/assets/images/bajo.svg">
+                                    <p class="quest-10-grey text-center">Bajo</p>
+                                  </label>
+                                </div> -->
+                          <input  
+                            (change)="updateInstrumentSource($event,4)" type="file" id="img-tabs-bass" name="img-tabs-bass" accept="image/*"
+                            class="hidden">
+                          <label class="img-btn" for="img-tabs-bass" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                            <img src="/assets/images/bajo.svg">
+                            <p class="quest-10-grey text-center">Bajo</p>
+                          </label>
                         </label>
+                        <!-- img placeholder when a file has been picked. shows only when 'sourceTabBass' is not empty -->
+                        <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                            <img *ngIf="sourceTabBass.length > 0" [src]="sourceTabBass">
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                            <button *ngIf="sourceTabBass.length > 0" (click)="cancelImageInstrument(4)" class="trash-btn"><i
+                                class="fas fa-trash"></i></button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div *ngIf="newSong.tabBass == true" class="input-group mb-3 row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                          <img class="edit-img" [src]="newSong.tabBassBlob">
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                          <button (click)="cancelImageInstrument(4)" class="trash-btn" data-toggle="tooltip" data-placement="right"
+                            title="Eliminar foto"><i class="fas fa-trash"></i></button>
+                        </div>
                       </div>
                     </div>
                     <div class="col-lg-4">
-                      <div>
-                        <input type="file" id="img-t" class="hidden">
-                        <label class="img-btn-ins" for="img-t">
-                          <img src="/assets/images/piano.svg">
-                          <p class="quest-10-grey text-center">Teclado</p>
+                      <div *ngIf="newSong.tabPiano == false" class="input-group mb-3" style="justify-content: center;">
+                        <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
+                        <label *ngIf="sourceTabPiano.length == 0">
+                          <!-- <div>
+                                  <input type="file" id="img-t" class="hidden">
+                                  <label class="img-btn-ins" for="img-t">
+                                    <img src="/assets/images/piano.svg">
+                                    <p class="quest-10-grey text-center">Teclado</p>
+                                  </label>
+                                </div> -->
+                          <input  
+                            (change)="updateInstrumentSource($event,5)" type="file" id="img-tabs-piano" name="img-tabs-piano" accept="image/*"
+                            class="hidden">
+                          <label class="img-btn" for="img-tabs-piano" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                            <img src="/assets/images/piano.svg">
+                            <p class="quest-10-grey text-center">Teclado</p>
+                          </label>
                         </label>
+                        <!-- img placeholder when a file has been picked. shows only when 'sourceTabPiano' is not empty -->
+                        <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                            <img *ngIf="sourceTabPiano.length > 0" [src]="sourceTabPiano">
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                            <button *ngIf="sourceTabPiano.length > 0" (click)="cancelImageInstrument(5)" class="trash-btn"><i
+                                class="fas fa-trash"></i></button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div *ngIf="newSong.tabPiano == true" class="input-group mb-3 row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                          <img class="edit-img" [src]="newSong.tabPianoBlob">
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                          <button (click)="cancelImageInstrument(5)" class="trash-btn" data-toggle="tooltip" data-placement="right"
+                            title="Eliminar foto"><i class="fas fa-trash"></i></button>
+                        </div>
                       </div>
                     </div>
                   </div>
+                  
                   <p class="fira-20-blu">Etiquetas de búsqueda</p>
                   <p class="quest-15-grey">Añade etiquetas de búsqueda de tus canciones para que tu equipo siempre
-                    pueda encontrarlas!</p>
+                    pueda
+                    encontrarlas!</p>
                   <div>
-                    <select class="selectpicker" data-live-search="true" multiple title="Escoge una etiqueta..."
-                      data-width="100%">
-                      <option>tranqui</option>
-                      <option>lenta</option>
-                      <option>Rápida</option>
-                    </select>
+                    <!-- <div>
+                      <select class="selectpicker" data-live-search="true" multiple title="Escoge una etiqueta..."
+                        data-width="100%">
+                        <option>tranqui</option>
+                        <option>lenta</option>
+                        <option>Rápida</option>
+                      </select>
+                    </div> -->
+                    <div class="p-t-20">
+                      <ng-multiselect-dropdown
+                          [placeholder]="'Escoge una etiqueta...'"
+                          [settings]="dropdownTagSettings"
+                          [data]="dataSessionService.tagsCatalog"
+                          [(ngModel)]="selectedTag"
+                          >
+                      </ng-multiselect-dropdown>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn-lblu">Guardar</button>
+              <button #CloseEditSong type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
+              <button (click)="saveNewSong()" type="button" class="btn-lblu">Guardar</button>
             </div>
           </div>
         </div>
@@ -265,7 +510,7 @@
             <div class="modal-body">
               <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#newsong" role="tab"
+                  <a  #TabAddSong class="nav-link active" id="home-tab" data-toggle="tab" href="#newsong" role="tab"
                     aria-controls="home" aria-selected="true">Nueva canción</a>
                 </li>
                 <li class="nav-item" role="presentation">
@@ -278,61 +523,173 @@
                   <div class="row p-t-30">
                     <div class="col-lg-6 col-md-12 border-right-blu">
                       <div>
-                        <input type="text" placeholder="Nombre de la canción...">
+                        <input [(ngModel)]="newSong.name" type="text" placeholder="Nombre de la canción...">
                       </div>
                       <div class="p-t-10">
-                        <input type="text" placeholder="Artista de la canción...">
+                        <input [(ngModel)]="newSong.artist" type="text" placeholder="Artista de la canción...">
                       </div>
                       <div class="p-t-10">
-                        <input type="number" placeholder="BPM...">
+                        <input  [(ngModel)]="newSong.tempo" type="number" placeholder="BPM...">
                       </div>
                       <div>
                         <p class="quest-18-grey p-t-10">Busca tú canción, modificala y guardala!</p>
                         <ul>
                           <li>
-                            <a class="fira-15-blu alink-blu" href="https://www.musica.com/" target="_blank">musica.com</a>
+                            <a class="fira-15-blu alink-blu" href="https://www.musica.com/"
+                              target="_blank">musica.com</a>
                           </li>
                           <li>
-                            <a class="fira-15-blu alink-blu" href="https://www.buscaletras.com/" target="_blank">buscaletras.com</a>
+                            <a class="fira-15-blu alink-blu" href="https://www.buscaletras.com/"
+                              target="_blank">buscaletras.com</a>
                           </li>
                           <li>
-                            <a class="fira-15-blu alink-blu" href="https://www.letras.com/" target="_blank">letras.com</a>
+                            <a class="fira-15-blu alink-blu" href="https://www.letras.com/"
+                              target="_blank">letras.com</a>
                           </li>
                         </ul>
                       </div>
                       <div>
-                        <p>Aquí va el editor!!!!</p>
+                        <p><!-- Aquí va el editor!!!! -->
+                          <textarea [(ngModel)]="newSong.lyric" placeholder="Letra de la cancion..."></textarea>
+                        </p>
                       </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
                       <p class="fira-20-blu">Acordes</p>
                       <p class="quest-15-grey">Añade una imagen de los acordes de acuerdo al instrumento.</p>
                       <div class="row instruments">
+                        <!-- Imagen GUITARA TABS -->
                         <div class="col-lg-4">
                           <div>
-                            <input type="file" id="img-g" class="hidden">
+                            <!-- <input type="file" id="img-g" class="hidden">
                             <label class="img-btn-ins" for="img-g">
                               <img src="/assets/images/guitarra.svg">
                               <p class="quest-10-grey text-center">Guitarra</p>
+                            </label> -->
+
+                            <div *ngIf="newSong.chordsGuitar == false" class="input-group mb-3" style="justify-content: center;">
+                              <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
+
+                              <label *ngIf="sourceChordsGuitar.length == 0">
+                               <!--  <input (change)="updateInstrumentSource($event)" type="file" id="img" name="img" accept="image/*"
+                                  class="hidden">
+                                <label class="img-btn-ins" for="img-g" data-toggle="tooltip" data-placement="right">
+                                  <img src="/assets/images/guitarra.svg">
+                                  <p class="quest-10-grey text-center">Guitarra</p>
+                                </label> -->
+
+                                <input 
+                                  (change)="updateInstrumentSource($event,0)" type="file" id="img-chords-guitar" name="img-chords-guitar" accept="image/*"
+                                  class="hidden">
+                                <label class="img-btn" for="img-chords-guitar" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                                  <img src="/assets/images/guitarra.svg">
+                                  <p class="quest-10-grey text-center">Guitarra</p>
+                                </label>
+                              </label>
+                              <!-- img placeholder when a file has been picked. shows only when 'sourceTabGuitar' is not empty -->
+                              <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                                  <img *ngIf="sourceChordsGuitar.length > 0" [src]="sourceChordsGuitar">
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                                  <button *ngIf="sourceChordsGuitar.length > 0" (click)="cancelImageInstrument(0)" class="trash-btn"><i
+                                      class="fas fa-trash"></i></button>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div *ngIf="newSong.chordsGuitar == true" class="input-group mb-3 row">
+                              <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                                <img class="edit-img" [src]="newSong.chordsGuitarBlob">
+                              </div>
+                              <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                                <button (click)="cancelImageInstrument(0)" class="trash-btn" data-toggle="tooltip" data-placement="right"
+                                  title="Eliminar foto"><i class="fas fa-trash"></i></button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Imagen BAJO TABS -->
+                        <div class="col-lg-4">
+                          <div *ngIf="newSong.chordsBass == false" class="input-group mb-3" style="justify-content: center;">
+                            <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
+                            <label *ngIf="sourceChordsBass.length == 0">
+                              <!-- <div>
+                                <input type="file" id="img-b" class="hidden">
+                                <label class="img-btn-ins" for="img-b">
+                                  <img src="/assets/images/bajo.svg">
+                                  <p class="quest-10-grey text-center">Bajo</p>
+                                </label>
+                              </div> -->
+                              <input  
+                                (change)="updateInstrumentSource($event,1)" type="file" id="img-chords-bass" name="img-chords-bass" accept="image/*"
+                                class="hidden">
+                              <label class="img-btn" for="img-chords-bass" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                                <img src="/assets/images/bajo.svg">
+                                <p class="quest-10-grey text-center">Bajo</p>
+                              </label>
                             </label>
+                            <!-- img placeholder when a file has been picked. shows only when 'sourceTabGuitar' is not empty -->
+                            <div class="row">
+                              <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                                <img *ngIf="sourceChordsBass.length > 0" [src]="sourceChordsBass">
+                              </div>
+                              <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                                <button *ngIf="sourceChordsBass.length > 0" (click)="cancelImageInstrument(1)" class="trash-btn"><i
+                                    class="fas fa-trash"></i></button>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div *ngIf="newSong.chordsBass == true" class="input-group mb-3 row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                              <img class="edit-img" [src]="newSong.chordsBassBlob">
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                              <button (click)="cancelImageInstrument(1)" class="trash-btn" data-toggle="tooltip" data-placement="right"
+                                title="Eliminar foto"><i class="fas fa-trash"></i></button>
+                            </div>
                           </div>
                         </div>
                         <div class="col-lg-4">
-                          <div>
-                            <input type="file" id="img-b" class="hidden">
-                            <label class="img-btn-ins" for="img-b">
-                              <img src="/assets/images/bajo.svg">
-                              <p class="quest-10-grey text-center">Bajo</p>
+                          <div *ngIf="newSong.chordsPiano == false" class="input-group mb-3" style="justify-content: center;">
+                            <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
+                            <label *ngIf="sourceChordsPiano.length == 0">
+                              <!-- <div>
+                                    <input type="file" id="img-t" class="hidden">
+                                    <label class="img-btn-ins" for="img-t">
+                                      <img src="/assets/images/piano.svg">
+                                      <p class="quest-10-grey text-center">Teclado</p>
+                                    </label>
+                                  </div> -->
+                              <input  
+                                (change)="updateInstrumentSource($event,2)" type="file" id="img-chords-piano" name="img-chords-piano" accept="image/*"
+                                class="hidden">
+                              <label class="img-btn" for="img-chords-piano" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                                <img src="/assets/images/piano.svg">
+                                <p class="quest-10-grey text-center">Teclado</p>
+                              </label>
                             </label>
+                            <!-- img placeholder when a file has been picked. shows only when 'sourceTabGuitar' is not empty -->
+                            <div class="row">
+                              <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                                <img *ngIf="sourceChordsPiano.length > 0" [src]="sourceChordsPiano">
+                              </div>
+                              <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                                <button *ngIf="sourceChordsPiano.length > 0" (click)="cancelImageInstrument(2)" class="trash-btn"><i
+                                    class="fas fa-trash"></i></button>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div class="col-lg-4">
-                          <div>
-                            <input type="file" id="img-t" class="hidden">
-                            <label class="img-btn-ins" for="img-t">
-                              <img src="/assets/images/piano.svg">
-                              <p class="quest-10-grey text-center">Teclado</p>
-                            </label>
+
+                          <div *ngIf="newSong.chordsPiano == true" class="input-group mb-3 row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                              <img class="edit-img" [src]="newSong.chordsPianoBlob">
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                              <button (click)="cancelImageInstrument(2)" class="trash-btn" data-toggle="tooltip" data-placement="right"
+                                title="Eliminar foto"><i class="fas fa-trash"></i></button>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -340,90 +697,183 @@
                       <p class="quest-15-grey">Añade una imagen de la partitura de acuerdo al instrumento.</p>
                       <div class="row instruments">
                         <div class="col-lg-4">
-                          <div>
-                            <input type="file" id="img-g" class="hidden">
-                            <label class="img-btn-ins" for="img-g">
-                              <img src="/assets/images/guitarra.svg">
-                              <p class="quest-10-grey text-center">Guitarra</p>
+                          <div *ngIf="newSong.tabGuitar == false" class="input-group mb-3" style="justify-content: center;">
+                            <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
+                            <label *ngIf="sourceTabGuitar.length == 0">
+                              <!-- <div>
+                                      <input type="file" id="img-g" class="hidden">
+                                      <label class="img-btn-ins" for="img-g">
+                                        <img src="/assets/images/guitarra.svg">
+                                        <p class="quest-10-grey text-center">Guitarra</p>
+                                      </label>
+                                    </div> -->
+                              <input  
+                                (change)="updateInstrumentSource($event,3)" type="file" id="img-tabs-guitar" name="img-tabs-guitar" accept="image/*"
+                                class="hidden">
+                              <label class="img-btn" for="img-tabs-guitar" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                                <img src="/assets/images/guitarra.svg">
+                                <p class="quest-10-grey text-center">Guitarra</p>
+                              </label>
                             </label>
+                            <!-- img placeholder when a file has been picked. shows only when 'sourceTabGuitar' is not empty -->
+                            <div class="row">
+                              <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                                <img *ngIf="sourceTabGuitar.length > 0" [src]="sourceTabGuitar">
+                              </div>
+                              <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                                <button *ngIf="sourceTabGuitar.length > 0" (click)="cancelImageInstrument(3)" class="trash-btn"><i
+                                    class="fas fa-trash"></i></button>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div *ngIf="newSong.tabGuitar == true" class="input-group mb-3 row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                              <img class="edit-img" [src]="newSong.tabGuitarBlob">
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                              <button (click)="cancelImageInstrument(3)" class="trash-btn" data-toggle="tooltip" data-placement="right"
+                                title="Eliminar foto"><i class="fas fa-trash"></i></button>
+                            </div>
                           </div>
                         </div>
                         <div class="col-lg-4">
-                          <div>
-                            <input type="file" id="img-b" class="hidden">
-                            <label class="img-btn-ins" for="img-b">
-                              <img src="/assets/images/bajo.svg">
-                              <p class="quest-10-grey text-center">Bajo</p>
+                          <div *ngIf="newSong.tabBass == false" class="input-group mb-3" style="justify-content: center;">
+                            <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
+                            <label *ngIf="sourceTabBass.length == 0">
+                              <!-- <div>
+                                      <input type="file" id="img-b" class="hidden">
+                                      <label class="img-btn-ins" for="img-b">
+                                        <img src="/assets/images/bajo.svg">
+                                        <p class="quest-10-grey text-center">Bajo</p>
+                                      </label>
+                                    </div> -->
+                              <input  
+                                (change)="updateInstrumentSource($event,4)" type="file" id="img-tabs-bass" name="img-tabs-bass" accept="image/*"
+                                class="hidden">
+                              <label class="img-btn" for="img-tabs-bass" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                                <img src="/assets/images/bajo.svg">
+                                <p class="quest-10-grey text-center">Bajo</p>
+                              </label>
                             </label>
+                            <!-- img placeholder when a file has been picked. shows only when 'sourceTabBass' is not empty -->
+                            <div class="row">
+                              <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                                <img *ngIf="sourceTabBass.length > 0" [src]="sourceTabBass">
+                              </div>
+                              <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                                <button *ngIf="sourceTabBass.length > 0" (click)="cancelImageInstrument(4)" class="trash-btn"><i
+                                    class="fas fa-trash"></i></button>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div *ngIf="newSong.tabBass == true" class="input-group mb-3 row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                              <img class="edit-img" [src]="newSong.tabBassBlob">
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                              <button (click)="cancelImageInstrument(4)" class="trash-btn" data-toggle="tooltip" data-placement="right"
+                                title="Eliminar foto"><i class="fas fa-trash"></i></button>
+                            </div>
                           </div>
                         </div>
                         <div class="col-lg-4">
-                          <div>
-                            <input type="file" id="img-t" class="hidden">
-                            <label class="img-btn-ins" for="img-t">
-                              <img src="/assets/images/piano.svg">
-                              <p class="quest-10-grey text-center">Teclado</p>
+                          <div *ngIf="newSong.tabPiano == false" class="input-group mb-3" style="justify-content: center;">
+                            <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
+                            <label *ngIf="sourceTabPiano.length == 0">
+                              <!-- <div>
+                                      <input type="file" id="img-t" class="hidden">
+                                      <label class="img-btn-ins" for="img-t">
+                                        <img src="/assets/images/piano.svg">
+                                        <p class="quest-10-grey text-center">Teclado</p>
+                                      </label>
+                                    </div> -->
+                              <input  
+                                (change)="updateInstrumentSource($event,5)" type="file" id="img-tabs-piano" name="img-tabs-piano" accept="image/*"
+                                class="hidden">
+                              <label class="img-btn" for="img-tabs-piano" data-toggle="tooltip" data-placement="right" title="Subir una foto">
+                                <img src="/assets/images/piano.svg">
+                                <p class="quest-10-grey text-center">Teclado</p>
+                              </label>
                             </label>
+                            <!-- img placeholder when a file has been picked. shows only when 'sourceTabPiano' is not empty -->
+                            <div class="row">
+                              <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                                <img *ngIf="sourceTabPiano.length > 0" [src]="sourceTabPiano">
+                              </div>
+                              <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                                <button *ngIf="sourceTabPiano.length > 0" (click)="cancelImageInstrument(5)" class="trash-btn"><i
+                                    class="fas fa-trash"></i></button>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div *ngIf="newSong.tabPiano == true" class="input-group mb-3 row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                              <img class="edit-img" [src]="newSong.tabPianoBlob">
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-center p-t-10">
+                              <button (click)="cancelImageInstrument(5)" class="trash-btn" data-toggle="tooltip" data-placement="right"
+                                title="Eliminar foto"><i class="fas fa-trash"></i></button>
+                            </div>
                           </div>
                         </div>
                       </div>
-
+                      
                       <p class="fira-20-blu">Etiquetas de búsqueda</p>
                       <p class="quest-15-grey">Añade etiquetas de búsqueda de tus canciones para que tu equipo siempre
                         pueda
                         encontrarlas!</p>
                       <div>
-                        <select class="selectpicker" data-live-search="true" multiple title="Escoge una etiqueta..."
-                          data-width="100%">
-                          <option>tranqui</option>
-                          <option>lenta</option>
-                          <option>Rápida</option>
-                        </select>
+                        <!-- <div>
+                          <select class="selectpicker" data-live-search="true" multiple title="Escoge una etiqueta..."
+                            data-width="100%">
+                            <option>tranqui</option>
+                            <option>lenta</option>
+                            <option>Rápida</option>
+                          </select>
+                        </div> -->
+                        <div class="p-t-20">
+                          <ng-multiselect-dropdown
+                              [placeholder]="'Escoge una etiqueta...'"
+                              [settings]="dropdownTagSettings"
+                              [data]="dataSessionService.tagsCatalog"
+                              [(ngModel)]="selectedTag"
+                              >
+                          </ng-multiselect-dropdown>
+                        </div>
                       </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button #CloseNewSong type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
+                      <button (click)="saveNewSong()" type="button" class="btn-lblu">Guardar</button>
                     </div>
                   </div>
                 </div>
                 <div class="tab-pane fade" id="oldsong" role="tabpanel" aria-labelledby="profile-tab">
+                  <div class="p-b-20">
+                    <h1 class="fira-30-grey">Lista de canciones disponibles para el set</h1>
+                    <div class="search-bar p-t-20">
+                        <input [(ngModel)]="searchValue" (ngModelChange)="filterSongByName($event)"  type="text" placeholder="Buscar una cancion...">
+                    </div>
+                  </div>
                   <p class="quest-15-grey p-t-30 p-l-15">Añade una canción que ya está registrada.</p>
                   <div class="row">
-                    <div class="col-lg-6 col-md-12">
+                    <!-- <div class="col-lg-6 col-md-12">
                       <div class="ex-song ex-song-choosen">
                         <p class="fira-18-blu"><strong>Bunny song</strong></p>
                         <p class="quest-18-grey">Cover</p>
                         <p class="quest-15-grey">Artista Bunny</p>
                         <p class="quest-12-grey">BPM: 135</p>
                       </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                      <div class="ex-song">
-                        <p class="fira-18-blu"><strong>Bunny song</strong></p>
-                        <p class="quest-18-grey">Cover</p>
-                        <p class="quest-15-grey">Artista Bunny</p>
-                        <p class="quest-12-grey">BPM: 135</p>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                      <div class="ex-song">
-                        <p class="fira-18-blu"><strong>Bunny song</strong></p>
-                        <p class="quest-18-grey">Cover</p>
-                        <p class="quest-15-grey">Artista Bunny</p>
-                        <p class="quest-12-grey">BPM: 135</p>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                      <div class="ex-song">
-                        <p class="fira-18-blu"><strong>Bunny song</strong></p>
-                        <p class="quest-18-grey">Cover</p>
-                        <p class="quest-15-grey">Artista Bunny</p>
-                        <p class="quest-12-grey">BPM: 135</p>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                      <div class="ex-song">
-                        <p class="fira-18-blu"><strong>Bunny song</strong></p>
-                        <p class="quest-18-grey">Cover</p>
-                        <p class="quest-15-grey">Artista Bunny</p>
-                        <p class="quest-12-grey">BPM: 135</p>
+                    </div> -->
+                    <div *ngFor="let song of songFiltered; let i = index"  class="col-lg-6 col-md-12">
+                      <div (click)="addSongFronList(song)" class="ex-song">
+                        <p class="fira-18-blu"><strong>{{song.name}}</strong></p>
+                        <p class="quest-18-grey">{{song.nameTag}}</p>
+                        <p class="quest-15-grey">{{song.artist}}</p>
+                        <p class="quest-12-grey">BPM: {{song.tempo}}</p>
                       </div>
                     </div>
                   </div>
@@ -431,10 +881,6 @@
                 </div>
               </div>
 
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn-lblu">Guardar</button>
             </div>
           </div>
         </div>

@@ -75,7 +75,7 @@ export class UtilitiesService {
     this.loadingOkMsg = false;
     this.loadingTitleMsg = title;
     this.loadingMessageMsg = message;
-    this.awaitTime(2000, () => {
+    this.awaitTime(500, () => {
       callback();
     });
   }

@@ -8,7 +8,7 @@
             [idUser]="dataSessionService.user.idUser"
             [imageSrc]="dataSessionService.user.imageBlob"
             [bandsList]="dataSessionService.elementsManager.bands"
-            [idActiveBand]="idBandOpened"
+            [idActive]="idBandOpened"
             ></app-sidebar>
     </div>
     <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
@@ -152,8 +152,8 @@
                                 <td  *ngFor="let set of newBand.sets; let i = index" >
                                     <div class="text-center">
                                         <div class="profile-box">
-                                            <img *ngIf="set.urlImage.length == 0" class="album-pic" src="/assets/images/no-song.svg">
-                                            <img *ngIf="set.urlImage.length !=0" class="album-pic" [src]="set.imageBlob">
+                                            <img *ngIf="set.haveImage == false" class="album-pic" src="/assets/images/no-song.svg">
+                                            <img *ngIf="set.haveImage == true" class="album-pic" [src]="set.imageBlob">
                                         </div>
                                         <p class="fira-18-blu">{{set.name}}</p>
                                     </div>

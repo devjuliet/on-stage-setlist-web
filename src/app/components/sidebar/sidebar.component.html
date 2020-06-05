@@ -23,7 +23,7 @@
                     <i class="fas fa-guitar p-r-20"></i>Bandas</a>
                 <a *ngFor="let item of bandsList; let i = index" 
                     class="second-link p-r-20"
-                    [style]="( idActiveBand == item.idBand ) ? 'border-left: 30px solid #0087D1;' : ''" 
+                    [style]="( idActive == item.idBand ) ? 'border-left: 30px solid #0087D1;' : ''" 
                     routerLink="/dashboard/manager/band-info/{{item.idBand}}" routerLinkActive="active">
                     {{item.name}}
                     <br>
@@ -73,6 +73,13 @@
             <li>
                 <a class="quest-16-wht" [class]="classesLinks[1]" routerLink="/dashboard/led/my-lists" routerLinkActive="active">
                     <i class="fas fa-home p-r-20"></i>Mis listas</a>
+                    <a *ngFor="let item of setList; let i = index" 
+                        class="second-link p-r-20"
+                        [style]="( idActive == item.idSet ) ? 'border-left: 30px solid #0087D1;' : ''" 
+                        routerLink="/dashboard/led/edit-list/{{item.idSet}}" routerLinkActive="active">
+                        {{item.name}}
+                        <br>
+                    </a>
             </li>
             <li>
                 <a class="quest-16-wht" [class]="classesLinks[2]" routerLink="/dashboard/led/add-list" routerLinkActive="active">
@@ -80,8 +87,8 @@
             </li>
             <li>
                 <!-- Esta ruta no venia en el mookup, preguntar que ondas -->
-                <a class="quest-16-wht" [class]="classesLinks[3]" routerLink="/dashboard/led/event" routerLinkActive="active">
-                    <i class="fas fa-calendar-alt p-r-20"></i>Eventos</a>
+                <!-- <a class="quest-16-wht" [class]="classesLinks[3]" routerLink="/dashboard/led/event" routerLinkActive="active">
+                    <i class="fas fa-calendar-alt p-r-20"></i>Eventos</a> -->
             </li>
             <li>
                 <a class="quest-16-wht" [class]="classesLinks[4]" routerLink="/dashboard/led/settings" routerLinkActive="active">
