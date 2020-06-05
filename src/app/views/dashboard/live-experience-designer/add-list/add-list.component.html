@@ -961,7 +961,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
-                <img class="img-modal" [src]="newSong.chordsGuitarBlob">
+                <img class="img-modal" *ngIf="sourceChordsGuitar.length > 0" [src]="sourceChordsGuitar">
+                <img class="img-modal" *ngIf="sourceChordsGuitar.length == 0" [src]="newSong.chordsGuitarBlob">
               </div>
             </div>
           </div>
@@ -973,7 +974,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
-                <img class="img-modal" [src]="newSong.chordsBassBlob">
+                <img class="img-modal" *ngIf="sourceChordsBass.length > 0" [src]="sourceChordsBass">
+                <img class="img-modal" *ngIf="sourceChordsBass.length == 0" [src]="newSong.chordsBassBlob">
               </div>
             </div>
           </div>
@@ -985,7 +987,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
-                <img class="img-modal" [src]="newSong.chordsPianoBlob">
+                <img class="img-modal" *ngIf="sourceChordsPiano.length > 0" [src]="sourceChordsPiano">
+                <img class="img-modal" *ngIf="sourceChordsPiano.length == 0" [src]="newSong.chordsPianoBlob">
               </div>
             </div>
           </div>
@@ -997,7 +1000,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
-                <img class="img-modal" [src]="newSong.tabGuitarBlob">
+                <img class="img-modal" *ngIf="sourceTabGuitar.length > 0" [src]="sourceTabGuitar">
+                <img class="img-modal" *ngIf="sourceTabGuitar.length == 0" [src]="newSong.tabGuitarBlob">
               </div>
             </div>
           </div>
@@ -1009,7 +1013,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
-                <img class="img-modal" [src]="newSong.tabBassBlob">
+                <img class="img-modal" *ngIf="sourceTabBass.length > 0" [src]="sourceTabBass">
+                <img class="img-modal" *ngIf="sourceTabBass.length == 0" [src]="newSong.tabBassBlob">
               </div>
             </div>
           </div>
@@ -1021,7 +1026,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
-                <img class="img-modal" [src]="newSong.tabPianoBlob">
+                <img class="img-modal" *ngIf="sourceTabPiano.length > 0" [src]="sourceTabPiano">
+                <img class="img-modal" *ngIf="sourceTabPiano.length == 0" [src]="newSong.tabPianoBlob">
               </div>
             </div>
           </div>
