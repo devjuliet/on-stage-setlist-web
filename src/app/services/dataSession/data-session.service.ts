@@ -7,6 +7,8 @@ import { LogedResponse } from '../../classes/logedResponse.class';
 import { ElementsManager } from '../../classes/elementsManager.class';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Tag } from '../../classes/tag.class';
+import { ElementsLed } from '../../classes/led/elementsLed.class';
+import { async } from 'rxjs/internal/scheduler/async';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +19,7 @@ export class DataSessionService {
 
   user: User;
   elementsManager: ElementsManager;
+  elementsLed: ElementsLed;
   tagsCatalog : Tag[];
   baseURL: String;
 
@@ -24,6 +27,7 @@ export class DataSessionService {
     this.token = "";
     this.user = new User();
     this.elementsManager = new ElementsManager();
+    this.elementsLed = new ElementsLed();
     this.tagsCatalog = [];
     this.baseURL = apiDataService.baseURL;
     //localStorage.setItem('token', JSON.stringify(this.token));
@@ -37,11 +41,47 @@ export class DataSessionService {
       //Acciones a realizar cuando el token estaba ya guardado pero la data para la interfaz no esta disponible
       //Se sabe que no esta disponible porque apenas se mando llamar el contructor
       if(this.token.length > 0){
-        this.getBandsManager((response) => {
-          //console.log(this.elementsManager.bands);
-        }, (err) => {
-          console.log(err);
-        })
+        this.apiDataService.getUserData(this.token).then((response: ServerMessage) => {
+          //console.log(response);
+          if (response.error == true) {
+            console.log(response);
+            
+          } else {
+            this.user.idUser = response.data.user.idUser;
+            this.user.username = response.data.user.username;
+            this.user.name = response.data.user.name;
+            this.user.type = response.data.user.type;
+            this.user.email = response.data.user.email;
+            this.user.haveImage = response.data.user.haveImage;
+
+            if (this.user.type == 0 || this.user.type == 2) {
+              console.log("cargando datos del live");
+              this.getBandsLed((response) => {
+                //console.log(this.elementsLed.bands);
+                this.getSetsLed((message) => {
+                  //this.showNotification(0, message, 3000, () => { });
+                  //this.setsListFiltered = Array.from(this.dataSessionService.elementsLed.setsList);
+                }, (messageError) => {
+                  //this.showNotification(1, messageError, 3000, () => { });
+                });
+              }, (err) => {
+                console.log(err);
+              });
+            } else if (this.user.type == 1){
+              this.getBandsManager((response) => {
+                //console.log(this.elementsManager.bands);
+              }, (err) => {
+                console.log(err);
+              });
+            }else{
+
+            }
+            /* console.log(this.user); */
+          }
+        }, (error) => {
+          console.log(error);
+        });
+        
       };
     }
   }
@@ -132,6 +172,41 @@ export class DataSessionService {
       }else{
         this.elementsManager.bands = response.data;
         succesCallBack("Bandas actualizadas con exito.");
+      }
+    }, (error) => {
+      console.log(error);
+      errorCallBack("A ocurrido un error");
+    });
+  };
+
+  getBandsLed(succesCallBack,errorCallBack){
+    this.apiDataService.getBandsLed().then((response: ServerMessage) => {
+      if(response.error == true){
+        errorCallBack(response.message);
+      }else{
+        this.elementsLed.bands = response.data;
+        succesCallBack("Bandas actualizadas del led con exito.");
+      }
+    }, (error) => {
+      console.log(error);
+      errorCallBack("A ocurrido un error");
+    });
+  };
+
+  getSetsLed(succesCallBack,errorCallBack){
+    this.apiDataService.getSetsLed().then(async (response: ServerMessage) => {
+      if(response.error == true){
+        errorCallBack(response.message);
+      }else{
+        this.elementsLed.setsList = response.data;
+        //Se cargan las imagenes si es que vienen con una
+        for (let index = 0; index < this.elementsLed.setsList.length; index++) {
+          if(this.elementsLed.setsList[index].haveImage == true){
+            this.elementsLed.setsList[index].imageBlob = await this.apiDataService.getImage(this.baseURL.toString() +
+            'uploads/set-image/' + this.elementsLed.setsList[index].idSet.toString());
+          }
+        }
+        succesCallBack("Sets del led actualizados con exito.");
       }
     }, (error) => {
       console.log(error);

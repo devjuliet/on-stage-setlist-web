@@ -8,6 +8,8 @@ import { of } from 'rxjs/internal/observable/of';
 import { Band } from '../../classes/band.class';
 import { User } from '../../classes/user.class';
 import { ActualEvent } from '../../classes/actualEvent.class';
+import { NewSong } from '../../classes/led/newSong.class';
+import { SetLed } from '../../classes/led/setLed.class';
 
 @Injectable({
   providedIn: 'root'
@@ -272,7 +274,48 @@ export class ApiDataService {
     })
   }
   //FIN.MANAGER
+  //LED
+  getBandsLed() {
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token
+      });
+      this.http.get(this.baseURL + 'led/band-list',{ headers: headers }).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
 
+  getSetsLed() {
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token
+      });
+      this.http.get(this.baseURL + 'led/set-list',{ headers: headers }).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
+  getSongLed(idSong : Number) {
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token
+      });
+      this.http.get(this.baseURL + 'led/get-song/'+idSong,{ headers: headers }).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
   //BANDAS
   async createBand(newDataBand : Band) : Promise<any>{
     return new Promise((resolve,reject)=>{
@@ -355,6 +398,153 @@ export class ApiDataService {
   }
   //FIN.BANDAS
 
+  //CANCIONES
+  async uploadImageSong(formData: FormData) {
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer '+this.token,
+      });
+
+      this.http.post(this.baseURL + 'uploads/song-image/', formData, {headers:headers })
+        .subscribe((res: ServerMessage) => {
+          if (res.error == false) {
+            resolve(res);
+          } else if( res.error == undefined){
+            console.log("error no llego nada");
+            reject(res);
+          }else{
+            resolve(res);
+          }
+        },(error)=>{
+          reject(error);
+        },);
+    });
+  }
+
+  deleteImageSong(idSong,nameFile){
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer '+this.token,
+      });
+      this.http.get(this.baseURL + 'uploads/song-delete-image/'+idSong+'/'+nameFile,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(new ServerMessage(true,"A ocurrido un error inesperado",error));
+      });
+    });
+  }
+
+  async createSong(newDataSong : NewSong) : Promise<any>{
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token,
+      });
+
+      this.http.post(this.baseURL + 'led/create-song',newDataSong,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
+  async updateSong(newDataSong : NewSong){
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token,
+      });
+
+      this.http.post(this.baseURL + 'led/update-song',newDataSong,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }  
+
+
+  getListSongsOfBand(idBand){
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer '+this.token,
+      });
+      this.http.get(this.baseURL + 'led/band-songs-list/'+idBand,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(new ServerMessage(true,"A ocurrido un error inesperado",error));
+      });
+    });
+  }
+  //FIN.CANCIONES
+  //LISTAS - SET
+  async createList(newDataList : SetLed) : Promise<any>{
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token,
+      });
+
+      this.http.post(this.baseURL + 'led/create-set',newDataList,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
+  async updateList(newDataList : SetLed) : Promise<any>{
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token,
+      });
+
+      this.http.post(this.baseURL + 'led/update-set',newDataList,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
+    //subida del archivo de la lista
+    async uploadImageList(formData: FormData) {
+      return new Promise((resolve,reject)=>{
+        const headers = new HttpHeaders({
+          'Authorization': 'Bearer '+this.token,
+        });
+  
+        this.http.post(this.baseURL + 'uploads/set-image/', formData, {headers:headers })
+          .subscribe((res: ServerMessage) => {
+            if (res.error == false) {
+              resolve(res);
+            } else if( res.error == undefined){
+              console.log("error no llego nada");
+              reject(res);
+            }else{
+              resolve(res);
+            }
+          },(error)=>{
+            reject(error);
+          },);
+      });
+    }
+  
+    deleteImageList(idSet){
+      return new Promise((resolve,reject)=>{
+        const headers = new HttpHeaders({
+          'Authorization': 'Bearer '+this.token,
+        });
+        this.http.get(this.baseURL + 'uploads/set-delete-image/'+idSet,{headers:headers}).subscribe((response : ServerMessage)=>{
+          resolve(response);
+        },(error)=>{
+          reject(new ServerMessage(true,"A ocurrido un error inesperado",error));
+        });
+      });
+    }
+  //FIN.LISTAS - SET
   //BUSCADOR
   searchBandsUsersByName(name : String) {
     return new Promise((resolve,reject)=>{

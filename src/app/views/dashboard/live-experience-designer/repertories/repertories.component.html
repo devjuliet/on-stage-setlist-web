@@ -2,7 +2,8 @@
     <div id="mySidenav" [class]="'side-sidebar ' + utilitiesService.sidebarClass.toString()">
         <app-sidebar class="sidebar" [activeLink]="0" [isManager]="dataSessionService.user.type.toString()=='1'"
             [nameUser]="dataSessionService.user.name" [imageurl]="dataSessionService.user.haveImage"
-            [idUser]="dataSessionService.user.idUser" [imageSrc]="dataSessionService.user.imageBlob"></app-sidebar>
+            [idUser]="dataSessionService.user.idUser" [imageSrc]="dataSessionService.user.imageBlob"
+            [setList]="dataSessionService.elementsLed.setsList"></app-sidebar>
     </div>
     <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
         <app-navbar-dashboard></app-navbar-dashboard>
