@@ -18,9 +18,11 @@ export class AdminBandsComponent implements OnInit {
   constructor(public dataSessionService : DataSessionService, public utilitiesService : UtilitiesService,
     private apiDataService: ApiDataService) {
       this.searchValue = "";
+      this.bandsFiltered = [];
      }
 
   ngOnInit(): void {
+    this.bandsFiltered = [];
     this.dataSessionService.checkLogin((logedResponse: LogedResponse) => {
       //console.log(logedResponse);
       //Manda al dashboard correspondiente o saca de la sesion

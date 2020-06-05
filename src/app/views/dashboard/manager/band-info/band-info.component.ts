@@ -120,8 +120,10 @@ export class BandInfoComponent implements OnInit {
 
         //Se cargan todas las imagenes de las listas 
         for (let index = 0; index < response.data.sets.length; index++) {
-          this.newBand.sets[index].imageBlob = await this.apiDataService.getImage(this.dataSessionService.baseURL.toString() +
+          if(this.newBand.sets[index].haveImage == true){
+            this.newBand.sets[index].imageBlob = await this.apiDataService.getImage(this.dataSessionService.baseURL.toString() +
             'uploads/set-image/' + this.newBand.sets[index].idSet.toString());
+          }
         };
         //console.log(this.newBand.sets);
         this.bandMembersFiltered = Array.from(this.newBand.bandMembers);
