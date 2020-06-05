@@ -7,7 +7,8 @@
             [imageurl]="dataSessionService.user.haveImage"
             [idUser]="dataSessionService.user.idUser" 
             [imageSrc]="dataSessionService.user.imageBlob"
-            [bandsList]="dataSessionService.elementsManager.bands" ></app-sidebar>
+            [bandsList]="dataSessionService.elementsManager.bands" 
+            [setList]="dataSessionService.elementsLed.setsList"></app-sidebar>
     </div>
     <div id="main" [class]="'side-content ' + utilitiesService.navbarClass.toString()">
         <app-navbar-dashboard></app-navbar-dashboard>
