@@ -45,6 +45,12 @@ export class LoginComponent implements OnInit {
         
       } else if (this.dataSessionService.user.type == 2 || this.dataSessionService.user.type == 0) {
         this.dataSessionService.navigateByUrl("/dashboard/led");
+        this.dataSessionService.getSetsLed((message) => {
+          //this.utilitiesService.showNotification(0, message, 3000, () => { });
+          //this.setsListFiltered = Array.from(this.dataSessionService.elementsLed.setsList);
+        }, (messageError) => {
+          this.utilitiesService.showNotification(1, messageError, 3000, () => { });
+        });
       }
     }, (noLoginResponse: LogedResponse) => {
       //console.log(noLoginResponse);
@@ -94,6 +100,12 @@ export class LoginComponent implements OnInit {
           });
         } else if (response.data.user.type == 2 || response.data.user.type == 0) {
           this.dataSessionService.navigateByUrl("/dashboard/led");
+          this.dataSessionService.getSetsLed((message) => {
+            //this.utilitiesService.showNotification(0, message, 3000, () => { });
+            //this.setsListFiltered = Array.from(this.dataSessionService.elementsLed.setsList);
+          }, (messageError) => {
+            this.utilitiesService.showNotification(1, messageError, 3000, () => { });
+          });
         }
       }, (error) => {
         //console.log(error);

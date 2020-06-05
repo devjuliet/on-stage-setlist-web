@@ -34,7 +34,7 @@
               <label *ngIf="newList.name.length != 0 || 
                             newList.description.length != 0 || 
                             newList.songs.length != 0">
-                Nueva lista para la banda: {{dataSessionService.elementsLed.bands[0].name}}<br>
+                <label *ngIf="dataSessionService.elementsLed.bands != undefined">lista para la banda: {{dataSessionService.elementsLed.bands[0].name}}</label><br>
                 Manager: {{dataSessionService.elementsLed.bands[0].managerName}}<br>
               </label>
             </div>
@@ -860,14 +860,9 @@
                   </div>
                   <p class="quest-15-grey p-t-30 p-l-15">Añade una canción que ya está registrada.</p>
                   <div class="row">
-                    <!-- <div class="col-lg-6 col-md-12">
-                      <div class="ex-song ex-song-choosen">
-                        <p class="fira-18-blu"><strong>Bunny song</strong></p>
-                        <p class="quest-18-grey">Cover</p>
-                        <p class="quest-15-grey">Artista Bunny</p>
-                        <p class="quest-12-grey">BPM: 135</p>
-                      </div>
-                    </div> -->
+                    <div *ngIf="songFiltered.length == 0">
+                      Sin Resultados
+                    </div>
                     <div *ngFor="let song of songFiltered; let i = index"  class="col-lg-6 col-md-12">
                       <div (click)="addSongFronList(song)" class="ex-song">
                         <p class="fira-18-blu"><strong>{{song.name}}</strong></p>

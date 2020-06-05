@@ -400,7 +400,7 @@ export class AddListComponent implements OnInit {
           });
           formData.append('files[]', image, newFileName);
 
-          this.apiDataService.uploadImageList(formData).then((result: ServerMessage) => {
+          this.apiDataService.uploadImageSong(formData).then((result: ServerMessage) => {
             //this.utilitiesService.showNotification(result.error ? 1 : 0, result.message, 5000, () => { });
             //this.utilitiesService.closeLoadingSuccess("Imagen subida", "Imagen de la banda " + this.newBand.name + " subida", () => {
             resolve(result);
@@ -806,19 +806,24 @@ export class AddListComponent implements OnInit {
             } else {
               //Cosas por hacer en caso de que se suba bien
               this.utilitiesService.showNotification(0, response.message, 3000, () => { });
+              this.dataSessionService.navigateByUrl("/dashboard/led/my-lists");
               this.utilitiesService.closeLoadingSuccess("Nueva Lista Guardada", "Informacion de la lista " + newDataList.name + " guardada.", () => {
                 //Cosas para hacer en caso de que se suba correctamente
                 //console.log(response);
-                if (response.data.haveImage == true) {
-                  this.uploadListImage(this.selectedFile, response.data.idSet).then(() => {
-                    //console.log("imagenes subidas y borradas");
-                    this.newList = new SetLed();
-                    this.selectedBand = [];
-                    this.dataSessionService.navigateByUrl("/dashboard/led/my-lists");
-                  }).catch(() => {
-                    this.utilitiesService.showNotification(1, "A ocurrido un error subiendo las imagenes", 3000, () => { });
-                  });
-                }
+                this.dataSessionService.getSetsLed((message) => {
+                  if (response.data.haveImage == true) {
+                    this.uploadListImage(this.selectedFile, response.data.idSet).then(() => {
+                      //console.log("imagenes subidas y borradas");
+                      this.newList = new SetLed();
+                      this.selectedBand = [];
+                    }).catch(() => {
+                      this.utilitiesService.showNotification(1, "A ocurrido un error subiendo las imagenes", 3000, () => { });
+                    });
+                  }
+                  
+                }, (messageError) => {
+                  this.utilitiesService.showNotification(1, messageError, 3000, () => { });
+                });
               });
             }
           }).catch((error) => {
@@ -831,7 +836,7 @@ export class AddListComponent implements OnInit {
         //console.log("editando");
         //console.log(newDataList);
         //console.log(imagesForDelete)
-        this.utilitiesService.showLoadingMsg("Editando Cancion", "Guardando informacion.", () => {
+        this.utilitiesService.showLoadingMsg("Editando Lista", "Guardando informacion.", () => {
           this.apiDataService.updateList(newDataList).then((response: ServerMessage) => {
             //console.log(response);
             if (response.error == true) {
@@ -840,12 +845,12 @@ export class AddListComponent implements OnInit {
               this.utilitiesService.closeLoadingMsg();
             } else {
               this.utilitiesService.showNotification(0, response.message, 3000, () => { });
-              this.utilitiesService.closeLoadingSuccess("Cancion Actualizada", "Informacion de la cancion " + response.data.name + " guardada.", () => {
+              this.utilitiesService.closeLoadingSuccess("Lista Actualizada", "Informacion de la cancion " + response.data.name + " guardada.", () => {
                 //Cosas para hacer en caso de que se suba correctamente
                 //Si se subira una imagen hay que subirla al servidor de la siguiente manera
                 if(isUploading == true){
-                  this.uploadImage( this.selectedFile , newDataList.idSet.toString() ).then(() => {
-                    //console.log("imagenes actualizadas");
+                  this.uploadListImage( this.selectedFile , newDataList.idSet.toString() ).then(() => {
+                    console.log("imagenes actualizadas");
                   }).catch(() => {
                     this.utilitiesService.showNotification(1, "A ocurrido un error subiendo las imagenes", 3000, () => { });
                   });
