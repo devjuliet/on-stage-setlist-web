@@ -625,7 +625,7 @@ button:focus{
         padding-top: 50px;
     }
 }
-@media screen and (max-width:900px){
+@media screen and (max-width:992px){
     .login-image, .register-img{
         display: none;
     }
@@ -637,6 +637,9 @@ button:focus{
     }
     .width-50-100{
         width: 100%;
+    }
+    .p-t-20r{
+      padding-top: 20px;
     }
 }
 @media (min-width: 768px) {
