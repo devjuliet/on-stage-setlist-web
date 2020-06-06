@@ -164,3 +164,7 @@ button#dropdownMenuButton:hover{
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
+.no-img-rep{
+  max-width: 500px;
+  opacity: .5;
+}
