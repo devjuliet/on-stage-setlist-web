@@ -117,8 +117,19 @@ export class AddListComponent implements OnInit {
           this.dataSessionService.getSetsLed((message) => {
             //this.utilitiesService.showNotification(0, message, 3000, () => { });
             //Si es una nueva lista viene como indefinido
+            this.dataSessionService.getTagsCatalog((response) => {
+                    
+            }, (err) => {
+              console.log(err);
+            });
             if (this.idListOpened == undefined) {
               this.isNewList = true;
+              this.dataSessionService.getBandsLed((response) => {
+              
+              }, (err) => {
+                console.log(err);
+                this.utilitiesService.showNotification(1,"A ocurrido un error obteniendo las bandas.",4000,()=>{});
+              });
             } else {
               this.isNewList = false;
               //Cargar los datos de la lista de esta manera evita que los elementos del slider se afecten cuando editas
@@ -126,7 +137,7 @@ export class AddListComponent implements OnInit {
               this.newList = newList.find((set) => {
                 return set.idSet == this.idListOpened;
               });
-
+              //console.log(this.newList);
               if (this.newList == undefined || this.newList == null) {
                 this.newList = new SetLed();
                 this.utilitiesService.showNotification(1, "La lista no se encuentra en tus listas.", 4000, () => { });
@@ -138,19 +149,17 @@ export class AddListComponent implements OnInit {
                 this.newList.imageBlob = itemForImage.imageBlob;
 
                 this.dataSessionService.getBandsLed((response) => {
-                  this.dataSessionService.getTagsCatalog((response) => {
                     //Se carga en el drop down la opcion seleccionada de la banda
                     let bandSelectedDrop = this.dataSessionService.elementsLed.bands.find((band)=>{
                       return band.idBand == this.newList.idBand;
                     });
+
                     if(bandSelectedDrop == null || bandSelectedDrop == undefined){
                       this.utilitiesService.showNotification(1, "La banda no se encuentra en tu lista de bandas.", 4000, () => { });
                     }else{
-                      this.selectedBand = [{ idBand: this.newList.idBand , name: bandSelectedDrop.name, urlLogo: "", description: "", managerName: "" }];
+                      this.selectedBand = [{ idBand: this.newList.idBand , name: bandSelectedDrop.name, urlLogo: "", description: "", managerName: bandSelectedDrop.managerName }];
                     }
-                  }, (err) => {
-                    console.log(err);
-                  });
+                  
                 }, (err) => {
                   console.log(err);
                 });
@@ -170,12 +179,18 @@ export class AddListComponent implements OnInit {
   ngOnInit(): void {}
 
   onBandSearchSelect(item: any) {
+    console.log(item);
+    
     if (this.selectedBand.length == 0) {
       //console.log("sin seleccion");
     } else {
       //console.log("con seleccion");
       this.newList = new SetLed();
       this.newList.idBand = this.selectedBand[0].idBand;
+      let bandSelectedDrop = this.dataSessionService.elementsLed.bands.find((band)=>{
+        return band.idBand == this.newList.idBand;
+      });
+      this.selectedBand[0].managerName = bandSelectedDrop.managerName;
     }
   }
 
@@ -868,7 +883,7 @@ export class AddListComponent implements OnInit {
                   });
                 }
                 this.dataSessionService.getSetsLed((message) => {
-                  this.utilitiesService.showNotification(0, message, 3000, () => { });
+                  //this.utilitiesService.showNotification(0, message, 3000, () => { });
                   //this.setsListFiltered = Array.from(this.dataSessionService.elementsLed.setsList);
                 }, (messageError) => {
                   this.utilitiesService.showNotification(1, messageError, 3000, () => { });

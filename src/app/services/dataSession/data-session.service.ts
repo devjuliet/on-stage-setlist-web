@@ -214,6 +214,20 @@ export class DataSessionService {
     });
   };
 
+  getRepertoriesLed(succesCallBack,errorCallBack){
+    this.apiDataService.getRepertoriesLed().then(async (response: ServerMessage) => {
+      if(response.error == true){
+        errorCallBack(response.message);
+      }else{
+        this.elementsLed.repertories = response.data;
+        succesCallBack("Repertorios del led actualizados con exito.");
+      }
+    }, (error) => {
+      console.log(error);
+      errorCallBack("A ocurrido un error");
+    });
+  };
+
   getEventsManager(succesCallBack,errorCallBack){
     this.apiDataService.getEventsManager().then((response: ServerMessage) => {
       if(response.error == true){

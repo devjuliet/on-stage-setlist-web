@@ -13,208 +13,57 @@
                 <div class="row">
                     <div class="col-lg-9">
                         <div class="search-bar p-t-20">
-                            <input class="p-input" type="text" placeholder="Buscar una lista...">
+                            <input [(ngModel)]="searchValue" (ngModelChange)="filterByName($event)" class="p-input" type="text" placeholder="Buscar una lista...">
                             <button class="search-btn">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
                     </div>
                     <div class="col-lg-3 disf-fend">
-                        <button class="btn-lblu" data-toggle="modal" data-target="#editNewModal"><i
+                        <button (click)="initNewRepertoire()" class="btn-lblu" data-toggle="modal" data-target="#editNewModal"><i
                                 class="fas fa-plus"></i> Añadir repertorio</button>
                     </div>
                 </div>
 
                 <div class="row p-t-40">
-                    <div class="col-lg-4 col-md-6">
+                    <div *ngFor="let repertorie of repertoriesFiltered; let i = index" class="col-lg-4 col-md-6">
                         <div class="rep-card">
-                            <p class="fira-16-grey text-center p-b-10"><strong>Bunny Repertorio</strong></p>
+                            <p class="fira-16-grey text-center p-b-10"><strong>{{repertorie.name}}</strong></p>
                             <div class="rep-line"></div>
-                            <p class="quest-15-grey p-t-20">Bunny Banda</p>
-                            <p class="quest-15-grey p-t-10">Evento 1</p>
-                            <p class="quest-12-grey p-t-10">Fecha: 14/08/2050</p>
-                            <p class="quest-12-grey p-t-10">Salón Bunys saltarines</p>
-                            <p class="quest-12-grey p-t-10">Chihuahua, chihuahua</p>
-                            <p class="quest-12-grey p-t-10">Gira 2050</p>
+                            <p class="quest-15-grey p-t-20">{{repertorie.band.name}}</p>
+                            <p *ngIf="repertorie.event.name.length == 0" class="quest-15-grey p-t-10">No se le ha asignado ningun evento</p>
+                            <p *ngIf="repertorie.event.name.length != 0" class="quest-15-grey p-t-10">{{repertorie.event.name}}</p>
+                            <p *ngIf="repertorie.event.name.length != 0" class="quest-12-grey p-t-10">Fecha: {{repertorie.event.date}}</p>
+                            <p *ngIf="repertorie.event.name.length != 0" class="quest-12-grey p-t-10">{{repertorie.event.place}}</p>
+                            <p *ngIf="repertorie.event.name.length != 0" class="quest-12-grey p-t-10">{{repertorie.event.location}}</p>
+                            <p *ngIf="repertorie.event.name.length != 0" class="quest-12-grey p-t-10">{{repertorie.event.tour}}</p>
                             <div class="rep-tag p-t-30">
                                 <div class="tagsini">
-                                    <p class="quest-10-grey">Tranqui</p>
-                                </div>
-                                <div class="tagsini">
-                                    <p class="quest-10-grey">Calmadas</p>
-                                </div>
-                                <div class="tagsini">
-                                    <p class="quest-10-grey">Kpop</p>
+                                    <p class="quest-10-grey">{{repertorie.tag.name}}</p>
                                 </div>
                             </div>
                             <div class="p-t-30">
                                 <div class="row">
                                     <div class="col-8">
                                         <button class="list-btn" type="button" data-toggle="collapse"
-                                            data-target="#collapseExample" aria-expanded="false"
-                                            aria-controls="collapseExample">
+                                            [attr.data-target]="'#collapseExample' + i" aria-expanded="false"
+                                            [attr.aria-controls]="'collapseExample'+i">
                                             Ver listas <i class="fas fa-angle-down p-l-5"></i>
                                         </button>
                                     </div>
                                     <div class="col-4 text-end">
-                                        <button class="rep-trash" data-toggle="modal" data-target="#trashModal"><i class="fas fa-trash"></i></button>
+                                        <button (click)="selectForDelete(repertorie.idSetlist)" class="rep-trash" data-toggle="modal" data-target="#trashModal"><i class="fas fa-trash"></i></button>
                                     </div>
                                 </div>
-                                <div class="collapse" id="collapseExample">
+                                <div class="collapse" [id]="'collapseExample'+i">
                                     <div class="card card-body">
-                                        <p class="quest-12-grey list-resu">Lista 1</p>
-                                        <p class="quest-12-grey list-resu">Lista 2</p>
-                                        <p class="quest-12-grey list-resu">Lista 3</p>
-                                        <p class="quest-12-grey list-resu">Lista 4</p>
+                                        <p *ngFor="let set of repertorie.sets; let i = index" 
+                                            class="quest-12-grey list-resu">{{set.idSet}} - {{set.name}}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="rep-edit">
-                                <button data-toggle="tooltip" data-placement="top" title="Editar repertorio"
-                                    data-toggle="modal" data-target="#editNewModal">
-                                    <i class="fas fa-pen-square"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="rep-card">
-                            <p class="fira-16-grey text-center p-b-10"><strong>Bunny Repertorio</strong></p>
-                            <div class="rep-line"></div>
-                            <p class="quest-15-grey p-t-20">Bunny Banda</p>
-                            <p class="quest-15-grey p-t-10">No se le ha asignado ningun evento</p>
-                            <div class="rep-tag p-t-30">
-                                <div class="tagsini">
-                                    <p class="quest-10-grey">Tranqui</p>
-                                </div>
-                                <div class="tagsini">
-                                    <p class="quest-10-grey">Calmadas</p>
-                                </div>
-                                <div class="tagsini">
-                                    <p class="quest-10-grey">Kpop</p>
-                                </div>
-                            </div>
-                            <div class="p-t-30">
-                                <div class="row">
-                                    <div class="col-8">
-                                        <button class="list-btn" type="button" data-toggle="collapse"
-                                            data-target="#collapseExample2" aria-expanded="false"
-                                            aria-controls="collapseExample">
-                                            Ver listas <i class="fas fa-angle-down p-l-5"></i>
-                                        </button>
-                                    </div>
-                                    <div class="col-4 text-end">
-                                        <button class="rep-trash" data-toggle="modal" data-target="#trashModal"><i class="fas fa-trash"></i></button>
-                                    </div>
-                                </div>
-                                <div class="collapse" id="collapseExample2">
-                                    <div class="card card-body">
-                                        <p class="quest-12-grey list-resu">Lista 1</p>
-                                        <p class="quest-12-grey list-resu">Lista 2</p>
-                                        <p class="quest-12-grey list-resu">Lista 3</p>
-                                        <p class="quest-12-grey list-resu">Lista 4</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="rep-edit">
-                                <button data-toggle="tooltip" data-placement="top" title="Editar repertorio"
-                                    data-toggle="modal" data-target="#editNewModal">
-                                    <i class="fas fa-pen-square"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="rep-card">
-                            <p class="fira-16-grey text-center p-b-10"><strong>Bunny Repertorio</strong></p>
-                            <div class="rep-line"></div>
-                            <p class="quest-15-grey p-t-20">Bunny Banda</p>
-                            <p class="quest-15-grey p-t-10">No se le ha asignado ningun evento</p>
-                            <div class="rep-tag p-t-30">
-                                <div class="tagsini">
-                                    <p class="quest-10-grey">Tranqui</p>
-                                </div>
-                                <div class="tagsini">
-                                    <p class="quest-10-grey">Calmadas</p>
-                                </div>
-                                <div class="tagsini">
-                                    <p class="quest-10-grey">Kpop</p>
-                                </div>
-                            </div>
-                            <div class="p-t-30">
-                                <div class="row">
-                                    <div class="col-8">
-                                        <button class="list-btn" type="button" data-toggle="collapse"
-                                            data-target="#collapseExample3" aria-expanded="false"
-                                            aria-controls="collapseExample">
-                                            Ver listas <i class="fas fa-angle-down p-l-5"></i>
-                                        </button>
-                                    </div>
-                                    <div class="col-4 text-end">
-                                        <button class="rep-trash" data-toggle="modal" data-target="#trashModal"><i class="fas fa-trash"></i></button>
-                                    </div>
-                                </div>
-                                <div class="collapse" id="collapseExample3">
-                                    <div class="card card-body">
-                                        <p class="quest-12-grey list-resu">Lista 1</p>
-                                        <p class="quest-12-grey list-resu">Lista 2</p>
-                                        <p class="quest-12-grey list-resu">Lista 3</p>
-                                        <p class="quest-12-grey list-resu">Lista 4</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="rep-edit">
-                                <button data-toggle="tooltip" data-placement="top" title="Editar repertorio"
-                                    data-toggle="modal" data-target="#editNewModal">
-                                    <i class="fas fa-pen-square"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="rep-card">
-                            <p class="fira-16-grey text-center p-b-10"><strong>Bunny Repertorio</strong></p>
-                            <div class="rep-line"></div>
-                            <p class="quest-15-grey p-t-20">Bunny Banda</p>
-                            <p class="quest-15-grey p-t-10">No se le ha asignado ningun evento</p>
-                            <div class="rep-tag p-t-30">
-                                <div class="tagsini">
-                                    <p class="quest-10-grey">Tranqui</p>
-                                </div>
-                                <div class="tagsini">
-                                    <p class="quest-10-grey">Calmadas</p>
-                                </div>
-                                <div class="tagsini">
-                                    <p class="quest-10-grey">Kpop</p>
-                                </div>
-                            </div>
-                            <div class="p-t-30">
-                                <div class="row">
-                                    <div class="col-8">
-                                        <button class="list-btn" type="button" data-toggle="collapse"
-                                            data-target="#collapseExample4" aria-expanded="false"
-                                            aria-controls="collapseExample">
-                                            Ver listas <i class="fas fa-angle-down p-l-5"></i>
-                                        </button>
-                                    </div>
-                                    <div class="col-4 text-end">
-                                        <button class="rep-trash" data-toggle="modal" data-target="#trashModal">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div class="collapse" id="collapseExample4">
-                                    <div class="card card-body">
-                                        <p class="quest-12-grey list-resu">Lista 1</p>
-                                        <p class="quest-12-grey list-resu">Lista 2</p>
-                                        <p class="quest-12-grey list-resu">Lista 3</p>
-                                        <p class="quest-12-grey list-resu">Lista 4</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="rep-edit">
-                                <button data-toggle="tooltip" data-placement="top" title="Editar repertorio"
+                                <button (click)="initSelectionRepertoire(repertorie)" data-toggle="tooltip" data-placement="top" title="Editar repertorio"
                                     data-toggle="modal" data-target="#editNewModal">
                                     <i class="fas fa-pen-square"></i>
                                 </button>
@@ -235,82 +84,74 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-12">
                                     <div>
-                                        <input class="input-text" type="text" placeholder="Nombre del repertorio...">
+                                        <input [(ngModel)]="actualRepertoire.name" class="input-text" type="text" placeholder="Nombre del repertorio...">
                                     </div>
-                                    <div class="p-t-20">
+                                    <div *ngIf="selectedBand.length == 0" class="p-t-20">
                                         <p class="quest-15-grey">Selecciona una banda</p>
-                                        <div class="dropdown">
-                                          <button class=" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Lista de bandas
-                                          </button>
-                                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Banda 1</a>
-                                            <a class="dropdown-item" href="#">Banda 2</a>
-                                            <a class="dropdown-item" href="#">Banda 3</a>
-                                          </div>
+                                        <div class="p-t-20">
+                                            <ng-multiselect-dropdown
+                                              [placeholder]="'Lista de bandas'"
+                                              [settings]="dropdownSearchBandSettings"
+                                              [data]="dataSessionService.elementsLed.bands"
+                                              (onSelect)="onBandSearchSelect($event)"
+                                              (onDeSelect)="onBandSearchSelect($event)"
+                                              [(ngModel)]="selectedBand"
+                                              [disabled]="false">
+                                            </ng-multiselect-dropdown>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="selectedBand.length != 0" class="p-t-20">
+                                        <p class="quest-15-grey">Banda Seleccionada</p>
+                                        <div >
+                                            {{selectedBand[0].name}}
                                         </div>
                                     </div>
                                     <div class="p-t-20">
                                         <p class="quest-15-grey">Asignale un evento</p>
-                                        <button class=" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                          Lista de eventos
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                          <a class="dropdown-item" href="#">Evento 1</a>
-                                          <a class="dropdown-item" href="#">Evento 2</a>
-                                          <a class="dropdown-item" href="#">Evento 3</a>
+                                        <div class="p-t-20">
+                                            <ng-multiselect-dropdown
+                                              [placeholder]="'Lista de eventos'"
+                                              [settings]="dropdownEventsOfBandSettings"
+                                              [data]="eventsAvailableOfBand"
+                                              (onSelect)="onEventSearchSelect($event)"
+                                              (onDeSelect)="onEventSearchSelect($event)"
+                                              [(ngModel)]="selectedEvent"
+                                              [disabled]="false">
+                                            </ng-multiselect-dropdown>
                                         </div>
                                     </div>
                                     <div class="p-t-20">
                                         <p class="quest-15-grey">Ponle etiquetas</p>
+                                        <ng-multiselect-dropdown
+                                            [placeholder]="'Buscar por tag'"
+                                            [settings]="dropdownSearchTagSettings"
+                                            [data]="dataSessionService.tagsCatalog"
+                                            (onSelect)="onTagSearchSelect($event)"
+                                            (onDeSelect)="onTagSearchSelect($event)"
+                                            [(ngModel)]="selectedSearchTag"
+                                            >
+                                        </ng-multiselect-dropdown>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12">
                                     <div>
                                         <p class="quest-20-grey">Selecciona las listas de canciones</p>
                                     </div>
+                                    <div>
+                                        <p class="quest-20-grey">{{countSelected()}} de {{setsOfBand.length}}</p>
+                                    </div>
                                     <div class="list-box">
-                                        <div class="list-card list-card-selected">
+                                        <div *ngFor="let set of setsOfBand; let i = index"  
+                                            [class]="'list-card'+( set.selected == true? '' : ' list-card-selected')"
+                                            (click)="selectSet(i)">
                                           <div class="row">
                                               <div class="col-4">
-                                                  <img class="sm-img" src="/assets/images/gbaby.jpg">
+                                                <img *ngIf="set.haveImage == false" src="/assets/images/gbaby.jpg" class="sm-img">
+                                                <img *ngIf="set.haveImage == true" [src]="set.imageBlob" class="sm-img">
                                               </div>
                                               <div class="col-8">
-                                                  <p>Bunny Lista</p>
-                                                  <p>10 Canciones</p>
-                                              </div>
-                                          </div>
-                                        </div>
-                                        <div class="list-card">
-                                          <div class="row">
-                                              <div class="col-4">
-                                                  <img class="sm-img" src="/assets/images/gbaby.jpg">
-                                              </div>
-                                              <div class="col-8">
-                                                  <p>Bunny Lista</p>
-                                                  <p>10 Canciones</p>
-                                              </div>
-                                          </div>
-                                        </div>
-                                        <div class="list-card">
-                                          <div class="row">
-                                              <div class="col-4">
-                                                  <img class="sm-img" src="/assets/images/gbaby.jpg">
-                                              </div>
-                                              <div class="col-8">
-                                                  <p>Bunny Lista</p>
-                                                  <p>10 Canciones</p>
-                                              </div>
-                                          </div>
-                                        </div>
-                                        <div class="list-card">
-                                          <div class="row">
-                                              <div class="col-4">
-                                                  <img class="sm-img" src="/assets/images/gbaby.jpg">
-                                              </div>
-                                              <div class="col-8">
-                                                  <p>Bunny Lista</p>
-                                                  <p>10 Canciones</p>
+                                                  <p>{{set.name}}</p>
+                                                  <p>{{set.numberSongs}} Canciones</p>
                                               </div>
                                           </div>
                                         </div>
@@ -319,8 +160,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn-lblu">Guardar</button>
+                            <button (click)="initNewRepertoire()" #CloseModal type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
+                            <button (click)="save()" type="button" class="btn-lblu">Guardar</button>
                         </div>
                     </div>
                 </div>
@@ -337,8 +178,8 @@
                             <img src="/assets/images/no-song.svg">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn-red">Eliminar</button>
+                            <button #CloseModalConfirmDelete type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
+                            <button (click)="deleteConfirmed()" type="button" class="btn-red">Eliminar</button>
                         </div>
                     </div>
                 </div>
