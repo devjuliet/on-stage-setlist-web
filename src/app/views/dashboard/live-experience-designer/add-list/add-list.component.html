@@ -34,9 +34,9 @@
               <label class="quest-15-grey" *ngIf="newList.name.length != 0 ||
                             newList.description.length != 0 ||
                             newList.songs.length != 0">
-                <label *ngIf="dataSessionService.elementsLed.bands != undefined">lista para la banda: {{dataSessionService.elementsLed.bands[0].name}}</label><br>
-
-                Manager: {{dataSessionService.elementsLed.bands[0].managerName}}<br>
+                <label *ngIf="selectedBand[0] != undefined">lista para la banda: {{selectedBand[0].name}}</label><br>
+                <label *ngIf="selectedBand[0] != undefined"> Manager: {{selectedBand[0].managerName}}</label><br>
+               <br>
               </label>
             </div>
             <div *ngIf="selectedBand.length != 0" class="p-t-20">

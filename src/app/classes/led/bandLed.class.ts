@@ -1,6 +1,6 @@
 export class BandLed {
     idBand: number;
-    name: String;
+    name: string;
     urlLogo: String;
     description: String;
     managerName: String;

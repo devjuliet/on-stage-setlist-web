@@ -10,6 +10,7 @@ import { User } from '../../classes/user.class';
 import { ActualEvent } from '../../classes/actualEvent.class';
 import { NewSong } from '../../classes/led/newSong.class';
 import { SetLed } from '../../classes/led/setLed.class';
+import { Repertorie } from '../../classes/led/repertorieLed.class';
 
 @Injectable({
   providedIn: 'root'
@@ -316,6 +317,81 @@ export class ApiDataService {
       });
     })
   }
+
+  getBandAvailableEventsLed(idBand : number) {
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token
+      });
+      this.http.get(this.baseURL + 'led/events-bands-available/'+idBand,{ headers: headers }).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
+  async createRepertorie(newDataRepertorie : Repertorie) : Promise<any>{
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token,
+      });
+
+      this.http.post(this.baseURL + 'led/create-repertorie',newDataRepertorie,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
+  async updateRepertorie(newDataRepertorie : Repertorie) : Promise<any>{
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token,
+      });
+
+      this.http.post(this.baseURL + 'led/update-repertorie',newDataRepertorie,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
+  async deleteRepertorie(idRepertorie : number) : Promise<any>{
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token,
+      });
+
+      this.http.get(this.baseURL + 'led/delete-repertorie/'+idRepertorie,{headers:headers}).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
+  getRepertoriesLed() {
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token
+      });
+      this.http.get(this.baseURL + 'led/get-repertories',{ headers: headers }).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
+
   //BANDAS
   async createBand(newDataBand : Band) : Promise<any>{
     return new Promise((resolve,reject)=>{
