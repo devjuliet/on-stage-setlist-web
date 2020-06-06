@@ -22,7 +22,10 @@ img {
   color: #3d9ae8;
 }
 .export:hover {
-  color: #cd4410;
+  color: #0087D1;
+}
+.export{
+  font-size: 25px;
 }
 .disp-alcent {
   display: flex;
