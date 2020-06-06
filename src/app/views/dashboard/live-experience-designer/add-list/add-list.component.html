@@ -102,9 +102,9 @@
                       <p>{{song.name}}</p>
                     </div>
                     <div>
-                      <button (click)="initEditingSong(song.idSong)" class="edit-btn" data-toggle="modal" data-target="#editSongModal"><i
+                        <button (click)="initEditingSong(song.idSong)" class="edit-btn" data-toggle="modal" data-target="#editSongModal"><i
                           class="fas fa-pen-square"></i></button>
-                      <button (click)="selectSongForDeleteInSet(song.idSong)" class="trash-btn fsize-25" data-toggle="modal" data-target="#deleteSongModal"><i
+                        <button (click)="selectSongForDeleteInSet(song.idSong)" class="trash-btn fsize-25" data-toggle="modal" data-target="#deleteSongModal"><i
                           class="fas fa-trash"></i></button>
                     </div>
                   </div>
@@ -918,10 +918,10 @@
                         </div>
                       </div>
                     </div>
-                    <div class="modal-footer">
-                      <button #CloseNewSong type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
-                      <button (click)="saveNewSong()" type="button" class="btn-lblu">Guardar</button>
-                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button #CloseNewSong type="button" class="btn-gray" data-dismiss="modal">Cancelar</button>
+                    <button (click)="saveNewSong()" type="button" class="btn-lblu">Guardar</button>
                   </div>
                 </div>
                 <div class="tab-pane fade" id="oldsong" role="tabpanel" aria-labelledby="profile-tab">
@@ -933,8 +933,15 @@
                   </div>
                   <p class="quest-15-grey p-l-15">Añade una canción que ya está registrada.</p>
                   <div class="row">
-                    <div *ngIf="songFiltered.length == 0">
-                      Sin Resultados
+                    <div *ngIf="songFiltered.length == 0" class="width-100p">
+                      <div class="text-center">
+                        <div>
+                          <img class="img-noresu" src="/assets/images/no-song-list.svg">
+                        </div>
+                        <div>
+                          <p class="quest-18-grey">Sin Resultados</p>
+                        </div>
+                      </div>
                     </div>
                     <div *ngFor="let song of songFiltered; let i = index"  class="col-lg-6 col-md-12">
                       <div (click)="addSongFronList(song)" class="ex-song">

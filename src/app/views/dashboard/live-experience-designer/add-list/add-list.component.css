@@ -176,3 +176,12 @@ textarea:focus, input:focus{
 .img-modal{
   max-width: 450px;
 }
+.img-noresu{
+  max-width: 400px;
+  margin: auto;
+}
+#newsong .modal-footer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
