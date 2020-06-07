@@ -26,6 +26,12 @@
                 </div>
 
                 <div class="row p-t-40">
+                    <div *ngIf="repertoriesFiltered.length == 0 && dataSessionService.elementsLed.repertories.length > 0">
+                        Sin resultados
+                    </div>
+                    <div *ngIf="dataSessionService.elementsLed.repertories.length == 0">
+                        Por el momento no cuentas con repertorios
+                    </div>
                     <div *ngFor="let repertorie of repertoriesFiltered; let i = index" class="col-lg-4 col-md-6">
                         <div class="rep-card">
                             <p class="fira-16-grey text-center p-b-10"><strong>{{repertorie.name}}</strong></p>

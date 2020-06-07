@@ -440,4 +440,16 @@ export class BandInfoComponent implements OnInit {
       })
     });
   }
+
+  isLiveDesigner(id:number): boolean{
+    let index = this.newBand.bandLiveDesigners.findIndex((idDesigner)=>{
+      return idDesigner == id;
+    });
+
+    if(index > -1){
+      return true;
+    }else{
+      return false;
+    }
+  }
 }
