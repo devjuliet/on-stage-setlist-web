@@ -23,12 +23,14 @@
                         </button>
                     </div>
                 </div>
-                <div class="row">
-                    <div *ngIf="dataSessionService.elementsLed.setsList.length == 0">
-                        Sin listas
+                <div class="row text-center p-t-40">
+                    <div *ngIf="dataSessionService.elementsLed.setsList.length == 0" class="width-100p">
+                      <img class="no-resu-img" src="/assets/images/no-song-list.svg">
+                      <p class="quest-20-grey">Sin listas</p>
                     </div>
-                    <div *ngIf="setsListFiltered.length == 0 && dataSessionService.elementsLed.setsList.length > 0">
-                        Sin resultados
+                    <div *ngIf="setsListFiltered.length == 0 && dataSessionService.elementsLed.setsList.length > 0" class="width-100p">
+                      <img class="no-resu-img" src="/assets/images/no-song-list.svg">
+                      <p class="quest-20-grey">Sin resultados</p>
                     </div>
                     <div *ngFor="let list of setsListFiltered; let i = index"  class="col-xl-4 col-lg-6 col-sm-12 p-20-0">
                         <div [routerLink]="'/dashboard/led/edit-list/'+list.idSet.toString()" routerLinkActive="active" class="album-card text-center album-card-selected">
