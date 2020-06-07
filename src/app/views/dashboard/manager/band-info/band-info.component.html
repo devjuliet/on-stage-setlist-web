@@ -122,7 +122,8 @@
                                         <p class="fira-20-blu" *ngIf="member.role.toString()=='2'">Bajista</p>
                                         <p class="fira-20-blu" *ngIf="member.role.toString()=='3'">Guitarrista</p>
                                         <div class="profile-box">
-                                            <span class="led" data-toggle="tooltip" data-placement="top" title="Diseñador de experiencia"><i class="fas fa-pen-fancy"></i></span>
+                                            <span class="led" data-toggle="tooltip" data-placement="top" title="Diseñador de experiencia">
+                                                <i *ngIf="isLiveDesigner(member.idUser)" class="fas fa-pen-fancy"></i></span>
                                             <button (click)="selectForDelete(member)" class="delete-btn" data-toggle="modal" data-target="#deleteModal"><i class="far fa-times-circle"></i></button>
                                             <img *ngIf="!member.haveImage" class="profile-pic" src="/assets/images/avatar.svg">
                                             <img *ngIf="member.haveImage" class="profile-pic" [src]="member.imageBlob">
