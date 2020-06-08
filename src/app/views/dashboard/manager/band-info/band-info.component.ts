@@ -166,7 +166,7 @@ export class BandInfoComponent implements OnInit {
   }
 
   cancelAddUser() {
-    this.inputNewUser = "jennyrivera";
+    this.inputNewUser = "";
     this.newBandMember = new BandMemberProfile();
     this.newMemberIsLiveDesigner = false;
   }
