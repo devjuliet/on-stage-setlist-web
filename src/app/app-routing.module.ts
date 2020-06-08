@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'dashboard/manager/band-info/:id', component: BandInfoComponent },//lista
   { path: 'dashboard/manager/add-band', component: AddBandComponent },//lista
   { path: 'dashboard/manager/admin-events', component: AdminEventsComponent },//lista
-  { path: 'dashboard/manager/catalog', component: CatalogComponent },
+  { path: 'dashboard/manager/catalog', component: CatalogComponent },//lista
   { path: 'dashboard/manager/settings', component: SettingsComponent },//lista
 
 
