@@ -50,12 +50,12 @@ export class RegisterComponent implements OnInit {
   }
 
   clearData() {
-    this.name = "Lupillo Rivera";
-    this.email = "lupillos.music@hotmail.com";
-    this.password = "lupillos.music";
-    this.confirmPass = "lupillos.music";
+    this.name = "";
+    this.email = "";
+    this.password = "";
+    this.confirmPass = "";
     this.type = 1;
-    this.username = "lupillos.music";
+    this.username = "";
     this.isManager = false;
   }
 

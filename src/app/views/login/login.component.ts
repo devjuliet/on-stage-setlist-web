@@ -58,8 +58,8 @@ export class LoginComponent implements OnInit {
   }
 
   clearData() {
-    this.username = "hipsy-luu";
-    this.password = "hipsy-luu";
+    this.username = "";
+    this.password = "";
   }
 
   validateLoginData(): Boolean {
