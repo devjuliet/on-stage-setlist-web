@@ -53,6 +53,8 @@ export class DataSessionService {
             this.user.type = response.data.user.type;
             this.user.email = response.data.user.email;
             this.user.haveImage = response.data.user.haveImage;
+            this.user.role = response.data.user.role;
+            this.user.description = response.data.user.description;
 
             if (this.user.type == 0 || this.user.type == 2) {
               console.log("cargando datos del live");
@@ -111,6 +113,8 @@ export class DataSessionService {
             this.user.type = response.data.user.type;
             this.user.email = response.data.user.email;
             this.user.haveImage = response.data.user.haveImage;
+            this.user.role = response.data.user.role;
+            this.user.description = response.data.user.description;
 
             if (this.user.haveImage) {
               this.apiDataService.getImage(this.baseURL.toString() +
