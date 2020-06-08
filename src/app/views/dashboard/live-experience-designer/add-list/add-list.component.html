@@ -195,8 +195,10 @@
                   <div class="p-t-20 ">
                     <!-- Aquí va el editor!!!! -->
                     <p class="quest-18-grey p-b-10">Escribe la letra de tu canción aqui abajo.</p>
-                      <textarea [(ngModel)]="newSong.lyric" placeholder="Letra de la cancion..."></textarea>
-
+                      <!-- <textarea [(ngModel)]="newSong.lyric" placeholder="Letra de la cancion..."></textarea> -->
+                      <div [ngxSummernote] [(ngModel)]="newSong.lyric"></div>
+                      <!-- <div [ngxSummernote]></div>
+                      <div [ngxSummernoteView]="content"></div> -->
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-12">
@@ -587,8 +589,8 @@
                         </ul>
                       </div>
                       <div class="p-t-20"><!-- Aquí va el editor!!!! -->
-                          <p class="quest-18-grey p-b-10">Escribe la letra de tu canción aqui abajo.</p>
-                          <textarea [(ngModel)]="newSong.lyric" placeholder="Letra de la cancion..."></textarea>
+                          <p class="quest-18-grey p-b-10">Escribe la letra de tu canción aquia abajo.</p>
+                          <div [ngxSummernote] [(ngModel)]="newSong.lyric"></div>
                       </div>
                     </div>
                     <div class="col-lg-6 col-md-12">

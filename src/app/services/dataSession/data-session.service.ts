@@ -179,6 +179,20 @@ export class DataSessionService {
     });
   };
 
+  getCatalogSongsBandsManager(succesCallBack,errorCallBack){
+    this.apiDataService.getCatalogSongsBandsManager().then((response: ServerMessage) => {
+      if(response.error == true){
+        errorCallBack(response.message);
+      }else{
+        this.elementsManager.songsCatalog = response.data;
+        succesCallBack("Catalogo de canciones obtenido con exito.");
+      }
+    }, (error) => {
+      console.log(error);
+      errorCallBack("A ocurrido un error");
+    });
+  };
+
   getBandsLed(succesCallBack,errorCallBack){
     this.apiDataService.getBandsLed().then((response: ServerMessage) => {
       if(response.error == true){

@@ -35,6 +35,7 @@ import { EventComponent } from './views/dashboard/live-experience-designer/event
 import { SearchResultComponent } from './views/dashboard/search-result/search-result.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { RepertoriesComponent } from './views/dashboard/live-experience-designer/repertories/repertories.component';
+import { NgxSummernoteModule } from 'ngx-summernote';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { RepertoriesComponent } from './views/dashboard/live-experience-designer
     FormsModule, 
     HttpClientModule,
     NgMultiSelectDropDownModule.forRoot(),
+    NgxSummernoteModule
   ],
   providers: [],
   bootstrap: [AppComponent],

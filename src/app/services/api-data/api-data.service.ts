@@ -11,6 +11,7 @@ import { ActualEvent } from '../../classes/actualEvent.class';
 import { NewSong } from '../../classes/led/newSong.class';
 import { SetLed } from '../../classes/led/setLed.class';
 import { Repertorie } from '../../classes/led/repertorieLed.class';
+import { Song } from '../../classes/elementsManager.class';
 
 @Injectable({
   providedIn: 'root'
@@ -210,6 +211,36 @@ export class ApiDataService {
       })
        
       this.http.get(this.baseURL + 'manager/bands',{ headers: headers }).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
+  getCatalogSongsBandsManager() {
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token
+      })
+       
+      this.http.get(this.baseURL + 'manager/bands-song-catalog',{ headers: headers }).subscribe((response : ServerMessage)=>{
+        resolve(response);
+      },(error)=>{
+        reject(error)
+      });
+    })
+  }
+
+  uploadCatalogSongsForBand(songs : Song[], idBand : number) {
+    return new Promise((resolve,reject)=>{
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token
+      })
+       
+      this.http.post(this.baseURL + 'manager/bands-save-songs/'+idBand, songs ,{ headers: headers }).subscribe((response : ServerMessage)=>{
         resolve(response);
       },(error)=>{
         reject(error)
