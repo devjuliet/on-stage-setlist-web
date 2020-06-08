@@ -44,10 +44,13 @@ export class SettingsComponent implements OnInit {
         
         /* Se Recarga el usuario actual en la vista*/
         this.actualInfoUser.idUser = new Number(this.dataSessionService.user.idUser);
-        this.actualInfoUser.name = new String(this.dataSessionService.user.name);
-        this.actualInfoUser.username = new String( this.dataSessionService.user.username);
-        this.actualInfoUser.email = new String( this.dataSessionService.user.email );
-        this.actualInfoUser.haveImage = this.dataSessionService.user.haveImage;
+        this.actualInfoUser.username = new String(this.dataSessionService.user.username);
+        this.actualInfoUser.name = new String( this.dataSessionService.user.name);
+        this.actualInfoUser.type = new Number(this.dataSessionService.user.type);
+        this.actualInfoUser.email = new String( this.dataSessionService.user.email);
+        this.actualInfoUser.haveImage = this.dataSessionService.user.haveImage ;
+        this.actualInfoUser.role = new Number(this.dataSessionService.user.role);
+        this.actualInfoUser.description = new String( this.dataSessionService.user.description);
 
         if(this.actualInfoUser.haveImage == true){
           this.actualInfoUser.imageBlob = await this.apiDataService.getImage(this.dataSessionService.baseURL.toString() +
@@ -118,7 +121,7 @@ export class SettingsComponent implements OnInit {
       //console.log("valodciones ok");
       //Se elimino la imagen
       if (!this.actualInfoUser.haveImage && this.dataSessionService.user.haveImage && this.source.length == 0) {
-        //console.log("Elimino imagen");
+        console.log("Elimino imagen");
         //Loading de carga
         this.utilitiesService.showLoadingMsg("Eliminando imagen", "Eliminando imagen del usuario #" + this.actualInfoUser.idUser, () => {
           this.apiDataService.deleteImageUser(this.actualInfoUser.idUser).then((response : ServerMessage) => {
@@ -134,7 +137,7 @@ export class SettingsComponent implements OnInit {
       }
       //Si se selecciona una imagen
       else if ( this.source.length > 0) {
-        //console.log("imgagen diferente");
+        console.log("imgagen diferente");
 
         this.uploadImage(this.selectedFile, "" + this.actualInfoUser.idUser).then((response: any) => {
           //Se guarda el estado actual de la imagen
@@ -148,25 +151,46 @@ export class SettingsComponent implements OnInit {
       //Si la imagen no se va a eliminar
       else {
         //console.log("Misma imagen");
+        //console.log(this.actualInfoUser);
         this.utilitiesService.showLoadingMsg("Actualizando Usuario", "Actualizando el usuario #" + this.actualInfoUser.idUser, () => {
-          this.apiDataService.updateUser(this.actualInfoUser).then((response: ServerMessage) => {
+          this.apiDataService.updateUser({
+            idUser : parseInt(this.actualInfoUser.idUser.toString()),
+            name : this.actualInfoUser.name.toString(),
+            email : this.actualInfoUser.email.toString(),
+            password : this.actualInfoUser.password,
+            type : parseInt(this.actualInfoUser.type.toString()),
+            username : this.actualInfoUser.username.toString(),
+            haveImage: this.actualInfoUser.haveImage,
+            role : parseInt(this.actualInfoUser.role.toString()),
+            description : this.actualInfoUser.description.toString(),
+            imageBlob : ""
+          }).then((response: ServerMessage) => {
             //console.log(response);
+            //console.log(this.actualInfoUser);
+            //
             if(response.error == true){
+              //Se cargan los datos previos 
               this.utilitiesService.showNotification(1, response.message, 3000, () => {});
               this.utilitiesService.closeLoadingMsg();
-              this.actualInfoUser.idUser = new Number(this.dataSessionService.user.idUser);
-              this.dataSessionService.user.haveImage = this.actualInfoUser.haveImage;
-              this.actualInfoUser.name=this.dataSessionService.user.name;
-              this.actualInfoUser.username=this.dataSessionService.user.username;
-              this.actualInfoUser.email=this.dataSessionService.user.email;
-              
+
+              this.actualInfoUser.idUser = this.dataSessionService.user.idUser;
+              this.actualInfoUser.username = this.dataSessionService.user.username;
+              this.actualInfoUser.name =  this.dataSessionService.user.name;
+              this.actualInfoUser.type = this.dataSessionService.user.type;
+              this.actualInfoUser.email =  this.dataSessionService.user.email;
+              this.actualInfoUser.haveImage = this.dataSessionService.user.haveImage ;
+              this.actualInfoUser.role = this.dataSessionService.user.role;
+              this.actualInfoUser.description =this.dataSessionService.user.description;
             }else{
               /* Se Recarga el usuario actual*/
-              this.actualInfoUser.idUser = new Number(this.dataSessionService.user.idUser);
-              this.dataSessionService.user.name = response.data.name;
-              this.dataSessionService.user.username = response.data.username;
-              this.dataSessionService.user.email = response.data.email;
-              this.dataSessionService.user.haveImage = response.data.haveImage;
+              this.actualInfoUser.idUser = parseInt(this.dataSessionService.user.idUser.toString());
+              this.actualInfoUser.username = response.data.username;
+              this.actualInfoUser.name = response.data.name;
+              this.actualInfoUser.type = response.data.type;
+              this.actualInfoUser.email = response.data.email;
+              this.actualInfoUser.haveImage = response.data.haveImage;
+              this.actualInfoUser.role = response.data.role;
+              this.actualInfoUser.description = response.data.description;
               this.utilitiesService.closeLoadingSuccess("Usuario Actualizado", "Informacion del usuario #" + this.actualInfoUser.idUser + " actualizada.", () => {
                 //ok
               });
@@ -234,23 +258,31 @@ export class SettingsComponent implements OnInit {
         this.source = '';
         this.utilitiesService.showLoadingMsg("Actualizando Usuario", "Actualizando el usuario #" + newData.idUser, () => {
           this.apiDataService.updateUser(newData).then((response: ServerMessage) => {
-            //console.log(response);
+            console.log(response);
             if(response.error == true){
               this.utilitiesService.showNotification(1, response.message, 3000, () => {});
               this.utilitiesService.closeLoadingMsg();
-              this.actualInfoUser.idUser = new Number(this.dataSessionService.user.idUser);
-              this.dataSessionService.user.haveImage = this.actualInfoUser.haveImage;
-              this.actualInfoUser.name=this.dataSessionService.user.name;
-              this.actualInfoUser.username=this.dataSessionService.user.username;
-              this.actualInfoUser.email=this.dataSessionService.user.email;
               
+              this.actualInfoUser.idUser = new Number(this.dataSessionService.user.idUser);
+              this.actualInfoUser.username = new String(this.dataSessionService.user.username);
+              this.actualInfoUser.name = new String( this.dataSessionService.user.name);
+              this.actualInfoUser.type = new Number(this.dataSessionService.user.type);
+              this.actualInfoUser.email = new String( this.dataSessionService.user.email);
+              this.actualInfoUser.haveImage = this.dataSessionService.user.haveImage ;
+              this.actualInfoUser.role = new Number(this.dataSessionService.user.role);
+              this.actualInfoUser.description = new String( this.dataSessionService.user.description);
+            
             }else{
               /* Se Recarga el usuario actual*/
               this.actualInfoUser.idUser = new Number(this.dataSessionService.user.idUser);
-              this.dataSessionService.user.name = response.data.name;
-              this.dataSessionService.user.username = response.data.username;
-              this.dataSessionService.user.email = response.data.email;
-              this.dataSessionService.user.haveImage = response.data.haveImage;
+              this.actualInfoUser.username = response.data.username;
+              this.actualInfoUser.name = response.data.name;
+              this.actualInfoUser.type = response.data.type;
+              this.actualInfoUser.email = response.data.email;
+              this.actualInfoUser.haveImage = response.data.haveImage;
+              this.actualInfoUser.role = response.data.role;
+              this.actualInfoUser.description = response.data.description;
+            
               this.utilitiesService.closeLoadingSuccess("Usuario Actualizado", "Informacion del usuario #" + newData.idUser + " actualizada.", () => {
                 //ok
               });

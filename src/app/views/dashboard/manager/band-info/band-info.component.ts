@@ -203,13 +203,12 @@ export class BandInfoComponent implements OnInit {
         this.newBandMember = response.data;
         if (this.newBandMember.haveImage == true) {
           //console.log(this.newBandMember);
-          
           this.apiDataService.getImage(this.dataSessionService.baseURL.toString() +
             'uploads/user-image/' + this.newBandMember.idUser.toString()).then((urlImage) => {
               this.newBandMember.imageBlob = urlImage;
             });
-          this.inputNewUser = "";
         }
+        this.inputNewUser = "";
       }
       
     }).catch((error) => {
