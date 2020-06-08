@@ -11,61 +11,91 @@
       <div class="info-dashboard">
         <h1 class="fira-30-grey p-b-20">Catálogo</h1>
         <div class="row">
-          <div class="col-12">
-            <div class="text-end">
-              <button class="btn-lblu"><i class="fas fa-file-import"></i> Importar</button>
-            </div>
-          </div>
-          <div class="col-xl-4 col-md-6 col-sm-12 p-b-20 p-t-20">
+          <div *ngFor="let bandCatalog of dataSessionService.elementsManager.songsCatalog; let i = index"
+            class="col-xl-4 col-md-6 col-sm-12 p-b-20 p-t-20">
             <div class="catolog-card">
               <div>
-                <img src="/assets/images/no-song.svg">
+                <img *ngIf="bandCatalog.urlLogo.length == 0" src="/assets/images/no-song.svg">
+                <img *ngIf="bandCatalog.urlLogo.length != 0" [src]="bandCatalog.imageBlob">
+
               </div>
               <div class="p-l-10">
-                <p class="fira-18-blu">Nombre de lista</p>
-                <p class="quest-15-grey">Número de canciones</p>
-                <p class="quest-15-grey">Banda</p>
+                <p class="fira-18-blu">{{bandCatalog.name}}</p>
+                <p class="quest-15-grey">{{bandCatalog.songs.length}} canciones</p>
               </div>
               <div class="row">
                 <!--
                 <div class="col-4">
                   <button class="social-btn cloud"><i class="fas fa-cloud"></i></button>
                 </div>-->
-                <div class="col-12">
+                <!-- <div class="col-12">
                   <button class="social-btn export" data-toggle="tooltip" data-placement="right" title="Exportar"><i class="fas fa-file-export"></i></button>
-                </div>
+                </div> -->
                 <!--
                 <div class="col-4">
                   <button class="social-btn dropbox"><i class="fab fa-dropbox"></i></button>
                 </div>-->
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-4 col-md-6 col-sm-12 p-b-20 p-t-20">
-            <div class="catolog-card">
-              <div>
-                <img src="/assets/images/no-song.svg">
-              </div>
-              <div class="p-l-10">
-                <p class="fira-18-blu">Nombre de lista</p>
-                <p class="quest-15-grey">Número de canciones</p>
-                <p class="quest-15-grey">Banda</p>
-              </div>
-              <div class="row">
-                <!--
-                <div class="col-4">
-                  <button class="social-btn cloud"><i class="fas fa-cloud"></i></button>
-                </div>-->
                 <div class="col-12">
-                  <button class="social-btn export" data-toggle="tooltip" data-placement="right" title="Exportar"><i class="fas fa-file-export"></i></button>
+                  <label>
+                    <input  (change)="updateSource($event)" type="file" id="txt" name="txt"
+                      accept="text/*" class="hidden">
+                    <label (click)="updateBandId(bandCatalog.idBand)" class="img-btn btn-lblu position-r" for="txt">
+                      <i class="fas fa-file-import"></i> Importar
+                    </label>
+                  </label>
+                  <!-- <button class="btn-lblu"><i class="fas fa-file-import"></i> Importar</button><br> -->
+                  <button (click)="dynamicDownloadTxt(bandCatalog.songs)" class="btn-lblu"><i
+                      class="fas fa-file-import"></i> Exportar</button><br>
                 </div>
-                <!--
-                <div class="col-4">
-                  <button class="social-btn dropbox"><i class="fab fa-dropbox"></i></button>
-                </div>-->
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button #OpenConfirmModal class="delete-btn" data-toggle="modal" data-target="#ConfirmImport"></button>
+  <div class="modal fade" id="ConfirmImport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header dis-fle-jcent">
+          <h5 class="modal-title fira-30-blu text-center" id="exampleModalLabel">¿Seguro que quieres añadir estas
+            canciones a la banda?</h5>
+        </div>
+        <div class="modal-body text-center">
+          <img src="/assets/images/sadteam.svg">
+        </div>
+        <div class="modal-footer dis-fle-jcent">
+          <button #btnCloseConfirmImport type="button" class="btn-red" data-dismiss="modal">Cancelar</button>
+          <button (click)="confirmUpload()" type="button" class="btn-gray">Añadir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button #OpenInfoUpload class="delete-btn" data-toggle="modal" data-target="#DataUpload"></button>
+  <div class="modal fade" id="DataUpload" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header dis-fle-jcent">
+          <h5 class="modal-title fira-30-blu text-center" id="exampleModalLabel">Resultados de la importacion</h5>
+        </div>
+        <div class="modal-body text-center">
+          Canciones guardadas con exito : {{resultsImport.saved.length}}<br>
+          <div *ngFor="let savedSong of resultsImport.saved; let i = index">
+            {{savedSong.idSong}} - {{savedSong.name}}
+          </div>
+          <br>
+          <br>
+          Canciones que ya estan en el catalogo de la banda y no se subiran: {{resultsImport.songsNotSaved.length}}<br>
+          <div *ngFor="let notSavedSong of resultsImport.songsNotSaved; let i = index">
+            {{notSavedSong.idSong}} - {{notSavedSong.name}} - 
+          </div>
+        </div>
+        <div class="modal-footer dis-fle-jcent">
+          <button type="button" class="btn-gray" data-dismiss="modal">Aceptar</button>
         </div>
       </div>
     </div>
